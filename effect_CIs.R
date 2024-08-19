@@ -44,11 +44,16 @@ anova1 <-
 anova1 %>% apa::anova_apa(force_sph_corr = T)
 
 # t-test ------------------------------------------------------------------
-with(data, t.test(dwell ~ diagnosticity, paired=T)) %>% apa::t_apa(es_ci=T)
+#with(data, t.test(dwell ~ diagnosticity, paired=T)) %>% apa::t_apa(es_ci=T)
 
 # J: paired + formula notation kann (seit 4.4.0, glaube ich?) nicht mehr 
 # verwendet werden, weil die Reihenfolge der Daten(-Paare) in dem Fall nicht 
 # explizit ist. Der Code läuft also für mich nicht, sondern:
+
+# M: Schade. Ein warning hätte es wohl auch getan für backwards compatibility...
+# Ich mag nämlich nicht, wenn man redundant info eingeben muss
+# z.B. "dwell" doppelt callen oder gar explizit die levels von diagnosticity :/
+# aber wenn das jetzt einen error wirft, haben wir ja keine Wahl mehr
 
 with(
   data, 
