@@ -6,6 +6,9 @@ se = function(x, na.rm = TRUE) {
   sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
 }
 
+CI = .95 #we want 95% CIs
+z.CI = qnorm(1-(1-CI)/2) #two-sided CI
+
 
 # Load Data ---------------------------------------------------------------
 data = read_rds("eye.rds") %>% tibble() %>% 
@@ -44,7 +47,7 @@ full_join(data.se, se.wrong %>% rename(dwell.se.wrong = dwell.se))
 #plot
 plot.between = data.se %>% ggplot(aes(y = dwell.m, x = diagnosticity, fill = diagnosticity)) + 
   geom_col(color="black") + 
-  geom_errorbar(aes(ymin = dwell.m - dwell.se*CI95, ymax = dwell.m + dwell.se*CI95), width=.5) +
+  geom_errorbar(aes(ymin = dwell.m - dwell.se*z.CI, ymax = dwell.m + dwell.se*z.CI), width=.5) +
   scale_fill_viridis_d() + theme_bw()
 plot.between
 
@@ -59,7 +62,7 @@ data.se.within = data %>% summarize(.by=c("subject", "diagnosticity"),
 #plot
 # plot.within = data.se.within %>% ggplot(aes(y = dwell.m, x = diagnosticity)) + 
 #   geom_col(color="black") + 
-#   geom_errorbar(aes(ymin = dwell.m - dwell.se*CI95, ymax = dwell.m + dwell.se*CI95), width=.5) +
+#   geom_errorbar(aes(ymin = dwell.m - dwell.se*z.CI, ymax = dwell.m + dwell.se*z.CI), width=.5) +
 #   theme_bw()
 # plot.within  
 # 
@@ -69,6 +72,6 @@ data.se.within = data %>% summarize(.by=c("subject", "diagnosticity"),
 plot.within = data.se %>% bind_rows(data.se.within) %>% mutate(diagnosticity = diagnosticity %>% as_factor()) %>% 
   ggplot(aes(y = dwell.m, x = diagnosticity, fill = diagnosticity)) + 
   geom_col(color="black") + 
-  geom_errorbar(aes(ymin = dwell.m - dwell.se*CI95, ymax = dwell.m + dwell.se*CI95), width=.5) +
+  geom_errorbar(aes(ymin = dwell.m - dwell.se*z.CI, ymax = dwell.m + dwell.se*z.CI), width=.5) +
   scale_fill_viridis_d() + theme_bw()
 plot.within
