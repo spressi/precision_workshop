@@ -24,8 +24,9 @@ data = read_rds("eye.rds") %>% tibble() %>%
 
 
 # J: Nur am Rande; sofern man confintr eh geladen hat:
-se(data$dwell)
-confintr::se_mean(data$dwell)
+data %>% summarize(se1 = se(dwell),
+                   se2 = confintr::se_mean(dwell),
+                   check = se1 == se2)
 
 # ANOVA -------------------------------------------------------------------
 
