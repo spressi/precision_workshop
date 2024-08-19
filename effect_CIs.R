@@ -122,6 +122,9 @@ data %>%
 # T <- FALSE
 # T == TRUE
 
+# M: guter Punkt! Ich wusste nicht, dass man "TRUE" nicht als Variablennamen verwenden kann, aber T schon
+# können wir gerne konsistent im Kurs so handhaben, dass wir TRUE nie abkürzen
+
 # Correlation -------------------------------------------------------------
 data %>% pivot_wider(names_from=diagnosticity, values_from=dwell) %>% 
   summarize(.by=diagnostic, cortest = cor.test(Diagnostic, `Non-Diagnostic`) %>% apa::cor_apa(r_ci=T, print=F))
@@ -130,6 +133,10 @@ data %>% pivot_wider(names_from=diagnosticity, values_from=dwell) %>%
 # J: Für dieses Beispiel finde ich gerade wenn die tidy syntax das Ziel ist, 
 # rstatix leichter nachvollziehbar. Werte sind auch hier wieder 
 # dieselben.
+
+# M: Syntax gefällt mir besser, output gefällt mir weniger :D
+# Wir könnten ja beide Varianten zeigen und dann die Teilnehmenden entscheiden lassen
+# zumal rstatix ein richtig gutes allround-Paket zu sein scheint - ähnlich wie apa
 
 data %>% 
   pivot_wider(names_from = diagnosticity, values_from = dwell) %>% 
