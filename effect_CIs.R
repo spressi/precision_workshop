@@ -79,7 +79,7 @@ with(
 
 (
   cohen1 <- 
-    cohens_d(
+    effectsize::cohens_d(
       data$dwell[data$diagnosticity == "Diagnostic"], 
       data$dwell[data$diagnosticity == "Non-Diagnostic"], 
       paired = TRUE
