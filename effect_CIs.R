@@ -27,6 +27,10 @@ data = read_rds("eye.rds") %>% tibble() %>%
 data %>% summarize(se1 = se(dwell),
                    se2 = confintr::se_mean(dwell),
                    check = se1 == se2)
+checkNAs = data; checkNAs[1:50, "dwell"] = NA
+checkNAs %>% summarize(se1 = se(dwell),
+                       se2 = confintr::se_mean(dwell),
+                       check = se1 == se2)
 
 # ANOVA -------------------------------------------------------------------
 
