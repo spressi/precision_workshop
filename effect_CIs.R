@@ -151,6 +151,23 @@ confintr::ci_cor(
   data$dwell[data$diagnosticity == "Diagnostic" & data$diagnostic == "Eyes"],
   data$dwell[data$diagnosticity == "Non-Diagnostic" & data$diagnostic == "Eyes"]
 )
+confintr::ci_cor(
+  data$dwell[data$diagnosticity == "Diagnostic" & data$diagnostic == "Mouth/Nose"],
+  data$dwell[data$diagnosticity == "Non-Diagnostic" & data$diagnostic == "Mouth/Nose"]
+)
+
+# M: best I can do to reduce baseR :P
+with(data %>% filter(diagnostic == "Eyes"), #das hier so vorzuziehen muss nicht sein
+     confintr::ci_cor(dwell[diagnosticity == "Diagnostic"],
+                      dwell[diagnosticity == "Non-Diagnostic"]))
+with(data %>% filter(diagnostic == "Mouth/Nose"),
+     confintr::ci_cor(dwell[diagnosticity == "Diagnostic"],
+                      dwell[diagnosticity == "Non-Diagnostic"]))
+
+
+# M: Fazit
+# apa und rstatix gefallen mir am besten, weil man damit in data frames bleiben kann
+# sobald man nämlich was Komplexeres als eine Hand voll Tests vor hat, stößt man schnell ohne data.frames an Grenzen
 
 
 # ANOVA -------------------------------------------------------------------
