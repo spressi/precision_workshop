@@ -13,10 +13,6 @@ se = function(x, na.rm = TRUE) {
   sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
 }
 
-# J: Nur am Rande; sofern man confintr eh geladen hat:
-se(data$dwell)
-confintr::se_mean(data$dwell)
-
 # Load Data ---------------------------------------------------------------
 data = read_rds("eye.rds") %>% tibble() %>% 
   filter(phase=="Gen") %>% 
@@ -26,6 +22,10 @@ data = read_rds("eye.rds") %>% tibble() %>%
   summarize(.by = c(subject, diagnostic, diagnosticity),
             dwell = mean(dwell))
 
+
+# J: Nur am Rande; sofern man confintr eh geladen hat:
+se(data$dwell)
+confintr::se_mean(data$dwell)
 
 # ANOVA -------------------------------------------------------------------
 
