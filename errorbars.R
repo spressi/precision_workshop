@@ -28,7 +28,7 @@ afex::aov_ez(data=data,
              include_aov = T) %>% apa::anova_apa(force_sph_corr = T)
 
 
-# Compute Standard Error --------------------------------------------------
+# Compute Between Standard Error ------------------------------------------
 #wrong
 se.wrong = data %>% summarize(.by="diagnosticity", dwell.m = mean(dwell), dwell.se = se(dwell))
 
