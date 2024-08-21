@@ -3,7 +3,7 @@
 
 set.seed(42)
 
-library(Rmisc)
+#library(Rmisc)
 library(tidyverse)
 library(truncnorm)
 
@@ -88,7 +88,7 @@ dat %>%
 
 # wrong - see N = 300
 dat_summary <- 
-  summarySE(
+  Rmisc::summarySE(
     dat,
     measurevar = "score",
     groupvars = "condition"
@@ -106,7 +106,7 @@ dat_agg <- dat %>%
   summarise(mean_agg = mean(score))
 
 dat_summary2 <- 
-  summarySE(
+  Rmisc::summarySE(
     dat_agg,
     measurevar = "mean_agg",
     groupvars = "condition"
@@ -117,7 +117,7 @@ dat_summary2
 ## MOREY APPROACH --------------------------------------------------------------
 
 dat_summary3 <- 
-  summarySEwithin(
+  Rmisc::summarySEwithin(
     dat_agg,
     measurevar = "mean_agg",
     withinvars = "condition", 
