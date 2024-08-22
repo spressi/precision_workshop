@@ -43,6 +43,32 @@ anova1 <-
 
 anova1 %>% apa::anova_apa(force_sph_corr = T)
 
+# with CIs
+# petasq_ci = anova1$anova_table %>% lapply(apaTables::get.ci.partial.eta.squared, . %>% pull("F"), . %>% pull("num Df"), . %>% pull("den Df"))
+# anova1 %>% apa::anova_apa(force_sph_corr = T, print = F) %>% mutate(text = text %>% lapply(paste, petasq_ci))
+
+peta.ci.vec = function(F.values, dfs1, dfs2, conf.level = .9) {
+  if (length(F.values) != length(dfs1) | length(F.values) != length(dfs2)) stop("Different length of arguments.")
+  
+  result = tibble()
+  for (i in seq_along(F.values))
+    result = apaTables::get.ci.partial.eta.squared(F.values[i], dfs1[i], dfs2[i], conf.level = conf.level) %>% bind_rows() %>% bind_rows(result, .)
+  return(result)
+}
+peta.ci = function(anova_table, conf.level = .9, intercept=F) {
+  result = peta.ci.vec(anova_table$`F`, anova_table$`num Df`, anova_table$`den Df`, conf.level = conf.level)
+  if (intercept) result = result %>% bind_rows(tibble(LL=NA, UL=NA), .) #TODO get F of intercept
+  
+  #result %>% rename(!!paste0("ci", conf.level*100, "_low") = LL, !!paste0("ci", conf.level*100, "_up") = UL)
+  result = result %>% bind_cols(tibble(conf.level = conf.level))
+  
+  return(result)
+}
+#peta.ci(anova1$anova_table)
+
+anova1 %>% apa::anova_apa(force_sph_corr = T, print=F) %>% bind_cols(peta.ci(anova1$anova_table, intercept=T)) %>% 
+  mutate(LL = LL %>% round(2), UL = UL %>% round(2)) %>% group_by(effect) %>% transmute(text = paste0(text, ", ", conf.level*100, "% CI [", LL, ", ", UL, "]"))
+
 # t-test ------------------------------------------------------------------
 #with(data, t.test(dwell ~ diagnosticity, paired=T)) %>% apa::t_apa(es_ci=T)
 
