@@ -14,11 +14,16 @@ se = function(x, na.rm = TRUE) {
 }
 
 # Load Data ---------------------------------------------------------------
+
 data = read_rds("eye.rds") %>% tibble() %>% 
-  filter(phase=="Gen") %>% 
+  filter(phase == "Gen") %>% 
   select(subject, trial, dwell, dwell.non, threat, diagnostic) %>% 
-  pivot_longer(cols=contains("dwell"), names_to="diagnosticity", values_to="dwell") %>% 
-  mutate(diagnosticity = if_else(diagnosticity %>% grepl("non", .), "Non-Diagnostic", "Diagnostic") %>% as_factor()) %>% 
+  pivot_longer(cols = contains("dwell"), names_to = "diagnosticity", values_to = "dwell") %>% 
+  mutate(
+    diagnosticity = 
+      if_else(diagnosticity %>% grepl("non", .), "Non-Diagnostic", "Diagnostic") %>% 
+      as_factor()
+  ) %>% 
   summarize(.by = c(subject, diagnostic, diagnosticity),
             dwell = mean(dwell))
 
@@ -39,9 +44,9 @@ anova1 <-
                dv = "dwell",
                id = "subject", 
                within = c("diagnostic", "diagnosticity"),
-               include_aov = T) 
+               include_aov = TRUE) 
 
-anova1 %>% apa::anova_apa(force_sph_corr = T)
+anova1 %>% apa::anova_apa(force_sph_corr = TRUE)
 
 # with CIs
 # petasq_ci = anova1$anova_table %>% lapply(apaTables::get.ci.partial.eta.squared, . %>% pull("F"), . %>% pull("num Df"), . %>% pull("den Df"))
@@ -55,19 +60,48 @@ peta.ci.vec = function(F.values, dfs1, dfs2, conf.level = .9) {
     result = apaTables::get.ci.partial.eta.squared(F.values[i], dfs1[i], dfs2[i], conf.level = conf.level) %>% bind_rows() %>% bind_rows(result, .)
   return(result)
 }
-peta.ci = function(anova_table, conf.level = .9, intercept=F) {
+
+peta.ci = function(anova_table, conf.level = .9, intercept = FALSE) {
   result = peta.ci.vec(anova_table$`F`, anova_table$`num Df`, anova_table$`den Df`, conf.level = conf.level)
-  if (intercept) result = result %>% bind_rows(tibble(LL=NA, UL=NA), .) #TODO get F of intercept
+  if (intercept) result = result %>% bind_rows(tibble(LL = NA, UL = NA), .) #TODO get F of intercept
   
   #result %>% rename(!!paste0("ci", conf.level*100, "_low") = LL, !!paste0("ci", conf.level*100, "_up") = UL)
   result = result %>% bind_cols(tibble(conf.level = conf.level))
   
   return(result)
 }
-#peta.ci(anova1$anova_table)
 
-anova1 %>% apa::anova_apa(force_sph_corr = T, print=F) %>% bind_cols(peta.ci(anova1$anova_table, intercept=T)) %>% 
-  mutate(LL = LL %>% round(2), UL = UL %>% round(2)) %>% group_by(effect) %>% transmute(text = paste0(text, ", ", conf.level*100, "% CI [", LL, ", ", UL, "]"))
+# J: base R for the win :-)
+peta.ci2 <- 
+  function(anova_table, conf.level = .9, intercept = FALSE) {
+  
+  result <- 
+    apply(anova1$anova_table, 1, function(x) {
+      ci <- 
+        apaTables::get.ci.partial.eta.squared(
+          F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
+        )
+      
+      return(setNames(c(ci$LL, ci$UL), c("LL", "UL")))
+    }) %>% 
+    t() %>% 
+    as.data.frame()
+  
+  result$conf.level <- conf.level
+  
+  return(result)
+}
+
+
+# peta.ci(anova1$anova_table)
+peta.ci2(anova1$anova_table)
+
+anova1 %>% 
+  apa::anova_apa(force_sph_corr = TRUE, print = FALSE) %>% 
+  bind_cols(peta.ci(anova1$anova_table, intercept = TRUE)) %>% 
+  mutate(LL = LL %>% round(2), UL = UL %>% round(2)) %>% 
+  group_by(effect) %>% 
+  transmute(text = paste0(text, ", ", conf.level*100, "% CI [", LL, ", ", UL, "]"))
 
 # t-test ------------------------------------------------------------------
 #with(data, t.test(dwell ~ diagnosticity, paired=T)) %>% apa::t_apa(es_ci=T)
