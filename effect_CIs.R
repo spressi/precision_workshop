@@ -9,13 +9,13 @@ library(effectsize)
 library(confintr)
 library(rstatix)
 
-se = function(x, na.rm = TRUE) {
+se <- function(x, na.rm = TRUE) {
   sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
 }
 
 # Load Data ---------------------------------------------------------------
 
-data = read_rds("eye.rds") %>% tibble() %>% 
+data <- read_rds("eye.rds") %>% tibble() %>% 
   filter(phase == "Gen") %>% 
   select(subject, trial, dwell, dwell.non, threat, diagnostic) %>% 
   pivot_longer(cols = contains("dwell"), names_to = "diagnosticity", values_to = "dwell") %>% 
@@ -32,7 +32,7 @@ data = read_rds("eye.rds") %>% tibble() %>%
 data %>% summarize(se1 = se(dwell),
                    se2 = confintr::se_mean(dwell),
                    check = se1 == se2)
-checkNAs = data; checkNAs[1:50, "dwell"] = NA
+checkNAs <- data; checkNAs[1:50, "dwell"] <- NA
 checkNAs %>% summarize(se1 = se(dwell),
                        se2 = confintr::se_mean(dwell),
                        check = se1 == se2)
@@ -40,7 +40,7 @@ checkNAs %>% summarize(se1 = se(dwell),
 # ANOVA -------------------------------------------------------------------
 
 anova1 <- 
-  afex::aov_ez(data=data,
+  afex::aov_ez(data = data,
                dv = "dwell",
                id = "subject", 
                within = c("diagnostic", "diagnosticity"),
@@ -49,24 +49,24 @@ anova1 <-
 anova1 %>% apa::anova_apa(force_sph_corr = TRUE)
 
 # with CIs
-# petasq_ci = anova1$anova_table %>% lapply(apaTables::get.ci.partial.eta.squared, . %>% pull("F"), . %>% pull("num Df"), . %>% pull("den Df"))
+# petasq_ci <- anova1$anova_table %>% lapply(apaTables::get.ci.partial.eta.squared, . %>% pull("F"), . %>% pull("num Df"), . %>% pull("den Df"))
 # anova1 %>% apa::anova_apa(force_sph_corr = T, print = F) %>% mutate(text = text %>% lapply(paste, petasq_ci))
 
-peta.ci.vec = function(F.values, dfs1, dfs2, conf.level = .9) {
+peta.ci.vec <- function(F.values, dfs1, dfs2, conf.level = .9) {
   if (length(F.values) != length(dfs1) | length(F.values) != length(dfs2)) stop("Different length of arguments.")
   
-  result = tibble()
+  result <- tibble()
   for (i in seq_along(F.values))
-    result = apaTables::get.ci.partial.eta.squared(F.values[i], dfs1[i], dfs2[i], conf.level = conf.level) %>% bind_rows() %>% bind_rows(result, .)
+    result <- apaTables::get.ci.partial.eta.squared(F.values[i], dfs1[i], dfs2[i], conf.level = conf.level) %>% bind_rows() %>% bind_rows(result, .)
   return(result)
 }
 
-peta.ci = function(anova_table, conf.level = .9, intercept = FALSE) {
-  result = peta.ci.vec(anova_table$`F`, anova_table$`num Df`, anova_table$`den Df`, conf.level = conf.level)
-  if (intercept) result = result %>% bind_rows(tibble(LL = NA, UL = NA), .) #TODO get F of intercept
+peta.ci <- function(anova_table, conf.level = .9, intercept = FALSE) {
+  result <- peta.ci.vec(anova_table$`F`, anova_table$`num Df`, anova_table$`den Df`, conf.level = conf.level)
+  if (intercept) result <- result %>% bind_rows(tibble(LL = NA, UL = NA), .) #TODO get F of intercept
   
   #result %>% rename(!!paste0("ci", conf.level*100, "_low") = LL, !!paste0("ci", conf.level*100, "_up") = UL)
-  result = result %>% bind_cols(tibble(conf.level = conf.level))
+  result <- result %>% bind_cols(tibble(conf.level = conf.level))
   
   return(result)
 }
@@ -104,7 +104,7 @@ anova1 %>%
   transmute(text = paste0(text, ", ", conf.level*100, "% CI [", LL, ", ", UL, "]"))
 
 # t-test ------------------------------------------------------------------
-#with(data, t.test(dwell ~ diagnosticity, paired=T)) %>% apa::t_apa(es_ci=T)
+#with(data, t.test(dwell ~ diagnosticity, paired = T)) %>% apa::t_apa(es_ci = T)
 
 # J: paired + formula notation kann (seit 4.4.0, glaube ich?) nicht mehr 
 # verwendet werden, weil die Reihenfolge der Daten(-Paare) in dem Fall nicht 
@@ -186,8 +186,10 @@ data %>%
 # können wir gerne konsistent im Kurs so handhaben, dass wir TRUE nie abkürzen
 
 # Correlation -------------------------------------------------------------
-data %>% pivot_wider(names_from=diagnosticity, values_from=dwell) %>% 
-  summarize(.by=diagnostic, cortest = cor.test(Diagnostic, `Non-Diagnostic`) %>% apa::cor_apa(r_ci=T, print=F))
+data %>% pivot_wider(names_from = diagnosticity, values_from = dwell) %>% 
+  summarize(.by = diagnostic, 
+            cortest = cor.test(Diagnostic, `Non-Diagnostic`) %>% 
+              apa::cor_apa(r_ci = TRUE, print = FALSE))
 #see also: psych::r.con
 
 # J: Für dieses Beispiel finde ich gerade wenn die tidy syntax das Ziel ist, 
