@@ -73,10 +73,10 @@ peta.ci = function(anova_table, conf.level = .9, intercept = FALSE) {
 
 # J: base R for the win :-)
 peta.ci2 <- 
-  function(anova_table, conf.level = .9, intercept = FALSE) {
+  function(anova_table, conf.level = .9, intercept = FALSE) { #intercept currently unused argument
   
   result <- 
-    apply(anova1$anova_table, 1, function(x) {
+    apply(anova_table, 1, function(x) {
       ci <- 
         apaTables::get.ci.partial.eta.squared(
           F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
