@@ -25,7 +25,7 @@ afex::aov_ez(data = data,
              dv = "dwell",
              id = "subject", 
              within = c("diagnostic", "diagnosticity"),
-             include_aov = T) %>% apa::anova_apa(force_sph_corr = T)
+             include_aov = TRUE) %>% apa::anova_apa(force_sph_corr = TRUE)
 
 
 # Compute Between Standard Error ------------------------------------------

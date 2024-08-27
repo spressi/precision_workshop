@@ -50,7 +50,7 @@ anova1 %>% apa::anova_apa(force_sph_corr = TRUE)
 
 # with CIs
 # petasq_ci <- anova1$anova_table %>% lapply(apaTables::get.ci.partial.eta.squared, . %>% pull("F"), . %>% pull("num Df"), . %>% pull("den Df"))
-# anova1 %>% apa::anova_apa(force_sph_corr = T, print = F) %>% mutate(text = text %>% lapply(paste, petasq_ci))
+# anova1 %>% apa::anova_apa(force_sph_corr = TRUE, print = FALSE) %>% mutate(text = text %>% lapply(paste, petasq_ci))
 
 peta.ci.vec <- function(F.values, dfs1, dfs2, conf.level = .9) {
   if (length(F.values) != length(dfs1) | length(F.values) != length(dfs2)) stop("Different length of arguments.")
@@ -104,7 +104,7 @@ anova1 %>%
   transmute(text = paste0(text, ", ", conf.level*100, "% CI [", LL, ", ", UL, "]"))
 
 # t-test ------------------------------------------------------------------
-#with(data, t.test(dwell ~ diagnosticity, paired = T)) %>% apa::t_apa(es_ci = T)
+#with(data, t.test(dwell ~ diagnosticity, paired = TRUE)) %>% apa::t_apa(es_ci = TRUE)
 
 # J: paired + formula notation kann (seit 4.4.0, glaube ich?) nicht mehr 
 # verwendet werden, weil die Reihenfolge der Daten(-Paare) in dem Fall nicht 
