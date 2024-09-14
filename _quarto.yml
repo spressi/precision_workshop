@@ -9,9 +9,9 @@ website:
     style: "floating"
     search: true
     contents:
-      - 1.1 R Intro.qmd
-      - 1.2 Data Wrangling.qmd
-      - 1.3 Data Visualization.qmd
+      - 1.1_R_Intro.qmd
+      - 1.2_Data_Wrangling.qmd
+      - 1.3_Data_Visualization.qmd
 
 format:
   html:
