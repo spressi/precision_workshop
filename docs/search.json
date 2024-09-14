@@ -1,0 +1,749 @@
+[
+  {
+    "objectID": "1.1 R Intro.html#general-working-with-r-in-this-course",
+    "href": "1.1 R Intro.html#general-working-with-r-in-this-course",
+    "title": "1.1 Intro to R",
+    "section": "General: Working with R in this course",
+    "text": "General: Working with R in this course\nDuring Class\n\nYou should have RStudio open and your Biostats project loaded (we will set up the project today).\nHave the slides open in the background. You will need them to copy R code (top right button on any code chunk) or click on links.\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\"\n\n\n\nRemember: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.\n\n\n\nAt Home\nIf possible, use two screens with the slides (Zoom) opened on one and RStudio on the other",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#why-write-code",
+    "href": "1.1 R Intro.html#why-write-code",
+    "title": "1.1 Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g., SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nScience/Academia is a marathon and not a sprint\n=&gt; it is worthwhile investing in skills with a slow learning curve that will pay off in the long run\n\n\n\nChat: What are advantages (or disadvantages!) of coding?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#install-r-rstudio",
+    "href": "1.1 R Intro.html#install-r-rstudio",
+    "title": "1.1 Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed R & RStudio by now! Who had problems doing so?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#overview-rstudio",
+    "href": "1.1 R Intro.html#overview-rstudio",
+    "title": "1.1 Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen R!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#rstudio-panes",
+    "href": "1.1 R Intro.html#rstudio-panes",
+    "title": "1.1 Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane: view, edit, & save your code\nConsole: here the commands are run and rudimentary output may be provided\nEnvironment: which variables/data are available\nFiles, plots, help etc.\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#using-the-console-as-a-calculator",
+    "href": "1.1 R Intro.html#using-the-console-as-a-calculator",
+    "title": "1.1 Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#saving-the-results-as-a-variableobject",
+    "href": "1.1 R Intro.html#saving-the-results-as-a-variableobject",
+    "title": "1.1 Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not common in the R community)\na, multi etc. are the variable names, which can be words, some special characters are allowed but not whitespace\n\nYou can find those now in your Environment! (top right)\nFor saving variables, there is no feedback in the console (2*3 outputs 6 but multi &lt;- 2*3 does not)\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g., a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#functions",
+    "href": "1.1 R Intro.html#functions",
+    "title": "1.1 Intro to R",
+    "section": "Functions",
+    "text": "Functions\nThis code with sqrt(9) looked unfamiliar. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: ?functionname\n\n?sqrt\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\nYou can also click on a function in the script or console pane and press the F1 key.\n\nDo this now! Anything unclear?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#functions-2",
+    "href": "1.1 R Intro.html#functions-2",
+    "title": "1.1 Intro to R",
+    "section": "Functions 2",
+    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\nrnorm(6, 3, 1) #this outputs the same as above\n\n# By the way, # denotes a line-end comment (ignored by R), which are very important for code documentation!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#packages",
+    "href": "1.1 R Intro.html#packages",
+    "title": "1.1 Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions that are already included with Base R (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages are like collections of functions or even data types that someone else wrote.\nOn the top, click on Tools and then Install Packages…. Search for tidyverse and install!\n\n\n\nYou can also download a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools for some packages: https://cran.r-project.org/bin/windows/Rtools/)\n\n\n\n\nBut installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package (i.e., make it directly available) with the library() function. This is the first thing you do on the top of an R script:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\n(If you don’t load a package, you have to call functions explicitly by packagename::function)\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#new-project",
+    "href": "1.1 R Intro.html#new-project",
+    "title": "1.1 Intro to R",
+    "section": "New Project",
+    "text": "New Project\nCreate a new project by clicking on “File” in the top left and then “New Project…”\nWe usually want to create a “New Directory” and then choose a standard “New Project” on the top of the list\n(we will only need standard projects during this class)\nChoose the project name, e.g., as “Biostats R” (this will create a folder in which the whole project is living)\nBrowse any kind of path you want to contain your project folder,\ne.g., “D:/Documents/Studies/Translational Neuroscience/Biostats”\n\nNew Project final window",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#existing-projects",
+    "href": "1.1 R Intro.html#existing-projects",
+    "title": "1.1 Intro to R",
+    "section": "Existing Projects",
+    "text": "Existing Projects\nYou will find the current project on the top right corner of RStudio\nIf you click on the current project, you can open new projects by choosing “Open Project” and select the .Rproj file of the project.\nYou can also just double click on .Rproj files and RStudio will open with the project loaded.\n\nExisting projects",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#using-scripts",
+    "href": "1.1 R Intro.html#using-scripts",
+    "title": "1.1 Intro to R",
+    "section": "Using Scripts",
+    "text": "Using Scripts\nTo open a new script, click File -&gt; New File -&gt; R Script. (Ctrl + Shift + N)\nTo run a line of the script, you can either click Run at the top right of the pane or Ctrl + Enter. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command).\nTo run the whole script/chunk, press Ctrl + Shift + Enter (with full console output) or Ctrl + Shift + S (limited output).\n\n\nUsing scripts",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#read-in-data",
+    "href": "1.1 R Intro.html#read-in-data",
+    "title": "1.1 Intro to R",
+    "section": "Read in Data",
+    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).\nWe will use the files from Fundamentals of Quantitative Analysis: ahi-cesd.csv and participant-info.csv. Save these directly in your project folder on your computer (do not open them!).\n\n\n\nDid you find the files? Here are the direct links:\n\nhttps://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv\nhttps://psyteachr.github.io/quant-fun-v2/participant-info.csv\n\n\n\n\n\nCreate a new script with the following content:\n\n#install.packages(\"tidyverse\") #if you have not yet installed the tidyverse, uncomment and run\nlibrary(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#looking-at-the-data",
+    "href": "1.1 R Intro.html#looking-at-the-data",
+    "title": "1.1 Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on dat and pinfo in your Environment.\nType View(dat) into the console or into the script pane and run it.\nRun str(dat) or str(pinfo) to get an overview of the data.\nRun summary(dat).\nRun head(dat), print(dat), or even just dat.\nWhat is the difference between these commands?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1 R Intro.html#looking-at-the-data-2",
+    "href": "1.1 R Intro.html#looking-at-the-data-2",
+    "title": "1.1 Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\n\nThe two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#accessing-variablescolumns",
+    "href": "1.2 Data Wrangling.html#accessing-variablescolumns",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns",
+    "text": "Accessing Variables/Columns\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# create a small data set for this example:\ntestdata &lt;- data.frame(a = c(1, 2, 3),  # c() creates a (column)vector!\n                       b = c(\"a\", \"b\", \"c\"),\n                       c = c(4, 5, 6),\n                       d = c(7, 8, 9),\n                       e = c(10, 11, 12))\n\nprint(testdata)\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n3 3 c 6 9 12\n\nstr(testdata)\n\n'data.frame':   3 obs. of  5 variables:\n $ a: num  1 2 3\n $ b: chr  \"a\" \"b\" \"c\"\n $ c: num  4 5 6\n $ d: num  7 8 9\n $ e: num  10 11 12\n\n\n\ndata.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)\nc() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#accessing-variablescolumns-2",
+    "href": "1.2 Data Wrangling.html#accessing-variablescolumns-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns 2",
+    "text": "Accessing Variables/Columns 2\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# in baseR, we access elements of a data.frame with square brackets\ntestdata[1, 2] #get cell that is in first row and second column\n\n[1] \"a\"\n\ntestdata[1:2, 4:5] #use a colon to create ranges of values: first two rows and column numbers 4 and 5\n\n  d  e\n1 7 10\n2 8 11\n\n# we can leave one part empty to select ALL available columns/rows\ntestdata[1:2,] #first two rows, all columns\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n\ntestdata[, 4:5] #columns number 4 and 5, all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n# it is usually better to access columns by their column name:\ntestdata[, c(\"d\", \"e\")] #columns with names \"d\" and \"e\", all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n\n\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#accessing-variablescolumns-3",
+    "href": "1.2 Data Wrangling.html#accessing-variablescolumns-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns 3",
+    "text": "Accessing Variables/Columns 3\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# access a column only:\ntestdata[, \"a\"] #if possible, R will give you just a vector instead of a data.frame\n\n[1] 1 2 3\n\ntestdata$a #short notation to get column \"a\" as a vector\n\n[1] 1 2 3\n\n# tidy versions (see next slides)\n#library(tidyverse) #load tidyverse (if not already done)\npull(testdata, a) #same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a) #get column(s) as a data.frame (we usually want this only if we select several columns)\n\n  a\n1 1\n2 2\n3 3\n\n\n\ndata.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)\nc() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!\nselect –&gt; tidyverse",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#tidyverse-2",
+    "href": "1.2 Data Wrangling.html#tidyverse-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidyverse 2",
+    "text": "Tidyverse 2\nBase R:\noutput_data1 &lt;- function1(data)\noutput_data2 &lt;- function2(output_data1, param1)\noutput_data3 &lt;- function3(output_data2, param2, param3)\n\nOr:\noutput_data &lt;- function3(function2(function1(data), param1), param2, param3)\n\n\nTidyverse:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2(param1) %&gt;% function3(param2, param3)\n\n\nYou can insert a pipe %&gt;% (including spaces) by pressing Ctrl + Shift + M\n\n\nBe aware, though, that coding in the tidyverse style is very different than in Base R!\nBase R is more similar to “traditional” programming and other programming languages.\nFor example, you could wrap functions, which would then be carried out from the most nested to the outer function:\noutput_data &lt;- function3(function2(function1(data)))\nfunction1() will be carried out first, followed by function2(), then function3() .\n. . .\nIn the tidyverse, the same would look like this:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2() %&gt;% function(3)\n%&gt;% is called “the pipe” and will “hand over” whatever has been done to the next part. In this example, the data is handed over to function1(), which is then carried out, the result of which is handed over to function2() etc.\nTidyverse style programming is thus a bit easier to read!\nThere’s also the new pipe Base R |&gt;, which is similar to %&gt;%.\n\n\n\n%&gt;% is called the pipe. It takes the output of whatever happens to its left and “hands it over” to the right. There’s also a new base-R-pipe: |&gt;. It is very similar, but sometimes the functionality differs.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#tidyverse-3",
+    "href": "1.2 Data Wrangling.html#tidyverse-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidyverse 3",
+    "text": "Tidyverse 3\nlibrary(tidyverse) will load a number of packages, such as dplyr, ggplot2, readr, forcats, tibble etc., which are all usefuls for data wrangling.\nWe will work mainly with functions from the dplyr package, but also use readr to read in data. We will also use ggplot2 to visualize data.\nThe most important dplyr functions for data wrangling are:\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\nselect()\nInclude or exclude certain columns (variables)\n\n\nfilter()\nInclude or exclude certain rows (observations)\n\n\nmutate()\nCreate new columns (variables)\n\n\nsummarize()\nCreate new columns that aggregate data/create summary variables for groups of observations (data frame will become smaller)\n\n\ngroup_by()\nOrganize the rows (observations) into groups\n\n\narrange()\nChange the order of rows (observations)\n\n\n\n\nfunction names very self-explanatory!\nWe don’t create new observations in R - this is job of the data acquisition - we just read the existing data",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#setting-up-libraries",
+    "href": "1.2 Data Wrangling.html#setting-up-libraries",
+    "title": "1.2 Data Wrangling",
+    "section": "Setting up libraries",
+    "text": "Setting up libraries\n\nOpen your Biostats R project.\nCreate a new R script and save it, e.g. as “DataWrangling1.R”.\nInsert code to make sure the packages “tidyverse” and “babynames” are installed and loaded.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"babynames\")\n\nlibrary(babynames)\nlibrary(tidyverse)\n\n\nload tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#look-at-the-data",
+    "href": "1.2 Data Wrangling.html#look-at-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Look at the Data",
+    "text": "Look at the Data\n\n\nType the word babynames into your console pane and press enter. What kind of information do you get?\n\n“A tibble: 1,924,665 x 5”\n\ntibble is an extension of the data.frame with more convenient output (e.g., values rounded to significant digits)\n~1.9 million rows/observations\n5 columns/variables\n\n\nWhat kind of columns/variables do we have?\n\ndbl = double/numeric (can take decimals)\nchr = character/string (letters or words)\nint = integer (only whole numbers)\n\n\n\n\nask first for 1 and 2",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#selecting-variables-of-interest",
+    "href": "1.2 Data Wrangling.html#selecting-variables-of-interest",
+    "title": "1.2 Data Wrangling",
+    "section": "Selecting Variables of Interest",
+    "text": "Selecting Variables of Interest\nUse select() to choose only the columns year, sex, name, and prop and store it as a new tibble called babynames_reduced.\nRemember that you can run ?select in the console if you need help about, e.g., input/arguments to the function.\n\n\n# my favorite:\nbabynames_reduced &lt;- babynames %&gt;% \n  select(year, sex, name, prop)\n\n# or without the pipe operator:\nbabynames_reduced &lt;- select(.data = babynames, year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- babynames %&gt;% \n  select(-n) # remove columns by using -\n\nRemoving columns vs. selecting columns: Results may change if the data get updated!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#arranging-data",
+    "href": "1.2 Data Wrangling.html#arranging-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Arranging Data",
+    "text": "Arranging Data\nChange the order of the data (oberservations/rows)!\n\n\nUsing arrange(), try sorting the data according to the names column. What happens?\nHow can you sort a column in a descending fashion? Check out the help file (?arrange).\nLet’s sort by year descendingly and within each year, sort names alphabetically.\n\n\n\n\nsort_asc &lt;- babynames %&gt;% arrange(name)\n\nsort_desc &lt;- babynames %&gt;% arrange(desc(year)) \n\nbabynames %&gt;% arrange(desc(year), name) \n\n# A tibble: 1,924,665 × 5\n    year sex   name          n       prop\n   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;      &lt;dbl&gt;\n 1  2017 M     Aaban        11 0.0000056 \n 2  2017 F     Aabriella     6 0.0000032 \n 3  2017 M     Aadam        18 0.00000917\n 4  2017 M     Aadan         8 0.00000407\n 5  2017 M     Aadarsh      15 0.00000764\n 6  2017 M     Aaden       240 0.000122  \n 7  2017 M     Aadesh        7 0.00000357\n 8  2017 M     Aadhav       31 0.0000158 \n 9  2017 M     Aadhavan      6 0.00000306\n10  2017 M     Aadhi        10 0.00000509\n# ℹ 1,924,655 more rows\n\n\n\nremember to save data in new tibble/data frame!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#filter-observations",
+    "href": "1.2 Data Wrangling.html#filter-observations",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter Observations",
+    "text": "Filter Observations\nWe have already used select() to keep only certain variables (columns), but often we also want to keep only certain observations (rows), e.g. babies born in the year 2000 and later.\nWe use the function filter() for this.\n\nLook at the following code and think about what it might do.\n\nbabynames %&gt;% filter(year &gt; 2000)\n\n\n\n\n\n# A tibble: 562,156 × 5\n    year sex   name          n    prop\n   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;\n 1  2001 F     Emily     25055 0.0127 \n 2  2001 F     Madison   22164 0.0112 \n 3  2001 F     Hannah    20712 0.0105 \n 4  2001 F     Ashley    16526 0.00835\n 5  2001 F     Alexis    16401 0.00828\n 6  2001 F     Sarah     15896 0.00803\n 7  2001 F     Samantha  15862 0.00801\n 8  2001 F     Abigail   14807 0.00748\n 9  2001 F     Elizabeth 14784 0.00747\n10  2001 F     Olivia    13978 0.00706\n# ℹ 562,146 more rows\n\n\nThe data starts at 2001! :(",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#detour-boolean-expressions",
+    "href": "1.2 Data Wrangling.html#detour-boolean-expressions",
+    "title": "1.2 Data Wrangling",
+    "section": "Detour: Boolean Expressions",
+    "text": "Detour: Boolean Expressions\nThe second argument, year &gt; 2000, is a Boolean or logical expression, which means that it results in a value of either TRUE or FALSE. filter() runs this expression and then removes all values/rows that contain FALSE.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#detour-boolean-expressions-2",
+    "href": "1.2 Data Wrangling.html#detour-boolean-expressions-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Detour: Boolean Expressions 2",
+    "text": "Detour: Boolean Expressions 2\n\nBoolean expressions\n\n\n\n\n\n\n\nOperator\nName\nis TRUE if and only if\n\n\n\n\nA &lt; B\nless than\nA is less than B\n\n\nA &lt;= B\nless than or equal\nA is less than or equal to B\n\n\nA &gt; B\ngreater than\nA is greater than B\n\n\nA &gt;= B\ngreater than or equal\nA is greater than or equal to B\n\n\nA == B\nequivalence\nA exactly equals B\n\n\nA != B\nnot equal\nA does not exactly equal B\n\n\nA %in% B\nin\nA is an element of vector B\n\n\n\n\n\nA double equality sign == is a comparison, a single equals = is a variable or parameter assignment.\nThis is why R users like to make the distinction even bigger by using &lt;- for variable assignment (your environment in the top right pane) and = for parameter assignment in functions (a hidden so-called local environment only visible to the function).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#filter-some-more",
+    "href": "1.2 Data Wrangling.html#filter-some-more",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter some more",
+    "text": "Filter some more\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\n\nFirst task:\n\nmarys &lt;- babynames %&gt;% filter(name == \"Mary\")\n\n\n\nThe second task might be difficult because you have two expressions, name != \"Mary\" and year &gt; 2000. You can simply add several expressions separated by commas in filter (commas are treated like a “logical and” &):\n\nno_marys_young &lt;- babynames %&gt;% filter(name != \"Mary\", year &gt; 2000)\n\n\n\nThird task:\n\nqueens &lt;- babynames %&gt;% filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))\n\n\n\nThe fourth task is tricky! You could use three filters in a row with name != \"Mary\", name != \"Elizabeth\", name != \"Victoria\". Or you could use %in%, but then you can’t use the ! in front of the %in%. The trick is to negate the whole expression with == FALSE:\n\nno_queens &lt;- babynames %&gt;% filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\") == FALSE)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#your-first-plot",
+    "href": "1.2 Data Wrangling.html#your-first-plot",
+    "title": "1.2 Data Wrangling",
+    "section": "Your First Plot",
+    "text": "Your First Plot\nIn your script, insert and run the following code:\n\ndat &lt;- babynames %&gt;% \n  filter(sex==\"F\", #only female babies\n         name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\")) #reduce to these 4 names\n\ndat %&gt;% ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(size=2) #plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex==\"F\" to sex==\"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#create-new-variables",
+    "href": "1.2 Data Wrangling.html#create-new-variables",
+    "title": "1.2 Data Wrangling",
+    "section": "Create New Variables",
+    "text": "Create New Variables\nIf we want to create variables that do not exist yet (i.e. by calculating values, combining other variables, etc.), we can use mutate()!\n\nAdd a variable called “country” that contains the value “USA” for all observations\n\n\n\nbaby_where &lt;- babynames %&gt;% mutate(country = \"USA\")\n\n\n\nBut mutate is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- babynames %&gt;% mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1888   1880\n 2  1910   1910\n 3  1923   1920\n 4  1940   1940\n 5  1944   1940\n 6  1946   1940\n 7  1967   1960\n 8  1975   1970\n 9  1999   1990\n10  2003   2000",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#summarizing",
+    "href": "1.2 Data Wrangling.html#summarizing",
+    "title": "1.2 Data Wrangling",
+    "section": "Summarizing",
+    "text": "Summarizing\nThe goal of data wrangling is often to summarize (or aggregate) the data, e.g. to have an average value per condition. Sometimes you’d also want to calculate descriptive statistics to report.\n\nYou can do so using the function summarize():\n\n# run the filter function just like above again:\ndat &lt;- babynames %&gt;% \n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n         sex == \"F\")\n\n# summarize the data, calculating the number of oberservations:\ndat_sum &lt;- dat %&gt;% summarize(total = sum(n))\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374\n\n\nAs you can see, a new variable named total is created, which contains the total number of observations (in this case, it is different from the number of rows because each row already contains a count n).\nThere’s just one row in the resulting data frame, because summarize() reduces the data frame (to only include the necessary information)!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#grouping-and-summarizing",
+    "href": "1.2 Data Wrangling.html#grouping-and-summarizing",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing",
+    "text": "Grouping and Summarizing\nOften, we want to summarize data for specific subgroups. For this aim, summarize() has the .by parameter:\n\ngroup_sum &lt;- dat %&gt;% summarize(total = sum(n), .by=name) \ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Emily     841491\n2 Kathleen  711605\n3 Beverly   376914\n4 Alexandra 231364\n\n\n\nYou can also subgroup by a combination of variables:\n\nbabynames %&gt;% filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\")) %&gt;% #we start with the 4 names regardless of sex\n  summarize(total = sum(n), .by=c(name, sex)) #and then summarize by name, separated for sex\n\n# A tibble: 8 × 3\n  name      sex    total\n  &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;\n1 Emily     F     841491\n2 Kathleen  F     711605\n3 Beverly   M       4633\n4 Beverly   F     376914\n5 Alexandra F     231364\n6 Emily     M       1744\n7 Kathleen  M       1692\n8 Alexandra M        859",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#grouping-and-summarizing-2",
+    "href": "1.2 Data Wrangling.html#grouping-and-summarizing-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing 2",
+    "text": "Grouping and Summarizing 2\nIn earlier versions, we had to use summarize() together with group_by():\n\ngroup_sum &lt;- dat %&gt;% group_by(name) %&gt;% summarize(total = sum(n)) \ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Alexandra 231364\n2 Beverly   376914\n3 Emily     841491\n4 Kathleen  711605\n\n\nWe avoid using group_by() because it can have unintended side effects.\nIt is just part of this class because you will likely encounter it in somebody else’s (old) code.\n\nIf you do have to use it, make sure to ungroup() after summarize() (or mutate()) to avoid unintended effects:\n\ngroup_sum &lt;- dat %&gt;% group_by(name) %&gt;% summarize(total = sum(n)) %&gt;% ungroup()",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#grouping-and-summarizing-3",
+    "href": "1.2 Data Wrangling.html#grouping-and-summarizing-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing 3",
+    "text": "Grouping and Summarizing 3\nUse the baby_decades data frame to calculate the mean and median number of observations, grouped by sex & decade.\n\n\nbaby_decades %&gt;% summarize(mean_year = mean(n),\n                           median_year = median(n),\n                           .by=c(sex, decade))\n\n# A tibble: 28 × 4\n   sex   decade mean_year median_year\n   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;\n 1 F       1880     111.           13\n 2 M       1880     101.           12\n 3 F       1890     128.           13\n 4 M       1890      93.6          12\n 5 F       1900     131.           12\n 6 M       1900      94.4          12\n 7 F       1910     187.           12\n 8 M       1910     181.           12\n 9 F       1920     211.           12\n10 M       1920     227.           13\n# ℹ 18 more rows",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#counting-data",
+    "href": "1.2 Data Wrangling.html#counting-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Counting Data",
+    "text": "Counting Data\nThere are several ways to get the number of rows per group. You can use the function n() within a call to summarize() (or mutate()). A shortcut is to use count():\n\ndat %&gt;% summarize(n = n(), .by=name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Emily       138\n2 Kathleen    138\n3 Beverly     122\n4 Alexandra   117\n\ndat %&gt;% count(name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138\n\n\nInterestingly, the order of the output may vary. summarize() leaves the data in the original order (i.e., by prop, which (likely) translates to an order by n()). count() arranges the output by the variables for which the counting is done (here: alphabetically by name).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#bigger-pipes",
+    "href": "1.2 Data Wrangling.html#bigger-pipes",
+    "title": "1.2 Data Wrangling",
+    "section": "Bigger Pipes!",
+    "text": "Bigger Pipes!\nSo far we have often saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the environment with intermediate data.frames or tibbles!\n\npipe_summary &lt;- babynames %&gt;%\n  mutate(decade = floor(year/10) *10) %&gt;%\n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n         sex==\"F\") %&gt;%\n  summarize(mean_decade = mean(n), .by=c(name, decade))\n\nIt’s not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes.\nAs a rule of thumb: If an intermediate step is only used once, you should probably delete it (unless it makes the code easier to comprehend).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#tidy-data",
+    "href": "1.2 Data Wrangling.html#tidy-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidy Data",
+    "text": "Tidy Data\nTidy data: Data that is easily processed by tidyverse functions (also for visualizations and statistical analyses).\nThree principles:\n\nEach variable has its own column.\nEach observation has its own row.\nEach value has its own cell.\n\n\nWide vs. long format data?\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#tidy-data-2",
+    "href": "1.2 Data Wrangling.html#tidy-data-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidy Data 2",
+    "text": "Tidy Data 2\nWhat do you think, which of the following data sets is tidy?\n\n\n\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\n\n\n\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n\n\n\n\n\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n\n\n\n# A tibble: 3 × 5\n  country     `1999_cases` `2000_cases` `1999_population` `2000_population`\n  &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;\n1 Afghanistan          745         2666          19987071          20595360\n2 Brazil             37737        80488         172006362         174504898\n3 China             212258       213766        1272915272        1280428583\n\n\n\n\n\nTable1 is tidy! (upper)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#analyzing-the-autism-spectrum-quotient",
+    "href": "1.2 Data Wrangling.html#analyzing-the-autism-spectrum-quotient",
+    "title": "1.2 Data Wrangling",
+    "section": "Analyzing the Autism Spectrum Quotient",
+    "text": "Analyzing the Autism Spectrum Quotient\nFor the following activities, we will need the following files:\n\nresponses.csv containing the AQ survey responses to each of the 10 questions for the 66 participants\nqformats.csv containing information on how a question should be coded - i.e. forward or reverse coding\nscoring.csv containing information on how many points a specific response should get; depending on whether it is forward or reverse coded\npinfo.csv containing participant information such as Age, Sex and importantly ID number.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#set-up",
+    "href": "1.2 Data Wrangling.html#set-up",
+    "title": "1.2 Data Wrangling",
+    "section": "Set Up",
+    "text": "Set Up\nFor the following activities, we will need the following files:\n\nresponses.csv containing the AQ survey responses to each of the 10 questions for the 66 participants\nqformats.csv containing information on how a question should be coded - i.e. forward or reverse coding\nscoring.csv containing information on how many points a specific response should get; depending on whether it is forward or reverse coded\npinfo.csv containing participant information such as Age, Sex and importantly ID number.\n\n\nCreate a new script, e.g. as “DataWrangling3.R” (remember we skipped #2 in the book).\nDownload the data into your project folder.\nOptional: Clear your environment (the brush in the top right pane) and/or restart the R session (Session -&gt; Restart R).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#load-the-data",
+    "href": "1.2 Data Wrangling.html#load-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Load the Data",
+    "text": "Load the Data\nFor the following activities, we will need the following files:\n\nresponses.csv containing the AQ survey responses to each of the 10 questions for the 66 participants\nqformats.csv containing information on how a question should be coded - i.e. forward or reverse coding\nscoring.csv containing information on how many points a specific response should get; depending on whether it is forward or reverse coded\npinfo.csv containing participant information such as Age, Sex and importantly ID number.\n\n\nLoad the four .csv files into your environment, e.g.:\n\n\nresponses &lt;- read_csv(\"responses.csv\") \nqformats &lt;- read_csv(\"qformats.csv\")\nscoring &lt;- read_csv(\"scoring.csv\")\npinfo &lt;- read_csv(\"pinfo.csv\")",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#look-at-the-data-1",
+    "href": "1.2 Data Wrangling.html#look-at-the-data-1",
+    "title": "1.2 Data Wrangling",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nIs the data (responses) in a tidy format?\n\n\n# A tibble: 6 × 11\n     Id Q1                 Q2    Q3    Q4    Q5    Q6    Q7    Q8    Q9    Q10  \n  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1    16 Slightly Disagree  Defi… Slig… Defi… Slig… Slig… Slig… Defi… Slig… Slig…\n2    17 Definitely Agree   Slig… Slig… Defi… Defi… Defi… Slig… Slig… Slig… Slig…\n3    18 Definitely Agree   Defi… Slig… Defi… Defi… Defi… Slig… Defi… Defi… Defi…\n4    19 Definitely Agree   Defi… Defi… Slig… Defi… Defi… Slig… Slig… Defi… Slig…\n5    20 Definitely Disagr… Slig… Defi… Slig… Slig… Slig… Slig… Slig… Slig… Slig…\n6    21 Slightly Disagree  Slig… Defi… Slig… Slig… Slig… Defi… Defi… Slig… Slig…\n\n\n\nWhy is it not tidy?\n\nwide format",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#reformatting-the-data",
+    "href": "1.2 Data Wrangling.html#reformatting-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Reformatting the Data",
+    "text": "Reformatting the Data\nLet’s bring the wide data in a longer, tidy format!\n\nThere are several functions in R to reformat data, but the newest ones are pivot_longer() and pivot_wider().\nRun the code and see what changes:\n\nrlong &lt;- responses %&gt;% pivot_longer(cols = Q1:Q10, #we can select a range of column names\n                                    #cols = starts_with(\"Q\"), #alternative\n                                    names_to = \"Question\", \n                                    values_to = \"Response\")\n\n\n\nDescribe what the function does, what does the input/the arguments mean?",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#joining-the-data",
+    "href": "1.2 Data Wrangling.html#joining-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Joining the Data",
+    "text": "Joining the Data\nWe now want to combine the different data sets: We want to have the information how the questionnaire has to be scored included with the items.\nWe can find the scoring information (i.e. how the questions are framed, positive or negative/whether they need to be reversed) in the qformats tibble. Furthermore, we can find how many points are given to each item/response in scoring.\nWe can use the function inner_join() to merge the tibbles into one bigger tibble.\n\nActivity: Replace the NULL values in the below code with the necessary variable names to join rlong and qformats by Question.\n\nrlong2 &lt;- inner_join(x = NULL, \n                     y = NULL, \n                     by = \"NULL\")\n\n\n\n\nrlong2 &lt;- inner_join(x = rlong, \n                     y = qformats, \n                     by = \"Question\")\n\n\nDescribe what happened?\nwhat is forward and reverse scoring?",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#combining-more-data",
+    "href": "1.2 Data Wrangling.html#combining-more-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Combining more Data",
+    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- rlong2 %&gt;% inner_join(scoring, \n                                 c(\"QFormat\", \"Response\"))",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#calculate-the-questionnaire-scores",
+    "href": "1.2 Data Wrangling.html#calculate-the-questionnaire-scores",
+    "title": "1.2 Data Wrangling",
+    "section": "Calculate the Questionnaire Scores",
+    "text": "Calculate the Questionnaire Scores\nHow do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the NULL.\n\naq_scores &lt;- rscores %&gt;% summarize(AQ = sum(NULL), .by=NULL)\n\n\n\naq_scores &lt;- rscores %&gt;% summarize(AQ = sum(Score), .by=Id) # sum column Score to obtain AQ scores.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#pipe-it-all-together",
+    "href": "1.2 Data Wrangling.html#pipe-it-all-together",
+    "title": "1.2 Data Wrangling",
+    "section": "Pipe it all together!",
+    "text": "Pipe it all together!\n\naq_scores2 &lt;- responses %&gt;% \n  pivot_longer(cols = Q1:Q10,\n               names_to = \"Question\", \n               values_to = \"Response\") %&gt;%  \n  inner_join(qformats, \"Question\") %&gt;% \n  inner_join(scoring, c(\"QFormat\", \"Response\")) %&gt;% \n  summarize(AQ = sum(Score), .by=Id)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#background",
+    "href": "1.2 Data Wrangling.html#background",
+    "title": "1.2 Data Wrangling",
+    "section": "Background",
+    "text": "Background\nWe’ll use data from a paper that investigates whether the ability to perform an action influences perception. In particular, the authors wondered whether participants who played Pong would perceive the ball to move faster when they have a small paddle.\n\n\nDownload the data, create a new script.\nClear the environment if you prefer.\nLook at the data.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#solutions",
+    "href": "1.2 Data Wrangling.html#solutions",
+    "title": "1.2 Data Wrangling",
+    "section": "Solutions",
+    "text": "Solutions\n\nlibrary(\"tidyverse\")\npong_data &lt;- read_csv(\"Data/PongBlueRedBack 1-16 Codebook.csv\")\nsummary(pong_data)\n\n  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    \n Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  \n 1st Qu.: 4.75   1st Qu.:0.0000   1st Qu.: 50   1st Qu.:3.0   1st Qu.: 72.75  \n Median : 8.50   Median :1.0000   Median :150   Median :4.5   Median :144.50  \n Mean   : 8.50   Mean   :0.5471   Mean   :150   Mean   :4.5   Mean   :144.50  \n 3rd Qu.:12.25   3rd Qu.:1.0000   3rd Qu.:250   3rd Qu.:6.0   3rd Qu.:216.25  \n Max.   :16.00   Max.   :1.0000   Max.   :250   Max.   :7.0   Max.   :288.00  \n BackgroundColor      HitOrMiss       BlockNumber   \n Length:4608        Min.   :0.0000   Min.   : 1.00  \n Class :character   1st Qu.:0.0000   1st Qu.: 3.75  \n Mode  :character   Median :1.0000   Median : 6.50  \n                    Mean   :0.6866   Mean   : 6.50  \n                    3rd Qu.:1.0000   3rd Qu.: 9.25  \n                    Max.   :1.0000   Max.   :12.00  \n\n# look at the data (can also use summary(), str(), head() etc.)\nglimpse(pong_data)\n\nRows: 4,608\nColumns: 8\n$ Participant     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ JudgedSpeed     &lt;dbl&gt; 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, …\n$ PaddleLength    &lt;dbl&gt; 50, 250, 50, 250, 250, 50, 250, 50, 250, 50, 50, 250, …\n$ BallSpeed       &lt;dbl&gt; 5, 3, 4, 3, 7, 5, 6, 2, 4, 4, 7, 7, 3, 6, 5, 7, 2, 5, …\n$ TrialNumber     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…\n$ BackgroundColor &lt;chr&gt; \"red\", \"blue\", \"red\", \"red\", \"blue\", \"blue\", \"red\", \"r…\n$ HitOrMiss       &lt;dbl&gt; 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, …\n$ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2 Data Wrangling.html#solutions-2",
+    "href": "1.2 Data Wrangling.html#solutions-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Solutions 2",
+    "text": "Solutions 2\n\nnew_pong_data &lt;- pong_data %&gt;% \n  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, \n         TrialNumber) %&gt;% \n  arrange(desc(HitOrMiss), desc(JudgedSpeed)) %&gt;% \n  filter(JudgedSpeed == 1,\n         BallSpeed %in% c(\"2\", \"4\", \"5\", \"7\"),\n         HitOrMiss == 0) %&gt;% \n  filter(TrialNumber &gt; 2) %&gt;% \n  mutate(TrialNumber = TrialNumber -1) \n  \n  # summarize (use old data frame because we removed variables)\npong_data_hits &lt;- pong_data %&gt;% \n  summarize(total_hits = sum(HitOrMiss, na.rm = TRUE),\n            meanhits = mean(HitOrMiss, na.rm = TRUE),\n            .by=c(BackgroundColor, PaddleLength))",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#ggplot",
+    "href": "1.3 Data Visualization.html#ggplot",
+    "title": "1.3 Data Visualization",
+    "section": "ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful figure, which are immediately ready for publication.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#activity-1-set-up",
+    "href": "1.3 Data Visualization.html#activity-1-set-up",
+    "title": "1.3 Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nOpen RStudio and load your Biostats R project. Create a new script called DataVisualisation1.R.\nMake sure you have the following two files downloaded into your project folder (we already used them in Intro to R presentation): ahi-cesd.csv and participant-info.csv.\nCopy and run the code below to load the tidyverse package and the data files:\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\n\nRun the following code to combine both files and select our variables of interest:\n\n\nall_dat &lt;- dat %&gt;% inner_join(pinfo, \n                              by=c(\"id\", \"intervention\")) %&gt;% \n  arrange(id, occasion) #joining messes up the order of the data frame =&gt; arrange again\n\n#we throw out several variables even though they would be important for a comprehensive data analysis\nsummarydata &lt;- all_dat %&gt;% select(id, ahiTotal, cesdTotal, #ID & questionnaire scores\n                                  sex, age, educ, income) #demographic variables\n\n\nwhat happens in the code chunk?",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#look-at-the-data",
+    "href": "1.3 Data Visualization.html#look-at-the-data",
+    "title": "1.3 Data Visualization",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 7\n$ id        &lt;dbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, …\n$ ahiTotal  &lt;dbl&gt; 63, 73, 73, 89, 89, 93, 80, 77, 77, 85, 60, 67, 56, 61, 41, …\n$ cesdTotal &lt;dbl&gt; 14, 6, 7, 10, 13, 8, 15, 12, 3, 5, 31, 31, 41, 35, 27, 32, 2…\n$ sex       &lt;dbl&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, …\n$ age       &lt;dbl&gt; 35, 35, 59, 59, 59, 59, 59, 59, 51, 51, 50, 50, 50, 50, 58, …\n$ educ      &lt;dbl&gt; 5, 5, 1, 1, 1, 1, 1, 1, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …\n$ income    &lt;dbl&gt; 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, …\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income don’t seem to really be numbers but factors with individual categories (factor levels)!\nWe should convert these data to factor. Checking and adjusting data types (as part of data wrangling) will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#activity-2-transform-data-type",
+    "href": "1.3 Data Visualization.html#activity-2-transform-data-type",
+    "title": "1.3 Data Visualization",
+    "section": "Activity 2: Transform Data Type",
+    "text": "Activity 2: Transform Data Type\nCopy and run the below code to change the categories to factors.\n\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nIf you mutate a new column with the same name as the old one, it will overwrite the column.\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\n\n\nsummarydata1 &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata1)\n\nRows: 992\nColumns: 7\n$ id        &lt;dbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, …\n$ ahiTotal  &lt;dbl&gt; 63, 73, 73, 89, 89, 93, 80, 77, 77, 85, 60, 67, 56, 61, 41, …\n$ cesdTotal &lt;dbl&gt; 14, 6, 7, 10, 13, 8, 15, 12, 3, 5, 31, 31, 41, 35, 27, 32, 2…\n$ sex       &lt;fct&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, …\n$ age       &lt;dbl&gt; 35, 35, 59, 59, 59, 59, 59, 59, 51, 51, 50, 50, 50, 50, 58, …\n$ educ      &lt;fct&gt; 5, 5, 1, 1, 1, 1, 1, 1, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …\n$ income    &lt;fct&gt; 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, …\n\nsummarydata1 %&gt;% pull(educ) %&gt;% unique()\n\n[1] 5 1 4 2 3\nLevels: 1 2 3 4 5",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#transform-data-type-2",
+    "href": "1.3 Data Visualization.html#transform-data-type-2",
+    "title": "1.3 Data Visualization",
+    "section": "Transform Data Type 2",
+    "text": "Transform Data Type 2\nA simple change to a factor is not always helpful. We still don’t know what a 1 in sex or a 5 in educ stands for:\n\nsex: 1 = female, 2 = male\neduc: 1 = no graduation, 2 = school graduation, 3 = vocational training, 4 = bachelor’s degree, 5 = post graduate\nincome: 1 = low, 2 = middle, 3 = high\n\n\n\nThere is very sparse information on the variables at https://doi.org/10.5334/jopd.35, so I guesstimated some of the factor levels.",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#transform-data-type-3",
+    "href": "1.3 Data Visualization.html#transform-data-type-3",
+    "title": "1.3 Data Visualization",
+    "section": "Transform Data Type 3",
+    "text": "Transform Data Type 3\nA simple change to a factor is not always helpful. We still don’t know what a 1 in sex or a 5 in educ stands for:\n\nsummarydata2 = summarydata1 %&gt;% \n  mutate(sex = sex %&gt;% recode(\"1\" = \"female\", \"2\" = \"male\"),\n         educ = educ %&gt;% recode(\"1\" = \"no graduation\",\n                                \"2\" = \"school graduation\",\n                                \"3\" = \"vocational training\",\n                                \"4\" = \"bachelor's degree\",\n                                \"5\" = \"post grad\"),\n         income = income %&gt;% recode(\"1\" = \"low\",\n                                    \"2\" = \"middle\",\n                                    \"3\" = \"high\"))\n\n#glimpse(summarydata2)\nsummarydata2 %&gt;% pull(educ) %&gt;% unique()\n\n[1] post grad           no graduation       bachelor's degree  \n[4] school graduation   vocational training\n5 Levels: no graduation school graduation ... post grad",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#transform-data-type-4",
+    "href": "1.3 Data Visualization.html#transform-data-type-4",
+    "title": "1.3 Data Visualization",
+    "section": "Transform Data Type 4",
+    "text": "Transform Data Type 4\nrecode() only works with data that are already factors. What if we start with the original data (i.e., summarydata instead of summarydata1)?\n\n# no factors yet =&gt; refer to original data as numbers WITHOUT quotation marks\nsummarydata3 = summarydata %&gt;% \n  mutate(sex = if_else(sex==1, \"female\", \"male\") %&gt;% as_factor(), #could also use case_match\n         educ = educ %&gt;% case_match(1 ~ \"no graduation\",\n                                    2 ~ \"school graduation\",\n                                    3 ~ \"vocational training\",\n                                    4 ~ \"bachelor's degree\",\n                                    5 ~ \"post grad\") %&gt;% as_factor(),\n         income = income %&gt;% case_match(1 ~ \"low\", 2 ~ \"middle\", 3 ~ \"high\") %&gt;% as_factor())\n\n#glimpse(summarydata3)\nsummarydata3 %&gt;% pull(educ) %&gt;% unique()\n\n[1] post grad           no graduation       bachelor's degree  \n[4] school graduation   vocational training\n5 Levels: post grad no graduation bachelor's degree ... vocational training\n\n\n\nFactor is now ordered by occurrence in data! :(",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#transform-data-summary",
+    "href": "1.3 Data Visualization.html#transform-data-summary",
+    "title": "1.3 Data Visualization",
+    "section": "Transform Data: Summary",
+    "text": "Transform Data: Summary\n\nIf data are factors coded as numbers, do as_factor() first (implicitly sorts levels ascendingly) and then recode()\nIf data are factors coded as characters, make sure that the ordering is correct (e.g., use arrange() for alphabetical order) or create a new factor() with explicit ordering:\n\n\nincome = income %&gt;% factor(levels=c(\"low\", \"middle\", \"high\")) \n#not as_factor but just factor to supply levels explicitly\n\n\n\n\nWarning: If numbers are represented as characters (\"1\" instead of just 1), handle them as characters or cast them to a number:\n\n\nincome = income %&gt;% as.integer() %&gt;% as_factor() %&gt;% recode(...)",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#the-first-layer",
+    "href": "1.3 Data Visualization.html#the-first-layer",
+    "title": "1.3 Data Visualization",
+    "section": "The First Layer",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to plot the number of data points in each group onto the y-axis, so you do not specify y here.\n\n\n\nggplot(summarydata1, aes(x = sex))",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#the-second-layer",
+    "href": "1.3 Data Visualization.html#the-second-layer",
+    "title": "1.3 Data Visualization",
+    "section": "The Second Layer",
+    "text": "The Second Layer\nThe next layer adds a geom or a shape. In this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata1, aes(x = sex)) +\n  geom_bar()",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#the-second-layer-with-color",
+    "href": "1.3 Data Visualization.html#the-second-layer-with-color",
+    "title": "1.3 Data Visualization",
+    "section": "The Second Layer with color",
+    "text": "The Second Layer with color\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different color. In this case, there is a different colored bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar() #geom_bar(show.legend = FALSE)",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#the-next-layers---improving-the-plot",
+    "href": "1.3 Data Visualization.html#the-next-layers---improving-the-plot",
+    "title": "1.3 Data Visualization",
+    "section": "The Next Layers - Improving the Plot",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) + #if we didn't set factor labels, we can do here manually (not recommended!)\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#themes-changing-the-appearance",
+    "href": "1.3 Data Visualization.html#themes-changing-the-appearance",
+    "title": "1.3 Data Visualization",
+    "section": "Themes: Changing the Appearance",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) + #now with summarydata2\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\") + #no need to set labels\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#colors",
+    "href": "1.3 Data Visualization.html#colors",
+    "title": "1.3 Data Visualization",
+    "section": "Colors",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function has an option parameter that takes 5 different values (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#transparency",
+    "href": "1.3 Data Visualization.html#transparency",
+    "title": "1.3 Data Visualization",
+    "section": "Transparency",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#grouped-plots",
+    "href": "1.3 Data Visualization.html#grouped-plots",
+    "title": "1.3 Data Visualization",
+    "section": "Grouped Plots",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata1, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\", #prevents \"stacked\" barplots\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")\n\n\n\n\n\n\n\n\n\n\n\nWithout position = dodge, you would get a stacked barplot",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#facetting",
+    "href": "1.3 Data Visualization.html#facetting",
+    "title": "1.3 Data Visualization",
+    "section": "Facetting",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations into several subplots: facet_wrap for one variable.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(vars(income)) #in this function, you need to use vars() around variable names\n\n\n\nWhat is problematic here? We needed percentages for females and males for a better comparison",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#facetting-2",
+    "href": "1.3 Data Visualization.html#facetting-2",
+    "title": "1.3 Data Visualization",
+    "section": "Facetting 2",
+    "text": "Facetting 2\nYou could also use facets to divide your data visualizations into several subplots: facet_grid for a matrix of (combinations of) two variables.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_grid(rows=vars(income), \n             cols=vars(educ),\n             labeller = \"label_both\") #this adds the variable name into the facet legends",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#violin-boxplot",
+    "href": "1.3 Data Visualization.html#violin-boxplot",
+    "title": "1.3 Data Visualization",
+    "section": "Violin-Boxplot",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot above?\n\n\nggplot(summarydata1, aes(x = income, \n                        y = ahiTotal, #new variable!\n                        fill = income)) +\n  geom_violin(trim = FALSE, #smooth on edges\n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, #small boxplot contained in violin\n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#layer-order",
+    "href": "1.3 Data Visualization.html#layer-order",
+    "title": "1.3 Data Visualization",
+    "section": "Layer Order",
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order (later layers on top):\n\n\n\nggplot(summarydata1, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata1, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#scatterplot",
+    "href": "1.3 Data Visualization.html#scatterplot",
+    "title": "1.3 Data Visualization",
+    "section": "Scatterplot",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata1, aes(x = age, y = cesdTotal)) +\n  geom_point() +\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#saving-your-figures",
+    "href": "1.3 Data Visualization.html#saving-your-figures",
+    "title": "1.3 Data Visualization",
+    "section": "Saving your Figures",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\n\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 6.5, #width of a typical page in inches minus border (according to APA format)\n       height = 6.5 / sqrt(2), #golden ratio :)\n       units = \"in\")\n\nor\n\nggsave(\"violin-boxplot.png\",\n       width = 1920,\n       height = 1080,\n       units = \"px\") #full HD picture in pixels: 1920 x 1080",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3 Data Visualization.html#saving-your-figures-2",
+    "href": "1.3 Data Visualization.html#saving-your-figures-2",
+    "title": "1.3 Data Visualization",
+    "section": "Saving your Figures 2",
+    "text": "Saving your Figures 2\nYou can also assign the plot to a variable in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\nviobox &lt;- summarydata1 %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7) +\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Workshop: Handling Uncertainty in your Data",
+    "section": "",
+    "text": "Welcome to the R workshop “Handling Uncertainty in your Data”!\nThe workshop consists of two afternoons from 1 - 5 pm:\n\nAn optional session on the basics of using R, RStudio, and the tidyverse\nA theoretical introduction to measurement precision (cf. Nebe, Reutter et al., 2023) and how this translates to calculating confidence intervals and visualizing uncertainty in R.\n\nThis workshop is organized by Dr. Mario Reutter and Juli Nagel. It is sponsored by the Interest Group for Open and Reproducible research (IGOR) of the section “Biological Psychology and Neuropsychology” of the German Psychological Society (DGPs). Consider following IGOR on Twitter/X.\nPlease use the navigation on the left to select the slides for each topic (recommendation: open in new tab).\n\n\n\nDate\nTopic\n\n\n\n\n02.10.\nGeneral R Intro\n\n\n\nData Wrangling\n\n\n\nData Visualization\n\n\n\n\n\n\n09.10.\nMeasurement Precision\n\n\n\nConfidence Intervals\n\n\n\nVisualize Uncertainty"
+  }
+]
