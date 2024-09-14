@@ -1,0 +1,25 @@
+---
+title: "R Workshop: Handling Uncertainty in your Data"
+---
+
+Welcome to the R workshop "Handling Uncertainty in your Data"!
+
+The workshop consists of two afternoons from 1 - 5 pm: 
+
+1. An optional session on the basics of using [R](https://www.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/), and the [tidyverse](https://www.tidyverse.org/)
+2. A theoretical introduction to measurement precision (cf. [Nebe, Reutter et al., 2023](https://doi.org/10.7554/eLife.85980)) and how this translates to calculating confidence intervals and visualizing uncertainty in R.
+
+This workshop is organized by [Dr. Mario Reutter](https://www.psychologie.uni-wuerzburg.de/expklin/personen/mario-reutter/) and [Juli Nagel](https://juli-nagel.de/). It is sponsored by the [Interest Group for Open and Reproducible research (IGOR)](https://www.dgps.de/fachgruppen/fgbi/aktivitaeten-der-fachgruppe/igor/) of the section "Biological Psychology and Neuropsychology" of the German Psychological Society (DGPs). Consider following IGOR on [Twitter/X](https://x.com/igor_dgps?lang=de).
+
+Please use the navigation on the left to select the slides for each topic (recommendation: open in new tab).
+
+
+| Date            | Topic                        |
+|-----------------|------------------------------|
+| 02.10.          | General R Intro              |
+|                 | Data Wrangling               |
+|                 | Data Visualization           |
+|                 |                              |
+| 09.10.          | Measurement Precision        |
+|                 | Confidence Intervals         |
+|                 | Visualize Uncertainty        |

@@ -1,0 +1,396 @@
+---
+title: "1.1 Intro to R"
+subtitle: | 
+   | Workshop: "Handling Uncertainty in your Data"
+   |
+   | Dr. Mario Reutter & Juli Nagel
+   | (slides adapted from Dr. Lea Hildebrandt)
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: serif
+    chalkboard: true
+from: markdown+emoji
+---
+
+# R!
+
+```{css}
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+```
+
+::: notes
+start recording
+:::
+
+## General: Working with R in this course
+
+**During Class**
+
+-   You should have RStudio open and your Biostats project loaded (we will set up the project today).
+-   Have the slides open in the background. You will need them to copy R code (top right button on any code chunk) or click on links.
+
+```{r}
+#| echo: true
+
+print("Hello World")
+
+```
+
+\
+Remember: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.
+
+. . .
+
+\
+\
+**At Home**
+
+If possible, use two screens with the slides (Zoom) opened on one and RStudio on the other
+
+## Why write code?
+
+::: {.incremental .smaller}
+-   Doing statistical calculation by hand? Tedious & error prone! Computer is faster...
+
+-   Using spreadsheets? Limited options, change data accidentally...
+
+-   Using point-and-click software (e.g., SPSS)?
+
+    -   proprietary software = expensive
+
+    -   R = open, extensible (community)
+
+    -   reproducible!
+
+-   Science/Academia is a marathon and not a sprint\
+    =\> it is worthwhile investing in skills with a slow learning curve that will pay off in the long run
+:::
+
+::: notes
+Chat: What are advantages (or disadvantages!) of coding?
+:::
+
+## Install R & RStudio
+
+You should all have <a href="https://www.r-project.org/">installed R</a> & <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> by now! Who had problems doing so?
+
+## Overview RStudio
+
+![RStudio Interface](images/rstudio.png){fig-alt="Screenshot of the RStudio Interface with different panes visible"}
+
+::: notes
+open R!
+:::
+
+## RStudio Panes
+
+::: columns
+::: {.column .smaller width="40%"}
+1.  Script pane: view, edit, & save your code
+
+2.  Console: here the commands are run and rudimentary output may be provided
+
+3.  Environment: which variables/data are available
+
+4.  Files, plots, help etc.
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="50%"}
+![RStudio Interface](images/rstudio2.png)
+:::
+:::
+
+::: notes
+Console vs. Script (Rmarkdown later)
+:::
+
+## Using the Console as a Calculator
+
+```{r}
+#| echo: true
+
+100 + 1
+
+2*3
+
+sqrt(9)
+```
+
+![Console used as calculator](images/Console.jpg){fig-alt="Calculated 100+1, 2*3, square root of 9 directly in the console"}
+
+::: notes
+try it out!
+
+We can't really do much with these values, they will just be written in the console.
+:::
+
+## Saving the Results as a Variable/Object
+
+```{r}
+#| echo: true
+
+a <- 100 + 1
+
+multi <- 2*3
+
+SqrtOfNine <- sqrt(9)
+
+word <- "Hello"
+```
+
+::: {.incremental .smaller}
+-   "\<-" is used to assign values to variables ("=" is also possible but not common in the R community)
+
+-   `a`, `multi` etc. are the variable names, which can be words, some special characters are allowed but not whitespace
+
+    -   You can find those now in your Environment! (top right)
+    -   For saving variables, there is no feedback in the console (`2*3` outputs `6` but `multi <- 2*3` does not)
+
+-   as you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.
+
+-   the variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)
+
+-   You can use those variables for further calculations, e.g., `a + multi`
+:::
+
+::: notes
+Type first command in console, what happens?
+
+Why don't we see anything in the console?\
+What happens if we type in `a` in the console?
+
+Is there anything else that you find interesting?
+
+What is sqrt()?
+:::
+
+```{=html}
+<!-- ## Working Directory
+
+::: incremental
+It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
+
+-   Make sure that R knows that you want to work in this folder, i.e., set your working directory:
+
+    -   **Session -\> Set Working Directory -\> Choose Directory**
+
+-   **Assignment**: Please make a folder, e.g. called "Biostatistics" (but not "R" or anything with spaces in it). Then set your working directory to this folder.
+::: -->
+```
+## Functions
+
+This code with `sqrt(9)` looked unfamiliar. `sqrt()` is an R function that calculates the square root of a number. `9` is the *argument* that we hand over to the function.
+
+If you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: `?functionname`
+
+```{r}
+#| echo: true
+#| eval: false
+?sqrt
+```
+
+This will open the help file in the Help Pane on the lower right of RStudio.
+
+You can also click on a function in the script or console pane and press the *F1* key.
+
+::: notes
+Do this now! Anything unclear?
+:::
+
+## Functions 2
+
+Functions often take more than one argument:
+
+```{r}
+#| echo: true
+#| eval: false
+rnorm(n = 6, mean = 3, sd = 1)
+rnorm(6, 3, 1) #this outputs the same as above
+
+# By the way, # denotes a line-end comment (ignored by R), which are very important for code documentation!
+```
+
+You can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).
+
+## Packages
+
+There are a number of functions that are already included with *Base R* (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages are like collections of functions or even data types that someone else wrote.
+
+On the top, click on *Tools* and then *Install Packages...*. Search for **tidyverse** and install!
+
+. . .
+
+\
+
+You can also download a package using the `install.packages()` function:
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("tidyverse")
+```
+
+(It may be necessary to install Rtools for some packages: <https://cran.r-project.org/bin/windows/Rtools/>)
+
+. . .
+
+\
+
+But installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package (i.e., make it directly available) with the `library()` function. This is the first thing you do on the top of an R script:
+
+```{r}
+#| echo: true
+#| eval: false
+library("tidyverse") # or library(tidyverse)
+```
+
+(If you don't load a package, you have to call functions explicitly by `packagename::function`)
+
+::: notes
+Open Source! Anyone can write a package!
+
+Base R = mobile phone, comes with some functions, packages = apps
+
+possibly necessary to install Rtools!
+:::
+
+# Scripts & Projects
+
+If you type your code into the console (bottom left), it does not get documented well. Therefore, it is better practice to write scripts (top left) and save them as files
+
+Scripts are basically text files that contain your code and can be run as needed
+
+It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
+
+We will create an R *project* that saves your opened scripts and even your environment (top right).
+
+## New Project
+
+Create a new project by clicking on "*File*" in the top left and then "*New Project...*"
+
+We usually want to create a "*New Directory*" and then choose a standard "*New Project*" on the top of the list\
+(we will only need standard projects during this class)
+
+Choose the project name, e.g., as "*Biostats R*" (this will create a folder in which the whole project is living)\
+Browse any kind of path you want to contain your project folder, \
+e.g., "*D:/Documents/Studies/Translational Neuroscience/Biostats*"
+
+![New Project final window](images/rstudioProject.png)
+
+## Existing Projects
+
+You will find the current project on the top right corner of RStudio
+
+If you click on the current project, you can open new projects by choosing "*Open Project*" and select the `.Rproj` file of the project.
+
+You can also just double click on `.Rproj` files and RStudio will open with the project loaded.
+
+![Existing projects](images/rstudioProject2.png)
+
+## Using Scripts
+
+To open a new script, click **File -\> New File -\> R Script.** (`Ctrl + Shift + N`)
+
+To run a line of the script, you can either click *Run* at the top right of the pane or `Ctrl + Enter`. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command). \
+To run the whole script/chunk, press `Ctrl + Shift + Enter` (with full console output) or `Ctrl + Shift + S` (limited output).
+
+![Using scripts](images/rstudioScript.png)
+
+```{=html}
+<!-- ## Scripts 2
+
+**Assignment**: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.
+
+Now run the code (either by pressing "run" at the top right of the script or `ctrl + enter`). -->
+```
+
+# Working with Data
+
+## Read in Data
+
+To read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).
+
+We will use the files from [Fundamentals of Quantitative Analysis](https://psyteachr.github.io/quant-fun-v2/starting-with-data.html): `ahi-cesd.csv` and `participant-info.csv`. Save these directly in your project folder on your computer (do not open them!).
+
+. . .
+
+\
+
+Did you find the files? Here are the direct links:
+
+1.  <https://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv>
+
+2.  <https://psyteachr.github.io/quant-fun-v2/participant-info.csv>
+
+. . .
+
+\
+
+Create a new script with the following content:
+
+```{r}
+#| echo: true
+#| eval: false
+
+#install.packages("tidyverse") #if you have not yet installed the tidyverse, uncomment and run
+library(tidyverse) # we will use a function from the tidyverse to read in the data
+
+dat <- read_csv("ahi-cesd.csv")
+pinfo <- read_csv("participant-info.csv")
+```
+
+Run the code!
+
+## Looking at the Data
+
+::: incremental
+There are several options to get a glimpse at the data:
+
+-   Click on `dat` and `pinfo` in your Environment.
+
+-   Type `View(dat)` into the console or into the script pane and run it.
+
+-   Run `str(dat)` or `str(pinfo)` to get an overview of the data.
+
+-   Run `summary(dat)`.
+
+-   Run `head(dat)`, `print(dat)`, or even just `dat`.
+
+-   What is the difference between these commands?
+:::
+
+## Looking at the Data 2
+
+What is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?
+
+![](images/rstudioEnvironment.png)
+
+. . .
+
+The two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.
+
+Data frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.
+
+# Thanks!
+
+That's the lesson on "Getting started with R"! If you have any questions, feel free to approach me before or after class or send an email.
+
+**Managing expectations**: You will learn a new (programming) language. Don't expect to "speak" it fluently right away. During this class, it is more important that you can roughly comprehend written code and "translate" it into natural language. The second step is to be able to make small adjustments to code that is given to you. Only then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ), which will be needed for your research project at the end of the semester.
+
+\
+Next: 
+
+-   Theory: Models
+-   R: Data Wrangling

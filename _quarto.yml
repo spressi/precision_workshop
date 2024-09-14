@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: docs
+  
+  
+website:
+  title: "Biostatistics"
+  sidebar:
+    style: "floating"
+    search: true
+    contents:
+      - 1.1 R Intro.qmd
+      - 1.2 Data Wrangling.qmd
+      - 1.3 Data Visualization.qmd
+
+format:
+  html:
+    theme: cosmo
+  

@@ -1,0 +1,15 @@
+---
+title: "2.1 Measurement Precision"
+subtitle: "Workshop: \"Handling Uncertainty in your Data\""
+author: "Dr. Mario Reutter & Juli Nagel"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: serif
+    chalkboard: true
+from: markdown+emoji
+---
+
+# TODO
