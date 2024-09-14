@@ -4,7 +4,7 @@ project:
   
   
 website:
-  title: "Biostatistics"
+  title: "Precision Workshop"
   sidebar:
     style: "floating"
     search: true
