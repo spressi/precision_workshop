@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R Workshop: Handling Uncertainty in your Data – Precision Workshop</title>
+<title>0 R - Installation and Updating – Precision Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,10 +67,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -79,9 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Precision Workshop
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0_R_Installation.html">0 R - Installation and Updating</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0_R_Installation.html" class="sidebar-item-text sidebar-link">
+  <a href="./0_R_Installation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">0 R - Installation and Updating</span></a>
   </div>
 </li>
@@ -135,13 +162,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#installing-r" id="toc-installing-r" class="nav-link active" data-scroll-target="#installing-r">Installing R</a>
+  <ul class="collapse">
+  <li><a href="#important-information" id="toc-important-information" class="nav-link" data-scroll-target="#important-information">Important Information</a></li>
+  <li><a href="#installation-guide" id="toc-installation-guide" class="nav-link" data-scroll-target="#installation-guide">Installation Guide</a></li>
+  </ul></li>
+  <li><a href="#updating-r" id="toc-updating-r" class="nav-link" data-scroll-target="#updating-r">Updating R</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R Workshop: Handling Uncertainty in your Data</h1>
+<h1 class="title">0 R - Installation and Updating</h1>
 </div>
 
 
@@ -158,54 +198,85 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the R workshop “Handling Uncertainty in your Data”!</p>
-<p>The workshop consists of two afternoons from 1 - 5 pm:</p>
-<ol type="1">
-<li>An optional session on the basics of using <a href="https://www.r-project.org/">R</a>, <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>, and the <a href="https://www.tidyverse.org/">tidyverse</a></li>
-<li>A theoretical introduction to measurement precision (cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter et al., 2023</a>) and how this translates to calculating confidence intervals and visualizing uncertainty in R.</li>
-</ol>
-<p>This workshop is organized by <a href="https://www.psychologie.uni-wuerzburg.de/expklin/personen/mario-reutter/">Dr.&nbsp;Mario Reutter</a> and <a href="https://juli-nagel.de/">Juli Nagel</a>. It is sponsored by the <a href="https://www.dgps.de/fachgruppen/fgbi/aktivitaeten-der-fachgruppe/igor/">Interest Group for Open and Reproducible research (IGOR)</a> of the section “Biological Psychology and Neuropsychology” of the German Psychological Society (DGPs). Consider following IGOR on <a href="https://x.com/igor_dgps?lang=de">Twitter/X</a>.</p>
-<p>Please use the navigation on the left to select the slides for each topic (recommendation: open in new tab).</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>02.10.</td>
-<td>General R Intro</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Wrangling</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Data Visualization</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>09.10.</td>
-<td>Measurement Precision</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Confidence Intervals</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Visualize Uncertainty</td>
-</tr>
-</tbody>
-</table>
+<section id="installing-r" class="level1">
+<h1>Installing R</h1>
+<section id="important-information" class="level2">
+<h2 class="anchored" data-anchor-id="important-information">Important Information</h2>
+<p>Hello future participants of the workshop “Handling Uncertainty in your Data”!</p>
+<p>This guide will help you to install <code>R</code> if you haven’t installed it yet, or update your <code>R</code> in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.</p>
+<p>You might already be an expert in <code>R</code> - feel free to skip this guide if all of the following conditions are met:</p>
+<ul>
+<li>You have <code>R</code> installed, and it’s at least version 4.0. To check which version you have, run <code>R.version</code> in your <code>R</code> console. If your version is lower than 4, please update.</li>
+<li>You have RStudio installed, or alternatively, an editor of your choice that can handle <code>R</code> and that you are comfortable with. (The instructors of the workshop will use RStudio.)</li>
+<li>You have installed the following packages: <code>tidyverse</code>, <code>confintr</code>, <code>rstatix</code>, <code>apaTable</code>.</li>
+</ul>
+<p>If you’re missing any of these, install them on your own or follow this guide.</p>
+</section>
+<section id="installation-guide" class="level2">
+<h2 class="anchored" data-anchor-id="installation-guide">Installation Guide</h2>
+<p>We want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we’ll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you. This guide is written from a Windows 11 perspective - should something not work for your setup, don’t hesitate to email <a href="mailto:juliane.nagel@zi-mannheim.de" class="email">juliane.nagel@zi-mannheim.de</a> - happy to help!</p>
+<p>Sometimes, people will say they hate re-installing, updating R, but it’s honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.</p>
+<section id="r" class="level3">
+<h3 class="anchored" data-anchor-id="r">R</h3>
+<p>You can download <code>R</code> at <a href="https://www.r-project.org/">https://www.r-project.org/</a>. Right on the start page, you can find a download link via CRAN (“The Comprehensive R Archive Network”).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/download_r.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Download R</figcaption>
+</figure>
+</div>
+<p>When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, the those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of <code>R</code>. Even if one of the servers should be down, you can still get <code>R</code> from any of the other servers. You can download <code>R</code> using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/download_r_win.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>R for Windows</figcaption>
+</figure>
+</div>
+<p>On the next page, what you want is “base” - base <code>R</code> is the “basic version” of <code>R</code>, i.e., <code>R</code> without any additions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/base_r.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Download base R</figcaption>
+</figure>
+</div>
+<p>On the next page, click the download link at the top (in my case “Download R-4.4.1 for Windows”). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.</p>
+</section>
+<section id="optional-for-windows-users-rtools" class="level3">
+<h3 class="anchored" data-anchor-id="optional-for-windows-users-rtools">OPTIONAL for Windows Users: Rtools</h3>
+<p>If you are using Windows, you might also want to install Rtools (but you don’t have to). Here is what it does (so you can make an informed decision): In <code>R</code>, you will frequently use additional “packages” that offer additional functionalities beyond base <code>R</code> (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built “binary version” of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, <code>R</code> will ask you whether it should “compile” the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don’t need this additional tool, and Linux users are usually compile everything anyways :-) )</p>
+<p>You don’t have to use Rtools on Windows - if you don’t have it, you won’t be able to compile packages “from source”, but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that’s fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.</p>
+<p>If you want to install Rtools (honestly, it doesn’t hurt and isn’t complicated at all), you can find it on the same page where we previously found “base” (<code>R</code>) - see screenshot above. This time, click “Rtools”. Pick the version that corresponds to the R version you just installed (in my case, that’s 4.4). The download link is a bit hidden on the page:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/download_rtools.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Rtools installer</figcaption>
+</figure>
+</div>
+<p>After downloading, execute the installation file (default options are recommended).</p>
+</section>
+<section id="rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
+<p><code>R</code> is just a programming language - <strong>where</strong> you write your <code>R</code> code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with <code>R</code> code. One of these, probably the most popular right now, is <a href="https://posit.co/downloads/">RStudio</a>.</p>
+<p>Below, you can find a screenshot of what RStudio can look like. (Without going into detail, it’s obvious that it comes with a lot of useful gadgets.)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rstudio_screenshot.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<figcaption>RStudio Screenshot</figcaption>
+</figure>
+</div>
+<p>What you want to download is the <strong>free version of RStudio Desktop</strong> here: <a href="https://rstudio.com/products/rstudio/download/">https://rstudio.com/products/rstudio/download/</a>. (In my case, there’s a “download RStudio Desktop for Windows” button. No need to download <code>R</code> - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.</p>
+<p>If you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under <strong>Tools</strong> <span class="math inline">\(\to\)</span> <strong>Global Options</strong> <span class="math inline">\(\to\)</span> <strong>Appearance</strong>.</p>
+<p>By the way, RStudio is such a common editor for <code>R</code> that people frequently confuse it with <code>R</code> itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of <code>R</code> they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - <code>R</code> and RStudio are completely different things!</p>
+<p>Aaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run <code>R</code> code. If you type in <code>41 + 1</code> and press Enter, <code>[1] 42</code> should appear below. If it doesn’t, contact <a href="mailto:juliane.nagel@zi-mannheim.de" class="email">juliane.nagel@zi-mannheim.de</a> for trouble shooting.</p>
+</section>
+</section>
+</section>
+<section id="updating-r" class="level1">
+<h1>Updating R</h1>
+<p>TO DO.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

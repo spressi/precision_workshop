@@ -1,0 +1,79 @@
+---
+title: "0 R - Installation and Updating"
+toc: true
+toc-depth: 2
+---
+
+# Installing R
+
+## Important Information
+
+Hello future participants of the workshop "Handling Uncertainty in your Data"!
+
+This guide will help you to install `R` if you haven't installed it yet, or update your `R` in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.
+
+You might already be an expert in `R` - feel free to skip this guide if all of the following conditions are met:
+
+- You have `R` installed, and it's at least version 4.0. To check which version you have, run `R.version` in your `R` console. If your version is lower than 4, please update.
+- You have RStudio installed, or alternatively, an editor of your choice that can handle `R` and that you are comfortable with. (The instructors of the workshop will use RStudio.)
+- You have installed the following packages: `tidyverse`, `confintr`, `rstatix`, `apaTable`.
+
+If you're missing any of these, install them on your own or follow this guide. **To jump to different sections of this guide, use the menu on the right!**
+
+## Installation Guide
+
+We want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we'll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you.
+This guide is written from a Windows 11 perspective - should something not work for your setup, don't hesitate to email <juliane.nagel@zi-mannheim.de> - happy to help!
+
+Sometimes, people will say they hate re-installing, updating R, but it's honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.
+
+### R
+
+You can download `R` at [https://www.r-project.org/](https://www.r-project.org/).
+Right on the start page, you can find a download link via CRAN ("The Comprehensive R Archive Network").
+
+![Download R](images/download_r.png){width=80% fig-align="center"}
+
+
+When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, the those "mirrors" around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of `R`. Even if one of the servers should be down, you can still get `R` from any of the other servers. You can download `R` using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that's windows.
+
+![R for Windows](images/download_r_win.png){width=100% fig-align="center"}
+
+On the next page, what you want is "base" - base `R` is the "basic version" of `R`, i.e., `R` without any additions.
+
+![Download base R](images/base_r.png){width=100% fig-align="center"}
+
+On the next page, click the download link at the top (in my case "Download R-4.4.1 for Windows"). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.
+
+### OPTIONAL for Windows Users: Rtools
+
+If you are using Windows, you might also want to install Rtools (but you don't have to). Here is what it does (so you can make an informed decision): In `R`, you will frequently use additional "packages" that offer additional functionalities beyond base `R` (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built "binary version" of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, `R` will ask you whether it should "compile" the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don't need this additional tool, and Linux users are usually compile everything anyways :-) )
+
+You don't have to use Rtools on Windows - if you don't have it, you won't be able to compile packages "from source", but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that's fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.
+
+If you want to install Rtools (honestly, it doesn't hurt and isn't complicated at all), you can find it on the same page where we previously found "base" (`R`) - see screenshot above. This time, click "Rtools". Pick the version that corresponds to the R version you just installed (in my case, that's 4.4). The download link is a bit hidden on the page:
+
+![Rtools installer](images/download_rtools.png){width=100% fig-align="center"}
+
+After downloading, execute the installation file (default options are recommended).
+
+### RStudio
+
+`R` is just a programming language - **where** you write your `R` code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with `R` code. One of these, probably the most popular right now, is [RStudio](https://posit.co/downloads/).
+
+Below, you can find a screenshot of what RStudio can look like. (Without going into detail, it's obvious that it comes with a lot of useful gadgets.)
+
+![RStudio Screenshot](images/rstudio_screenshot.png){width=120% fig-align="center"}
+
+What you want to download is the **free version of RStudio Desktop** here: [https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/). (In my case, there's a "download RStudio Desktop for Windows" button. No need to download `R` - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.
+
+If you open RStudio after the installation, don't be worried when it doesn't look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don't hesitate to play around under **Tools** $\to$ **Global Options** $\to$ **Appearance**.
+
+By the way, RStudio is such a common editor for `R` that people frequently confuse it with `R` itself! E.g., sometimes, in scientific papers, you will read things like "we used RStudio version 2024.4.2.764 for all analyses". However, that does not tell me much (if anything) about their analyses, because the important information is what version of `R` they used. It's a bit like writing "I've written the paper in Word" when what you want to say is "I've written the paper in English". Don't make this mistake in the future - `R` and RStudio are completely different things!
+
+Aaaaand we're done! To confirm that everything worked, open RStudio. There should be a tab that says "console" somewhere. Here, you can run `R` code. 
+If you type in `41 + 1` and press Enter, `[1] 42` should appear below. If it doesn't, contact <juliane.nagel@zi-mannheim.de> for trouble shooting.
+
+# Updating R
+
+TO DO.
