@@ -1,5 +1,5 @@
 ---
-title: "0 R - Installation and Updating"
+title: "0.1 R - Installation and Updating"
 toc: true
 toc-depth: 2
 ---
@@ -16,7 +16,7 @@ You might already be an expert in `R` - feel free to skip this guide if all of t
 
 - You have `R` installed, and it's at least version 4.0. To check which version you have, run `R.version` in your `R` console. If your version is lower than 4, please update.
 - You have RStudio installed, or alternatively, an editor of your choice that can handle `R` and that you are comfortable with. (The instructors of the workshop will use RStudio.)
-- You have installed the following packages: `tidyverse`, `confintr`, `rstatix`, `apaTable`.
+- You have installed the following packages: `tidyverse`, `confintr`, `rstatix`, `apaTable`, `babynames`.
 
 If you're missing any of these, install them on your own or follow this guide. **To jump to different sections of this guide, use the menu on the right!**
 
@@ -73,6 +73,59 @@ By the way, RStudio is such a common editor for `R` that people frequently confu
 
 Aaaaand we're done! To confirm that everything worked, open RStudio. There should be a tab that says "console" somewhere. Here, you can run `R` code. 
 If you type in `41 + 1` and press Enter, `[1] 42` should appear below. If it doesn't, contact <juliane.nagel@zi-mannheim.de> for trouble shooting.
+
+# Installing packages
+
+For this workshop, please install the following packages:
+
+- `tidyverse`
+- `confintr`
+- `rstatix`
+- `apaTable`
+- `babynames`
+
+## About packages
+
+When we've installed `R`, it can already do quite a lot of things (if not everything). However, the question is how conveniently (and standardized) we can achieve something. For example, we **could** write code that computes a linear mixed model for us - but most of us would certainly prefer to use a pre-existing function for that. Luckily, someone already wrote such a function, but it's not included in `R` from the start. If we want to use additional functions (or additional data sets!), we have to install additional "packages". It is very common to have many different additional packages installed.
+
+## How to install packages
+
+As often the case in `R`, there are several ways to achieve what we want (here, install a package). We will describe several options here - you can just stick to the one you like best.
+Either way, if you install a package you do not have yet, it will get installed (duh!), but if you install a package you have already installed, the version you currently have will be overwritten by the latest version of the package that's available.
+
+Whichever method you use, `R` will then tell you some things about the installation status of the package (e.g., where the package was installed, how large it is etc.) in the console. Most importantly, whether the installation was successful. It should say "package ‘babynames’ successfully unpacked and MD5 sums checked" somewhere at the end.
+
+As an example, we will install the package `babynames`, which includes data about the popularity of different baby names over the years. (Packages that provide additional functions for `R` are more common, but packages are also a great way to provide toy data sets to other people!) For this package, the "report" `R` gives you is very short - don't worry if the console goes a little crazy if you install bigger packages with a lot of "dependencies" (i.e., that require additional packages to work and install those as well during the process).
+
+### install.packages()
+
+You can install the package by typing `install.packages("babynames")` in an `R` console (e.g., after opening RStudio) and pressing enter.
+
+You can install multiple packages at once like this: `install.packages(c("babynames", "apaTable"))`. Mind the `c()` wrapped around the package names.
+
+![Install packages in the console](images/babynames_console.png){width=80% fig-align="center"}
+
+### RStudio Tools
+
+Within RStudio, click on *Tools* at the top, and then *Install Packages...*. Enter the package you would like to install (`babynames`). Autocomplete should help you. The installation report in the console should look like the screenshot you can find above (under "install.packages()"). All the other default options are fine (in fact, if you use `install.packages()` as shown above, it will use the same default options).
+
+You can install multiple packages at once by entering multiple package names (separated by a space or comma).
+
+![Install packages via the RStudio tools](images/babynames_tools.png){width=50% fig-align="center"}
+
+### RStudio autodetect
+
+It is worth noting that RStudio will warn you if you open a script that loads a package that you have not installed. (We did not talk about loading packages yet - more about that in the introductory workshop - but briefly, you need to load packages that you want to use first in your `R` scripts.) You can simply click on "install" and any missing packages you need for the script in question will automatically be installed. Once again, the report in the console should look the same as above. Note that this method does not work for updating packages that you already have installed.
+
+![RStudio missing packages autodetect](images/missing_packages.png){width=80% fig-align="center"}
+
+### If things go wrong
+
+Sometimes, installing packages can lead to unexpected errors. In many cases, the issue is not caused by the package you are trying to install itself, but rather by another package that it requires and also installs in the process. Surprisingly often, the issue can be fixed by directly re-installing the package that caused the process to fail, and then trying to install the original package you wanted again. If a package is very stubborn and does not want to be installed, contact <juliane.nagel@zi-mannheim.de> for trouble shooting.
+
+### Sidenote
+
+By the way: Anyone can write an `R` package. That means that you should not install any packages that you do not trust. Packages that you can get from CRAN have to pass several quality checks and have to fulfill certain requirements (e.g., that no sneaky .exe files are included in the package), so they are safe to install. It is also possible to e.g. get packages from users on GitHub, but you can't install them using e.g. `install.packages()`, but will need additional tools for this (such as the package `devtools`).
 
 # Updating R
 

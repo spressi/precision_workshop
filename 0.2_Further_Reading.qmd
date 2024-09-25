@@ -1,0 +1,24 @@
+---
+title: "0.2 R - Further Reading"
+---
+
+# Additional Information
+
+Oh, you're still here. You must be really hyped for the workshop!
+
+This page is dedicated to some (maybe more niche) topics that *might* be interesting within the broader context of this workshop. However, they are neither crucial, nor is everyone interested in reading pages upon pages about `R`. If you are, though, go ahead! Some of this content will make more sense after the introductory part of the workshop (or if you have pre-existing `R` knowledge).
+
+## Base R vs. tidyverse
+
+TO DO.
+
+## Project-oriented workflows
+
+TO DO.
+
+## Fun trivia
+
+While we're here:
+
+- Each `R` version is named after Peanuts comic strips/films. If you run `R.version` in the console, you'll find a "nickname". E.g. for 4.4.1, it's "Race for Your Life", a 1977 film.
+- Ever wondered why the function `head()` shows you exactly **six** entries (elements in a vector, rows in a data frame ...)? Not an "obvious" number like five, or ten? Well, it's basically: "You can cover my homework, but don't make it seem too obvious." As Patrick Burns, the author of the function, said: "I came upon 'head' and 'tail' at one of my clients. That implementation had n = 5. I didn't think there would ever be an issue regarding ownership of the code, but I changed to 6 just to help if there were a conflict." (see [this discussion](https://forum.posit.co/t/why-does-head-show-6-rows-by-default/3259/4)).

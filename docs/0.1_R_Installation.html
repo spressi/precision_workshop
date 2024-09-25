@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>0 R - Installation and Updating – Precision Workshop</title>
+<title>0.1 R - Installation and Updating – Precision Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0_R_Installation.html">0 R - Installation and Updating</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0.1_R_Installation.html">0.1 R - Installation and Updating</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,8 +135,14 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0_R_Installation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">0 R - Installation and Updating</span></a>
+  <a href="./0.1_R_Installation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">0.1 R - Installation and Updating</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.2_Further_Reading.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.2 R - Further Reading</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -172,6 +178,11 @@ window.Quarto = {
   <li><a href="#important-information" id="toc-important-information" class="nav-link" data-scroll-target="#important-information">Important Information</a></li>
   <li><a href="#installation-guide" id="toc-installation-guide" class="nav-link" data-scroll-target="#installation-guide">Installation Guide</a></li>
   </ul></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages">Installing packages</a>
+  <ul class="collapse">
+  <li><a href="#about-packages" id="toc-about-packages" class="nav-link" data-scroll-target="#about-packages">About packages</a></li>
+  <li><a href="#how-to-install-packages" id="toc-how-to-install-packages" class="nav-link" data-scroll-target="#how-to-install-packages">How to install packages</a></li>
+  </ul></li>
   <li><a href="#updating-r" id="toc-updating-r" class="nav-link" data-scroll-target="#updating-r">Updating R</a></li>
   </ul>
 </nav>
@@ -181,7 +192,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">0 R - Installation and Updating</h1>
+<h1 class="title">0.1 R - Installation and Updating</h1>
 </div>
 
 
@@ -208,9 +219,9 @@ window.Quarto = {
 <ul>
 <li>You have <code>R</code> installed, and it’s at least version 4.0. To check which version you have, run <code>R.version</code> in your <code>R</code> console. If your version is lower than 4, please update.</li>
 <li>You have RStudio installed, or alternatively, an editor of your choice that can handle <code>R</code> and that you are comfortable with. (The instructors of the workshop will use RStudio.)</li>
-<li>You have installed the following packages: <code>tidyverse</code>, <code>confintr</code>, <code>rstatix</code>, <code>apaTable</code>.</li>
+<li>You have installed the following packages: <code>tidyverse</code>, <code>confintr</code>, <code>rstatix</code>, <code>apaTable</code>, <code>babynames</code>.</li>
 </ul>
-<p>If you’re missing any of these, install them on your own or follow this guide.</p>
+<p>If you’re missing any of these, install them on your own or follow this guide. <strong>To jump to different sections of this guide, use the menu on the right!</strong></p>
 </section>
 <section id="installation-guide" class="level2">
 <h2 class="anchored" data-anchor-id="installation-guide">Installation Guide</h2>
@@ -268,6 +279,67 @@ window.Quarto = {
 <p>If you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under <strong>Tools</strong> <span class="math inline">\(\to\)</span> <strong>Global Options</strong> <span class="math inline">\(\to\)</span> <strong>Appearance</strong>.</p>
 <p>By the way, RStudio is such a common editor for <code>R</code> that people frequently confuse it with <code>R</code> itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of <code>R</code> they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - <code>R</code> and RStudio are completely different things!</p>
 <p>Aaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run <code>R</code> code. If you type in <code>41 + 1</code> and press Enter, <code>[1] 42</code> should appear below. If it doesn’t, contact <a href="mailto:juliane.nagel@zi-mannheim.de" class="email">juliane.nagel@zi-mannheim.de</a> for trouble shooting.</p>
+</section>
+</section>
+</section>
+<section id="installing-packages" class="level1">
+<h1>Installing packages</h1>
+<p>For this workshop, please install the following packages:</p>
+<ul>
+<li><code>tidyverse</code></li>
+<li><code>confintr</code></li>
+<li><code>rstatix</code></li>
+<li><code>apaTable</code></li>
+<li><code>babynames</code></li>
+</ul>
+<section id="about-packages" class="level2">
+<h2 class="anchored" data-anchor-id="about-packages">About packages</h2>
+<p>When we’ve installed <code>R</code>, it can already do quite a lot of things (if not everything). However, the question is how conveniently (and standardized) we can achieve something. For example, we <strong>could</strong> write code that computes a linear mixed model for us - but most of us would certainly prefer to use a pre-existing function for that. Luckily, someone already wrote such a function, but it’s not included in <code>R</code> from the start. If we want to use additional functions (or additional data sets!), we have to install additional “packages”. It is very common to have many different additional packages installed.</p>
+</section>
+<section id="how-to-install-packages" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-install-packages">How to install packages</h2>
+<p>As often the case in <code>R</code>, there are several ways to achieve what we want (here, install a package). We will describe several options here - you can just stick to the one you like best. Either way, if you install a package you do not have yet, it will get installed (duh!), but if you install a package you have already installed, the version you currently have will be overwritten by the latest version of the package that’s available.</p>
+<p>Whichever method you use, <code>R</code> will then tell you some things about the installation status of the package (e.g., where the package was installed, how large it is etc.) in the console. Most importantly, whether the installation was successful. It should say “package ‘babynames’ successfully unpacked and MD5 sums checked” somewhere at the end.</p>
+<p>As an example, we will install the package <code>babynames</code>, which includes data about the popularity of different baby names over the years. (Packages that provide additional functions for <code>R</code> are more common, but packages are also a great way to provide toy data sets to other people!) For this package, the “report” <code>R</code> gives you is very short - don’t worry if the console goes a little crazy if you install bigger packages with a lot of “dependencies” (i.e., that require additional packages to work and install those as well during the process).</p>
+<section id="install.packages" class="level3">
+<h3 class="anchored" data-anchor-id="install.packages">install.packages()</h3>
+<p>You can install the package by typing <code>install.packages("babynames")</code> in an <code>R</code> console (e.g., after opening RStudio) and pressing enter.</p>
+<p>You can install multiple packages at once like this: <code>install.packages(c("babynames", "apaTable"))</code>. Mind the <code>c()</code> wrapped around the package names.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/babynames_console.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Install packages in the console</figcaption>
+</figure>
+</div>
+</section>
+<section id="rstudio-tools" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-tools">RStudio Tools</h3>
+<p>Within RStudio, click on <em>Tools</em> at the top, and then <em>Install Packages…</em>. Enter the package you would like to install (<code>babynames</code>). Autocomplete should help you. The installation report in the console should look like the screenshot you can find above (under “install.packages()”). All the other default options are fine (in fact, if you use <code>install.packages()</code> as shown above, it will use the same default options).</p>
+<p>You can install multiple packages at once by entering multiple package names (separated by a space or comma).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/babynames_tools.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Install packages via the RStudio tools</figcaption>
+</figure>
+</div>
+</section>
+<section id="rstudio-autodetect" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-autodetect">RStudio autodetect</h3>
+<p>It is worth noting that RStudio will warn you if you open a script that loads a package that you have not installed. (We did not talk about loading packages yet - more about that in the introductory workshop - but briefly, you need to load packages that you want to use first in your <code>R</code> scripts.) You can simply click on “install” and any missing packages you need for the script in question will automatically be installed. Once again, the report in the console should look the same as above. Note that this method does not work for updating packages that you already have installed.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/missing_packages.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>RStudio missing packages autodetect</figcaption>
+</figure>
+</div>
+</section>
+<section id="if-things-go-wrong" class="level3">
+<h3 class="anchored" data-anchor-id="if-things-go-wrong">If things go wrong</h3>
+<p>Sometimes, installing packages can lead to unexpected errors. In many cases, the issue is not caused by the package you are trying to install itself, but rather by another package that it requires and also installs in the process. Surprisingly often, the issue can be fixed by directly re-installing the package that caused the process to fail, and then trying to install the original package you wanted again. If a package is very stubborn and does not want to be installed, contact <a href="mailto:juliane.nagel@zi-mannheim.de" class="email">juliane.nagel@zi-mannheim.de</a> for trouble shooting.</p>
+</section>
+<section id="sidenote" class="level3">
+<h3 class="anchored" data-anchor-id="sidenote">Sidenote</h3>
+<p>By the way: Anyone can write an <code>R</code> package. That means that you should not install any packages that you do not trust. Packages that you can get from CRAN have to pass several quality checks and have to fulfill certain requirements (e.g., that no sneaky .exe files are included in the package), so they are safe to install. It is also possible to e.g.&nbsp;get packages from users on GitHub, but you can’t install them using e.g.&nbsp;<code>install.packages()</code>, but will need additional tools for this (such as the package <code>devtools</code>).</p>
 </section>
 </section>
 </section>
