@@ -35,7 +35,7 @@ Right on the start page, you can find a download link via CRAN ("The Comprehensi
 ![Download R](images/download_r.png){width=80% fig-align="center"}
 
 
-When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, the those "mirrors" around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of `R`. Even if one of the servers should be down, you can still get `R` from any of the other servers. You can download `R` using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that's windows.
+When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those "mirrors" around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of `R`. Even if one of the servers should be down, you can still get `R` from any of the other servers. You can download `R` using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that's windows.
 
 ![R for Windows](images/download_r_win.png){width=100% fig-align="center"}
 
