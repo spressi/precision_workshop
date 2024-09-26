@@ -121,7 +121,7 @@
     "href": "1.3_Data_Visualization.html#the-next-layers---improving-the-plot",
     "title": "1.3 Data Visualization",
     "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) + #if we didn't set factor labels, we can do here manually (not recommended!)\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) + #if we didn't set factor labels, we can do here manually (not recommended!)\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -161,7 +161,7 @@
     "href": "1.3_Data_Visualization.html#grouped-plots",
     "title": "1.3 Data Visualization",
     "section": "Grouped Plots",
-    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata1, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\", #prevents \"stacked\" barplots\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")\n\n\n\n\n\n\n\n\n\n\nWithout position = dodge, you would get a stacked barplot",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata1, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\", #prevents \"stacked\" barplots\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")\n\n\n\n\n\n\n\n\n\n\n\nWithout position = dodge, you would get a stacked barplot",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -191,7 +191,7 @@
     "href": "1.3_Data_Visualization.html#violin-boxplot",
     "title": "1.3 Data Visualization",
     "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot above?\n\n\nggplot(summarydata1, aes(x = income, \n                        y = ahiTotal, #new variable!\n                        fill = income)) +\n  geom_violin(trim = FALSE, #smooth on edges\n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, #small boxplot contained in violin\n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot above?\n\n\nggplot(summarydata1, aes(x = income, \n                        y = ahiTotal, #new variable!\n                        fill = income)) +\n  geom_violin(trim = FALSE, #smooth on edges\n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, #small boxplot contained in violin\n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -281,7 +281,7 @@
     "href": "1.1_R_Intro.html#rstudio-panes",
     "title": "1.1 Intro to R",
     "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane: view, edit, & save your code\nConsole: here the commands are run and rudimentary output may be provided\nEnvironment: which variables/data are available\nFiles, plots, help etc.\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\nConsole vs. Script (Rmarkdown later)",
+    "text": "RStudio Panes\n\n\n\nScript pane: view, edit, & save your code\nConsole: here the commands are run and rudimentary output may be provided\nEnvironment: which variables/data are available\nFiles, plots, help etc.\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)",
     "crumbs": [
       "1.1 Intro to R"
     ]
@@ -391,7 +391,7 @@
     "href": "1.1_R_Intro.html#looking-at-the-data-2",
     "title": "1.1 Intro to R",
     "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\n\nThe two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nRStudio’s Environment panel\nThe two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.",
     "crumbs": [
       "1.1 Intro to R"
     ]

@@ -375,7 +375,7 @@ There are several options to get a glimpse at the data:
 
 What is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?
 
-![](images/rstudioEnvironment.png)
+![RStudio's Environment panel](images/rstudioEnvironment.png)
 
 . . .
 
