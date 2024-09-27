@@ -8,9 +8,9 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
-  <title>Precision Workshop - 1.1 Intro to R</title>
+  <title>Precision Workshop – 1.1 Intro to R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -69,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -83,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -433,11 +433,14 @@ div.cell-output-stdout {
 </section>
 <section id="general-working-with-r-in-this-course" class="slide level2">
 <h2>General: Working with R in this course</h2>
-<p><strong>During Class</strong></p>
 <ul>
-<li>You should have RStudio open and your Biostats project loaded (we will set up the project today).</li>
-<li>Have the slides open in the background. You will need them to copy R code (top right button on any code chunk) or click on links.</li>
+<li>You should have RStudio open and your precision workshop project loaded (we will set up the project today).</li>
+<li>Have the slides open in the background - handy to copy <code>R</code> code (top right button if you hover over a code chunk) or click on links.</li>
+<li>If possible, use two screens with the slides (Zoom) opened on one and RStudio on the other</li>
 </ul>
+<div class="fragment">
+<p><br>
+</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -445,12 +448,7 @@ div.cell-output-stdout {
 </div>
 </div>
 <p><br>
-Remember: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.</p>
-<div class="fragment">
-<p><br>
-<br>
-<strong>At Home</strong></p>
-<p>If possible, use two screens with the slides (Zoom) opened on one and RStudio on the other</p>
+<strong>Note:</strong> You can navigate through the slides quickly by clicking on the three dashes in the bottom left.</p>
 </div>
 </section>
 <section id="why-write-code" class="slide level2">
@@ -482,6 +480,20 @@ Remember: You can navigate through the slides quickly by clicking on the three d
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="why-write-code-1" class="slide level2">
+<h2>Why write code?</h2>
+
+<img data-src="images/memes/automate.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="managing-expectations" class="slide level2">
+<h2>Managing Expectations</h2>
+<ul>
+<li>You will learn a new (programming) language. Don’t expect to “speak” it fluently right away.</li>
+<li>During the workshop, it is more important that you can roughly comprehend written code and “translate” it into natural language.</li>
+<li>The second step is to be able to make small adjustments to code that is given to you.</li>
+<li>Only then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ).</li>
+<li>But: Use it or loose it! Don’t wait to use <code>R</code> in your research projects until you’re “good enough”. It’s more fun to use it on “actual” problems, and makes it much easier to learn.</li>
+</ul>
 </section>
 <section id="install-r-rstudio" class="slide level2">
 <h2>Install R &amp; RStudio</h2>
@@ -523,8 +535,7 @@ Remember: You can navigate through the slides quickly by clicking on the three d
 <figcaption>RStudio Interface</figcaption>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>Console vs.&nbsp;Script (Rmarkdown later)</p>
 <style type="text/css">
@@ -556,7 +567,7 @@ Remember: You can navigate through the slides quickly by clicking on the three d
 </div>
 </div>
 
-<img data-src="images/Console.jpg" alt="Calculated 100+1, 2*3, square root of 9 directly in the console" class="r-stretch quarto-figure-center"><p class="caption">Console used as calculator</p><aside class="notes">
+<img data-src="images/console.png" style="width:60.0%" alt="Calculated 100+1, 2*3, square root of 9 directly in the console" class="r-stretch quarto-figure-center"><p class="caption">Console used as calculator</p><aside class="notes">
 <p>try it out!</p>
 <p>We can’t really do much with these values, they will just be written in the console.</p>
 <style type="text/css">
@@ -582,17 +593,17 @@ Remember: You can navigate through the slides quickly by clicking on the three d
 <span id="cb9-6"><a></a></span>
 <span id="cb9-7"><a></a>word <span class="ot">&lt;-</span> <span class="st">"Hello"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="smaller">
+<p><br></p>
+<div>
 <ul>
-<li class="fragment"><p>“&lt;-” is used to assign values to variables (“=” is also possible but not common in the R community)</p></li>
-<li class="fragment"><p><code>a</code>, <code>multi</code> etc. are the variable names, which can be words, some special characters are allowed but not whitespace</p>
+<li class="fragment"><p><code>&lt;-</code> is used to assign values to variables (<code>=</code> is also possible, but discouraged in <code>R</code>)</p></li>
+<li class="fragment"><p><code>a</code>, <code>multi</code> etc. are the variable names <span style="font-size: 16px;">(some naming rules, e.g., no whitespace, must no start with an number, many special characters not allowed)</span></p>
 <ul>
-<li class="fragment">You can find those now in your Environment! (top right)</li>
-<li class="fragment">For saving variables, there is no feedback in the console (<code>2*3</code> outputs <code>6</code> but <code>multi &lt;- 2*3</code> does not)</li>
+<li class="fragment">You can find those now in your Environment! (top right panel)</li>
+<li class="fragment">No feedback in the console for saving variables (<code>2*3</code> outputs <code>6</code>, but <code>multi &lt;- 2*3</code> doesn’t)</li>
 </ul></li>
-<li class="fragment"><p>as you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.</p></li>
+<li class="fragment"><p>variables can contain basically anything (words, numbers, entire tables of data …)</p></li>
 <li class="fragment"><p>the variables contain the calculated value (i.e.&nbsp;101) and not the calculation/formula (100+1)</p></li>
-<li class="fragment"><p>You can use those variables for further calculations, e.g., <code>a + multi</code></p></li>
 </ul>
 </div>
 <aside class="notes">
@@ -612,27 +623,62 @@ What happens if we type in <code>a</code> in the console?</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- ## Working Directory
-
-::: incremental
-It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
-
--   Make sure that R knows that you want to work in this folder, i.e., set your working directory:
-
-    -   **Session -\> Set Working Directory -\> Choose Directory**
-
--   **Assignment**: Please make a folder, e.g. called "Biostatistics" (but not "R" or anything with spaces in it). Then set your working directory to this folder.
-::: -->
+</section>
+<section id="working-with-variables" class="slide level2">
+<h2>Working with variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>a <span class="sc">+</span> multi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 107</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>multi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p><br><br></p>
+<div>
+<ul>
+<li class="fragment">You can use those variables for further calculations, e.g., <code>a + multi</code></li>
+<li class="fragment">Note that neither <code>a</code> nor <code>multi</code> change their value.</li>
+</ul>
+</div>
+</section>
+<section id="working-with-variables-1" class="slide level2">
+<h2>Working with variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>a <span class="ot">&lt;-</span> <span class="dv">42</span></span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42</code></pre>
+</div>
+</div>
+<p><br><br></p>
+<ul>
+<li>Variables can be overwritten (<code>R</code> won’t warn you about this!)</li>
+</ul>
 </section>
 <section id="functions" class="slide level2">
 <h2>Functions</h2>
 <p>This code with <code>sqrt(9)</code> looked unfamiliar. <code>sqrt()</code> is an R function that calculates the square root of a number. <code>9</code> is the <em>argument</em> that we hand over to the function.</p>
 <p>If you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: <code>?functionname</code></p>
+<p><br><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>?sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>?sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will open the help file in the Help Pane on the lower right of RStudio.</p>
 <p>You can also click on a function in the script or console pane and press the <em>F1</em> key.</p>
+<p><br><br></p>
+<p>Sometimes, the help page can be a bit overwhelming (lots of technical details etc.). It might help you to scroll down to the examples at the bottom to see the function in action!</p>
 <aside class="notes">
 <p>Do this now! Anything unclear?</p>
 <style type="text/css">
@@ -647,37 +693,54 @@ It makes sense to save all your scripts etc. in a folder specifically dedicated 
           display:block!important;
       }</style></aside>
 </section>
-<section id="functions-2" class="slide level2">
-<h2>Functions 2</h2>
-<p>Functions often take more than one argument:</p>
+<section id="functions-1" class="slide level2">
+<h2>Functions</h2>
+<p>Functions often take more than one argument (which have names):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb11-2"><a></a><span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>) <span class="co">#this outputs the same as above</span></span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a><span class="co"># By the way, # denotes a line-end comment (ignored by R), which are very important for code documentation!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb21-2"><a></a><span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>) <span class="co"># this outputs the same as above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).</p>
+<p><br><br></p>
+<p>You can explicitly name your arguments (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).</p>
+<div class="fragment">
+<p><br>
+</p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb22-2"><a></a></span>
+<span id="cb22-3"><a></a><span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>) <span class="co"># this outputs the same as above</span></span>
+<span id="cb22-4"><a></a><span class="fu">rnorm</span>(<span class="at">sd =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">3</span>) <span class="co"># still the same result</span></span>
+<span id="cb22-5"><a></a><span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">3</span>) <span class="co"># different result - R thinks n = 1 and mean = 6!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="comments" class="slide level2">
+<h2>Comments</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">mean =</span> <span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb23-2"><a></a><span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">1</span>) <span class="co"># this outputs the same as above</span></span>
+<span id="cb23-3"><a></a></span>
+<span id="cb23-4"><a></a><span class="co"># By the way, # denotes a comment - very important for documentation!</span></span>
+<span id="cb23-5"><a></a><span class="co"># Anything after # will be ignored by R</span></span>
+<span id="cb23-6"><a></a><span class="co"># To (un)comment the line you are in/multiple lines you selected: ctrl + shift + C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="packages" class="slide level2">
 <h2>Packages</h2>
-<p>There are a number of functions that are already included with <em>Base R</em> (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages are like collections of functions or even data types that someone else wrote.</p>
-<p>On the top, click on <em>Tools</em> and then <em>Install Packages…</em>. Search for <strong>tidyverse</strong> and install!</p>
+<p>There are a number of functions already included with <em>Base R</em> (i.e., <code>R</code> after a new installation), but you can greatly extend the power of <code>R</code> by loading packages (and we will!). Packages can e.g.&nbsp;contain collections of functions someone else wrote, or even data.</p>
+<p>You should already have the <code>tidyverse</code> installed (if not, quickly run <code>install.packages("tidyverse")</code> :-) )</p>
 <div class="fragment">
 <p><br>
 </p>
-<p>You can also download a package using the <code>install.packages()</code> function:</p>
+<p>But installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package with the <code>library()</code> function. This is the first thing you do at the top of an <code>R</code> script:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>) <span class="co"># or library(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>(It may be necessary to install Rtools for some packages: <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>)</p>
 </div>
 <div class="fragment">
 <p><br>
 </p>
-<p>But installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package (i.e., make it directly available) with the <code>library()</code> function. This is the first thing you do on the top of an R script:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>) <span class="co"># or library(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>(If you don’t load a package, you have to call functions explicitly by <code>packagename::function</code>)</p>
 <aside class="notes">
 <p>Open Source! Anyone can write a package!</p>
@@ -699,21 +762,28 @@ It makes sense to save all your scripts etc. in a folder specifically dedicated 
 <section>
 <section id="scripts-projects" class="title-slide slide level1 center">
 <h1>Scripts &amp; Projects</h1>
-<p>If you type your code into the console (bottom left), it does not get documented well. Therefore, it is better practice to write scripts (top left) and save them as files</p>
-<p>Scripts are basically text files that contain your code and can be run as needed</p>
-<p>It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.</p>
-<p>We will create an R <em>project</em> that saves your opened scripts and even your environment (top right).</p>
+<ul>
+<li>If you type your code into the console (bottom left), it is not saved. Therefore, it is better practice to write scripts (top left) and save them as files.</li>
+<li>Scripts are basically text files that contain your code and can be run as needed.</li>
+<li>It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.</li>
+<li>We will now create an <code>R</code> <em>project</em> together, which will help you to work with files that belong together.</li>
+</ul>
 </section>
 <section id="new-project" class="slide level2">
 <h2>New Project</h2>
-<p>Create a new project by clicking on “<em>File</em>” in the top left and then “<em>New Project…</em>”</p>
-<p>We usually want to create a “<em>New Directory</em>” and then choose a standard “<em>New Project</em>” on the top of the list<br>
-(we will only need standard projects during this class)</p>
-<p>Choose the project name, e.g., as “<em>Biostats R</em>” (this will create a folder in which the whole project is living)<br>
-Browse any kind of path you want to contain your project folder,<br>
-e.g., “<em>D:/Documents/Studies/Translational Neuroscience/Biostats</em>”</p>
 
-<img data-src="images/rstudioProject.png" class="r-stretch quarto-figure-center"><p class="caption">New Project final window</p></section>
+<img data-src="images/rstudioProject.png" class="quarto-figure quarto-figure-center r-stretch" style="width:200.0%"><div>
+<ul>
+<li class="fragment">Create a new project by clicking on “<em>File</em>” on the top left and then “<em>New Project…</em>”</li>
+<li class="fragment">Select “<em>New Directory</em>” <span style="font-size: 16px">(if you already have a folder for this course, you can choose “<em>Existing directory</em>” and select that folder)</span> and then choose “<em>New Project</em>” at the top of the list.</li>
+<li class="fragment">Choose a project name, e.g., as “<em>r_workshop</em>” (this will create a folder in which the project lives)</li>
+<li class="fragment">Browse where you want to put your project folder (in my case, “<em>C:/r_stuff/</em>”)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span style="font-size: 16px">PS: <code>R</code> can deal with folder and file names that contain spaces, but since some programms can’t, it’s best practice not to use whitespaces for file/folder naming.</span></p>
+</div>
+</section>
 <section id="existing-projects" class="slide level2">
 <h2>Existing Projects</h2>
 <p>You will find the current project on the top right corner of RStudio</p>
@@ -721,9 +791,16 @@ e.g., “<em>D:/Documents/Studies/Translational Neuroscience/Biostats</em>”</p
 <p>You can also just double click on <code>.Rproj</code> files and RStudio will open with the project loaded.</p>
 
 <img data-src="images/rstudioProject2.png" class="r-stretch quarto-figure-center"><p class="caption">Existing projects</p></section>
+<section id="why-projects" class="slide level2">
+<h2>Why Projects</h2>
+<ul>
+<li>Projects are not only convenient for us (e.g., scripts that we had opened before are re-opened when we open the project), they are also great for reproducibility.</li>
+<li>We won’t cover the details here - see the “Further Reading” section of the course page!</li>
+</ul>
+</section>
 <section id="using-scripts" class="slide level2">
 <h2>Using Scripts</h2>
-<p>To open a new script, click <strong>File -&gt; New File -&gt; R Script.</strong> (<code>Ctrl + Shift + N</code>)</p>
+<p>To open a new script, click <strong>File</strong> <span class="math inline">\(\to\)</span> <strong>New File</strong> <span class="math inline">\(\to\)</span> <strong>R Script.</strong> (<code>Ctrl + Shift + N</code>)</p>
 <p>To run a line of the script, you can either click <em>Run</em> at the top right of the pane or <code>Ctrl + Enter</code>. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command).<br>
 To run the whole script/chunk, press <code>Ctrl + Shift + Enter</code> (with full console output) or <code>Ctrl + Shift + S</code> (limited output).</p>
 
@@ -734,12 +811,78 @@ To run the whole script/chunk, press <code>Ctrl + Shift + Enter</code> (with ful
 Now run the code (either by pressing "run" at the top right of the script or `ctrl + enter`). -->
 <img data-src="images/rstudioScript.png" class="r-stretch quarto-figure-center"><p class="caption">Using scripts</p></section></section>
 <section>
-<section id="working-with-data" class="title-slide slide level1 center">
-<h1>Working with Data</h1>
+<section id="vectors" class="title-slide slide level1 center">
+<h1>Vectors</h1>
+<div>
+<ul>
+<li class="fragment">So far, we’ve worked with single values; <em>vectors</em> contain several elements.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">12</span>, <span class="dv">4</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  7 12  4  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">6.1</span>, <span class="fl">9.234</span>, <span class="fl">1.23</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.000 6.100 9.234 1.230</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">c</span>(<span class="st">"hello"</span>, <span class="st">"cake"</span>, <span class="st">"biscuit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hello"   "cake"    "biscuit"</code></pre>
+</div>
+</div>
+<div>
+<ul>
+<li class="fragment">Vectors always contain the same data type (It’s a bit tricky, but can you see why <code>c(10, "biscuit", 2.31)</code> does not work?).</li>
+<li class="fragment">Vectors are always wrapped in the <code>c()</code> function (“combine”).</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="working-with-vectors" class="slide level2">
+<h2>Working with vectors</h2>
+<ul>
+<li>Of course, vectors can be stored in variables.</li>
+</ul>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>my_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">10</span>)</span>
+<span id="cb31-2"><a></a></span>
+<span id="cb31-3"><a></a>shopping_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"flour"</span>, <span class="st">"eggs"</span>, <span class="st">"apples"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="vector-operations" class="slide level2">
+<h2>Vector operations</h2>
+<ul>
+<li>But the real fun is that <code>R</code> is “vectorized”, which allows us to do some funny tricks.</li>
+<li>Note that this is different from usual “vector math”.</li>
+</ul>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 4 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co"># Can you spot what happens HERE?!</span></span>
+<span id="cb36-2"><a></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3 14  7 15  1 10</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="working-with-real-data" class="title-slide slide level1 center">
+<h1>Working with real data</h1>
 
 </section>
-<section id="read-in-data" class="slide level2 scrollable">
-<h2>Read in Data</h2>
+<section id="get-the-data" class="slide level2 scrollable">
+<h2>Get the data</h2>
 <p>To read in data files, you need to know which format these files have, e.g.&nbsp;.txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).</p>
 <p>We will use the files from <a href="https://psyteachr.github.io/quant-fun-v2/starting-with-data.html">Fundamentals of Quantitative Analysis</a>: <code>ahi-cesd.csv</code> and <code>participant-info.csv</code>. Save these directly in your project folder on your computer (do not open them!).</p>
 <div class="fragment">
@@ -751,19 +894,17 @@ Now run the code (either by pressing "run" at the top right of the script or `ct
 <li><p><a href="https://psyteachr.github.io/quant-fun-v2/participant-info.csv" class="uri">https://psyteachr.github.io/quant-fun-v2/participant-info.csv</a></p></li>
 </ol>
 </div>
-<div class="fragment">
-<p><br>
-</p>
+</section>
+<section id="read-in-the-data" class="slide level2">
+<h2>Read in the data</h2>
 <p>Create a new script with the following content:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co">#install.packages("tidyverse") #if you have not yet installed the tidyverse, uncomment and run</span></span>
-<span id="cb14-2"><a></a><span class="fu">library</span>(tidyverse) <span class="co"># we will use a function from the tidyverse to read in the data</span></span>
-<span id="cb14-3"><a></a></span>
-<span id="cb14-4"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb14-5"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">library</span>(tidyverse) <span class="co"># we will use a function from the tidyverse to read in the data</span></span>
+<span id="cb38-2"><a></a></span>
+<span id="cb38-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
+<span id="cb38-4"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Run the code!</p>
-</div>
 </section>
 <section id="looking-at-the-data" class="slide level2">
 <h2>Looking at the Data</h2>
@@ -784,14 +925,13 @@ Now run the code (either by pressing "run" at the top right of the script or `ct
 <p>What is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?</p>
 
 <img data-src="images/rstudioEnvironment.png" class="r-stretch quarto-figure-center"><p class="caption">RStudio’s Environment panel</p><div class="fragment">
-<p>The two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.</p>
-<p>Data frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.</p>
+<p>The two objects we just read in are data frames, which are “tables” of data (they can contain entire data sets). The objects we assigned earlier were simpler (single values, or “one-dimensional” vectors).</p>
+<p>Data frames usually have several rows and columns. The columns are the <em>variables</em> and the rows are the <em>observations</em> (more about that later).</p>
 </div>
 </section></section>
-<section id="thanks" class="title-slide slide level1 center">
-<h1>Thanks!</h1>
-<p>That’s the lesson on “Getting started with R”! If you have any questions, feel free to approach me before or after class or send an email.</p>
-<p><strong>Managing expectations</strong>: You will learn a new (programming) language. Don’t expect to “speak” it fluently right away. During this class, it is more important that you can roughly comprehend written code and “translate” it into natural language. The second step is to be able to make small adjustments to code that is given to you. Only then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ), which will be needed for your research project at the end of the semester.</p>
+<section id="questions" class="title-slide slide level1 center">
+<h1>Questions?</h1>
+<p>This was the first chapter of this workshop! Do you have any questions?</p>
 <p><br>
 Next:</p>
 <ul>
@@ -983,9 +1123,9 @@ Next:</p>
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -1125,18 +1265,7 @@ Next:</p>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1168,7 +1297,29 @@ Next:</p>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1176,7 +1327,7 @@ Next:</p>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

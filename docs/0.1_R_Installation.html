@@ -183,7 +183,12 @@ window.Quarto = {
   <li><a href="#about-packages" id="toc-about-packages" class="nav-link" data-scroll-target="#about-packages">About packages</a></li>
   <li><a href="#how-to-install-packages" id="toc-how-to-install-packages" class="nav-link" data-scroll-target="#how-to-install-packages">How to install packages</a></li>
   </ul></li>
-  <li><a href="#updating-r" id="toc-updating-r" class="nav-link" data-scroll-target="#updating-r">Updating R</a></li>
+  <li><a href="#updating-r" id="toc-updating-r" class="nav-link" data-scroll-target="#updating-r">Updating R</a>
+  <ul class="collapse">
+  <li><a href="#quick-detour" id="toc-quick-detour" class="nav-link" data-scroll-target="#quick-detour">Quick Detour</a></li>
+  <li><a href="#the-dirty-way" id="toc-the-dirty-way" class="nav-link" data-scroll-target="#the-dirty-way">The dirty way</a></li>
+  <li><a href="#the-clean-way" id="toc-the-clean-way" class="nav-link" data-scroll-target="#the-clean-way">The clean way</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -236,7 +241,7 @@ window.Quarto = {
 <figcaption>Download R</figcaption>
 </figure>
 </div>
-<p>When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, the those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of <code>R</code>. Even if one of the servers should be down, you can still get <code>R</code> from any of the other servers. You can download <code>R</code> using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.</p>
+<p>When clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of <code>R</code>. Even if one of the servers should be down, you can still get <code>R</code> from any of the other servers. You can download <code>R</code> using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/download_r_win.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -345,9 +350,46 @@ window.Quarto = {
 </section>
 <section id="updating-r" class="level1">
 <h1>Updating R</h1>
-<p>TO DO.</p>
+<p>If you already have <code>R</code> installed, and want to update it, here are some recommendations how to achieve this.</p>
+<section id="quick-detour" class="level2">
+<h2 class="anchored" data-anchor-id="quick-detour">Quick Detour</h2>
+<p>A general word of caution: As other programming languages, <code>R</code> develops constantly - new functions are added, old ones change etc. This means that over time, more powerful versions of <code>R</code> are available, bugs get fixed - but it also means that your old code won’t work anymore if it relies on the behaviour of an old <code>R</code> version. There are a few links in the “Further Reading” section if you want to get into the topic, but we will not discuss it here in detail. Most updates don’t break your code, and it’s even more rare that they change your results, especially when it’s “minor” updates, e.g., from <code>R</code> 4.2.1 to 4.2.2. That being said, if you are still running some version of <code>R</code> 3, updating might affect your current code. If you are unsure about updating before the workshop, e.g.&nbsp;because you’re in the middle of an important analysis, feel free to talk to <a href="mailto:juliane.nagel@zi-mannheim.de" class="email">juliane.nagel@zi-mannheim.de</a> (if you do, please mention your current <code>R</code> version).</p>
+</section>
+<section id="the-dirty-way" class="level2">
+<h2 class="anchored" data-anchor-id="the-dirty-way">The dirty way</h2>
+<p>In principle, you could simply follow the installation guide above and end up with a clean new version of <code>R</code>. Both the old and the new version will be installed on your computer, but RStudio should automatically detect the latest version (or at least ask you which version it should use). <em>With this approach, you will need to re-install all packages you need afterwards</em>, or copy them over manually (error-prone!). If you’re fine with re-installing a few packages (that’s what I always to after updating anyways), you can simply follow the installation guide above, or …</p>
+</section>
+<section id="the-clean-way" class="level2">
+<h2 class="anchored" data-anchor-id="the-clean-way">The clean way</h2>
+<p>… you can use the package <code>installr</code>, which, as the name suggests, helps you to install <code>R</code>-related things and is often recommended for a clean update. (Note that with this approach, just as with the “dirty way”, the old <code>R</code> version will stay installed on your computer.) If you don’t have <code>installr</code> installed yet, do so by running <code>install.packages("installr")</code> in the console.</p>
+<p><em>For the following steps, don’t use RStudio, but the R GUI.</em> This works best with a “pure” version of <code>R</code>, without any magic that RStudio might want to add. For good measure, close RStudio if you haven’t already, and search for <code>R</code> in your apps. If you have several installations (which you might have if you updated before, just pick the most recent one). Take a deep breath, admire the <code>R</code> GUI and appreciate that modern editors exist to take away this pain from you.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/r_gui.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>R GUI</figcaption>
+</figure>
+</div>
+<p>Run <code>installr::updateR()</code>. A message like this should pop up - klick OK.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/installr.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>installr dialogue</figcaption>
+</figure>
+</div>
+<p>Next, <code>installr</code> will ask you whether you would like to see the NEWS regarding the new version of <code>R</code>. This is a good idea to get an overview about what changed, and whether any functions that you are using might be affected by the changes. Or whether there’s a cool new feature. You can also always read about the news later, e.g.&nbsp;for <code>R</code> 4.4.1, the link is &gt;https://cran.rstudio.com/bin/windows/base/NEWS.R-4.4.1.html&gt;. If you click “yes” the news page will open in a new tab in your browser - the installation will not be cancelled.</p>
+<p><code>installr</code> will then ask you whether you want to install the new version - click yes. You might need to choose a mirror from where to download <code>R</code> (see installation guide above). When installing <code>R</code>, accept the defaults. After clicking “finish”, <code>installr</code> has a few more tricks up it’s sleeve:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/installr_copy.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>installr dialogue</figcaption>
+</figure>
+</div>
+<p>If you click “Yes”, all your packages you had installed from your previous <code>R</code> version will be copied over to the new version. In the next step, <code>installr</code> will ask you whether you want to keep the packages from your old version (otherwise, they will be deleted). Lastly, <code>installr</code> even offers to update the packages you copied to the new version of <code>R</code>. For all of these steps, there are no right or wrong answers. You can choose whatever fits your needs. (E.g., I like to start with a clean slate.) Note that the whole process of copying and updating might take a little bit of time, and you will not see a progress bar or anything else that indicates what is happening.</p>
+<p>Finally, <code>installr</code> will ask you whether you want to start a GUI of the new <code>R</code> installation. You don’t need to do that, but you could to quickly confirm that everything worked as intended (e.g., your old packages are there).</p>
+<p>When you start RStudio the next time, it might either automatically detect your latest <code>R</code> version, or it should ask you which one it should use.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

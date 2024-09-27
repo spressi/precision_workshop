@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -168,11 +231,74 @@ ul.task-list li input[type="checkbox"] {
 <p>This page is dedicated to some (maybe more niche) topics that <em>might</em> be interesting within the broader context of this workshop. However, they are neither crucial, nor is everyone interested in reading pages upon pages about <code>R</code>. If you are, though, go ahead! Some of this content will make more sense after the introductory part of the workshop (or if you have pre-existing <code>R</code> knowledge).</p>
 <section id="base-r-vs.-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="base-r-vs.-tidyverse">Base R vs.&nbsp;tidyverse</h2>
-<p>TO DO.</p>
+<p>In this course, we will mainly use the <code>tidyverse</code>, and sometimes, we will refer to base <code>R</code>. But what is the difference, and does it matter?</p>
+<p>The term base <code>R</code> can be a little bit ambiguous. In this course, we refer to base <code>R</code> as “<code>R</code> without any packages installed”, i.e., what you get after a new installation of <code>R</code>. When you hear someone say, “base <code>R</code> vs.&nbsp;<code>tidyverse</code>”, the term “base <code>R</code>” may also refer to a programming style in the broader sense. Because usually, this debate is not about people using the <code>tidyverse</code> vs.&nbsp;no packages at all, but rather about people using the <code>tidyverse</code> coding style vs.&nbsp;the coding style that is used in base <code>R</code>, and usually for other packages outside of the <code>tidyverse</code>. This is all a bit abstract, but it will make more sense at the end.</p>
+<p>Another important thing to know is that the <code>tidyverse</code> is actually not a package (well, technically, it is, but that’s not the point), but a <em>collection</em> of packages. For example, the packages <code>ggplot2</code> (the famous package for plotting) or <code>dplyr</code> (famous for data wrangling) are both part of the <code>tidyverse</code> among many others! What these packages have in common is a certain way of coding. Most notably, the <code>tidyverse</code> works with “pipes” (<code>%&gt;%</code>) that allow you to chain function calls one after the other (top to bottom, or left to right), instead of the “onion style” (inside to outside) in base <code>R</code>. See:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">5</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="fu">round</span>(<span class="fu">mean</span>(my_data), <span class="dv">2</span>)) <span class="co"># base R</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Central to the <code>tidyverse</code> is also “tidy evaluation”, a special form of so-called “non-standard evaluation”. A popular example is “data masking”: In base <code>R</code>, you always have to call the data source explicitly if you access a column of e.g.&nbsp;a <code>data.frame</code>. Within the <code>tidyverse</code>, you provide the data source once, and can then access the columns without having to name the data again. See:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># base R</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>new_col <span class="ot">&lt;-</span> iris<span class="sc">$</span>Sepal.Length <span class="sc">+</span> iris<span class="sc">$</span>Petal.Length</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_col =</span> Sepal.Length <span class="sc">+</span> Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We won’t go into further details here, but all packages within the <code>tidyverse</code> adhere to the “tidy philosophy”. Importantly, fierce debates have been fought over “base <code>R</code>” vs.&nbsp;<code>tidyverse</code> - meaning “tidy style” vs.&nbsp;“base <code>R</code> style” rather than “<code>tidyverse</code> vs.&nbsp;no packages at all”. People particularly disagree on the question what you should teach beginners. Very briefly, some people think that the <code>tidyverse</code> is easier to read and understand, especially for beginners. Others argue that only knowing how to code “tidy style” will make you dependent on certain packages, and less capable of navigating “pure” <code>R</code>. Sometimes, it might seem whether people are coding in two different languages, not simply <code>R</code>.</p>
+<p>While most of the examples in this code follow the <code>tidyverse</code>, it’s important to note that it’s not necessarily either/or. You can use functionalities of the <code>tidyverse</code>, and other wise stick to a more “base <code>R</code> style”. Or you can switch your approach depending on the task you need to do. Despite occasional debates like these, the <code>R</code> community is generally speaking very friendly and inclusive.</p>
+<p>PS: Sometimes, you will see scripts where people loaded both the <code>tidyverse</code>, and packages included in the <code>tidyverse</code>, e.g.&nbsp;<code>ggplot2</code>, <code>dplyr</code> etc. This is not necessary, because those packages are already loaded as part of the <code>tidyverse</code>. Sometimes, it might make more sense to load individual packages if you only need a couple of functions. But within the <code>tidyverse</code>, it’s also fairly common to just load the whole bunch using <code>library(tidyverse)</code>. Loading packages of the <code>tidyverse</code> after already loading the <code>tidyverse</code> will not break anything, but it clutters your code unnecessarily.</p>
 </section>
 <section id="project-oriented-workflows" class="level2">
 <h2 class="anchored" data-anchor-id="project-oriented-workflows">Project-oriented workflows</h2>
-<p>TO DO.</p>
+<p>In this workshop, we encouraged you to work with <code>R</code> projects, which a) help you to organize files of code that belong together, b) offer you some convenience functions (i.e., RStudio will remember which scripts you had opened last and will open these automatically for you if you open your project again) and most importantly c) enhance the reproducibility of your code. Here are some additional information why projects are more reproducible, and how you (or someone else using your code) might run into trouble if you don’t use them. Most of my arguments are paraphrased from <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Jenny Bryan’s 2017 post</a> about a project-oriented workflow. Note that Jenny may come and set your computer on fire of you don’t heed my (her) advice, so pay close attention :-)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/on_fire.png" class="img-fluid figure-img"></p>
+<figcaption>Jenny Bryan’s “hot take” on a non-project-oriented workflow</figcaption>
+</figure>
+</div>
+<section id="absolute-and-relative-paths" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-and-relative-paths">Absolute and relative paths</h3>
+<p>Let’s start with the general issue we have (and the first point addressed in Jenny’s “fiery” tweet). If you run code (or at least when you want to read in files, e.g.&nbsp;data files), <code>R</code> will need to know “where you are” on your computer. For example, if I want to open my file “my_data.csv”, I’d need to let <code>R</code> know where said file can be found at (e.g.&nbsp;<code>C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv</code>). So, I could read in my data like this: <code>data &lt;- read.csv("C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv")</code>. However, it is quite tedious to spell out very long file paths for every single file you want to read in. So what some people do instead is to set the “working directory” to the location where their code/data lives. E.g., if I set my working directory to <code>"C:/Users/juliane.nagel/Documents/code/r_workshop/"</code>, we start from the folder <code>r_workshop</code>, and if I ask <code>R</code> to read in a data file, it will search for it in the working directory (but not elsewhere!). This allows me to shorten my code to <code>read.csv("my_data.csv")</code> - much cleaner! This is the difference between “absolute paths” and “relative paths”. An absolute path is like the “full address” that can be found regardless from where you start in the world (e.g., the Central Institute of Mental health can be found in J5, Mannheim, Germany). A relative path is the address relative to a certain location (e.g, start from Mannheim main station, turn left, and you’ll find Mannheim castle after 1 km).</p>
+<p>So, setting a working directory and setting relative paths <em>may</em> look like a good solution - but it isn’t in terms of reproducibility. First of all, setting the working directory isn’t permanent. You’d need to run it every time (e.g., include it at the beginning of your scripts). But that’s just a minor inconvenience. More troubling is what happens if you share your code with a colleague, or even try to use it yourself on a different computer. An absolute path like <code>"C:/Users/juliane.nagel/Documents/code/r_workshop/"</code> is unique to a specific computer. Note my name in the path - I’m fairly certain this location does not exist on your computer. That means that whenever the code is used on another computer, you will need to change the working directory manually. (Plus, you might accidentally reveal the embarrassing path structure you have on your computer - think <code>"C:/Users/cutiepie123/Documents/code/i_hate_my_thesis/"</code>.) <code>R</code> projects take this hassle away.</p>
+<p>If you create an <code>R</code> project, an <code>.Rproj</code> file will be created in the folder you specified. Within a project, the working directory will always be the location where the <code>.Rproj</code> is, so there is no need to set the working directory every time. It will be handled automatically when opening a project. Furthermore, if the location of the project folder changes, the working directory will “move along” with it: Suppose I have set up a project in <code>"C:/Users/juliane.nagel/Documents/code/r_workshop/"</code>. If I now move the folder <code>"r_workshop"</code> to, say, <code>"C:/Users/juliane.nagel/Documents/code/subfolder/another_subfolder/r_workshop/"</code>, I can simply open the project there and continue working on my code, without changing anything. Likewise, I can give the entire folder <code>"r_workshop"</code> to a colleague, they can put it anywhere they want on their computer, simply open the <code>R</code> project and work on the code without having to change anything.</p>
+</section>
+<section id="a-clean-slate" class="level3">
+<h3 class="anchored" data-anchor-id="a-clean-slate">A clean slate</h3>
+<p>Now for Jenny’s second case, the <code>rm(list = ls())</code>. This line of code might look a bit obscure, but it’s used to simply clear your entire environment. The same thing will happen if you click the little broom icon in your Environment Pane - all variables that are currently in there will be deleted. You will probably have noticed that by default, RStudio asks you whether you want to save your workspace (i.e., the content of your Environment) whenever you close it. Which somehow suggests that that’s a good idea - which it is usually not (at least not in its entirety!). The issue with saving (and then loading) your workspace every time is: you might not be able to rely on your script anymore, and might not notice. Imagine the following (stupid) example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice how we did not define a variable <code>b</code>. If I run this code as it is, it will throw an error and tell me that <code>b</code> is missing. However, imagine I had saved my previous workspace, which happened to contain a variable <code>b</code> with the value <code>3</code>. In this case, the code from above will happily return <code>15</code>, even though <code>b</code> was not created in the script. If something like this gets overlooked, your results might be wrong, or you may not be able to run your script again if your workspace gets deleted/overwritten at some point. And also - you guessed it - other will not be able to reproduce your results (unless you give them your workspace along with your script).</p>
+<p>What Jenny refers to here with <code>rm(list = ls())</code> at the very beginning of a script is: The person who wrote this script probably regularly saves their workspace, but to prevent it from interfering with the script they want to run, they start with a clean slate by running <code>rm(list = ls())</code> at the beginning. If you do this anyways, saving the workspace in the first place didn’t really make sense.</p>
+<p>Of course, no one is against saving workspaces <em>per se</em>! Especially if you have long calculations or want to work with the results of previous scripts, you might want to save these results and work on them later. It would be silly to re-run calculations that take hours or even days from scratch every time. However, instead of simply saving the entire workspace at the end of each session (which, by the way, gets saved to the same file every time, i.e., is overwritten every time), you can be a bit more mindful about which things you want to keep - and which not. For example, you could save the variables <code>a</code> and <code>b</code> in a file called <code>previous_results.RData</code> like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(a, b, <span class="at">file =</span> <span class="st">"previous_results.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you want to try this out, create the variables <code>a</code> and <code>b</code>, and run the line of code above. Then, clear your workspace. In your next script, you can then load in the variables you saved like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"previous_results.RData"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b <span class="co"># can now be used!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>PS: If you want to disable the annoying behaviour of RStudio where it asks you whether you want to save your workspace every time you close it - go to <strong>Tools</strong> <span class="math inline">\(\to\)</span> <strong>Global options</strong>. Then, for “Save workspace to .RData on exit”, select “Never”.</p>
+<p>Of course, there are exceptions to every rule and there might be very good arguments for doing things differently in some scenarios. However, it is important to understand what the pitfalls and consequences of different approaches are, and how to navigate them.</p>
+</section>
+</section>
+<section id="managing-different-versions" class="level2">
+<h2 class="anchored" data-anchor-id="managing-different-versions">Managing different versions</h2>
+<p>In the installation guide, we briefly talked about <code>R</code> and its packages changing constantly. Sometimes, new versions of software can lead to different results, which we generally do not want for our old analyses (which are e.g.&nbsp;tied to publications). There are ways how to manage several <code>R</code> versions or older <code>R</code> package versions, but those will not be covered here, because that would be enough material for at least two workshops. If you want to read about the topic, a rather lightweight alternative for managing different package versions is <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a>. Another pretty common tool to manage software and package versions is Docker - but it takes time to master it. <a href="https://www.r-bloggers.com/2023/06/a-gentle-introduction-to-docker/">This tutorial might be a good start</a>.</p>
 </section>
 <section id="fun-trivia" class="level2">
 <h2 class="anchored" data-anchor-id="fun-trivia">Fun trivia</h2>
