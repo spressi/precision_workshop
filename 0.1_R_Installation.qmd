@@ -129,4 +129,36 @@ By the way: Anyone can write an `R` package. That means that you should not inst
 
 # Updating R
 
-TO DO.
+If you already have `R` installed, and want to update it, here are some recommendations how to achieve this.
+
+## Quick Detour
+
+A general word of caution: As other programming languages, `R` develops constantly - new functions are added, old ones change etc. This means that over time, more powerful versions of `R` are available, bugs get fixed - but it also means that your old code won't work anymore if it relies on the behaviour of an old `R` version. There are a few links in the "Further Reading" section if you want to get into the topic, but we will not discuss it here in detail. Most updates don't break your code, and it's even more rare that they change your results, especially when it's "minor" updates, e.g., from `R` 4.2.1 to 4.2.2. That being said, if you are still running some version of `R` 3, updating might affect your current code. If you are unsure about updating before the workshop, e.g. because you're in the middle of an important analysis, feel free to talk to <juliane.nagel@zi-mannheim.de> (if you do, please mention your current `R` version).
+
+## The dirty way
+
+In principle, you could simply follow the installation guide above and end up with a clean new version of `R`. Both the old and the new version will be installed on your computer, but RStudio should automatically detect the latest version (or at least ask you which version it should use). *With this approach, you will need to re-install all packages you need afterwards*, or copy them over manually (error-prone!). If you're fine with re-installing a few packages (that's what I always to after updating anyways), you can simply follow the installation guide above, or ...
+
+## The clean way
+
+... you can use the package `installr`, which, as the name suggests, helps you to install `R`-related things and is often recommended for a clean update. (Note that with this approach, just as with the "dirty way", the old `R` version will stay installed on your computer.) If you don't have `installr` installed yet, do so by running `install.packages("installr")` in the console.
+
+*For the following steps, don't use RStudio, but the R GUI.* This works best with a "pure" version of `R`, without any magic that RStudio might want to add. For good measure, close RStudio if you haven't already, and search for `R` in your apps. If you have several installations (which you might have if you updated before, just pick the most recent one). Take a deep breath, admire the `R` GUI and appreciate that modern editors exist to take away this pain from you.
+
+![R GUI](images/r_gui.png){width=80% fig-align="center"}
+
+Run `installr::updateR()`. A message like this should pop up - klick OK.
+
+![installr dialogue](images/installr.png){width=60% fig-align="center"}
+
+Next, `installr` will ask you whether you would like to see the NEWS regarding the new version of `R`. This is a good idea to get an overview about what changed, and whether any functions that you are using might be affected by the changes. Or whether there's a cool new feature. You can also always read about the news later, e.g. for `R` 4.4.1, the link is >https://cran.rstudio.com/bin/windows/base/NEWS.R-4.4.1.html>. If you click "yes" the news page will open in a new tab in your browser - the installation will not be cancelled.
+
+`installr` will then ask you whether you want to install the new version - click yes. You might need to choose a mirror from where to download `R` (see installation guide above). When installing `R`, accept the defaults. After clicking "finish", `installr` has a few more tricks up it's sleeve:
+
+![installr dialogue](images/installr_copy.png){width=60% fig-align="center"}
+
+If you click "Yes", all your packages you had installed from your previous `R` version will be copied over to the new version. In the next step, `installr` will ask you whether you want to keep the packages from your old version (otherwise, they will be deleted). Lastly, `installr` even offers to update the packages you copied to the new version of `R`. For all of these steps, there are no right or wrong answers. You can choose whatever fits your needs. (E.g., I like to start with a clean slate.) Note that the whole process of copying and updating might take a little bit of time, and you will not see a progress bar or anything else that indicates what is happening.
+
+Finally, `installr` will ask you whether you want to start a GUI of the new `R` installation. You don't need to do that, but you could to quickly confirm that everything worked as intended (e.g., your old packages are there).
+
+When you start RStudio the next time, it might either automatically detect your latest `R` version, or it should ask you which one it should use.
