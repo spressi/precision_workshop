@@ -8,9 +8,9 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.555">
 
-  <title>Precision Workshop – 1.2 Data Wrangling</title>
+  <title>Precision Workshop - 1.2 Data Wrangling</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -69,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.cf { color: #003b4f; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -83,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.kw { color: #003b4f; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -417,19 +417,6 @@ div.cell-output-stdout {
 }
 </style>
 </div>
-<aside class="notes">
-<p>start recording!</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <p>“Preparation” of the data for analysis: cleaning up variables (outliers, erroneous values, recoding…), changing the structure/format of data frames, merging/joining data sets, calculating new variables, reducing/summarizing variables…</p>
 <div class="fragment">
 <p>You will spend a lot more time wrangling the data than analyzing it!</p>
@@ -513,14 +500,6 @@ div.cell-output-stdout {
 2 8 11
 3 9 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># it is usually better to access columns by their column name:</span></span>
-<span id="cb13-2"><a></a>testdata[, <span class="fu">c</span>(<span class="st">"d"</span>, <span class="st">"e"</span>)] <span class="co">#columns with names "d" and "e", all rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  d  e
-1 7 10
-2 8 11
-3 9 12</code></pre>
-</div>
 </div>
 <aside class="notes">
 <p>subsetting: rows, columns –&gt; leave empty!<br>
@@ -542,8 +521,16 @@ Use either name or index of column!</p>
 <h2>Accessing Variables/Columns 3</h2>
 <p>When wrangling your data in R, you often want to access/use different columns, e.g.&nbsp;to calculate new ones. There are a number of ways you can do that:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># it is usually better to access columns by their column name:</span></span>
+<span id="cb13-2"><a></a>testdata[<span class="fu">c</span>(<span class="st">"d"</span>, <span class="st">"e"</span>)] <span class="co">#columns with names "d" and "e", all rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  d  e
+1 7 10
+2 8 11
+3 9 12</code></pre>
+</div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># access a column only:</span></span>
-<span id="cb15-2"><a></a>testdata[, <span class="st">"a"</span>] <span class="co">#if possible, R will give you just a vector instead of a data.frame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a></a>testdata[[<span class="st">"a"</span>]] <span class="co">#double square brackets to get a vector (not a data.frame)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
@@ -551,27 +538,36 @@ Use either name or index of column!</p>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># tidy versions (see next slides)</span></span>
-<span id="cb19-2"><a></a><span class="co">#library(tidyverse) #load tidyverse (if not already done)</span></span>
-<span id="cb19-3"><a></a><span class="fu">pull</span>(testdata, a) <span class="co">#same as testdata$a but can be used better in pipes (see next slide)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>better avoid the comma when accessing by column name:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b
+1 1 a
+2 2 b
+3 3 c</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">select</span>(testdata, a) <span class="co">#get column(s) as a data.frame (we usually want this only if we select several columns)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b
+1 1 a
+2 2 b
+3 3 c</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  a
 1 1
 2 2
 3 3</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
 </div>
-<aside class="notes">
-<p>data.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)</p>
-<p>c() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.</p>
-<p>subsetting: rows, columns –&gt; leave empty!<br>
-Select range!<br>
-Use either name or index of column!</p>
-<p>select –&gt; tidyverse</p>
+</div>
+<p>=&gt; consistent data format without leading comma</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -583,6 +579,25 @@ Use either name or index of column!</p>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="accessing-variablescolumns-4" class="slide level2">
+<h2>Accessing Variables/Columns 4</h2>
+<p>When wrangling your data in R, you often want to access/use different columns, e.g.&nbsp;to calculate new ones. There are a number of ways you can do that:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># tidy versions (see next slides)</span></span>
+<span id="cb24-2"><a></a><span class="co">#library(tidyverse) #load tidyverse (if not already done)</span></span>
+<span id="cb24-3"><a></a><span class="fu">pull</span>(testdata, a) <span class="co">#same as testdata$a but can be used better in pipes (see next slide)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">select</span>(testdata, a, b) <span class="co">#get column(s) as a data.frame; no c() needed!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b
+1 1 a
+2 2 b
+3 3 c</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="tidyverse" class="title-slide slide level1 center">
@@ -607,17 +622,7 @@ Use either name or index of column!</p>
 <p>You can insert a pipe <code>%&gt;%</code> (including spaces) by pressing <code>Ctrl + Shift + M</code></p>
 
 <aside class="notes">
-<p>Be aware, though, that coding in the tidyverse style is very different than in Base R!</p>
-<p>Base R is more similar to “traditional” programming and other programming languages.<br>
-For example, you could wrap functions, which would then be carried out from the most nested to the outer function:<br>
-<code>output_data &lt;- function3(function2(function1(data)))</code></p>
-<p><code>function1()</code> will be carried out first, followed by <code>function2()</code>, then <code>function3()</code> .</p>
-<p>. . .</p>
-<p>In the tidyverse, the same would look like this:</p>
-<p><code>output_data &lt;- data %&gt;% function1() %&gt;% function2() %&gt;% function(3)</code></p>
-<p><code>%&gt;%</code> is called “the pipe” and will “hand over” whatever has been done to the next part. In this example, the <code>data</code> is handed over to <code>function1()</code>, which is then carried out, the result of which is handed over to <code>function2()</code> etc.</p>
-<p>Tidyverse style programming is thus a bit easier to read!</p>
-<p>There’s also the new pipe Base R |&gt;, which is similar to %&gt;%.</p>
+<p>The shortcut for the pipe (and other useful things like the assignment operator) can be adjusted in <code>Tools</code> -&gt; <code>Modify Keyboard Shortcuts...</code></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -705,11 +710,11 @@ For example, you could wrap functions, which would then be carried out from the 
 </ol>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb23-2"><a></a><span class="co"># install.packages("babynames")</span></span>
-<span id="cb23-3"><a></a></span>
-<span id="cb23-4"><a></a><span class="fu">library</span>(babynames)</span>
-<span id="cb23-5"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb28-2"><a></a><span class="co"># install.packages("babynames")</span></span>
+<span id="cb28-3"><a></a></span>
+<span id="cb28-4"><a></a><span class="fu">library</span>(babynames)</span>
+<span id="cb28-5"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>load tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!</p>
@@ -767,16 +772,13 @@ For example, you could wrap functions, which would then be carried out from the 
 Remember that you can run <code>?select</code> in the console if you need help about, e.g., input/arguments to the function.</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># my favorite:</span></span>
-<span id="cb24-2"><a></a>babynames_reduced <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a></a>  <span class="fu">select</span>(year, sex, name, prop)</span>
-<span id="cb24-4"><a></a></span>
-<span id="cb24-5"><a></a><span class="co"># or without the pipe operator:</span></span>
-<span id="cb24-6"><a></a>babynames_reduced <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> babynames, year, sex, name, prop)</span>
-<span id="cb24-7"><a></a></span>
-<span id="cb24-8"><a></a><span class="co"># or alternatively:</span></span>
-<span id="cb24-9"><a></a>babynames_reduced <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
-<span id="cb24-10"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="co"># remove columns by using -</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># my favorite:</span></span>
+<span id="cb29-2"><a></a>babynames_reduced <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a></a>  <span class="fu">select</span>(year, sex, name, prop)</span>
+<span id="cb29-4"><a></a></span>
+<span id="cb29-5"><a></a><span class="co"># or alternatively:</span></span>
+<span id="cb29-6"><a></a>babynames_reduced <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb29-7"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="co"># remove columns by using -</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Removing columns vs.&nbsp;selecting columns: Results may change if the data get updated!</p>
 </div>
@@ -793,11 +795,11 @@ Remember that you can run <code>?select</code> in the console if you need help a
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>sort_asc <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(name)</span>
-<span id="cb25-2"><a></a></span>
-<span id="cb25-3"><a></a>sort_desc <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(year)) </span>
-<span id="cb25-4"><a></a></span>
-<span id="cb25-5"><a></a>babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(year), name) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>sort_asc <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(name)</span>
+<span id="cb30-2"><a></a></span>
+<span id="cb30-3"><a></a>sort_desc <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(year)) </span>
+<span id="cb30-4"><a></a></span>
+<span id="cb30-5"><a></a>babynames <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(year), name) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,924,665 × 5
     year sex   name          n       prop
@@ -837,7 +839,7 @@ Remember that you can run <code>?select</code> in the console if you need help a
 <div class="fragment">
 <p>Look at the following code and think about what it might do.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -936,41 +938,86 @@ This is why R users like to make the distinction even bigger by using <code>&lt;
 <div class="fragment">
 <p>First task:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>marys <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"Mary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>marys <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"Mary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
-<p>The second task might be difficult because you have two expressions, <code>name != "Mary"</code> and <code>year &gt; 2000</code>. You can simply add several expressions separated by commas in filter (commas are treated like a “logical and” <code>&amp;</code>):</p>
+<p>Second task:</p>
+<p>This might be difficult because you have two expressions, <code>name != "Mary"</code> and <code>year &gt; 2000</code>. You can simply add several expressions separated by commas in filter (commas are treated like a “logical and” <code>&amp;</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>no_marys_young <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">!=</span> <span class="st">"Mary"</span>, year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>no_marys_young <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">!=</span> <span class="st">"Mary"</span>, year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="fragment">
+</section>
+<section id="filter-some-more-2" class="slide level2 scrollable">
+<h2>Filter some more 2</h2>
+<ol type="1">
+<li>Keep only those observations with the name “Mary”.</li>
+<li>Discard all observations with name “Mary” and keep only those from year &gt; 2000.</li>
+<li>Keep only those with names of former Queens (Mary, Elizabeth, Victoria).</li>
+<li>Discard the ones with the Queen names!</li>
+</ol>
 <p>Third task:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Victoria"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"Mary"</span> <span class="sc">|</span> <span class="co">#the vertical line is a logical OR</span></span>
+<span id="cb36-2"><a></a>                               name <span class="sc">==</span> <span class="st">"Elizabeth"</span> <span class="sc">|</span> </span>
+<span id="cb36-3"><a></a>                               name <span class="sc">==</span> <span class="st">"Victoria"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<p>The fourth task is tricky! You could use three filters in a row with <code>name != "Mary", name != "Elizabeth", name != "Victoria"</code>. Or you could use <code>%in%</code>, but then you can’t use the <code>!</code> in front of the <code>%in%</code>. The trick is to negate the whole expression with <code>== FALSE</code>:</p>
+<p>A better shorthand exists with the operator <code>%in%</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>no_queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Victoria"</span>) <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Victoria"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</section>
+<section id="filter-some-more-3" class="slide level2 scrollable">
+<h2>Filter some more 3</h2>
+<ol type="1">
+<li>Keep only those observations with the name “Mary”.</li>
+<li>Discard all observations with name “Mary” and keep only those from year &gt; 2000.</li>
+<li>Keep only those with names of former Queens (Mary, Elizabeth, Victoria).</li>
+<li>Discard the ones with the Queen names!</li>
+</ol>
+<p>Fourth task:</p>
+<p>This is very tricky! You could use three filters in a row with:<br>
+<code>name != "Mary", name != "Elizabeth", name != "Victoria"</code>.</p>
+<p>There is no function “not in” but you can negate the result in two ways:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>no_queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span>name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Victoria"</span>)) <span class="co">#! is a negation ("not")</span></span>
+<span id="cb38-3"><a></a></span>
+<span id="cb38-4"><a></a>no_queens <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mary"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Victoria"</span>) <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Careful with precedence! <code>%in%</code> is evaluated before <code>!</code>:<br>
+<code>!(name %in% c("Mary", "Elizabeth", "Victoria"))</code></p>
+<p>=&gt; I prefer to add <code>== FALSE</code> in the end</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="your-first-plot" class="slide level2">
 <h2>Your First Plot</h2>
 <p>In your script, insert and run the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a></a>  <span class="fu">filter</span>(sex<span class="sc">==</span><span class="st">"F"</span>, <span class="co">#only female babies</span></span>
-<span id="cb33-3"><a></a>         name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>)) <span class="co">#reduce to these 4 names</span></span>
-<span id="cb33-4"><a></a></span>
-<span id="cb33-5"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> prop, <span class="at">colour =</span> name)) <span class="sc">+</span></span>
-<span id="cb33-6"><a></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="co">#plot data as a line (with increased size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a></a>  <span class="fu">filter</span>(sex<span class="sc">==</span><span class="st">"F"</span>, <span class="co">#only female babies</span></span>
+<span id="cb39-3"><a></a>         name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>)) <span class="co">#reduce to these 4 names</span></span>
+<span id="cb39-4"><a></a></span>
+<span id="cb39-5"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> prop, <span class="at">colour =</span> name)) <span class="sc">+</span></span>
+<span id="cb39-6"><a></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="co">#plot data as a line (with increased size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="1.2_Data_Wrangling_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><div class="fragment">
+<img data-src="1.2_Data_Wrangling_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><div class="fragment">
 <p>Alter the code to check for male babies with the same names (change <code>sex=="F"</code> to <code>sex=="M"</code>).<br>
 <em>Optional</em>: Plot the absolute number <code>n</code> instead of the relative proportion <code>prop</code>.</p>
 </div>
@@ -983,7 +1030,7 @@ This is why R users like to make the distinction even bigger by using <code>&lt;
 </ol>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>baby_where <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="st">"USA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>baby_where <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">country =</span> <span class="st">"USA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -994,24 +1041,24 @@ This is why R users like to make the distinction even bigger by using <code>&lt;
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co">#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again</span></span>
-<span id="cb35-2"><a></a>baby_decades <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="co">#round(year, -1) works but not floor(year, -1) :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co">#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again</span></span>
+<span id="cb41-2"><a></a>baby_decades <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="co">#round(year, -1) works but not floor(year, -1) :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
     year decade
    &lt;dbl&gt;  &lt;dbl&gt;
- 1  1888   1880
- 2  1897   1890
- 3  1898   1890
- 4  1922   1920
- 5  1925   1920
- 6  1928   1920
- 7  1929   1920
- 8  1947   1940
- 9  1958   1950
-10  2001   2000</code></pre>
+ 1  1892   1890
+ 2  1921   1920
+ 3  1924   1920
+ 4  1942   1940
+ 5  1943   1940
+ 6  1945   1940
+ 7  1948   1940
+ 8  1968   1960
+ 9  2011   2010
+10  2013   2010</code></pre>
 </div>
 </div>
 </div>
@@ -1022,14 +1069,14 @@ This is why R users like to make the distinction even bigger by using <code>&lt;
 <div class="fragment">
 <p>You can do so using the function <code>summarize()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co"># run the filter function just like above again:</span></span>
-<span id="cb37-2"><a></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
-<span id="cb37-3"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>), </span>
-<span id="cb37-4"><a></a>         sex <span class="sc">==</span> <span class="st">"F"</span>)</span>
-<span id="cb37-5"><a></a></span>
-<span id="cb37-6"><a></a><span class="co"># summarize the data, calculating the number of oberservations:</span></span>
-<span id="cb37-7"><a></a>dat_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))</span>
-<span id="cb37-8"><a></a>dat_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="co"># run the filter function just like above again:</span></span>
+<span id="cb43-2"><a></a>dat <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>), </span>
+<span id="cb43-4"><a></a>         sex <span class="sc">==</span> <span class="st">"F"</span>)</span>
+<span id="cb43-5"><a></a></span>
+<span id="cb43-6"><a></a><span class="co"># summarize the data, calculating the number of oberservations:</span></span>
+<span id="cb43-7"><a></a>dat_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n))</span>
+<span id="cb43-8"><a></a>dat_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
     total
@@ -1045,8 +1092,8 @@ There’s just one row in the resulting data frame, because <code>summarize()</c
 <h2>Grouping and Summarizing</h2>
 <p>Often, we want to summarize data for specific subgroups. For this aim, <code>summarize()</code> has the <code>.by</code> parameter:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.by=</span>name) </span>
-<span id="cb39-2"><a></a>group_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.by=</span>name) </span>
+<span id="cb45-2"><a></a>group_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   name       total
@@ -1057,11 +1104,14 @@ There’s just one row in the resulting data frame, because <code>summarize()</c
 4 Alexandra 231364</code></pre>
 </div>
 </div>
-<div class="fragment">
+</section>
+<section id="grouping-and-summarizing-2" class="slide level2">
+<h2>Grouping and Summarizing 2</h2>
 <p>You can also subgroup by a combination of variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>babynames <span class="sc">%&gt;%</span> <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>)) <span class="sc">%&gt;%</span> <span class="co">#we start with the 4 names regardless of sex</span></span>
-<span id="cb41-2"><a></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.by=</span><span class="fu">c</span>(name, sex)) <span class="co">#and then summarize by name, separated for sex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>babynames <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>)) <span class="sc">%&gt;%</span> <span class="co">#we start with the 4 names regardless of sex</span></span>
+<span id="cb47-3"><a></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.by=</span><span class="fu">c</span>(name, sex)) <span class="co">#and then summarize by name, separated for sex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
   name      sex    total
@@ -1076,38 +1126,40 @@ There’s just one row in the resulting data frame, because <code>summarize()</c
 8 Alexandra M        859</code></pre>
 </div>
 </div>
-</div>
 </section>
-<section id="grouping-and-summarizing-2" class="slide level2">
-<h2>Grouping and Summarizing 2</h2>
+<section id="grouping-and-summarizing-3" class="slide level2">
+<h2>Grouping and Summarizing 3</h2>
 <p>In earlier versions, we had to use <code>summarize()</code> together with <code>group_by()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n)) </span>
-<span id="cb43-2"><a></a>group_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  name       total
-  &lt;chr&gt;      &lt;int&gt;
-1 Alexandra 231364
-2 Beverly   376914
-3 Emily     841491
-4 Kathleen  711605</code></pre>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We avoid using <code>group_by()</code> because it can have unintended side effects.<br>
+<p>We avoid using <code>group_by()</code> like this because it can have unintended side effects.<br>
 It is just part of this class because you will likely encounter it in somebody else’s (old) code.<br>
 <br>
 If you do have to use it, make sure to <code>ungroup()</code> after <code>summarize()</code> (or <code>mutate()</code>) to avoid unintended effects:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>()</span>
+<span id="cb50-2"><a></a>group_sum <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<aside class="notes">
+<p>Unintended side effects: grouping stays active and affects future calls to <code>summarize</code> or <code>mutate</code>, which may be hundreds of lines of code away!</p>
+<p>=&gt; Fatal when, e.g., calculating z-scores after having summarized the trial-level data into subject-level averages.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <!-- ## Ungrouping
 
 Remember that the grouping done with `group_by()` is saved with the data frame (even though it might not immediately be obvious).
 
 It is good practice to always `ungroup()` your data once you finished the operations you needed the grouping for!
-
-
 
 
 ::: {.cell}
@@ -1139,18 +1191,16 @@ babynames %>%
 :::
 :::
 
-
-
 -->
 </section>
-<section id="grouping-and-summarizing-3" class="slide level2">
-<h2>Grouping and Summarizing 3</h2>
+<section id="grouping-and-summarizing-4" class="slide level2">
+<h2>Grouping and Summarizing 4</h2>
 <p>Use the <code>baby_decades</code> data frame to calculate the mean and median number of observations, grouped by sex &amp; decade.</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>baby_decades <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_year =</span> <span class="fu">mean</span>(n),</span>
-<span id="cb46-2"><a></a>                           <span class="at">median_year =</span> <span class="fu">median</span>(n),</span>
-<span id="cb46-3"><a></a>                           <span class="at">.by=</span><span class="fu">c</span>(sex, decade))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>baby_decades <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_year =</span> <span class="fu">mean</span>(n),</span>
+<span id="cb51-2"><a></a>                           <span class="at">median_year =</span> <span class="fu">median</span>(n),</span>
+<span id="cb51-3"><a></a>                           <span class="at">.by=</span><span class="fu">c</span>(sex, decade))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 28 × 4
    sex   decade mean_year median_year
@@ -1174,7 +1224,7 @@ babynames %>%
 <h2>Counting Data</h2>
 <p>There are several ways to get the number of rows per group. You can use the function <code>n()</code> within a call to <code>summarize()</code> (or <code>mutate()</code>). A shortcut is to use <code>count()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by=</span>name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.by=</span>name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   name          n
@@ -1184,7 +1234,7 @@ babynames %>%
 3 Beverly     122
 4 Alexandra   117</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">count</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>dat <span class="sc">%&gt;%</span> <span class="fu">count</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   name          n
@@ -1201,11 +1251,11 @@ babynames %>%
 <h2>Bigger Pipes!</h2>
 <p>So far we have often saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the environment with intermediate data.frames or tibbles!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>pipe_summary <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span></span>
-<span id="cb52-2"><a></a>  <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb52-3"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>), </span>
-<span id="cb52-4"><a></a>         sex<span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb52-5"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_decade =</span> <span class="fu">mean</span>(n), <span class="at">.by=</span><span class="fu">c</span>(name, decade))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>pipe_summary <span class="ot">&lt;-</span> babynames <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a></a>  <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-3"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>), </span>
+<span id="cb57-4"><a></a>         sex<span class="sc">==</span><span class="st">"F"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-5"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_decade =</span> <span class="fu">mean</span>(n), <span class="at">.by=</span><span class="fu">c</span>(name, decade))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It’s not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes.<br>
 As a rule of thumb: If an intermediate step is only used <strong>once</strong>, you should probably delete it (unless it makes the code easier to comprehend).</p>
@@ -1302,7 +1352,8 @@ there are (usually) several rows per participant</p>
 </tr>
 </tbody>
 </table>
-</div></div>
+</div>
+</div>
 </div>
 <div class="fragment">
 <p>Wide format implements a sparser representation of the data but less tidy!<br>
@@ -1326,8 +1377,7 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 <section id="tidy-data-2" class="slide level2">
 <h2>Tidy Data 2</h2>
 <p>What do you think, which of the following data sets is tidy?</p>
-<div class="columns">
-<div class="column" style="width:40%;">
+<p>1:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
@@ -1347,7 +1397,7 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 12 China        2000 population 1280428583</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:60%;">
+<p>2:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
@@ -1361,9 +1411,7 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 6 China        2000 213766 1280428583</code></pre>
 </div>
 </div>
-</div></div>
-<div class="columns">
-<div class="column" style="width:35%;">
+<p>3:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
@@ -1377,7 +1425,7 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 6 China        2000 213766/1280428583</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:65%;">
+<p>4:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
@@ -1388,9 +1436,108 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 3 China             212258       213766        1272915272        1280428583</code></pre>
 </div>
 </div>
-</div></div>
+<!-- This used to look good with the smaller output size
+:::columns
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 12 × 4
+   country      year type            count
+   <chr>       <dbl> <chr>           <dbl>
+ 1 Afghanistan  1999 cases             745
+ 2 Afghanistan  1999 population   19987071
+ 3 Afghanistan  2000 cases            2666
+ 4 Afghanistan  2000 population   20595360
+ 5 Brazil       1999 cases           37737
+ 6 Brazil       1999 population  172006362
+ 7 Brazil       2000 cases           80488
+ 8 Brazil       2000 population  174504898
+ 9 China        1999 cases          212258
+10 China        1999 population 1272915272
+11 China        2000 cases          213766
+12 China        2000 population 1280428583
+```
+
+
+:::
+:::
+
+:::
+::: {.column width="60%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 4
+  country      year  cases population
+  <chr>       <dbl>  <dbl>      <dbl>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+```
+
+
+:::
+:::
+
+:::
+:::
+
+:::columns
+::: {.column width="35%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 3
+  country      year rate             
+  <chr>       <dbl> <chr>            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583
+```
+
+
+:::
+:::
+
+:::
+::: {.column width="65%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 3 × 5
+  country     `1999_cases` `2000_cases` `1999_population` `2000_population`
+  <chr>              <dbl>        <dbl>             <dbl>             <dbl>
+1 Afghanistan          745         2666          19987071          20595360
+2 Brazil             37737        80488         172006362         174504898
+3 China             212258       213766        1272915272        1280428583
+```
+
+
+:::
+:::
+
+:::
+:::
+-->
 <aside class="notes">
-<p>Table1 is tidy! (upper)</p>
+<p>The second table is the tidyest!</p>
+<p>Table 1 has cases and population mixed together in <code>count</code> variable.<br>
+Table 3 mixes them in an awkward character row <code>rate</code>. Table 4 is standard wide format.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1415,36 +1562,22 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 </section>
 <section id="set-up" class="slide level2 scrollable">
 <h2>Set Up</h2>
-<p>For the following activities, we will need the following files:</p>
-<ul>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/responses.csv">responses.csv</a> containing the AQ survey responses to each of the 10 questions for the 66 participants</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/qformats.csv">qformats.csv</a> containing information on how a question should be coded - i.e.&nbsp;forward or reverse coding</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/scoring.csv">scoring.csv</a> containing information on how many points a specific response should get; depending on whether it is forward or reverse coded</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/pinfo.csv">pinfo.csv</a> containing participant information such as <code>Age</code>, <code>Sex</code> and importantly <code>ID</code> number.</p></li>
-</ul>
 <ol type="1">
 <li><p>Create a new script, e.g.&nbsp;as “<code>DataWrangling3.R</code>” (remember we skipped #2 in the book).</p></li>
-<li><p>Download the data into your project folder.</p></li>
-<li><p><em>Optional</em>: Clear your environment (the brush in the top right pane) and/or restart the R session (Session -&gt; Restart R).</p></li>
-</ol>
-</section>
-<section id="load-the-data" class="slide level2 scrollable">
-<h2>Load the Data</h2>
-<p>For the following activities, we will need the following files:</p>
-<ul>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/responses.csv">responses.csv</a> containing the AQ survey responses to each of the 10 questions for the 66 participants</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/qformats.csv">qformats.csv</a> containing information on how a question should be coded - i.e.&nbsp;forward or reverse coding</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/scoring.csv">scoring.csv</a> containing information on how many points a specific response should get; depending on whether it is forward or reverse coded</p></li>
-<li><p><a href="https://psyteachr.github.io/quant-fun-v2/pinfo.csv">pinfo.csv</a> containing participant information such as <code>Age</code>, <code>Sex</code> and importantly <code>ID</code> number.</p></li>
-</ul>
-<ol start="4" type="1">
-<li>Load the four .csv files into your environment, e.g.:</li>
+<li><p>Download the data into your project folder:<br>
+<a href="https://psyteachr.github.io/quant-fun-v2/responses.csv">responses.csv</a><br>
+<a href="https://psyteachr.github.io/quant-fun-v2/qformats.csv">qformats.csv</a><br>
+<a href="https://psyteachr.github.io/quant-fun-v2/scoring.csv">scoring.csv</a><br>
+<a href="https://psyteachr.github.io/quant-fun-v2/pinfo.csv">pinfo.csv</a></p></li>
+<li><p>Clear your environment (the brush in the top right pane) and/or restart the R session (Session -&gt; Restart R).</p></li>
+<li><p>Load the four .csv files into your environment, e.g.:</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>responses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"responses.csv"</span>) </span>
-<span id="cb57-2"><a></a>qformats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qformats.csv"</span>)</span>
-<span id="cb57-3"><a></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"scoring.csv"</span>)</span>
-<span id="cb57-4"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"pinfo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb62-2"><a></a>responses <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"responses.csv"</span>) </span>
+<span id="cb62-3"><a></a>qformats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qformats.csv"</span>)</span>
+<span id="cb62-4"><a></a>scoring <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"scoring.csv"</span>)</span>
+<span id="cb62-5"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"pinfo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="look-at-the-data-1" class="slide level2">
@@ -1487,10 +1620,11 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 <p>There are several functions in R to reformat data, but the newest ones are <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
 <p>Run the code and see what changes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>rlong <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> Q1<span class="sc">:</span>Q10, <span class="co">#we can select a range of column names</span></span>
-<span id="cb59-2"><a></a>                                    <span class="co">#cols = starts_with("Q"), #alternative</span></span>
-<span id="cb59-3"><a></a>                                    <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
-<span id="cb59-4"><a></a>                                    <span class="at">values_to =</span> <span class="st">"Response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>rlong <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span> </span>
+<span id="cb64-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> Q1<span class="sc">:</span>Q10, <span class="co">#we can select a range of column names</span></span>
+<span id="cb64-3"><a></a>               <span class="co">#cols = starts_with("Q"), #alternative</span></span>
+<span id="cb64-4"><a></a>               <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
+<span id="cb64-5"><a></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1505,16 +1639,16 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 <div class="fragment">
 <p>Activity: Replace the <code>NULL</code> values in the below code with the necessary variable names to join <code>rlong</code> and <code>qformats</code> by <code>Question</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> <span class="cn">NULL</span>, </span>
-<span id="cb60-2"><a></a>                     <span class="at">y =</span> <span class="cn">NULL</span>, </span>
-<span id="cb60-3"><a></a>                     <span class="at">by =</span> <span class="st">"NULL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb65-2"><a></a>                     <span class="at">y =</span> <span class="cn">NULL</span>, </span>
+<span id="cb65-3"><a></a>                     <span class="at">by =</span> <span class="st">"NULL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> rlong, </span>
-<span id="cb61-2"><a></a>                     <span class="at">y =</span> qformats, </span>
-<span id="cb61-3"><a></a>                     <span class="at">by =</span> <span class="st">"Question"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a>rlong2 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> rlong, </span>
+<span id="cb66-2"><a></a>                     <span class="at">y =</span> qformats, </span>
+<span id="cb66-3"><a></a>                     <span class="at">by =</span> <span class="st">"Question"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>Describe what happened?</p>
@@ -1537,32 +1671,32 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 <p>You can only join two data frames/tibbles at once.<br>
 Now add the scoring data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a>rscores <span class="ot">&lt;-</span> rlong2 <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(scoring, </span>
-<span id="cb62-2"><a></a>                                 <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a>rscores <span class="ot">&lt;-</span> rlong2 <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(scoring, </span>
+<span id="cb67-2"><a></a>                                 <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="calculate-the-questionnaire-scores" class="slide level2">
 <h2>Calculate the Questionnaire Scores</h2>
 <p>How do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the <code>NULL</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(<span class="cn">NULL</span>), <span class="at">.by=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(<span class="cn">NULL</span>), <span class="at">.by=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by=</span>Id) <span class="co"># sum column Score to obtain AQ scores.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a>aq_scores <span class="ot">&lt;-</span> rscores <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by=</span>Id) <span class="co"># sum column Score to obtain AQ scores.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="pipe-it-all-together" class="slide level2">
 <h2>Pipe it all together!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a>aq_scores2 <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span> </span>
-<span id="cb65-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
-<span id="cb65-3"><a></a>               <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
-<span id="cb65-4"><a></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span>  </span>
-<span id="cb65-5"><a></a>  <span class="fu">inner_join</span>(qformats, <span class="st">"Question"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb65-6"><a></a>  <span class="fu">inner_join</span>(scoring, <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb65-7"><a></a>  <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by=</span>Id) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>aq_scores2 <span class="ot">&lt;-</span> responses <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
+<span id="cb70-3"><a></a>               <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
+<span id="cb70-4"><a></a>               <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb70-5"><a></a>  <span class="fu">inner_join</span>(qformats, <span class="st">"Question"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-6"><a></a>  <span class="fu">inner_join</span>(scoring, <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-7"><a></a>  <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by=</span>Id) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -1584,9 +1718,9 @@ Now add the scoring data:</p>
 <section id="solutions" class="slide level2">
 <h2>Solutions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb66-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>)</span>
-<span id="cb66-3"><a></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb71-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>) <span class="co">#I put the data into a separate subfolder "Data"</span></span>
+<span id="cb71-3"><a></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    
  Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  
@@ -1603,8 +1737,8 @@ Now add the scoring data:</p>
                     3rd Qu.:1.0000   3rd Qu.: 9.25  
                     Max.   :1.0000   Max.   :12.00  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="co"># look at the data (can also use summary(), str(), head() etc.)</span></span>
-<span id="cb68-2"><a></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="co"># look at the data (can also use summary(), str(), head() etc.)</span></span>
+<span id="cb73-2"><a></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4,608
 Columns: 8
@@ -1622,21 +1756,21 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 <section id="solutions-2" class="slide level2">
 <h2>Solutions 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>new_pong_data <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb70-2"><a></a>  <span class="fu">select</span>(BallSpeed, HitOrMiss, JudgedSpeed, Participant, </span>
-<span id="cb70-3"><a></a>         TrialNumber) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(HitOrMiss), <span class="fu">desc</span>(JudgedSpeed)) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-5"><a></a>  <span class="fu">filter</span>(JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>,</span>
-<span id="cb70-6"><a></a>         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>),</span>
-<span id="cb70-7"><a></a>         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-8"><a></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-9"><a></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span><span class="dv">1</span>) </span>
-<span id="cb70-10"><a></a>  </span>
-<span id="cb70-11"><a></a>  <span class="co"># summarize (use old data frame because we removed variables)</span></span>
-<span id="cb70-12"><a></a>pong_data_hits <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb70-13"><a></a>  <span class="fu">summarize</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb70-14"><a></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb70-15"><a></a>            <span class="at">.by=</span><span class="fu">c</span>(BackgroundColor, PaddleLength))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>new_pong_data <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a></a>  <span class="fu">select</span>(BallSpeed, HitOrMiss, JudgedSpeed, Participant, </span>
+<span id="cb75-3"><a></a>         TrialNumber) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(HitOrMiss), <span class="fu">desc</span>(JudgedSpeed)) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-5"><a></a>  <span class="fu">filter</span>(JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb75-6"><a></a>         BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>),</span>
+<span id="cb75-7"><a></a>         HitOrMiss <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-8"><a></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-9"><a></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb75-10"><a></a>  </span>
+<span id="cb75-11"><a></a>  <span class="co"># summarize (use old data frame because we removed variables)</span></span>
+<span id="cb75-12"><a></a>pong_data_hits <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb75-13"><a></a>  <span class="fu">summarize</span>(<span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb75-14"><a></a>            <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb75-15"><a></a>            <span class="at">.by=</span><span class="fu">c</span>(BackgroundColor, PaddleLength))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section id="thanks" class="title-slide slide level1 center">
@@ -1647,7 +1781,7 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 <li><p>Learn and apply the six basic dplyr “verbs”</p></li>
 <li><p>Learn how to join data frames</p></li>
 </ul>
-<p>Next week:</p>
+<p>Next:</p>
 <p>Data Visualization in R</p>
 
 <div class="quarto-auto-generated-content">
@@ -1976,7 +2110,18 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -2008,29 +2153,7 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2038,7 +2161,7 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

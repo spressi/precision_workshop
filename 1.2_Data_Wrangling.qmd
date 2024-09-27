@@ -34,10 +34,6 @@ library(tidyverse)
 
 ```
 
-::: notes
-start recording!
-:::
-
 "Preparation" of the data for analysis: cleaning up variables (outliers, erroneous values, recoding...), changing the structure/format of data frames, merging/joining data sets, calculating new variables, reducing/summarizing variables...
 
 . . .
@@ -91,10 +87,6 @@ testdata[1:2, 4:5] #use a colon to create ranges of values: first two rows and c
 # we can leave one part empty to select ALL available columns/rows
 testdata[1:2,] #first two rows, all columns
 testdata[, 4:5] #columns number 4 and 5, all rows
- 
-# it is usually better to access columns by their column name:
-testdata[, c("d", "e")] #columns with names "d" and "e", all rows
-
 ```
 
 ::: notes
@@ -110,28 +102,40 @@ When wrangling your data in R, you often want to access/use different columns, e
 ```{r}
 #| echo: true
 
+# it is usually better to access columns by their column name:
+testdata[c("d", "e")] #columns with names "d" and "e", all rows
+
 # access a column only:
-testdata[, "a"] #if possible, R will give you just a vector instead of a data.frame
+testdata[["a"]] #double square brackets to get a vector (not a data.frame)
 testdata$a #short notation to get column "a" as a vector
+```
+
+::: notes
+better avoid the comma when accessing by column name:
+```{r}
+testdata[, c("a", "b")] #returns a data.frame
+testdata[, "a"] #returns a vector
+
+testdata[c("a", "b")] #returns a data.frame
+testdata["a"] #returns a data.frame
+testdata[["a"]] #returns a vector
+```
+=> consistent data format without leading comma
+:::
+
+## Accessing Variables/Columns 4
+
+When wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:
+
+```{r}
+#| echo: true
 
 # tidy versions (see next slides)
 #library(tidyverse) #load tidyverse (if not already done)
 pull(testdata, a) #same as testdata$a but can be used better in pipes (see next slide)
-select(testdata, a) #get column(s) as a data.frame (we usually want this only if we select several columns)
+select(testdata, a, b) #get column(s) as a data.frame; no c() needed!
 
 ```
-
-::: notes
-data.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)
-
-c() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.
-
-subsetting: rows, columns --\> leave empty!\
-Select range!\
-Use either name or index of column!
-
-select --\> tidyverse
-:::
 
 # Tidyverse
 
@@ -168,25 +172,8 @@ You can insert a pipe `%>%` (including spaces) by pressing `Ctrl + Shift + M`
 :::
 
 ::: notes
-Be aware, though, that coding in the tidyverse style is very different than in Base R!
-
-Base R is more similar to "traditional" programming and other programming languages.\
-For example, you could wrap functions, which would then be carried out from the most nested to the outer function:\
-`output_data <- function3(function2(function1(data)))`
-
-`function1()` will be carried out first, followed by `function2()`, then `function3()` .
-
-. . .
-
-In the tidyverse, the same would look like this:
-
-`output_data <- data %>% function1() %>% function2() %>% function(3)`
-
-`%>%` is called "the pipe" and will "hand over" whatever has been done to the next part. In this example, the `data` is handed over to `function1()`, which is then carried out, the result of which is handed over to `function2()` etc.
-
-Tidyverse style programming is thus a bit easier to read!
-
-There's also the new pipe Base R \|\>, which is similar to %\>%.
+The shortcut for the pipe (and other useful things like the assignment operator) can be adjusted in 
+`Tools` -> `Modify Keyboard Shortcuts...`
 :::
 
 ## Tidyverse 3
@@ -279,9 +266,6 @@ Remember that you can run `?select` in the console if you need help about, e.g.,
 # my favorite:
 babynames_reduced <- babynames %>% 
   select(year, sex, name, prop)
-
-# or without the pipe operator:
-babynames_reduced <- select(.data = babynames, year, sex, name, prop)
 
 # or alternatively:
 babynames_reduced <- babynames %>% 
@@ -390,7 +374,9 @@ marys <- babynames %>% filter(name == "Mary")
 
 . . .
 
-The second task might be difficult because you have two expressions, `name != "Mary"` and `year > 2000`. You can simply add several expressions separated by commas in filter (commas are treated like a "logical and" `&`):
+Second task: 
+
+This might be difficult because you have two expressions, `name != "Mary"` and `year > 2000`. You can simply add several expressions separated by commas in filter (commas are treated like a "logical and" `&`):
 
 ```{r}
 #| eval: false
@@ -399,9 +385,27 @@ The second task might be difficult because you have two expressions, `name != "M
 no_marys_young <- babynames %>% filter(name != "Mary", year > 2000)
 ```
 
-. . .
+## Filter some more 2
+
+1.  Keep only those observations with the name "Mary".
+2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
+3.  Keep only those with names of former Queens (Mary, Elizabeth, Victoria).
+4.  Discard the ones with the Queen names!
 
 Third task:
+
+```{r}
+#| eval: false
+#| echo: true
+
+queens <- babynames %>% filter(name == "Mary" | #the vertical line is a logical OR
+                               name == "Elizabeth" | 
+                               name == "Victoria") 
+```
+
+. . .
+
+A better shorthand exists with the operator `%in%`:
 
 ```{r}
 #| eval: false
@@ -410,16 +414,37 @@ Third task:
 queens <- babynames %>% filter(name %in% c("Mary", "Elizabeth", "Victoria"))
 ```
 
-. . .
+## Filter some more 3
 
-The fourth task is tricky! You could use three filters in a row with `name != "Mary", name != "Elizabeth", name != "Victoria"`. Or you could use `%in%`, but then you can't use the `!` in front of the `%in%`. The trick is to negate the whole expression with `== FALSE`:
+1.  Keep only those observations with the name "Mary".
+2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
+3.  Keep only those with names of former Queens (Mary, Elizabeth, Victoria).
+4.  Discard the ones with the Queen names!
+
+Fourth task:
+
+This is very tricky! You could use three filters in a row with: \
+`name != "Mary", name != "Elizabeth", name != "Victoria"`. 
+
+There is no function "not in" but you can negate the result in two ways:
 
 ```{r}
 #| echo: true
 #| eval: false
 
-no_queens <- babynames %>% filter(name %in% c("Mary", "Elizabeth", "Victoria") == FALSE)
+no_queens <- babynames %>% 
+  filter(!name %in% c("Mary", "Elizabeth", "Victoria")) #! is a negation ("not")
+
+no_queens <- babynames %>% 
+  filter(name %in% c("Mary", "Elizabeth", "Victoria") == FALSE)
 ```
+
+::: notes
+Careful with precedence! `%in%` is evaluated before `!`: \
+`!(name %in% c("Mary", "Elizabeth", "Victoria"))`
+
+=> I prefer to add `== FALSE` in the end
+:::
 
 ## Your First Plot
 
@@ -511,18 +536,20 @@ Often, we want to summarize data for specific subgroups. For this aim, `summariz
 group_sum <- dat %>% summarize(total = sum(n), .by=name) 
 group_sum
 ```
-. . .
+
+## Grouping and Summarizing 2
 
 You can also subgroup by a combination of variables:
 ```{r}
 #| echo: true
 #| eval: true
 
-babynames %>% filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly")) %>% #we start with the 4 names regardless of sex
+babynames %>% 
+  filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly")) %>% #we start with the 4 names regardless of sex
   summarize(total = sum(n), .by=c(name, sex)) #and then summarize by name, separated for sex
 ```
 
-## Grouping and Summarizing 2
+## Grouping and Summarizing 3
 
 In earlier versions, we had to use `summarize()` together with `group_by()`:
 
@@ -531,10 +558,9 @@ In earlier versions, we had to use `summarize()` together with `group_by()`:
 #| eval: true
 
 group_sum <- dat %>% group_by(name) %>% summarize(total = sum(n)) 
-group_sum
 ```
 
-We avoid using `group_by()` because it can have unintended side effects. \
+We avoid using `group_by()` like this because it can have unintended side effects. \
 It is just part of this class because you will likely encounter it in somebody else's (old) code. \
 \
 If you do have to use it, make sure to `ungroup()` after `summarize()` (or `mutate()`) to avoid unintended effects:
@@ -543,7 +569,14 @@ If you do have to use it, make sure to `ungroup()` after `summarize()` (or `muta
 #| eval: false
 
 group_sum <- dat %>% group_by(name) %>% summarize(total = sum(n)) %>% ungroup()
+group_sum <- dat %>% group_by(name) %>% summarize(total = sum(n), .groups = "drop")
 ```
+
+::: notes
+Unintended side effects: grouping stays active and affects future calls to `summarize` or `mutate`, which may be hundreds of lines of code away!
+
+=> Fatal when, e.g., calculating z-scores after having summarized the trial-level data into subject-level averages.
+:::
 
 <!-- ## Ungrouping
 
@@ -566,7 +599,7 @@ babynames %>%
 ```
 --> 
 
-## Grouping and Summarizing 3
+## Grouping and Summarizing 4
 
 Use the `baby_decades` data frame to calculate the mean and median number of observations, grouped by sex & decade.
 
@@ -678,6 +711,61 @@ Tidy data is in between wide and long (you can always go longer! :D)
 
 What do you think, which of the following data sets is tidy?
 
+1:
+```{r}
+table2
+#> # A tibble: 12 x 4
+#>   country      year type           count
+#>   <chr>       <int> <chr>          <int>
+#> 1 Afghanistan  1999 cases            745
+#> 2 Afghanistan  1999 population  19987071
+#> 3 Afghanistan  2000 cases           2666
+#> 4 Afghanistan  2000 population  20595360
+#> 5 Brazil       1999 cases          37737
+#> 6 Brazil       1999 population 172006362
+#> # … with 6 more rows
+```
+
+2:
+```{r}
+table1
+#> # A tibble: 6 x 4
+#>   country      year  cases population
+#>   <chr>       <int>  <int>      <int>
+#> 1 Afghanistan  1999    745   19987071
+#> 2 Afghanistan  2000   2666   20595360
+#> 3 Brazil       1999  37737  172006362
+#> 4 Brazil       2000  80488  174504898
+#> 5 China        1999 212258 1272915272
+#> 6 China        2000 213766 1280428583
+```
+
+3:
+```{r}
+table3
+#> # A tibble: 6 x 3
+#>   country      year rate             
+#> * <chr>       <int> <chr>            
+#> 1 Afghanistan  1999 745/19987071     
+#> 2 Afghanistan  2000 2666/20595360    
+#> 3 Brazil       1999 37737/172006362  
+#> 4 Brazil       2000 80488/174504898  
+#> 5 China        1999 212258/1272915272
+#> 6 China        2000 213766/1280428583
+```
+
+4:
+```{r}
+left_join(table4a, table4b, by="country", suffix=c("_cases", "_population"))
+# A tibble: 3 x 5
+#   country     `1999_cases` `2000_cases` `1999_population` `2000_population`
+#   <chr>              <int>        <int>             <int>             <int>
+# 1 Afghanistan          745         2666          19987071          20595360
+# 2 Brazil             37737        80488         172006362         174504898
+# 3 China             212258       213766        1272915272        1280428583
+```
+
+<!-- This used to look good with the smaller output size
 :::columns
 ::: {.column width="40%"}
 ```{r}
@@ -737,9 +825,14 @@ left_join(table4a, table4b, by="country", suffix=c("_cases", "_population"))
 ```
 :::
 :::
+-->
 
 ::: notes
-Table1 is tidy! (upper)
+The second table is the tidyest!
+
+Table 1 has cases and population mixed together in `count` variable. \
+Table 3 mixes them in an awkward character row `rate`.
+Table 4 is standard wide format.
 :::
 
 ## Analyzing the Autism Spectrum Quotient
@@ -756,40 +849,22 @@ For the following activities, we will need the following files:
 
 ## Set Up
 
-For the following activities, we will need the following files:
-
--   [responses.csv](https://psyteachr.github.io/quant-fun-v2/responses.csv) containing the AQ survey responses to each of the 10 questions for the 66 participants
-
--   [qformats.csv](https://psyteachr.github.io/quant-fun-v2/qformats.csv) containing information on how a question should be coded - i.e. forward or reverse coding
-
--   [scoring.csv](https://psyteachr.github.io/quant-fun-v2/scoring.csv) containing information on how many points a specific response should get; depending on whether it is forward or reverse coded
-
--   [pinfo.csv](https://psyteachr.github.io/quant-fun-v2/pinfo.csv) containing participant information such as `Age`, `Sex` and importantly `ID` number.
-
 1.  Create a new script, e.g. as "`DataWrangling3.R`" (remember we skipped #2 in the book).
 
-2.  Download the data into your project folder.
+2.  Download the data into your project folder: \
+[responses.csv](https://psyteachr.github.io/quant-fun-v2/responses.csv) \
+[qformats.csv](https://psyteachr.github.io/quant-fun-v2/qformats.csv) \
+[scoring.csv](https://psyteachr.github.io/quant-fun-v2/scoring.csv) \
+[pinfo.csv](https://psyteachr.github.io/quant-fun-v2/pinfo.csv)
 
-3.  *Optional*: Clear your environment (the brush in the top right pane) and/or restart the R session (Session -\> Restart R).
-
-## Load the Data
-
-For the following activities, we will need the following files:
-
--   [responses.csv](https://psyteachr.github.io/quant-fun-v2/responses.csv) containing the AQ survey responses to each of the 10 questions for the 66 participants
-
--   [qformats.csv](https://psyteachr.github.io/quant-fun-v2/qformats.csv) containing information on how a question should be coded - i.e. forward or reverse coding
-
--   [scoring.csv](https://psyteachr.github.io/quant-fun-v2/scoring.csv) containing information on how many points a specific response should get; depending on whether it is forward or reverse coded
-
--   [pinfo.csv](https://psyteachr.github.io/quant-fun-v2/pinfo.csv) containing participant information such as `Age`, `Sex` and importantly `ID` number.
+3.  Clear your environment (the brush in the top right pane) and/or restart the R session (Session -\> Restart R).
 
 4. Load the four .csv files into your environment, e.g.:
 
 ```{r}
 #| echo: true
 #| eval: false
-
+library(tidyverse)
 responses <- read_csv("responses.csv") 
 qformats <- read_csv("qformats.csv")
 scoring <- read_csv("scoring.csv")
@@ -834,10 +909,11 @@ Run the code and see what changes:
 ```{r}
 #| echo: true
 
-rlong <- responses %>% pivot_longer(cols = Q1:Q10, #we can select a range of column names
-                                    #cols = starts_with("Q"), #alternative
-                                    names_to = "Question", 
-                                    values_to = "Response")
+rlong <- responses %>% 
+  pivot_longer(cols = Q1:Q10, #we can select a range of column names
+               #cols = starts_with("Q"), #alternative
+               names_to = "Question", 
+               values_to = "Response")
 ```
 
 . . .
@@ -945,7 +1021,7 @@ We'll use data from a [paper](https://journals.sagepub.com/doi/full/10.1177/0956
 #| echo: true
 
 library("tidyverse")
-pong_data <- read_csv("Data/PongBlueRedBack 1-16 Codebook.csv")
+pong_data <- read_csv("Data/PongBlueRedBack 1-16 Codebook.csv") #I put the data into a separate subfolder "Data"
 summary(pong_data)
 
 # look at the data (can also use summary(), str(), head() etc.)
@@ -983,6 +1059,6 @@ Learning objectives:
 
 -   Learn how to join data frames
 
-Next week:
+Next:
 
 Data Visualization in R
