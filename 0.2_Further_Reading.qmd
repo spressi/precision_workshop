@@ -52,7 +52,7 @@ PS: Sometimes, you will see scripts where people loaded both the `tidyverse`, an
 
 In this workshop, we encouraged you to work with `R` projects, which a) help you to organize files of code that belong together, b) offer you some convenience functions (i.e., RStudio will remember which scripts you had opened last and will open these automatically for you if you open your project again) and most importantly c) enhance the reproducibility of your code. Here are some additional information why projects are more reproducible, and how you (or someone else using your code) might run into trouble if you don't use them. Most of my arguments are paraphrased from [Jenny Bryan's 2017 post](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/) about a project-oriented workflow. Note that Jenny may come and set your computer on fire of you don't heed my (her) advice, so pay close attention :-) 
 
-![Jenny Bryan's "hot take" on a non-project-oriented workflow](images/on_fire.png)
+![Jenny Bryan's "hot take" on a non-project-oriented workflow](images/on_fire.png){width=70%}
 
 ### Absolute and relative paths
 
