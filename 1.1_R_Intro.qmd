@@ -12,6 +12,8 @@ format:
     slide-number: true
     theme: serif
     chalkboard: true
+    width: 1280
+    height: 720
 from: markdown+emoji
 ---
 
@@ -33,10 +35,13 @@ start recording
 
 ## General: Working with R in this course
 
-**During Class**
+-   You should have RStudio open and your precision workshop project loaded (we will set up the project today).
+-   Have the slides open in the background - handy to copy `R` code (top right button if you hover over a code chunk) or click on links.
+-   If possible, use two screens with the slides (Zoom) opened on one and RStudio on the other
 
--   You should have RStudio open and your Biostats project loaded (we will set up the project today).
--   Have the slides open in the background. You will need them to copy R code (top right button on any code chunk) or click on links.
+. . .
+
+\
 
 ```{r}
 #| echo: true
@@ -46,15 +51,7 @@ print("Hello World")
 ```
 
 \
-Remember: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.
-
-. . .
-
-\
-\
-**At Home**
-
-If possible, use two screens with the slides (Zoom) opened on one and RStudio on the other
+**Note:** You can navigate through the slides quickly by clicking on the three dashes in the bottom left.
 
 ## Why write code?
 
@@ -78,6 +75,18 @@ If possible, use two screens with the slides (Zoom) opened on one and RStudio on
 ::: notes
 Chat: What are advantages (or disadvantages!) of coding?
 :::
+
+## Why write code?
+
+![](images/memes/automate.jpg){fig-align="center"}
+
+## Managing Expectations
+
+-   You will learn a new (programming) language. Don't expect to "speak" it fluently right away.
+-   During the workshop, it is more important that you can roughly comprehend written code and "translate" it into natural language.
+-   The second step is to be able to make small adjustments to code that is given to you.
+-   Only then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ).
+-   But: Use it or loose it! Don't wait to use `R` in your research projects until you're "good enough". It's more fun to use it on "actual" problems, and makes it much easier to learn.
 
 ## Install R & RStudio
 
@@ -128,7 +137,7 @@ Console vs. Script (Rmarkdown later)
 sqrt(9)
 ```
 
-![Console used as calculator](images/Console.jpg){fig-alt="Calculated 100+1, 2*3, square root of 9 directly in the console"}
+![Console used as calculator](images/console.png){fig-alt="Calculated 100+1, 2*3, square root of 9 directly in the console" width=60%}
 
 ::: notes
 try it out!
@@ -150,19 +159,19 @@ SqrtOfNine <- sqrt(9)
 word <- "Hello"
 ```
 
-::: {.incremental .smaller}
--   "\<-" is used to assign values to variables ("=" is also possible but not common in the R community)
+<br>
 
--   `a`, `multi` etc. are the variable names, which can be words, some special characters are allowed but not whitespace
+::: {.incremental}
+-   `<-` is used to assign values to variables (`=` is also possible, but discouraged in `R`)
 
-    -   You can find those now in your Environment! (top right)
-    -   For saving variables, there is no feedback in the console (`2*3` outputs `6` but `multi <- 2*3` does not)
+-   `a`, `multi` etc. are the variable names <span style="font-size: 16px;">(some naming rules, e.g., no whitespace, must no start with an number, many special characters not allowed)</span>
 
--   as you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.
+    -   You can find those now in your Environment! (top right panel)
+    -   No feedback in the console for saving variables (`2*3` outputs `6`, but `multi <- 2*3` doesn't)
+
+-   variables can contain basically anything (words, numbers, entire tables of data ...)
 
 -   the variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)
-
--   You can use those variables for further calculations, e.g., `a + multi`
 :::
 
 ::: notes
@@ -176,24 +185,48 @@ Is there anything else that you find interesting?
 What is sqrt()?
 :::
 
-```{=html}
-<!-- ## Working Directory
+## Working with variables
 
-::: incremental
-It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
+```{r}
+#| echo: true
 
--   Make sure that R knows that you want to work in this folder, i.e., set your working directory:
+a + multi
 
-    -   **Session -\> Set Working Directory -\> Choose Directory**
+a
 
--   **Assignment**: Please make a folder, e.g. called "Biostatistics" (but not "R" or anything with spaces in it). Then set your working directory to this folder.
-::: -->
+multi
 ```
+
+<br><br>
+
+::: {.incremental}
+-   You can use those variables for further calculations, e.g., `a + multi`
+-   Note that neither `a` nor `multi` change their value.
+:::
+
+## Working with variables
+
+```{r}
+#| echo: true
+
+a
+
+a <- 42
+
+a
+```
+
+<br><br>
+
+-   Variables can be overwritten (`R` won't warn you about this!)
+
 ## Functions
 
 This code with `sqrt(9)` looked unfamiliar. `sqrt()` is an R function that calculates the square root of a number. `9` is the *argument* that we hand over to the function.
 
 If you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: `?functionname`
+
+<br><br>
 
 ```{r}
 #| echo: true
@@ -205,56 +238,79 @@ This will open the help file in the Help Pane on the lower right of RStudio.
 
 You can also click on a function in the script or console pane and press the *F1* key.
 
+<br><br>
+
+Sometimes, the help page can be a bit overwhelming (lots of technical details etc.). It might help you to scroll down to the examples at the bottom to see the function in action!
+
 ::: notes
 Do this now! Anything unclear?
 :::
 
-## Functions 2
+## Functions
 
-Functions often take more than one argument:
+Functions often take more than one argument (which have names):
 
 ```{r}
 #| echo: true
 #| eval: false
 rnorm(n = 6, mean = 3, sd = 1)
-rnorm(6, 3, 1) #this outputs the same as above
-
-# By the way, # denotes a line-end comment (ignored by R), which are very important for code documentation!
+rnorm(6, 3, 1) # this outputs the same as above
 ```
 
-You can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).
+<br><br>
 
-## Packages
-
-There are a number of functions that are already included with *Base R* (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages are like collections of functions or even data types that someone else wrote.
-
-On the top, click on *Tools* and then *Install Packages...*. Search for **tidyverse** and install!
+You can explicitly name your arguments (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).
 
 . . .
 
 \
 
-You can also download a package using the `install.packages()` function:
+<br>
 
 ```{r}
 #| echo: true
 #| eval: false
-install.packages("tidyverse")
+rnorm(n = 6, mean = 3, sd = 1)
+
+rnorm(6, 3, 1) # this outputs the same as above
+rnorm(sd = 1, n = 6, mean = 3) # still the same result
+rnorm(1, 6, 3) # different result - R thinks n = 1 and mean = 6!
 ```
 
-(It may be necessary to install Rtools for some packages: <https://cran.r-project.org/bin/windows/Rtools/>)
+## Comments
+
+```{r}
+#| echo: true
+#| eval: false
+rnorm(n = 6, mean = 3, sd = 1)
+rnorm(6, 3, 1) # this outputs the same as above
+
+# By the way, # denotes a comment - very important for documentation!
+# Anything after # will be ignored by R
+# To (un)comment the line you are in/multiple lines you selected: ctrl + shift + C
+```
+
+## Packages
+
+There are a number of functions already included with *Base R* (i.e., `R` after a new installation), but you can greatly extend the power of `R` by loading packages (and we will!). Packages can e.g. contain collections of functions someone else wrote, or even data.
+
+You should already have the `tidyverse` installed (if not, quickly run `install.packages("tidyverse")` :-) )
 
 . . .
 
 \
 
-But installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package (i.e., make it directly available) with the `library()` function. This is the first thing you do on the top of an R script:
+But installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package with the `library()` function. This is the first thing you do at the top of an `R` script:
 
 ```{r}
 #| echo: true
 #| eval: false
 library("tidyverse") # or library(tidyverse)
 ```
+
+. . .
+
+\
 
 (If you don't load a package, you have to call functions explicitly by `packagename::function`)
 
@@ -268,26 +324,25 @@ possibly necessary to install Rtools!
 
 # Scripts & Projects
 
-If you type your code into the console (bottom left), it does not get documented well. Therefore, it is better practice to write scripts (top left) and save them as files
-
-Scripts are basically text files that contain your code and can be run as needed
-
-It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
-
-We will create an R *project* that saves your opened scripts and even your environment (top right).
+-   If you type your code into the console (bottom left), it is not saved. Therefore, it is better practice to write scripts (top left) and save them as files.
+-   Scripts are basically text files that contain your code and can be run as needed.
+-   It makes sense to save all your scripts etc. in a folder specifically dedicated to this course.
+-   We will now create an `R` *project* together, which will help you to work with files that belong together.
 
 ## New Project
 
-Create a new project by clicking on "*File*" in the top left and then "*New Project...*"
+![](images/rstudioProject.png){width=200% fig-align="center"}
 
-We usually want to create a "*New Directory*" and then choose a standard "*New Project*" on the top of the list\
-(we will only need standard projects during this class)
+::: {.incremental}
+- Create a new project by clicking on "*File*" on the top left and then "*New Project...*"
+- Select "*New Directory*" <span style="font-size: 16px">(if you already have a folder for this course, you can choose "*Existing directory*" and select that folder)</span> and then choose "*New Project*" at the top of the list.
+- Choose a project name, e.g., as "*r_workshop*" (this will create a folder in which the project lives)
+- Browse where you want to put your project folder (in my case, "*C:/r_stuff/*")
+:::
 
-Choose the project name, e.g., as "*Biostats R*" (this will create a folder in which the whole project is living)\
-Browse any kind of path you want to contain your project folder, \
-e.g., "*D:/Documents/Studies/Translational Neuroscience/Biostats*"
+. . .
 
-![New Project final window](images/rstudioProject.png)
+<span style="font-size: 16px">PS: `R` can deal with folder and file names that contain spaces, but since some programms can't, it's best practice not to use whitespaces for file/folder naming.</span>
 
 ## Existing Projects
 
@@ -299,9 +354,14 @@ You can also just double click on `.Rproj` files and RStudio will open with the 
 
 ![Existing projects](images/rstudioProject2.png)
 
+## Why Projects
+
+- Projects are not only convenient for us (e.g., scripts that we had opened before are re-opened when we open the project), they are also great for reproducibility.
+- We won't cover the details here - see the "Further Reading" section of the course page!
+
 ## Using Scripts
 
-To open a new script, click **File -\> New File -\> R Script.** (`Ctrl + Shift + N`)
+To open a new script, click **File** $\to$ **New File** $\to$ **R Script.** (`Ctrl + Shift + N`)
 
 To run a line of the script, you can either click *Run* at the top right of the pane or `Ctrl + Enter`. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command). \
 To run the whole script/chunk, press `Ctrl + Shift + Enter` (with full console output) or `Ctrl + Shift + S` (limited output).
@@ -316,9 +376,61 @@ To run the whole script/chunk, press `Ctrl + Shift + Enter` (with full console o
 Now run the code (either by pressing "run" at the top right of the script or `ctrl + enter`). -->
 ```
 
-# Working with Data
+# Vectors
 
-## Read in Data
+::: {.incremental}
+-   So far, we've worked with single values; *vectors* contain several elements.
+:::
+
+. . .
+
+```{r}
+#| echo: true
+c(1, 7, 12, 4, 2)
+
+c(2, 6.1, 9.234, 1.23)
+
+c("hello", "cake", "biscuit")
+```
+
+::: {.incremental}
+-   Vectors always contain the same data type (It's a bit tricky, but can you see why `c(10, "biscuit", 2.31)` does not work?).
+-   Vectors are always wrapped in the `c()` function ("combine").
+:::
+
+## Working with vectors
+
+-   Of course, vectors can be stored in variables.
+
+<br>
+
+```{r}
+#| echo: true
+my_vector <- c(1, 2, 10)
+
+shopping_list <- c("flour", "eggs", "apples")
+```
+
+## Vector operations
+
+-   But the real fun is that `R` is "vectorized", which allows us to do some funny tricks.
+-   Note that this is different from usual "vector math".
+
+<br>
+
+```{r}
+#| echo: true
+c(1, 2, 5) + 1
+
+c(2, 4, 6) + c(1, 0, 2)
+
+# Can you spot what happens HERE?!
+c(2, 4, 6, 5, 0, 0) + c(1, 10)
+```
+
+# Working with real data
+
+## Get the data
 
 To read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).
 
@@ -334,9 +446,7 @@ Did you find the files? Here are the direct links:
 
 2.  <https://psyteachr.github.io/quant-fun-v2/participant-info.csv>
 
-. . .
-
-\
+## Read in the data
 
 Create a new script with the following content:
 
@@ -344,7 +454,6 @@ Create a new script with the following content:
 #| echo: true
 #| eval: false
 
-#install.packages("tidyverse") #if you have not yet installed the tidyverse, uncomment and run
 library(tidyverse) # we will use a function from the tidyverse to read in the data
 
 dat <- read_csv("ahi-cesd.csv")
@@ -379,15 +488,13 @@ What is the difference to the objects/variables, that you assigned/saved in your
 
 . . .
 
-The two objects we just read in are data frames, which consist of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.
+The two objects we just read in are data frames, which are "tables" of data (they can contain entire data sets). The objects we assigned earlier were simpler (single values, or "one-dimensional" vectors).
 
-Data frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations.
+Data frames usually have several rows and columns. The columns are the *variables* and the rows are the *observations* (more about that later).
 
-# Thanks!
+# Questions?
 
-That's the lesson on "Getting started with R"! If you have any questions, feel free to approach me before or after class or send an email.
-
-**Managing expectations**: You will learn a new (programming) language. Don't expect to "speak" it fluently right away. During this class, it is more important that you can roughly comprehend written code and "translate" it into natural language. The second step is to be able to make small adjustments to code that is given to you. Only then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ), which will be needed for your research project at the end of the semester.
+This was the first chapter of this workshop! Do you have any questions?
 
 \
 Next: 
