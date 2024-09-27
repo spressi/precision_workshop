@@ -1,4 +1,4 @@
-Biostats Course by Mario Reutter: <https://spressi.github.io/biostats/>
+Biostats Course by Mario Reutter: <https://spressi.github.io/precision_workshop/>
 
 Data "eye.rds" are Eye Tracking Data from Reutter & Gamer (2023)
 Publication: <https://doi.org/10.1037/emo0001134>
