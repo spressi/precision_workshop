@@ -266,11 +266,13 @@ Remember that you can run `?select` in the console if you need help about, e.g.,
 #| echo: true
 
 # my favorite:
-babynames_reduced <- babynames %>% 
+babynames_reduced <- 
+  babynames %>% 
   select(year, sex, name, prop)
 
 # or alternatively:
-babynames_reduced <- babynames %>% 
+babynames_reduced <- 
+  babynames %>% 
   select(-n) # remove columns by using -
 ```
 
@@ -316,7 +318,8 @@ Look at the following code and think about what it might do.
 #| echo: true
 #| eval: false
 
-babynames %>% filter(year > 2000)
+babynames %>% 
+  filter(year > 2000)
 
 ```
 
@@ -332,11 +335,11 @@ babynames %>% filter(year > 2000)
 
 The data starts at 2001! :(
 
-## Detour: Boolean Expressions
+## Boolean Expressions
 
 The second argument, `year > 2000`, is a *Boolean* or *logical expression*, which means that it results in a value of either TRUE or FALSE. `filter()` runs this expression and then removes all values/rows that contain FALSE.
 
-## Detour: Boolean Expressions 2
+## Boolean Expressions 2
 
 | Operator | Name                  | is TRUE if and only if                    |
 |------------------|-------------------|-----------------------------------|
@@ -355,7 +358,7 @@ A double equality sign `==` is a **comparison**, a single equals `=` is a variab
 This is why R users like to make the distinction even bigger by using `<-` for variable assignment (your environment in the top right pane) and `=` for parameter assignment in functions (a hidden so-called *local* environment only visible to the function).
 :::
 
-## Filter some more
+## Filter some more 1
 
 1.  Keep only those observations with the name "Mary".
 2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
@@ -370,11 +373,18 @@ First task:
 #| eval: false
 #| echo: true
 
-marys <- babynames %>% filter(name == "Mary")
+marys <- 
+  babynames %>% 
+  filter(name == "Mary")
 
 ```
 
-. . .
+## Filter some more 2
+
+1.  Keep only those observations with the name "Mary".
+2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
+3.  Keep only those with names of former Queens (Mary, Elizabeth, Victoria).
+4.  Discard the ones with the Queen names!
 
 Second task: 
 
@@ -384,10 +394,12 @@ This might be difficult because you have two expressions, `name != "Mary"` and `
 #| eval: false
 #| echo: true
 
-no_marys_young <- babynames %>% filter(name != "Mary", year > 2000)
+no_marys_young <- 
+  babynames %>% 
+  filter(name != "Mary", year > 2000)
 ```
 
-## Filter some more 2
+## Filter some more 3
 
 1.  Keep only those observations with the name "Mary".
 2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
@@ -400,9 +412,12 @@ Third task:
 #| eval: false
 #| echo: true
 
-queens <- babynames %>% filter(name == "Mary" | #the vertical line is a logical OR
-                               name == "Elizabeth" | 
-                               name == "Victoria") 
+queens <- 
+  babynames %>% 
+  filter(name == "Mary" | #the vertical line is a logical OR
+         name == "Elizabeth" | 
+         name == "Victoria"
+  ) 
 ```
 
 . . .
@@ -413,10 +428,12 @@ A better shorthand exists with the operator `%in%`:
 #| eval: false
 #| echo: true
 
-queens <- babynames %>% filter(name %in% c("Mary", "Elizabeth", "Victoria"))
+queens <- 
+  babynames %>% 
+  filter(name %in% c("Mary", "Elizabeth", "Victoria"))
 ```
 
-## Filter some more 3
+## Filter some more 4
 
 1.  Keep only those observations with the name "Mary".
 2.  Discard all observations with name "Mary" and keep only those from year \> 2000.
@@ -434,10 +451,12 @@ There is no function "not in" but you can negate the result in two ways:
 #| echo: true
 #| eval: false
 
-no_queens <- babynames %>% 
+no_queens <- 
+  babynames %>% 
   filter(!name %in% c("Mary", "Elizabeth", "Victoria")) #! is a negation ("not")
 
-no_queens <- babynames %>% 
+no_queens <- 
+  babynames %>% 
   filter(name %in% c("Mary", "Elizabeth", "Victoria") == FALSE)
 ```
 
@@ -455,11 +474,11 @@ In your script, insert and run the following code:
 ```{r}
 #| echo: true
 
-dat <- babynames %>% 
+babynames %>% 
   filter(sex=="F", #only female babies
-         name %in% c("Emily", "Kathleen", "Alexandra", "Beverly")) #reduce to these 4 names
-
-dat %>% ggplot(aes(x = year, y = prop, colour = name)) +
+         name %in% c("Emily", "Kathleen", "Alexandra", "Beverly") #reduce to these 4 names
+  ) %>% 
+  ggplot(aes(x = year, y = prop, colour = name)) +
   geom_line(size=2) #plot data as a line (with increased size)
 ```
 
@@ -479,12 +498,16 @@ If we want to create variables that do not exist yet (i.e. by calculating values
 ```{r}
 #| echo: true
 
-baby_where <- babynames %>% mutate(country = "USA")
+baby_where <- 
+  babynames %>% 
+  mutate(country = "USA")
 ```
 
 . . .
 
 But `mutate` is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:
+
+## Create New Variables 2
 
 2.  Create a variable that denotes the decade a baby was born:
 
@@ -494,13 +517,19 @@ But `mutate` is much more powerful and can create variables that differ per obse
 #| echo: true
 
 #we can only use floor to round down to full numbers => divide year by 10, floor it, and then multiply by 10 again
-baby_decades <- babynames %>% mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(
+baby_decades <- 
+  babynames %>% 
+  mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(
 
 ```
 ```{r}
 #| echo: false
 
-baby_decades %>% select(year, decade) %>% unique() %>% sample_n(10) %>% arrange(year)
+baby_decades %>% 
+  select(year, decade) %>% 
+  unique() %>% 
+  sample_n(10) %>% 
+  arrange(year)
 ```
 
 ## Summarizing
@@ -515,12 +544,21 @@ You can do so using the function `summarize()`:
 #| echo: true
 
 # run the filter function just like above again:
-dat <- babynames %>% 
+dat <- 
+  babynames %>% 
   filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly"), 
-         sex == "F")
+         sex == "F"
+  )
 
 # summarize the data, calculating the number of oberservations:
 dat_sum <- dat %>% summarize(total = sum(n))
+dat_sum
+```
+
+## Summarizing 2
+
+```{r}
+#| echo: true
 dat_sum
 ```
 
@@ -535,7 +573,11 @@ Often, we want to summarize data for specific subgroups. For this aim, `summariz
 #| echo: true
 #| eval: true
 
-group_sum <- dat %>% summarize(total = sum(n), .by=name) 
+group_sum <- 
+  dat %>% 
+  summarize(total = sum(n), 
+            .by=name
+  ) 
 group_sum
 ```
 
@@ -548,7 +590,9 @@ You can also subgroup by a combination of variables:
 
 babynames %>% 
   filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly")) %>% #we start with the 4 names regardless of sex
-  summarize(total = sum(n), .by=c(name, sex)) #and then summarize by name, separated for sex
+  summarize(total = sum(n), 
+            .by=c(name, sex) #and then summarize by name, separated for sex
+  )
 ```
 
 ## Grouping and Summarizing 3
@@ -610,10 +654,11 @@ Use the `baby_decades` data frame to calculate the mean and median number of obs
 ```{r}
 #| echo: true
 
-baby_decades %>% summarize(mean_year = mean(n),
-                           median_year = median(n),
-                           .by=c(sex, decade))
-
+baby_decades %>% 
+  summarize(mean_year = mean(n),
+            median_year = median(n),
+            .by=c(sex, decade)
+  )
 ```
 
 ## Counting Data
@@ -637,11 +682,15 @@ So far we have often saved intermediate steps in tibbles and used those as input
 ```{r}
 #| echo: true
 
-pipe_summary <- babynames %>%
+pipe_summary <- 
+  babynames %>%
   mutate(decade = floor(year/10) *10) %>%
   filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly"), 
-         sex=="F") %>%
-  summarize(mean_decade = mean(n), .by=c(name, decade))
+         sex == "F"
+  ) %>%
+  summarize(mean_decade = mean(n), 
+            .by=c(name, decade)
+  )
 ```
 
 It's not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes. \
@@ -666,9 +715,7 @@ Three principles:
 
 -   Each value has its own cell.
 
-. . .
-
-Wide vs. long format data?
+## Tidy Data: wide vs. long format
 
 ::: columns
 ::: column
@@ -911,11 +958,14 @@ Run the code and see what changes:
 ```{r}
 #| echo: true
 
-rlong <- responses %>% 
-  pivot_longer(cols = Q1:Q10, #we can select a range of column names
-               #cols = starts_with("Q"), #alternative
-               names_to = "Question", 
-               values_to = "Response")
+rlong <- 
+  responses %>% 
+  pivot_longer(
+    cols = Q1:Q10, #we can select a range of column names
+    #cols = starts_with("Q"), #alternative
+    names_to = "Question", 
+    values_to = "Response"
+  )
 ```
 
 . . .
@@ -949,9 +999,12 @@ rlong2 <- inner_join(x = NULL,
 ```{r}
 #| echo: true
 #| eval: true
-rlong2 <- inner_join(x = rlong, 
-                     y = qformats, 
-                     by = "Question")
+rlong2 <- 
+  inner_join(
+    x = rlong, 
+    y = qformats, 
+    by = "Question"
+  )
 ```
 
 ::: notes
@@ -967,8 +1020,11 @@ Now add the scoring data:
 
 ```{r}
 #| echo: true
-rscores <- rlong2 %>% inner_join(scoring, 
-                                 c("QFormat", "Response"))
+rscores <- 
+  rlong2 %>% 
+  inner_join(scoring, 
+             c("QFormat", "Response")
+  )
 ```
 
 ## Calculate the Questionnaire Scores
@@ -977,14 +1033,24 @@ How do we need to group and summarize the data to get a sum score per person? (I
 
 ```{r}
 #| echo: true
-aq_scores <- rscores %>% summarize(AQ = sum(NULL), .by=NULL)
+aq_scores <- 
+  rscores %>% 
+  summarize(
+    AQ = sum(NULL), 
+    .by = NULL
+  )
 ```
 
 . . .
 
 ```{r}
 #| echo: true
-aq_scores <- rscores %>% summarize(AQ = sum(Score), .by=Id) # sum column Score to obtain AQ scores.
+aq_scores <- 
+  rscores %>% 
+  summarize(
+    AQ = sum(Score), # sum column Score to obtain AQ scores.
+    .by = Id #separately for each Id (participant)
+  )
 ```
 
 ## Pipe it all together!
@@ -992,13 +1058,25 @@ aq_scores <- rscores %>% summarize(AQ = sum(Score), .by=Id) # sum column Score t
 ```{r}
 #| echo: true
 
-aq_scores2 <- responses %>% 
-  pivot_longer(cols = Q1:Q10,
-               names_to = "Question", 
-               values_to = "Response") %>%  
-  inner_join(qformats, "Question") %>% 
-  inner_join(scoring, c("QFormat", "Response")) %>% 
-  summarize(AQ = sum(Score), .by=Id) 
+aq_scores2 <- 
+  responses %>% 
+  pivot_longer(
+    cols = Q1:Q10,
+    names_to = "Question", 
+    values_to = "Response"
+  ) %>%  
+  inner_join(
+    qformats, 
+    "Question"
+  ) %>% 
+  inner_join(
+    scoring, 
+    c("QFormat", "Response")
+  ) %>% 
+  summarize(
+    AQ = sum(Score), 
+    .by=Id
+  ) 
 ```
 
 # Optional Exercises
@@ -1035,20 +1113,24 @@ glimpse(pong_data)
 ```{r}
 #| echo: true
 new_pong_data <- pong_data %>% 
-  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, 
-         TrialNumber) %>% 
+  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) %>% 
   arrange(desc(HitOrMiss), desc(JudgedSpeed)) %>% 
-  filter(JudgedSpeed == 1,
-         BallSpeed %in% c("2", "4", "5", "7"),
-         HitOrMiss == 0) %>% 
+  filter(
+    JudgedSpeed == 1,
+    BallSpeed %in% c("2", "4", "5", "7"),
+    HitOrMiss == 0
+  ) %>% 
   filter(TrialNumber > 2) %>% 
   mutate(TrialNumber = TrialNumber -1) 
   
   # summarize (use old data frame because we removed variables)
-pong_data_hits <- pong_data %>% 
-  summarize(total_hits = sum(HitOrMiss, na.rm = TRUE),
-            meanhits = mean(HitOrMiss, na.rm = TRUE),
-            .by=c(BackgroundColor, PaddleLength))
+pong_data_hits <- 
+  pong_data %>% 
+  summarize(
+    total_hits = sum(HitOrMiss, na.rm = TRUE),
+    meanhits = mean(HitOrMiss, na.rm = TRUE),
+    .by=c(BackgroundColor, PaddleLength)
+  )
 ```
 
 # Thanks!
