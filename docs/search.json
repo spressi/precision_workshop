@@ -11,7 +11,7 @@
     "href": "1.3_Data_Visualization.html#ggplot",
     "title": "1.3 Data Visualization",
     "section": "ggplot",
-    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful figure, which are immediately ready for publication.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (part of the tidyverse). ggplot2 is a very versatile package that allows us to make beautiful, publication-ready(-ish) figures.\nggplot2 follows the “grammar of graphics” by Leland Wilkinson, a formal guide to visualization principles. A core feature are the layers each plot consists of. The main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -21,7 +21,17 @@
     "href": "1.3_Data_Visualization.html#activity-1-set-up",
     "title": "1.3 Data Visualization",
     "section": "Activity 1: Set Up",
-    "text": "Activity 1: Set Up\n\nOpen RStudio and load your Biostats R project. Create a new script called DataVisualisation1.R.\nMake sure you have the following two files downloaded into your project folder (we already used them in Intro to R presentation): ahi-cesd.csv and participant-info.csv.\nCopy and run the code below to load the tidyverse package and the data files:\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\n\nRun the following code to combine both files and select our variables of interest:\n\n\nall_dat &lt;- dat %&gt;% inner_join(pinfo, \n                              by=c(\"id\", \"intervention\")) %&gt;% \n  arrange(id, occasion) #joining messes up the order of the data frame =&gt; arrange again\n\n#we throw out several variables even though they would be important for a comprehensive data analysis\nsummarydata &lt;- all_dat %&gt;% select(id, ahiTotal, cesdTotal, #ID & questionnaire scores\n                                  sex, age, educ, income) #demographic variables\n\n\nwhat happens in the code chunk?",
+    "text": "Activity 1: Set Up\n\nWithin your precision workshop project in RStudio, create a new script called DataVisualisation1.R.\nMake sure you have the following two files downloaded into your project folder (we already used them in Intro to R presentation): ahi-cesd.csv and participant-info.csv.\nCopy and run the code below to load the tidyverse package and the data files:\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3_Data_Visualization.html#activity-1-set-up-1",
+    "href": "1.3_Data_Visualization.html#activity-1-set-up-1",
+    "title": "1.3 Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nRun the following code to combine both files and select our variables of interest:\n\n\nall_dat &lt;- \n  dat %&gt;% \n  inner_join(\n    pinfo, # combine dat with pinfo\n    by = c(\"id\", \"intervention\") # common variables that tell R which data belongs together\n  ) %&gt;% \n  arrange(id, occasion) #joining messes up the order of the data frame =&gt; arrange again\n\n# we throw out several variables even though they would be important for a comprehensive data analysis\nsummarydata &lt;- \n  all_dat %&gt;% \n  select(\n    id, ahiTotal, cesdTotal, # ID & questionnaire scores\n    sex, age, educ, income # demographic variables\n  ) \n\n\nwhat happens in the code chunk?",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -37,51 +47,61 @@
     ]
   },
   {
-    "objectID": "1.3_Data_Visualization.html#activity-2-transform-data-type",
-    "href": "1.3_Data_Visualization.html#activity-2-transform-data-type",
+    "objectID": "1.3_Data_Visualization.html#activity-2-transform-to-factor",
+    "href": "1.3_Data_Visualization.html#activity-2-transform-to-factor",
     "title": "1.3 Data Visualization",
-    "section": "Activity 2: Transform Data Type",
-    "text": "Activity 2: Transform Data Type\nCopy and run the below code to change the categories to factors.\n\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nIf you mutate a new column with the same name as the old one, it will overwrite the column.\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\n\n\nsummarydata1 &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata1)\n\nRows: 992\nColumns: 7\n$ id        &lt;dbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, …\n$ ahiTotal  &lt;dbl&gt; 63, 73, 73, 89, 89, 93, 80, 77, 77, 85, 60, 67, 56, 61, 41, …\n$ cesdTotal &lt;dbl&gt; 14, 6, 7, 10, 13, 8, 15, 12, 3, 5, 31, 31, 41, 35, 27, 32, 2…\n$ sex       &lt;fct&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, …\n$ age       &lt;dbl&gt; 35, 35, 59, 59, 59, 59, 59, 59, 51, 51, 50, 50, 50, 50, 58, …\n$ educ      &lt;fct&gt; 5, 5, 1, 1, 1, 1, 1, 1, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …\n$ income    &lt;fct&gt; 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, …\n\nsummarydata1 %&gt;% pull(educ) %&gt;% unique()\n\n[1] 5 1 4 2 3\nLevels: 1 2 3 4 5",
+    "section": "Activity 2: Transform to factor",
+    "text": "Activity 2: Transform to factor\nCopy and run the below code to change the categories to factors.\n\nsummarydata1 &lt;- \n  summarydata %&gt;%\n  mutate(\n    sex = as_factor(sex),\n    educ = as_factor(educ),\n    income = as_factor(income)\n  )\n\n\n\nIf you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\n\n\nglimpse(summarydata1)\n\nRows: 992\nColumns: 7\n$ id        &lt;dbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, …\n$ ahiTotal  &lt;dbl&gt; 63, 73, 73, 89, 89, 93, 80, 77, 77, 85, 60, 67, 56, 61, 41, …\n$ cesdTotal &lt;dbl&gt; 14, 6, 7, 10, 13, 8, 15, 12, 3, 5, 31, 31, 41, 35, 27, 32, 2…\n$ sex       &lt;fct&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, …\n$ age       &lt;dbl&gt; 35, 35, 59, 59, 59, 59, 59, 59, 51, 51, 50, 50, 50, 50, 58, …\n$ educ      &lt;fct&gt; 5, 5, 1, 1, 1, 1, 1, 1, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …\n$ income    &lt;fct&gt; 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, …",
     "crumbs": [
       "1.3 Data Visualization"
     ]
   },
   {
-    "objectID": "1.3_Data_Visualization.html#transform-data-type-2",
-    "href": "1.3_Data_Visualization.html#transform-data-type-2",
+    "objectID": "1.3_Data_Visualization.html#activity-2-transform-to-factor-1",
+    "href": "1.3_Data_Visualization.html#activity-2-transform-to-factor-1",
     "title": "1.3 Data Visualization",
-    "section": "Transform Data Type 2",
-    "text": "Transform Data Type 2\nA simple change to a factor is not always helpful. We still don’t know what a 1 in sex or a 5 in educ stands for:\n\nsex: 1 = female, 2 = male\neduc: 1 = no graduation, 2 = school graduation, 3 = vocational training, 4 = bachelor’s degree, 5 = post graduate\nincome: 1 = low, 2 = middle, 3 = high\n\n\n\nThere is very sparse information on the variables at https://doi.org/10.5334/jopd.35, so I guesstimated some of the factor levels.",
+    "section": "Activity 2: Transform to factor",
+    "text": "Activity 2: Transform to factor\n\nglimpse(summarydata1)\n\nRows: 992\nColumns: 7\n$ id        &lt;dbl&gt; 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, …\n$ ahiTotal  &lt;dbl&gt; 63, 73, 73, 89, 89, 93, 80, 77, 77, 85, 60, 67, 56, 61, 41, …\n$ cesdTotal &lt;dbl&gt; 14, 6, 7, 10, 13, 8, 15, 12, 3, 5, 31, 31, 41, 35, 27, 32, 2…\n$ sex       &lt;fct&gt; 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, …\n$ age       &lt;dbl&gt; 35, 35, 59, 59, 59, 59, 59, 59, 51, 51, 50, 50, 50, 50, 58, …\n$ educ      &lt;fct&gt; 5, 5, 1, 1, 1, 1, 1, 1, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, …\n$ income    &lt;fct&gt; 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, …\n\n\n\n\nsummarydata1 %&gt;% pull(educ) %&gt;% unique()\n\n[1] 5 1 4 2 3\nLevels: 1 2 3 4 5\n\n\n\n\n\nAt first glance, the data look the same. But the 1s and 2s in sex are now e.g. not treated as numbers anymore, but as factor levels (categories). This e.g. changes how the data behave in different analyses, or plotting (continuous vs. categorical data).",
     "crumbs": [
       "1.3 Data Visualization"
     ]
   },
   {
-    "objectID": "1.3_Data_Visualization.html#transform-data-type-3",
-    "href": "1.3_Data_Visualization.html#transform-data-type-3",
+    "objectID": "1.3_Data_Visualization.html#set-labels",
+    "href": "1.3_Data_Visualization.html#set-labels",
     "title": "1.3 Data Visualization",
-    "section": "Transform Data Type 3",
-    "text": "Transform Data Type 3\nA simple change to a factor is not always helpful. We still don’t know what a 1 in sex or a 5 in educ stands for:\n\nsummarydata2 = summarydata1 %&gt;% \n  mutate(sex = sex %&gt;% recode(\"1\" = \"female\", \"2\" = \"male\"),\n         educ = educ %&gt;% recode(\"1\" = \"no graduation\",\n                                \"2\" = \"school graduation\",\n                                \"3\" = \"vocational training\",\n                                \"4\" = \"bachelor's degree\",\n                                \"5\" = \"post grad\"),\n         income = income %&gt;% recode(\"1\" = \"low\",\n                                    \"2\" = \"middle\",\n                                    \"3\" = \"high\"))\n\n#glimpse(summarydata2)\nsummarydata2 %&gt;% pull(educ) %&gt;% unique()\n\n[1] post grad           no graduation       bachelor's degree  \n[4] school graduation   vocational training\n5 Levels: no graduation school graduation ... post grad",
+    "section": "Set labels",
+    "text": "Set labels\nA simple change to a factor is not always helpful. We still don’t know what a 1 in sex or a 5 in educ stands for:\n\nsex: 1 = female, 2 = male\neduc: 1 = no graduation, 2 = school graduation, 3 = vocational training, 4 = bachelor’s degree, 5 = post graduate\nincome: 1 = low, 2 = middle, 3 = high\n\n\n\nThere is very sparse information on the variables at https://doi.org/10.5334/jopd.35, so I guesstimated some of the factor levels.",
     "crumbs": [
       "1.3 Data Visualization"
     ]
   },
   {
-    "objectID": "1.3_Data_Visualization.html#transform-data-type-4",
-    "href": "1.3_Data_Visualization.html#transform-data-type-4",
+    "objectID": "1.3_Data_Visualization.html#set-labels-1",
+    "href": "1.3_Data_Visualization.html#set-labels-1",
     "title": "1.3 Data Visualization",
-    "section": "Transform Data Type 4",
-    "text": "Transform Data Type 4\nrecode() only works with data that are already factors. What if we start with the original data (i.e., summarydata instead of summarydata1)?\n\n# no factors yet =&gt; refer to original data as numbers WITHOUT quotation marks\nsummarydata3 = summarydata %&gt;% \n  mutate(sex = if_else(sex==1, \"female\", \"male\") %&gt;% as_factor(), #could also use case_match\n         educ = educ %&gt;% case_match(1 ~ \"no graduation\",\n                                    2 ~ \"school graduation\",\n                                    3 ~ \"vocational training\",\n                                    4 ~ \"bachelor's degree\",\n                                    5 ~ \"post grad\") %&gt;% as_factor(),\n         income = income %&gt;% case_match(1 ~ \"low\", 2 ~ \"middle\", 3 ~ \"high\") %&gt;% as_factor())\n\n#glimpse(summarydata3)\nsummarydata3 %&gt;% pull(educ) %&gt;% unique()\n\n[1] post grad           no graduation       bachelor's degree  \n[4] school graduation   vocational training\n5 Levels: post grad no graduation bachelor's degree ... vocational training\n\n\n\nFactor is now ordered by occurrence in data! :(",
+    "section": "Set labels",
+    "text": "Set labels\nmatch_case() allows us to label our numeric data with more human-readable descriptions. if_else() is a useful shorthand for cases where we only have two categories.\n\nsummarydata2 &lt;- \n  summarydata %&gt;% \n  mutate(\n    sex = if_else(sex == 1, \"female\", \"male\") %&gt;% as_factor(),\n    educ = educ %&gt;% \n      case_match(\n        1 ~ \"no graduation\",\n        2 ~ \"school graduation\",\n        3 ~ \"vocational training\",\n        4 ~ \"bachelor's degree\",\n        5 ~ \"post grad\"\n      ) %&gt;%\n      as_factor(), # need to transform to factor in the end\n    income = income %&gt;% \n      case_match(1 ~ \"low\", 2 ~ \"middle\", 3 ~ \"high\") %&gt;% \n      as_factor()\n  )",
     "crumbs": [
       "1.3 Data Visualization"
     ]
   },
   {
-    "objectID": "1.3_Data_Visualization.html#transform-data-summary",
-    "href": "1.3_Data_Visualization.html#transform-data-summary",
+    "objectID": "1.3_Data_Visualization.html#set-labels-2",
+    "href": "1.3_Data_Visualization.html#set-labels-2",
     "title": "1.3 Data Visualization",
-    "section": "Transform Data: Summary",
-    "text": "Transform Data: Summary\n\nIf data are factors coded as numbers, do as_factor() first (implicitly sorts levels ascendingly) and then recode()\nIf data are factors coded as characters, make sure that the ordering is correct (e.g., use arrange() for alphabetical order) or create a new factor() with explicit ordering:\n\n\nincome = income %&gt;% factor(levels=c(\"low\", \"middle\", \"high\")) \n#not as_factor but just factor to supply levels explicitly\n\n\n\n\nWarning: If numbers are represented as characters (\"1\" instead of just 1), handle them as characters or cast them to a number:\n\n\nincome = income %&gt;% as.integer() %&gt;% as_factor() %&gt;% recode(...)",
+    "section": "Set labels",
+    "text": "Set labels\n\nsummarydata2 %&gt;% pull(educ) %&gt;% unique()\n\n[1] post grad           no graduation       bachelor's degree  \n[4] school graduation   vocational training\n5 Levels: post grad no graduation bachelor's degree ... vocational training\n\n\nFactor is now ordered by occurrence in data! :( (E.g., the order on the axis of a plot would be wrong.)",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3_Data_Visualization.html#set-factor-order-levels",
+    "href": "1.3_Data_Visualization.html#set-factor-order-levels",
+    "title": "1.3 Data Visualization",
+    "section": "Set factor order (levels)",
+    "text": "Set factor order (levels)\nUsing factor(), we can explicitly order the categories using the argument levels.\n\nsummarydata %&gt;% \n  mutate(\n    income = income %&gt;%\n      case_match(1 ~ \"low\", 2 ~ \"middle\", 3 ~ \"high\") %&gt;% \n      as_factor()\n  ) %&gt;% \n  pull(income) %&gt;% unique()\n\n[1] high   low    middle\nLevels: high low middle\n\n\n\n\nsummarydata %&gt;% \n  mutate(\n    income = income %&gt;% \n      case_match(1 ~ \"low\", 2 ~ \"middle\", 3 ~ \"high\") %&gt;% \n      factor(levels = c(\"low\", \"middle\", \"high\")) # factor(), not as_factor()!\n  ) %&gt;% \n  pull(income) %&gt;% unique()\n\n[1] high   low    middle\nLevels: low middle high",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -91,7 +111,7 @@
     "href": "1.3_Data_Visualization.html#the-first-layer",
     "title": "1.3 Data Visualization",
     "section": "The First Layer",
-    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to plot the number of data points in each group onto the y-axis, so you do not specify y here.\n\n\n\nggplot(summarydata1, aes(x = sex))",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (aes()) (what will go on the x and y axis, how the plot will be grouped).\naes() includes anything that is directly related to your data: e.g., what goes on the x and y axis, or whether the plot should be grouped by a variable in your data.\nWe can provide x and y as arguments, however, in a bar plot, the count per category is calculated automatically, so we don’t need to put anything on the y-axis ourselves.\n\n\n\nggplot(summarydata1, aes(x = sex))",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -111,7 +131,7 @@
     "href": "1.3_Data_Visualization.html#the-second-layer-with-color",
     "title": "1.3 Data Visualization",
     "section": "The Second Layer with color",
-    "text": "The Second Layer with color\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different color. In this case, there is a different colored bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar() #geom_bar(show.legend = FALSE)",
+    "text": "The Second Layer with color\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and fill it with a different color. Note that fill colors the inside of the bar, while colour colors the bar’s outlines.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar() #geom_bar(show.legend = FALSE)",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -121,7 +141,7 @@
     "href": "1.3_Data_Visualization.html#the-next-layers---improving-the-plot",
     "title": "1.3 Data Visualization",
     "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) + #if we didn't set factor labels, we can do here manually (not recommended!)\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe could add better axis labels, and custom colors. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which adjust the x and y axes.\nBoth functions can change several aspects of our axes; here, we use the argument name to set a new axis name.\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\") + \n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -131,7 +151,7 @@
     "href": "1.3_Data_Visualization.html#themes-changing-the-appearance",
     "title": "1.3 Data Visualization",
     "section": "Themes: Changing the Appearance",
-    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) + #now with summarydata2\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\") + #no need to set labels\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\") + \n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -141,7 +161,7 @@
     "href": "1.3_Data_Visualization.html#colors",
     "title": "1.3 Data Visualization",
     "section": "Colors",
-    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function has an option parameter that takes 5 different values (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function has an option parameter that takes 5 different values (A - E).\n\nRun the code below. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -151,7 +171,7 @@
     "href": "1.3_Data_Visualization.html#transparency",
     "title": "1.3 Data Visualization",
     "section": "Transparency",
-    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata1, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data that overlap.\nTo do so, you can simply add alpha to the geom_bar() - try changing the value of alpha (between 0 and 1):\n\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -161,7 +181,7 @@
     "href": "1.3_Data_Visualization.html#grouped-plots",
     "title": "1.3 Data Visualization",
     "section": "Grouped Plots",
-    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata1, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\", #prevents \"stacked\" barplots\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")\n\n\n\n\n\n\n\n\n\n\nWithout position = dodge, you would get a stacked barplot",
+    "text": "Grouped Plots\nImagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata2, aes(x = sex, fill = income)) +\n  geom_bar(\n    # the default are stacked bars; we use \"dodge\" to put them side by side\n    position = \"dodge\",\n    alpha = .8\n  ) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")\n\n\n\n\n\n\n\n\n\n\nWithout position = dodge, you would get a stacked barplot",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -171,7 +191,7 @@
     "href": "1.3_Data_Visualization.html#facetting",
     "title": "1.3 Data Visualization",
     "section": "Facetting",
-    "text": "Facetting\nYou could also use facets to divide your data visualizations into several subplots: facet_wrap for one variable.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(vars(income)) #in this function, you need to use vars() around variable names\n\n\n\nWhat is problematic here? We needed percentages for females and males for a better comparison",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations into several subplots: facet_wrap for one variable.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(vars(income)) # here, you need to use vars() around variable names\n\n\n\nWhat is problematic here? We needed percentages for females and males for a better comparison",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -181,7 +201,17 @@
     "href": "1.3_Data_Visualization.html#facetting-2",
     "title": "1.3 Data Visualization",
     "section": "Facetting 2",
-    "text": "Facetting 2\nYou could also use facets to divide your data visualizations into several subplots: facet_grid for a matrix of (combinations of) two variables.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_grid(rows=vars(income), \n             cols=vars(educ),\n             labeller = \"label_both\") #this adds the variable name into the facet legends",
+    "text": "Facetting 2\nYou could also use facets to divide your data visualizations into several subplots: facet_grid for a matrix of (combinations of) two variables.\n\nggplot(summarydata2, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\") +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_grid(\n    rows = vars(income),\n    cols = vars(educ),\n    labeller = \"label_both\" # this adds the variable name into the facet legends\n  )",
+    "crumbs": [
+      "1.3 Data Visualization"
+    ]
+  },
+  {
+    "objectID": "1.3_Data_Visualization.html#a-closer-look",
+    "href": "1.3_Data_Visualization.html#a-closer-look",
+    "title": "1.3 Data Visualization",
+    "section": "A closer look",
+    "text": "A closer look",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -191,7 +221,7 @@
     "href": "1.3_Data_Visualization.html#violin-boxplot",
     "title": "1.3 Data Visualization",
     "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot above?\n\n\nggplot(summarydata1, aes(x = income, \n                        y = ahiTotal, #new variable!\n                        fill = income)) +\n  geom_violin(trim = FALSE, #smooth on edges\n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, #small boxplot contained in violin\n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot above?\n\n\nggplot(summarydata1, aes(x = income, \n                         y = ahiTotal, # new variable!\n                         fill = income)) +\n  geom_violin(trim = FALSE, # smooth on edges\n              alpha = .4) +\n  geom_boxplot(width = .2, # small boxplot contained in violin\n               alpha = .7) +\n  scale_x_discrete(\n    name = \"Income\",\n    # set new labels\n    labels = c(\"Below Average\", \"Average\", \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  # no need to switch of axis for every geom individually\n  theme(legend.position = \"none\") + \n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -211,7 +241,7 @@
     "href": "1.3_Data_Visualization.html#scatterplot",
     "title": "1.3 Data Visualization",
     "section": "Scatterplot",
-    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata1, aes(x = age, y = cesdTotal)) +\n  geom_point() +\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata1, aes(x = age, y = cesdTotal)) +\n  geom_point() +\n  # if you don't want the shaded CI, add se = FALSE to this\n  geom_smooth(method = lm)",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -221,7 +251,7 @@
     "href": "1.3_Data_Visualization.html#saving-your-figures",
     "title": "1.3 Data Visualization",
     "section": "Saving your Figures",
-    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\n\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 6.5, #width of a typical page in inches minus border (according to APA format)\n       height = 6.5 / sqrt(2), #golden ratio :)\n       units = \"in\")\n\nor\n\nggsave(\"violin-boxplot.png\",\n       width = 1920,\n       height = 1080,\n       units = \"px\") #full HD picture in pixels: 1920 x 1080",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 6.5, #width of a typical page in inches minus border (according to APA format)\n       height = 6.5 / sqrt(2), #golden ratio :)\n       units = \"in\")\n\nor\n\nggsave(\"violin-boxplot.png\",\n       width = 1920,\n       height = 1080,\n       units = \"px\") #full HD picture in pixels: 1920 x 1080",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -231,7 +261,7 @@
     "href": "1.3_Data_Visualization.html#saving-your-figures-2",
     "title": "1.3 Data Visualization",
     "section": "Saving your Figures 2",
-    "text": "Saving your Figures 2\nYou can also assign the plot to a variable in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\nviobox &lt;- summarydata1 %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7) +\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!",
+    "text": "Saving your Figures 2\nYou can also assign the plot to a variable in your environment and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\nviobox &lt;- \n  ggplot(summarydata1, aes(x = income, y = ahiTotal, fill = income)) +\n  geom_violin(trim = FALSE, alpha = .4) +\n  geom_boxplot(width = .2, alpha = .7) +\n  scale_x_discrete(\n    name = \"Income\",\n    labels = c(\"Below Average\", \"Average\", \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  theme(legend.position = \"none\") + \n  scale_fill_viridis_d()\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!",
     "crumbs": [
       "1.3 Data Visualization"
     ]
@@ -791,7 +821,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables",
-    "text": "Create New Variables\nIf we want to create variables that do not exist yet (i.e. by calculating values, combining other variables, etc.), we can use mutate()!\n\nAdd a variable called “country” that contains the value “USA” for all observations\n\n\n\nbaby_where &lt;- babynames %&gt;% mutate(country = \"USA\")\n\n\n\nBut mutate is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- babynames %&gt;% mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1902   1900\n 2  1910   1910\n 3  1931   1930\n 4  1941   1940\n 5  1944   1940\n 6  1946   1940\n 7  1964   1960\n 8  1965   1960\n 9  2006   2000\n10  2016   2010",
+    "text": "Create New Variables\nIf we want to create variables that do not exist yet (i.e. by calculating values, combining other variables, etc.), we can use mutate()!\n\nAdd a variable called “country” that contains the value “USA” for all observations\n\n\n\nbaby_where &lt;- babynames %&gt;% mutate(country = \"USA\")\n\n\n\nBut mutate is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- babynames %&gt;% mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1889   1880\n 2  1894   1890\n 3  1909   1900\n 4  1910   1910\n 5  1929   1920\n 6  1932   1930\n 7  1945   1940\n 8  1952   1950\n 9  1966   1960\n10  1977   1970",
     "crumbs": [
       "1.2 Data Wrangling"
     ]

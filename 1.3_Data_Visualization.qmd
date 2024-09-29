@@ -1,17 +1,19 @@
 ---
 title: "1.3 Data Visualization"
 subtitle: | 
-   | Workshop: "Handling Uncertainty in your Data"
-   |
-   | Dr. Mario Reutter & Juli Nagel
-   | (slides adapted from Dr. Lea Hildebrandt)
-format: 
+  | Workshop: "Handling Uncertainty in your Data"
+  |
+  | Dr. Mario Reutter & Juli Nagel
+  | (slides adapted from Dr. Lea Hildebrandt)
+format:
   revealjs:
     smaller: true
     scrollable: true
     slide-number: true
     theme: serif
     chalkboard: true
+    width: 1280
+    height: 720
 from: markdown+emoji
 ---
 
@@ -19,11 +21,11 @@ from: markdown+emoji
 
 ```{css}
 code.sourceCode {
-  font-size: 1.4em;
+font-size: 1.4em;
 }
 
 div.cell-output-stdout {
-  font-size: 1.4em;
+font-size: 1.4em;
 }
 ```
 
@@ -43,17 +45,17 @@ It's fun! (And plots are probably the most important information in papers!)
 
 ## ggplot
 
-We will use a package called `ggplot2` (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful figure, which are immediately ready for publication.
+We will use a package called `ggplot2` (part of the `tidyverse`). `ggplot2` is a very versatile package that allows us to make beautiful, publication-ready(-ish) figures.
 
-The main function to "start" plotting is `ggplot()` - we will then add layers of data and layers to tweak the appearance.
+`ggplot2` follows the ["grammar of graphics" by Leland Wilkinson](https://ggplot2-book.org/mastery), a formal guide to visualization principles. A core feature are the *layers* each plot consists of. The main function to "start" plotting is `ggplot()` - we will then add layers of data and layers to tweak the appearance.
 
 ![Layers of a ggplot](images/ggplotlayers.PNG){fig-alt="Depiction of how a plot is built up from different layers in ggplot2" width="502"}
 
 ## Activity 1: Set Up
 
-1.  Open RStudio and load your Biostats R project. Create a new script called `DataVisualisation1.R`.
+1.  Within your precision workshop project in RStudio, create a new script called `DataVisualisation1.R`.
 
-2.  Make sure you have the following two files downloaded into your project folder (we already used them in Intro to R presentation): [`ahi-cesd.csv`](https://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv) and [`participant-info.csv`](https://psyteachr.github.io/quant-fun-v2/participant-info.csv).
+2.  Make sure you have the following two files downloaded into your project folder (we already used them in Intro to `R` presentation): [`ahi-cesd.csv`](https://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv) and [`participant-info.csv`](https://psyteachr.github.io/quant-fun-v2/participant-info.csv).
 
 3.  Copy and run the code below to load the `tidyverse` package and the data files:
 
@@ -77,17 +79,27 @@ dat <- read_csv("Data/ahi-cesd.csv")
 pinfo <- read_csv("Data/participant-info.csv")
 ```
 
+## Activity 1: Set Up
+
 4.  Run the following code to combine both files and select our variables of interest:
 
 ```{r}
 #| echo: true
-all_dat <- dat %>% inner_join(pinfo, 
-                              by=c("id", "intervention")) %>% 
+all_dat <- 
+  dat %>% 
+  inner_join(
+    pinfo, # combine dat with pinfo
+    by = c("id", "intervention") # common variables that tell R which data belongs together
+  ) %>% 
   arrange(id, occasion) #joining messes up the order of the data frame => arrange again
 
-#we throw out several variables even though they would be important for a comprehensive data analysis
-summarydata <- all_dat %>% select(id, ahiTotal, cesdTotal, #ID & questionnaire scores
-                                  sex, age, educ, income) #demographic variables
+# we throw out several variables even though they would be important for a comprehensive data analysis
+summarydata <- 
+  all_dat %>% 
+  select(
+    id, ahiTotal, cesdTotal, # ID & questionnaire scores
+    sex, age, educ, income # demographic variables
+  ) 
 ```
 
 ::: notes
@@ -114,28 +126,51 @@ All variables are loaded as numeric. However, are all of those numeric?
 `sex`, `educ` and `income` don't seem to really be numbers but **factors** with individual categories (factor **levels**)! \
 We should convert these data to factor. Checking and adjusting data types (as part of data wrangling) will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!
 
-## Activity 2: Transform Data Type
+## Activity 2: Transform to factor
 
 Copy and run the below code to change the categories to factors.
 
--   So for example, the 1s in `sex` change to categorical factors instead of numerical 1s.
+```{r}
+#| echo: true
+summarydata1 <- 
+  summarydata %>%
+  mutate(
+    sex = as_factor(sex),
+    educ = as_factor(educ),
+    income = as_factor(income)
+  )
+```
+
+. . .
 
 -   If you mutate a new column with the same name as the old one, it will overwrite the column.
 
--   You can read each line of the mutate as "overwrite the data that is in that column with the same values now considered factors and not doubles"
+. . .
 
 ```{r}
 #| echo: true
-summarydata1 <- summarydata %>%
-  mutate(sex = as_factor(sex),
-         educ = as_factor(educ),
-         income = as_factor(income))
-
 glimpse(summarydata1)
+```
+
+## Activity 2: Transform to factor
+
+```{r}
+#| echo: true
+glimpse(summarydata1)
+```
+
+. . . 
+
+```{r}
+#| echo: true
 summarydata1 %>% pull(educ) %>% unique()
 ```
 
-## Transform Data Type 2
+. . .
+
+-   At first glance, the data look the same. But the 1s and 2s in `sex` are now e.g. not treated as numbers anymore, but as factor levels (categories). This e.g. changes how the data behave in different analyses, or plotting (continuous vs. categorical data).
+
+## Set labels
 
 A simple change to a factor is not always helpful. We still don't know what a `1` in `sex` or a `5` in `educ` stands for:
 
@@ -150,67 +185,66 @@ A simple change to a factor is not always helpful. We still don't know what a `1
 There is very sparse information on the variables at <https://doi.org/10.5334/jopd.35>, so I guesstimated some of the factor levels.
 :::
 
-## Transform Data Type 3
+## Set labels
 
-A simple change to a factor is not always helpful. We still don't know what a `1` in `sex` or a `5` in `educ` stands for:
+`match_case()` allows us to label our numeric data with more human-readable descriptions. `if_else()` is a useful shorthand for cases where we only have two categories.
 
 ```{r}
 #| echo: true
-summarydata2 = summarydata1 %>% 
-  mutate(sex = sex %>% recode("1" = "female", "2" = "male"),
-         educ = educ %>% recode("1" = "no graduation",
-                                "2" = "school graduation",
-                                "3" = "vocational training",
-                                "4" = "bachelor's degree",
-                                "5" = "post grad"),
-         income = income %>% recode("1" = "low",
-                                    "2" = "middle",
-                                    "3" = "high"))
+summarydata2 <- 
+  summarydata %>% 
+  mutate(
+    sex = if_else(sex == 1, "female", "male") %>% as_factor(),
+    educ = educ %>% 
+      case_match(
+        1 ~ "no graduation",
+        2 ~ "school graduation",
+        3 ~ "vocational training",
+        4 ~ "bachelor's degree",
+        5 ~ "post grad"
+      ) %>%
+      as_factor(), # need to transform to factor in the end
+    income = income %>% 
+      case_match(1 ~ "low", 2 ~ "middle", 3 ~ "high") %>% 
+      as_factor()
+  )
+```
 
-#glimpse(summarydata2)
+## Set labels
+
+```{r}
+#| echo: true
 summarydata2 %>% pull(educ) %>% unique()
 ```
 
-## Transform Data Type 4
+Factor is now ordered by occurrence in data! :( (E.g., the order on the axis of a plot would be wrong.)
 
-`recode()` only works with data that are already factors. What if we start with the original data (i.e., `summarydata` instead of `summarydata1`)?
+## Set factor order (levels)
+
+Using `factor()`, we can explicitly order the categories using the argument `levels`.
 
 ```{r}
 #| echo: true
-# no factors yet => refer to original data as numbers WITHOUT quotation marks
-summarydata3 = summarydata %>% 
-  mutate(sex = if_else(sex==1, "female", "male") %>% as_factor(), #could also use case_match
-         educ = educ %>% case_match(1 ~ "no graduation",
-                                    2 ~ "school graduation",
-                                    3 ~ "vocational training",
-                                    4 ~ "bachelor's degree",
-                                    5 ~ "post grad") %>% as_factor(),
-         income = income %>% case_match(1 ~ "low", 2 ~ "middle", 3 ~ "high") %>% as_factor())
-
-#glimpse(summarydata3)
-summarydata3 %>% pull(educ) %>% unique()
+summarydata %>% 
+  mutate(
+    income = income %>%
+      case_match(1 ~ "low", 2 ~ "middle", 3 ~ "high") %>% 
+      as_factor()
+  ) %>% 
+  pull(income) %>% unique()
 ```
 
 . . .
 
-Factor is now ordered by occurrence in data! :(
-
-## Transform Data: Summary
-
--   If data are **factors coded as numbers**, do `as_factor()` first (implicitly sorts levels ascendingly) and then `recode()`
--   If data are **factors coded as characters**, make sure that the ordering is correct (e.g., use `arrange()` for alphabetical order) or create a new `factor()` with explicit ordering: 
-
-```{r, eval=F, echo=T}
-income = income %>% factor(levels=c("low", "middle", "high")) 
-#not as_factor but just factor to supply levels explicitly
-```
-
-\
-
--   Warning: If numbers are represented as characters (`"1"` instead of just `1`), handle them as characters or cast them to a number: 
-
-```{r, eval=F, echo=T}
-income = income %>% as.integer() %>% as_factor() %>% recode(...)
+```{r}
+#| echo: true
+summarydata %>% 
+  mutate(
+    income = income %>% 
+      case_match(1 ~ "low", 2 ~ "middle", 3 ~ "high") %>% 
+      factor(levels = c("low", "middle", "high")) # factor(), not as_factor()!
+  ) %>% 
+  pull(income) %>% unique()
 ```
 
 # Activity 3: Barplot
@@ -221,9 +255,11 @@ We will plot male and female participants.
 
 ## The First Layer
 
--   The first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).
+-   The first line (or layer) sets up the base of the graph: the data to use and the aesthetics (`aes()`) (what will go on the x and y axis, how the plot will be grouped).
 
--   `aes()` can take both an `x` and `y` argument, however, with a bar plot you are just asking R to plot the number of data points in each group onto the y-axis, so you do not specify `y` here.
+-   `aes()` includes anything that is *directly* related to your data: e.g., what goes on the x and y axis, or whether the plot should be *grouped* by a variable in your data.
+
+-   We can provide `x` and `y` as arguments, however, in a bar plot, the count per category is calculated automatically, so we don't need to put anything on the y-axis ourselves.
 
 ```{r}
 #| output-location: column-fragment
@@ -248,7 +284,7 @@ ggplot(summarydata1, aes(x = sex)) +
 
 ## The Second Layer with color
 
--   Adding `fill` to the first layer will separate the data into each level of the grouping variable and give it a different color. In this case, there is a different colored bar for each level of `sex`.
+-   Adding `fill` to the first layer will separate the data into each level of the grouping variable and fill it with a different color. <span style="font-size: 16px;">Note that `fill` colors the inside of the bar, while `colour` colors the bar's outlines.</span>
 
 -   We can get rid of the (in this case redundant legend) with `show.legend = FALSE`.
 
@@ -256,7 +292,7 @@ ggplot(summarydata1, aes(x = sex)) +
 #| echo: true
 #| output-location: column-fragment
 #| code-line-numbers: "1"
-ggplot(summarydata1, aes(x = sex, fill = sex)) +
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
   geom_bar() #geom_bar(show.legend = FALSE)
 ```
 
@@ -266,22 +302,17 @@ We might want to make the plot a bit prettier and easier to read. What would you
 
 . . .
 
-We might want to add better axis labels and change the colors of the bars. We can do so with the functions `scale_x_discrete()` and `scale_y_continuous()`, which will adjust the x and y axes.
+We could add better axis labels, and custom colors. We can do so with the functions `scale_x_discrete()` and `scale_y_continuous()`, which adjust the x and y axes.
 
-We will use these two arguments in those functions:
-
--   `name` controls/overwrites the axis name (e.g. Groups)
-
--   `labels` controls the break points on the axis, i.e. what are the conditions called? The order is important here!
+Both functions can change several aspects of our axes; here, we use the argument `name` to set a new axis name.
 
 ```{r}
 #| echo: true
 #| output-location: column-fragment
 #| code-line-numbers: "3,4|5"
-ggplot(summarydata1, aes(x = sex, fill = sex)) +
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
   geom_bar(show.legend = FALSE) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", "Male")) + #if we didn't set factor labels, we can do here manually (not recommended!)
+  scale_x_discrete(name = "Participant Sex") + 
   scale_y_continuous(name = "Number of participants")
 ```
 
@@ -299,9 +330,9 @@ We will now change the default theme to `theme_minimal()`, but you can also try 
 #| echo: true
 #| output-location: column-fragment
 #| code-line-numbers: "5"
-ggplot(summarydata2, aes(x = sex, fill = sex)) + #now with summarydata2
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
   geom_bar(show.legend = FALSE) +
-  scale_x_discrete(name = "Participant Sex") + #no need to set labels
+  scale_x_discrete(name = "Participant Sex") + 
   scale_y_continuous(name = "Number of participants") +
   theme_minimal()
 ```
@@ -312,60 +343,57 @@ There are various ways to change the colors of the bars. You can manually indica
 
 A popular palette is **viridis**. We can simply add a function/layer to your ggplot named `scale_fill_viridis_d()` (d for discrete). The function has an *option* parameter that takes 5 different values (A - E).
 
--   Type and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!
+-   Run the code below. Try changing the option to either A, B, C or D and see which one you like!
 
 ```{r}
 #| echo: true
 #| output-location: column-fragment
-#| code-line-numbers: "7"
+#| code-line-numbers: "6"
 
-ggplot(summarydata1, aes(x = sex, fill = sex)) +
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
   geom_bar(show.legend = FALSE) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", "Male")) +
+  scale_x_discrete(name = "Participant Sex") +
   scale_y_continuous(name = "Number of participants") +
   theme_minimal() +
   scale_fill_viridis_d(option = "E")
-
 ```
 
 ## Transparency
 
-You can also add transparency to your plot, which can be helpful if you plot several layers of data.
+You can also add transparency to your plot, which can be helpful if you plot several layers of data that overlap.
 
-To do so, you can simply add `alpha` to the `geom_bar()`:
+To do so, you can simply add `alpha` to the `geom_bar()` - try changing the value of `alpha` (between 0 and 1):
 
 ```{r}
 #| echo: true
 #| output-location: column-fragment
 #| code-line-numbers: "3"
 
-ggplot(summarydata1, aes(x = sex, fill = sex)) +
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
   geom_bar(show.legend = FALSE, 
            alpha = .8) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", "Male")) +
+  scale_x_discrete(name = "Participant Sex") +
   scale_y_continuous(name = "Number of participants") +
   theme_minimal() +
   scale_fill_viridis_d(option = "E")
-
 ```
 
 ## Grouped Plots
 
-Let's go back to the bar plot (but works similarly for other plots as well): Imagine that you have several *factors* that you want to use to group your data, such as gender and income. In this case, you could use a **grouped bar plot**:
+Imagine that you have several *factors* that you want to use to group your data, such as gender and income. In this case, you could use a **grouped bar plot**:
 
 ```{r}
 #| echo: true
 #| output-location: column-fragment
-#| code-line-numbers: "1|2"
+#| code-line-numbers: "1|4"
 
-ggplot(summarydata1, aes(x = sex, fill = income)) +
-  geom_bar(position = "dodge", #prevents "stacked" barplots
-           show.legend = TRUE, 
-           alpha = .8) +
-  scale_x_discrete(name = "Participant Sex", 
-                   labels = c("Female", "Male")) +
+ggplot(summarydata2, aes(x = sex, fill = income)) +
+  geom_bar(
+    # the default are stacked bars; we use "dodge" to put them side by side
+    position = "dodge",
+    alpha = .8
+  ) +
+  scale_x_discrete(name = "Participant Sex") +
   scale_y_continuous(name = "Number of participants") +
   theme_minimal() +
   scale_fill_viridis_d(option = "E")
@@ -381,16 +409,15 @@ You could also use **facets** to divide your data visualizations into several su
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "8"
+#| code-line-numbers: "7"
 
 ggplot(summarydata2, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE, 
-           alpha = .8) +
+  geom_bar(show.legend = FALSE, alpha = .8) +
   scale_x_discrete(name = "Participant Sex") +
   scale_y_continuous(name = "Number of participants") +
   theme_minimal() +
   scale_fill_viridis_d(option = "E")  +
-  facet_wrap(vars(income)) #in this function, you need to use vars() around variable names
+  facet_wrap(vars(income)) # here, you need to use vars() around variable names
 ```
 
 :::notes
@@ -403,18 +430,35 @@ You could also use **facets** to divide your data visualizations into several su
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "8-10"
+#| code-line-numbers: "7-11"
 
 ggplot(summarydata2, aes(x = sex, fill = sex)) +
-  geom_bar(show.legend = FALSE, 
-           alpha = .8) +
+  geom_bar(show.legend = FALSE, alpha = .8) +
   scale_x_discrete(name = "Participant Sex") +
   scale_y_continuous(name = "Number of participants") +
   theme_minimal() +
   scale_fill_viridis_d(option = "E")  +
-  facet_grid(rows=vars(income), 
-             cols=vars(educ),
-             labeller = "label_both") #this adds the variable name into the facet legends
+  facet_grid(
+    rows = vars(income),
+    cols = vars(educ),
+    labeller = "label_both" # this adds the variable name into the facet legends
+  )
+```
+
+## A closer look
+
+```{r}
+ggplot(summarydata2, aes(x = sex, fill = sex)) +
+  geom_bar(show.legend = FALSE, alpha = .8) +
+  scale_x_discrete(name = "Participant Sex") +
+  scale_y_continuous(name = "Number of participants") +
+  theme_minimal() +
+  scale_fill_viridis_d(option = "E")  +
+  facet_grid(
+    rows = vars(income),
+    cols = vars(educ),
+    labeller = "label_both" # this adds the variable name into the facet legends
+  )
 ```
 
 # Activity 4: The Violin-Boxplot
@@ -430,23 +474,23 @@ Let's look at the code. How does the code differ from the one for the barplot ab
 ```{r}
 #| echo: true
 #| output-location: column-fragment
-#| code-line-numbers: "|2|4|7"
+#| code-line-numbers: "|2|4|6"
 
 ggplot(summarydata1, aes(x = income, 
-                        y = ahiTotal, #new variable!
-                        fill = income)) +
-  geom_violin(trim = FALSE, #smooth on edges
-              show.legend = FALSE, 
+                         y = ahiTotal, # new variable!
+                         fill = income)) +
+  geom_violin(trim = FALSE, # smooth on edges
               alpha = .4) +
-  geom_boxplot(width = .2, #small boxplot contained in violin
-               show.legend = FALSE, 
-               alpha = .7)+
-  scale_x_discrete(name = "Income",
-                   labels = c("Below Average", 
-                              "Average", 
-                              "Above Average")) +
+  geom_boxplot(width = .2, # small boxplot contained in violin
+               alpha = .7) +
+  scale_x_discrete(
+    name = "Income",
+    # set new labels
+    labels = c("Below Average", "Average", "Above Average")) +
   scale_y_continuous(name = "Authentic Happiness Inventory Score")+
   theme_minimal() +
+  # no need to switch of axis for every geom individually
+  theme(legend.position = "none") + 
   scale_fill_viridis_d()
 ```
 
@@ -489,8 +533,8 @@ If we have continuous data of two variables, we often want to make a **scatter p
 
 ggplot(summarydata1, aes(x = age, y = cesdTotal)) +
   geom_point() +
-  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this
-
+  # if you don't want the shaded CI, add se = FALSE to this
+  geom_smooth(method = lm) 
 ```
 
 ## Saving your Figures
@@ -508,8 +552,6 @@ ggsave("violin-boxplot.png")
 Check whether indeed the last plot was saved!
 
 . . .
-
-\
 
 You can also specify the dimensions of your plot to be saved:
 
@@ -533,7 +575,7 @@ ggsave("violin-boxplot.png",
 
 ## Saving your Figures 2
 
-You can also assign the plot to a variable in your environment (just like we did with the tibbles previously) and then tell `ggsave()` which object to save. This is a bit safer.
+You can also assign the plot to a variable in your environment and then tell `ggsave()` which object to save. This is a bit safer.
 
 Run the code for the violin-boxplot again and save the plot in an object called `viobox`. You'd then have to explicitly tell `ggsave()` to save the object `viobox`:
 
@@ -542,24 +584,17 @@ Run the code for the violin-boxplot again and save the plot in an object called 
 #| eval: false
 #| code-line-numbers: "1,20"
 
-viobox <- summarydata1 %>%
-  ggplot(aes(x = income,
-             y = ahiTotal,
-             fill = income)) +
-  geom_violin(trim = FALSE, 
-              show.legend = FALSE, 
-              alpha = .4) +
-  geom_boxplot(width = .2, 
-               show.legend = FALSE, 
-               alpha = .7) +
-  scale_x_discrete(name = "Income",
-                   labels = c("Below Average", 
-                              "Average", 
-                              "Above Average")) +
+viobox <- 
+  ggplot(summarydata1, aes(x = income, y = ahiTotal, fill = income)) +
+  geom_violin(trim = FALSE, alpha = .4) +
+  geom_boxplot(width = .2, alpha = .7) +
+  scale_x_discrete(
+    name = "Income",
+    labels = c("Below Average", "Average", "Above Average")) +
   scale_y_continuous(name = "Authentic Happiness Inventory Score")+
   theme_minimal() +
+  theme(legend.position = "none") + 
   scale_fill_viridis_d()
-
 
 ggsave("violin-boxplot-stored.png", plot = viobox)
 ```
@@ -574,24 +609,8 @@ If plot is assigned to object, it won't be displayed unless you type `viobox` in
 
 Check out [Chapter 13 of QuantFun](https://psyteachr.github.io/quant-fun-v2/visualisation.html) for further exercises and tips for data visualization!
 
+The free book [R for data science](https://r4ds.had.co.nz/) was written by (some of) the creators of the `tidyverse`, and includes lots of plotting and data science exercises. (For more advanced plotting, check the [ggplot2 book](https://ggplot2-book.org/).)
+
 Also keep in mind: Coding is a lot of googling things!
 
 You can also check out the [R Graph Gallery](https://r-graph-gallery.com/) for code for different types of plots.
-
-. . .
-
-**Learning objectives**
-
--   Know how to transform (pivot) and join data
-
--   Understand the basics of a ggplot (layers etc.)
-
--   Be able to make your first own plots, such as bar charts, violin + boxplots, scatterplots
-
--   Know what a grouped plot and a facetted plot is
-
-. . .
-
-**Next:**
-
--   Sampling
