@@ -164,7 +164,7 @@ word <- "Hello"
 ::: {.incremental}
 -   `<-` is used to assign values to variables (`=` is also possible, but discouraged in `R`)
 
--   `a`, `multi` etc. are the variable names <span style="font-size: 16px;">(some naming rules, e.g., no whitespace, must no start with an number, many special characters not allowed)</span>
+-   `a`, `multi` etc. are the variable names <span style="font-size: 16px;">(some naming rules, e.g., no whitespace, must not start with an number, many special characters not allowed)</span>
 
     -   You can find those now in your Environment! (top right panel)
     -   No feedback in the console for saving variables (`2*3` outputs `6`, but `multi <- 2*3` doesn't)
@@ -499,5 +499,4 @@ This was the first chapter of this workshop! Do you have any questions?
 \
 Next: 
 
--   Theory: Models
 -   R: Data Wrangling
