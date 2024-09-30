@@ -170,7 +170,8 @@ Tidyverse:
 You can insert a pipe `%>%` (including spaces) by pressing `Ctrl + Shift + M`
 
 ::: aside
-`%>%` is called the *pipe*. It takes the output of whatever happens to its left and "hands it over" to the right. There's also a new base-R-pipe: `|>`. It is very similar, but sometimes the functionality differs.
+`%>%` is called the *pipe*. It takes the output of whatever happens to its left and "hands it over" to the right. \
+Since `R 4.1.0`, there's also a new base-R-pipe: `|>`. It is very similar, but has a slightly limited functionality (see <u>[here](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)</u>).
 :::
 
 ::: notes
@@ -278,6 +279,15 @@ babynames_reduced <-
 
 Removing columns vs. selecting columns: Results may change if the data get updated!
 
+::: aside
+It is encouraged to use many line breakes for better readability. Check out the <u>[Tidyverse Style Guide](https://style.tidyverse.org/syntax.html#long-lines)</u> for suggestions.
+:::
+
+
+::: notes
+Similar to optional spaces for better readability, R allows for optional line breakes. You can try out what works best for you or look up some style guides.
+:::
+
 ## Arranging Data
 
 Change the order of the data (oberservations/rows)!
@@ -355,7 +365,8 @@ The second argument, `year > 2000`, is a *Boolean* or *logical expression*, whic
 
 ::: aside
 A double equality sign `==` is a **comparison**, a single equals `=` is a variable or parameter **assignment**. \
-This is why R users like to make the distinction even bigger by using `<-` for variable assignment (your environment in the top right pane) and `=` for parameter assignment in functions (a hidden so-called *local* environment only visible to the function).
+This is why R users like to make the distinction even bigger by using `<-` for variable assignment (your environment in the top right pane) and `=` for parameter assignment in functions (a hidden so-called *local* environment only visible to the function). \
+Also, there are slight differences between `<-` and `=` for variable assignment, see <u>[here](https://stackoverflow.com/questions/1741820/what-are-the-differences-between-and-assignment-operators)</u>.
 :::
 
 ## Filter some more 1

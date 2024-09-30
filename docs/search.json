@@ -341,7 +341,7 @@
     "href": "1.1_R_Intro.html#using-the-console-as-a-calculator",
     "title": "1.1 Intro to R",
     "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console.",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console.\nAlso: Notice that you have the option to include spaces are not between commands, i.e., 100 + 1 vs. 100+1.",
     "crumbs": [
       "1.1 Intro to R"
     ]
@@ -691,7 +691,7 @@
     "href": "1.2_Data_Wrangling.html#tidyverse-2",
     "title": "1.2 Data Wrangling",
     "section": "Tidyverse 2",
-    "text": "Tidyverse 2\nBase R:\noutput_data1 &lt;- function1(data)\noutput_data2 &lt;- function2(output_data1, param1)\noutput_data3 &lt;- function3(output_data2, param2, param3)\n\nOr:\noutput_data &lt;- function3(function2(function1(data), param1), param2, param3)\n\n\nTidyverse:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2(param1) %&gt;% function3(param2, param3)\n\n\nYou can insert a pipe %&gt;% (including spaces) by pressing Ctrl + Shift + M\n\n\nThe shortcut for the pipe (and other useful things like the assignment operator) can be adjusted in Tools -&gt; Modify Keyboard Shortcuts...\n\n\n\n%&gt;% is called the pipe. It takes the output of whatever happens to its left and “hands it over” to the right. There’s also a new base-R-pipe: |&gt;. It is very similar, but sometimes the functionality differs.",
+    "text": "Tidyverse 2\nBase R:\noutput_data1 &lt;- function1(data)\noutput_data2 &lt;- function2(output_data1, param1)\noutput_data3 &lt;- function3(output_data2, param2, param3)\n\nOr:\noutput_data &lt;- function3(function2(function1(data), param1), param2, param3)\n\n\nTidyverse:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2(param1) %&gt;% function3(param2, param3)\n\n\nYou can insert a pipe %&gt;% (including spaces) by pressing Ctrl + Shift + M\n\n\nThe shortcut for the pipe (and other useful things like the assignment operator) can be adjusted in Tools -&gt; Modify Keyboard Shortcuts...\n\n\n\n%&gt;% is called the pipe. It takes the output of whatever happens to its left and “hands it over” to the right.\nSince R 4.1.0, there’s also a new base-R-pipe: |&gt;. It is very similar, but has a slightly limited functionality (see here).",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -731,7 +731,7 @@
     "href": "1.2_Data_Wrangling.html#selecting-variables-of-interest",
     "title": "1.2 Data Wrangling",
     "section": "Selecting Variables of Interest",
-    "text": "Selecting Variables of Interest\nUse select() to choose only the columns year, sex, name, and prop and store it as a new tibble called babynames_reduced.\nRemember that you can run ?select in the console if you need help about, e.g., input/arguments to the function.\n\n\n# my favorite:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(-n) # remove columns by using -\n\nRemoving columns vs. selecting columns: Results may change if the data get updated!",
+    "text": "Selecting Variables of Interest\nUse select() to choose only the columns year, sex, name, and prop and store it as a new tibble called babynames_reduced.\nRemember that you can run ?select in the console if you need help about, e.g., input/arguments to the function.\n\n\n# my favorite:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(-n) # remove columns by using -\n\nRemoving columns vs. selecting columns: Results may change if the data get updated!\n\n\nSimilar to optional spaces for better readability, R allows for optional line breakes. You can try out what works best for you or look up some style guides.\n\n\n\nIt is encouraged to use many line breakes for better readability. Check out the Tidyverse Style Guide for suggestions.",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1041,7 +1041,7 @@
     "href": "1.2_Data_Wrangling.html#boolean-expressions-2",
     "title": "1.2 Data Wrangling",
     "section": "Boolean Expressions 2",
-    "text": "Boolean Expressions 2\n\nBoolean expressions\n\n\n\n\n\n\n\nOperator\nName\nis TRUE if and only if\n\n\n\n\nA &lt; B\nless than\nA is less than B\n\n\nA &lt;= B\nless than or equal\nA is less than or equal to B\n\n\nA &gt; B\ngreater than\nA is greater than B\n\n\nA &gt;= B\ngreater than or equal\nA is greater than or equal to B\n\n\nA == B\nequivalence\nA exactly equals B\n\n\nA != B\nnot equal\nA does not exactly equal B\n\n\nA %in% B\nin\nA is an element of vector B\n\n\n\n\n\nA double equality sign == is a comparison, a single equals = is a variable or parameter assignment.\nThis is why R users like to make the distinction even bigger by using &lt;- for variable assignment (your environment in the top right pane) and = for parameter assignment in functions (a hidden so-called local environment only visible to the function).",
+    "text": "Boolean Expressions 2\n\nBoolean expressions\n\n\n\n\n\n\n\nOperator\nName\nis TRUE if and only if\n\n\n\n\nA &lt; B\nless than\nA is less than B\n\n\nA &lt;= B\nless than or equal\nA is less than or equal to B\n\n\nA &gt; B\ngreater than\nA is greater than B\n\n\nA &gt;= B\ngreater than or equal\nA is greater than or equal to B\n\n\nA == B\nequivalence\nA exactly equals B\n\n\nA != B\nnot equal\nA does not exactly equal B\n\n\nA %in% B\nin\nA is an element of vector B\n\n\n\n\n\nA double equality sign == is a comparison, a single equals = is a variable or parameter assignment.\nThis is why R users like to make the distinction even bigger by using &lt;- for variable assignment (your environment in the top right pane) and = for parameter assignment in functions (a hidden so-called local environment only visible to the function).\nAlso, there are slight differences between &lt;- and = for variable assignment, see here.",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1071,7 +1071,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1897   1890\n 2  1905   1900\n 3  1912   1910\n 4  1919   1910\n 5  1944   1940\n 6  1966   1960\n 7  1977   1970\n 8  1989   1980\n 9  1997   1990\n10  2016   2010",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1891   1890\n 2  1905   1900\n 3  1911   1910\n 4  1926   1920\n 5  1940   1940\n 6  1942   1940\n 7  1948   1940\n 8  1957   1950\n 9  1985   1980\n10  2010   2010",
     "crumbs": [
       "1.2 Data Wrangling"
     ]

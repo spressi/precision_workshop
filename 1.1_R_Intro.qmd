@@ -143,6 +143,8 @@ sqrt(9)
 try it out!
 
 We can't really do much with these values, they will just be written in the console.
+
+Also: Notice that you have the option to include spaces are not between commands, i.e., `100 + 1` vs. `100+1`.
 :::
 
 ## Saving the Results as a Variable/Object
