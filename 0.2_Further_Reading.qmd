@@ -2,6 +2,13 @@
 title: "0.2 R - Further Reading"
 ---
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+```
+
 # Additional Information
 
 Oh, you're still here. You must be really hyped for the workshop!
@@ -95,6 +102,69 @@ a + b # can now be used!
 PS: If you want to disable the annoying behaviour of RStudio where it asks you whether you want to save your workspace every time you close it - go to **Tools** $\to$ **Global options**. Then, for "Save workspace to .RData on exit", select "Never".
 
 Of course, there are exceptions to every rule and there might be very good arguments for doing things differently in some scenarios. However, it is important to understand what the pitfalls and consequences of different approaches are, and how to navigate them.
+
+## Coding style
+
+A consistent coding style helps to make your code more readable and prevents errors. Some general things apply to every programming language, such as meaningful variable names. However, in other aspects, different programming languages my vary in what they consider "good coding style". If you want to learn about how to write "good code" (at least on the surface :-) ) `tidyverse` style, take a look at the [tidyverse style guide](https://style.tidyverse.org/index.html).
+
+The "style" of your code refers to things such as naming schemes (e.g., `day_one` instead of `DayOne`), spacing (e.g., `2 + 4` instead of `2+4`), when to add line breaks etc. None of these things will affect how your code works, but it may help readers of your code (including you) to find their way around the code. While you can follow any style guide to improve the readability of your code, it makes sense to adapt a language-specific style guide, so other users of the language (following the same style guide) will find it easier to work with your code. As a beginner, you might find it overwhelming to take care of your code style when you might already be struggling to make the code work in the first place. However, it pays off to adopt a good coding style right from the start (before you get used to a bad one), and might even help you to understand your code better.
+
+### Whitespace
+
+Whitespace refers to blank spaces in your code, whether that's within lines, or between them (see examples below). Unlike some other programming languages, `R` (mostly) doesn't care about whitespace. So, technically, you can put it wherever you want.
+
+This means that this code will work:
+
+```{r}
+#| echo: true
+iris %>% 
+  mutate(sepal_length_mm = Sepal.Length * 100) %>% 
+  summarise(sepal_length_mm = mean(sepal_length_mm), .by = Species)
+```
+
+... and so will this:
+
+```{r}
+#| echo: true
+iris%>%mutate(sepal_length_mm=Sepal.Length*100)%>%summarise(sepal_length_mm=mean(sepal_length_mm),.by=Species)
+```
+
+... and also this:
+
+```{r}
+#| echo: true
+iris %>% 
+  mutate(
+             sepal_length_mm = Sepal.Length * 
+               100) %>% 
+  summarise(
+    
+    
+    
+    sepal_length_mm = mean(
+      
+      
+      sepal_length_mm), 
+    
+    
+    
+    .by = Species
+    
+    
+    )
+```
+
+Needless to say, the second and the third example are not recommended (mildly put). This is just to emphasize that `R` *really* does not care about your whitespace.
+
+### The assignment operator
+
+If you have experience with other programming languages, you might find the assignment operator `<-` a bit weird. Many other languages use `=` to assign variables, i.e., `my_var = 2` instead of `my_var <- 2`. In `R`, it is possible to use `=` instead of `<-`. In the vast majority of scenarios, you will achieve the same results. There are subtle and rather technical details between `=` and `<-`; if you are interested, here is a [discussion on Stack Overflow](https://stackoverflow.com/questions/1741820/what-are-the-differences-between-and-assignment-operators) about the topic. Within the `R` community, the use of `=` for assigning variables is discouraged. By convention, the majority of `R` programmers uses `<-`. Note that the shortcut for inserting `<-` is *alt + -*, which will make your life a lot easier in the long run.
+
+Also note that the `<-` operator is only used for assigning variables - for arguments within functions (e.g., `mean(c(1, 10, 2), na.rm = TRUE)`) or within pipes (e.g., `iris %>% mutate(new_col = Sepal.Length * 100)`), `=` is the correct operator.
+
+### In this workshop
+
+This workshop follows the [tidyverse style guide](https://style.tidyverse.org/index.html) - however, we sometimes deviate from it to e.g. shorten code that would otherwise not fit on the slides, or to make it easier to highlight certain important lines of code.
 
 ## Managing different versions
 

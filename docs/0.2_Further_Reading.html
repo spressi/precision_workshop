@@ -296,6 +296,75 @@ window.Quarto = {
 <p>Of course, there are exceptions to every rule and there might be very good arguments for doing things differently in some scenarios. However, it is important to understand what the pitfalls and consequences of different approaches are, and how to navigate them.</p>
 </section>
 </section>
+<section id="coding-style" class="level2">
+<h2 class="anchored" data-anchor-id="coding-style">Coding style</h2>
+<p>A consistent coding style helps to make your code more readable and prevents errors. Some general things apply to every programming language, such as meaningful variable names. However, in other aspects, different programming languages my vary in what they consider “good coding style”. If you want to learn about how to write “good code” (at least on the surface :-) ) <code>tidyverse</code> style, take a look at the <a href="https://style.tidyverse.org/index.html">tidyverse style guide</a>.</p>
+<p>The “style” of your code refers to things such as naming schemes (e.g., <code>day_one</code> instead of <code>DayOne</code>), spacing (e.g., <code>2 + 4</code> instead of <code>2+4</code>), when to add line breaks etc. None of these things will affect how your code works, but it may help readers of your code (including you) to find their way around the code. While you can follow any style guide to improve the readability of your code, it makes sense to adapt a language-specific style guide, so other users of the language (following the same style guide) will find it easier to work with your code. As a beginner, you might find it overwhelming to take care of your code style when you might already be struggling to make the code work in the first place. However, it pays off to adopt a good coding style right from the start (before you get used to a bad one), and might even help you to understand your code better.</p>
+<section id="whitespace" class="level3">
+<h3 class="anchored" data-anchor-id="whitespace">Whitespace</h3>
+<p>Whitespace refers to blank spaces in your code, whether that’s within lines, or between them (see examples below). Unlike some other programming languages, <code>R</code> (mostly) doesn’t care about whitespace. So, technically, you can put it wherever you want.</p>
+<p>This means that this code will work:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sepal_length_mm =</span> Sepal.Length <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sepal_length_mm =</span> <span class="fu">mean</span>(sepal_length_mm), <span class="at">.by =</span> Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Species sepal_length_mm
+1     setosa           500.6
+2 versicolor           593.6
+3  virginica           658.8</code></pre>
+</div>
+</div>
+<p>… and so will this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">mutate</span>(<span class="at">sepal_length_mm=</span>Sepal.Length<span class="sc">*</span><span class="dv">100</span>)<span class="sc">%&gt;%</span><span class="fu">summarise</span>(<span class="at">sepal_length_mm=</span><span class="fu">mean</span>(sepal_length_mm),<span class="at">.by=</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Species sepal_length_mm
+1     setosa           500.6
+2 versicolor           593.6
+3  virginica           658.8</code></pre>
+</div>
+</div>
+<p>… and also this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">sepal_length_mm =</span> Sepal.Length <span class="sc">*</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>               <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sepal_length_mm =</span> <span class="fu">mean</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      sepal_length_mm), </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> Species</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Species sepal_length_mm
+1     setosa           500.6
+2 versicolor           593.6
+3  virginica           658.8</code></pre>
+</div>
+</div>
+<p>Needless to say, the second and the third example are not recommended (mildly put). This is just to emphasize that <code>R</code> <em>really</em> does not care about your whitespace.</p>
+</section>
+<section id="the-assignment-operator" class="level3">
+<h3 class="anchored" data-anchor-id="the-assignment-operator">The assignment operator</h3>
+<p>If you have experience with other programming languages, you might find the assignment operator <code>&lt;-</code> a bit weird. Many other languages use <code>=</code> to assign variables, i.e., <code>my_var = 2</code> instead of <code>my_var &lt;- 2</code>. In <code>R</code>, it is possible to use <code>=</code> instead of <code>&lt;-</code>. In the vast majority of scenarios, you will achieve the same results. There are subtle and rather technical details between <code>=</code> and <code>&lt;-</code>; if you are interested, here is a <a href="https://stackoverflow.com/questions/1741820/what-are-the-differences-between-and-assignment-operators">discussion on Stack Overflow</a> about the topic. Within the <code>R</code> community, the use of <code>=</code> for assigning variables is discouraged. By convention, the majority of <code>R</code> programmers uses <code>&lt;-</code>. Note that the shortcut for inserting <code>&lt;-</code> is <em>alt + -</em>, which will make your life a lot easier in the long run.</p>
+<p>Also note that the <code>&lt;-</code> operator is only used for assigning variables - for arguments within functions (e.g., <code>mean(c(1, 10, 2), na.rm = TRUE)</code>) or within pipes (e.g., <code>iris %&gt;% mutate(new_col = Sepal.Length * 100)</code>), <code>=</code> is the correct operator.</p>
+</section>
+<section id="in-this-workshop" class="level3">
+<h3 class="anchored" data-anchor-id="in-this-workshop">In this workshop</h3>
+<p>This workshop follows the <a href="https://style.tidyverse.org/index.html">tidyverse style guide</a> - however, we sometimes deviate from it to e.g.&nbsp;shorten code that would otherwise not fit on the slides, or to make it easier to highlight certain important lines of code.</p>
+</section>
+</section>
 <section id="managing-different-versions" class="level2">
 <h2 class="anchored" data-anchor-id="managing-different-versions">Managing different versions</h2>
 <p>In the installation guide, we briefly talked about <code>R</code> and its packages changing constantly. Sometimes, new versions of software can lead to different results, which we generally do not want for our old analyses (which are e.g.&nbsp;tied to publications). There are ways how to manage several <code>R</code> versions or older <code>R</code> package versions, but those will not be covered here, because that would be enough material for at least two workshops. If you want to read about the topic, a rather lightweight alternative for managing different package versions is <a href="https://rstudio.github.io/renv/articles/renv.html">renv</a>. Another pretty common tool to manage software and package versions is Docker - but it takes time to master it. <a href="https://www.r-bloggers.com/2023/06/a-gentle-introduction-to-docker/">This tutorial might be a good start</a>.</p>
