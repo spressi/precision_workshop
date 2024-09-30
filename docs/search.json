@@ -671,7 +671,7 @@
     "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-2",
     "title": "1.2 Data Wrangling",
     "section": "Accessing Variables/Columns 2",
-    "text": "Accessing Variables/Columns 2\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# in baseR, we access elements of a data.frame with square brackets\ntestdata[1, 2] #get cell that is in first row and second column\n\n[1] \"a\"\n\ntestdata[1:2, 4:5] #use a colon to create ranges of values: first two rows and column numbers 4 and 5\n\n  d  e\n1 7 10\n2 8 11\n\n# we can leave one part empty to select ALL available columns/rows\ntestdata[1:2,] #first two rows, all columns\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n\ntestdata[, 4:5] #columns number 4 and 5, all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n\n\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!",
+    "text": "Accessing Variables/Columns 2\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# in baseR, we access elements of a data.frame with square brackets\ntestdata[1, 2] # get cell that is in first row and second column\n\n[1] \"a\"\n\ntestdata[1:2, 4:5] # use a colon to create ranges of values: first two rows and column numbers 4 and 5\n\n  d  e\n1 7 10\n2 8 11\n\n# we can leave one part empty to select ALL available columns/rows\ntestdata[1:2, ] # first two rows, all columns\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n\ntestdata[, 4:5] # columns number 4 and 5, all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n\n\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -681,7 +681,7 @@
     "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-3",
     "title": "1.2 Data Wrangling",
     "section": "Accessing Variables/Columns 3",
-    "text": "Accessing Variables/Columns 3\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# it is usually better to access columns by their column name:\ntestdata[c(\"d\", \"e\")] #columns with names \"d\" and \"e\", all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n# access a column only:\ntestdata[[\"a\"]] #double square brackets to get a vector (not a data.frame)\n\n[1] 1 2 3\n\ntestdata$a #short notation to get column \"a\" as a vector\n\n[1] 1 2 3\n\n\n\nbetter avoid the comma when accessing by column name:\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n[1] 1 2 3\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n  a\n1 1\n2 2\n3 3\n\n\n[1] 1 2 3\n\n\n=&gt; consistent data format without leading comma",
+    "text": "Accessing Variables/Columns 3\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# it is usually better to access columns by their column name:\ntestdata[c(\"d\", \"e\")] # columns with names \"d\" and \"e\", all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n# access a column only:\ntestdata[[\"a\"]] # double square brackets to get a vector (not a data.frame)\n\n[1] 1 2 3\n\ntestdata$a # short notation to get column \"a\" as a vector\n\n[1] 1 2 3\n\n\n\nbetter avoid the comma when accessing by column name:\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n[1] 1 2 3\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n  a\n1 1\n2 2\n3 3\n\n\n[1] 1 2 3\n\n\n=&gt; consistent data format without leading comma",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -691,7 +691,7 @@
     "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-4",
     "title": "1.2 Data Wrangling",
     "section": "Accessing Variables/Columns 4",
-    "text": "Accessing Variables/Columns 4\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# tidy versions (see next slides)\n#library(tidyverse) #load tidyverse (if not already done)\npull(testdata, a) #same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a, b) #get column(s) as a data.frame; no c() needed!\n\n  a b\n1 1 a\n2 2 b\n3 3 c",
+    "text": "Accessing Variables/Columns 4\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# tidy versions (see next slides)\n# library(tidyverse) #load tidyverse (if not already done)\npull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a, b) # get column(s) as a data.frame; no c() needed!\n\n  a b\n1 1 a\n2 2 b\n3 3 c",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -811,7 +811,7 @@
     "href": "1.2_Data_Wrangling.html#filter-some-more-3",
     "title": "1.2 Data Wrangling",
     "section": "Filter some more 3",
-    "text": "Filter some more 3\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nThird task:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(name == \"Mary\" | #the vertical line is a logical OR\n         name == \"Elizabeth\" | \n         name == \"Victoria\"\n  ) \n\n\nA better shorthand exists with the operator %in%:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))",
+    "text": "Filter some more 3\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nThird task:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(\n    name == \"Mary\" | # the vertical line is a logical OR\n    name == \"Elizabeth\" | \n    name == \"Victoria\"\n  ) \n\n\nA better shorthand exists with the operator %in%:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -821,7 +821,7 @@
     "href": "1.2_Data_Wrangling.html#filter-some-more-4",
     "title": "1.2 Data Wrangling",
     "section": "Filter some more 4",
-    "text": "Filter some more 4\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nFourth task:\nThis is very tricky! You could use three filters in a row with:\nname != \"Mary\", name != \"Elizabeth\", name != \"Victoria\".\nThere is no function “not in” but you can negate the result in two ways:\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(!name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\")) #! is a negation (\"not\")\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\") == FALSE)\n\n\nCareful with precedence! %in% is evaluated before !:\n!(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))\n=&gt; I prefer to add == FALSE in the end",
+    "text": "Filter some more 4\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nFourth task:\nThis is very tricky! You could use three filters in a row with:\nname != \"Mary\", name != \"Elizabeth\", name != \"Victoria\".\nThere is no function “not in” but you can negate the result in two ways:\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(!name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\")) # ! is a negation (\"not\")\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\") == FALSE)\n\n\nCareful with precedence! %in% is evaluated before !:\n!(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))\n=&gt; I prefer to add == FALSE in the end",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -831,7 +831,7 @@
     "href": "1.2_Data_Wrangling.html#your-first-plot",
     "title": "1.2 Data Wrangling",
     "section": "Your First Plot",
-    "text": "Your First Plot\nIn your script, insert and run the following code:\n\nbabynames %&gt;% \n  filter(sex==\"F\", #only female babies\n         name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\") #reduce to these 4 names\n  ) %&gt;% \n  ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(size=2) #plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex==\"F\" to sex==\"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
+    "text": "Your First Plot\nIn your script, insert and run the following code:\n\nbabynames %&gt;% \n  filter(\n    sex == \"F\", # only female babies\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\") # reduce to these 4 names\n  ) %&gt;% \n  ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(size = 2) # plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex == \"F\" to sex == \"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -851,7 +851,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) #round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1880   1880\n 2  1892   1890\n 3  1912   1910\n 4  1929   1920\n 5  1945   1940\n 6  1969   1960\n 7  1985   1980\n 8  1988   1980\n 9  2011   2010\n10  2012   2010",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1883   1880\n 2  1888   1880\n 3  1911   1910\n 4  1917   1910\n 5  1920   1920\n 6  1940   1940\n 7  1948   1940\n 8  1979   1970\n 9  1994   1990\n10  2010   2010",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -861,7 +861,7 @@
     "href": "1.2_Data_Wrangling.html#summarizing",
     "title": "1.2 Data Wrangling",
     "section": "Summarizing",
-    "text": "Summarizing\nThe goal of data wrangling is often to summarize (or aggregate) the data, e.g. to have an average value per condition. Sometimes you’d also want to calculate descriptive statistics to report.\n\nYou can do so using the function summarize():\n\n# run the filter function just like above again:\ndat &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n         sex == \"F\"\n  )\n\n# summarize the data, calculating the number of oberservations:\ndat_sum &lt;- dat %&gt;% summarize(total = sum(n))\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374",
+    "text": "Summarizing\nThe goal of data wrangling is often to summarize (or aggregate) the data, e.g. to have an average value per condition. Sometimes you’d also want to calculate descriptive statistics to report.\n\nYou can do so using the function summarize():\n\n# run the filter function just like above again:\ndat &lt;- \n  babynames %&gt;% \n  filter(\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n    sex == \"F\"\n  )\n\n# summarize the data, calculating the number of oberservations:\ndat_sum &lt;- dat %&gt;% summarize(total = sum(n))\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -881,7 +881,7 @@
     "href": "1.2_Data_Wrangling.html#grouping-and-summarizing",
     "title": "1.2 Data Wrangling",
     "section": "Grouping and Summarizing",
-    "text": "Grouping and Summarizing\nOften, we want to summarize data for specific subgroups. For this aim, summarize() has the .by parameter:\n\ngroup_sum &lt;- \n  dat %&gt;% \n  summarize(total = sum(n), \n            .by=name\n  ) \ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Emily     841491\n2 Kathleen  711605\n3 Beverly   376914\n4 Alexandra 231364",
+    "text": "Grouping and Summarizing\nOften, we want to summarize data for specific subgroups. For this aim, summarize() has the .by parameter:\n\ngroup_sum &lt;- \n  dat %&gt;% \n  summarize(total = sum(n), .by = name) \n\ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Emily     841491\n2 Kathleen  711605\n3 Beverly   376914\n4 Alexandra 231364",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -891,7 +891,7 @@
     "href": "1.2_Data_Wrangling.html#grouping-and-summarizing-2",
     "title": "1.2 Data Wrangling",
     "section": "Grouping and Summarizing 2",
-    "text": "Grouping and Summarizing 2\nYou can also subgroup by a combination of variables:\n\nbabynames %&gt;% \n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\")) %&gt;% #we start with the 4 names regardless of sex\n  summarize(total = sum(n), \n            .by=c(name, sex) #and then summarize by name, separated for sex\n  )\n\n# A tibble: 8 × 3\n  name      sex    total\n  &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;\n1 Emily     F     841491\n2 Kathleen  F     711605\n3 Beverly   M       4633\n4 Beverly   F     376914\n5 Alexandra F     231364\n6 Emily     M       1744\n7 Kathleen  M       1692\n8 Alexandra M        859",
+    "text": "Grouping and Summarizing 2\nYou can also subgroup by a combination of variables:\n\nbabynames %&gt;% \n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\")) %&gt;% # we start with the 4 names regardless of sex\n  summarize(\n    total = sum(n),\n    .by = c(name, sex) #and then summarize by name, separated for sex\n  )\n\n# A tibble: 8 × 3\n  name      sex    total\n  &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;\n1 Emily     F     841491\n2 Kathleen  F     711605\n3 Beverly   M       4633\n4 Beverly   F     376914\n5 Alexandra F     231364\n6 Emily     M       1744\n7 Kathleen  M       1692\n8 Alexandra M        859",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -911,7 +911,7 @@
     "href": "1.2_Data_Wrangling.html#grouping-and-summarizing-4",
     "title": "1.2 Data Wrangling",
     "section": "Grouping and Summarizing 4",
-    "text": "Grouping and Summarizing 4\nUse the baby_decades data frame to calculate the mean and median number of observations, grouped by sex & decade.\n\n\nbaby_decades %&gt;% \n  summarize(mean_year = mean(n),\n            median_year = median(n),\n            .by=c(sex, decade)\n  )\n\n# A tibble: 28 × 4\n   sex   decade mean_year median_year\n   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;\n 1 F       1880     111.           13\n 2 M       1880     101.           12\n 3 F       1890     128.           13\n 4 M       1890      93.6          12\n 5 F       1900     131.           12\n 6 M       1900      94.4          12\n 7 F       1910     187.           12\n 8 M       1910     181.           12\n 9 F       1920     211.           12\n10 M       1920     227.           13\n# ℹ 18 more rows",
+    "text": "Grouping and Summarizing 4\nUse the baby_decades data frame to calculate the mean and median number of observations, grouped by sex & decade.\n\n\nbaby_decades %&gt;% \n  summarize(\n    mean_year = mean(n),\n    median_year = median(n),\n    .by = c(sex, decade)\n  )\n\n# A tibble: 28 × 4\n   sex   decade mean_year median_year\n   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;\n 1 F       1880     111.           13\n 2 M       1880     101.           12\n 3 F       1890     128.           13\n 4 M       1890      93.6          12\n 5 F       1900     131.           12\n 6 M       1900      94.4          12\n 7 F       1910     187.           12\n 8 M       1910     181.           12\n 9 F       1920     211.           12\n10 M       1920     227.           13\n# ℹ 18 more rows",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -921,7 +921,7 @@
     "href": "1.2_Data_Wrangling.html#counting-data",
     "title": "1.2 Data Wrangling",
     "section": "Counting Data",
-    "text": "Counting Data\nThere are several ways to get the number of rows per group. You can use the function n() within a call to summarize() (or mutate()). A shortcut is to use count():\n\ndat %&gt;% summarize(n = n(), .by=name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Emily       138\n2 Kathleen    138\n3 Beverly     122\n4 Alexandra   117\n\ndat %&gt;% count(name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138\n\n\nInterestingly, the order of the output may vary. summarize() leaves the data in the original order (i.e., by prop, which (likely) translates to an order by n()). count() arranges the output by the variables for which the counting is done (here: alphabetically by name).",
+    "text": "Counting Data\nThere are several ways to get the number of rows per group. You can use the function n() within a call to summarize() (or mutate()). A shortcut is to use count():\n\ndat %&gt;% summarize(n = n(), .by = name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Emily       138\n2 Kathleen    138\n3 Beverly     122\n4 Alexandra   117\n\ndat %&gt;% count(name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138\n\n\nInterestingly, the order of the output may vary. summarize() leaves the data in the original order (i.e., by prop, which (likely) translates to an order by n()). count() arranges the output by the variables for which the counting is done (here: alphabetically by name).",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -931,7 +931,7 @@
     "href": "1.2_Data_Wrangling.html#bigger-pipes",
     "title": "1.2 Data Wrangling",
     "section": "Bigger Pipes!",
-    "text": "Bigger Pipes!\nSo far we have often saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the environment with intermediate data.frames or tibbles!\n\npipe_summary &lt;- \n  babynames %&gt;%\n  mutate(decade = floor(year/10) *10) %&gt;%\n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n         sex == \"F\"\n  ) %&gt;%\n  summarize(mean_decade = mean(n), \n            .by=c(name, decade)\n  )\n\nIt’s not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes.\nAs a rule of thumb: If an intermediate step is only used once, you should probably delete it (unless it makes the code easier to comprehend).",
+    "text": "Bigger Pipes!\nSo far we have often saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the environment with intermediate data.frames or tibbles!\n\npipe_summary &lt;- \n  babynames %&gt;%\n  mutate(decade = floor(year / 10) * 10) %&gt;%\n  filter(\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"),\n    sex == \"F\"\n  ) %&gt;%\n  summarize(\n    mean_decade = mean(n),\n    .by = c(name, decade)\n  )\n\nIt’s not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes.\nAs a rule of thumb: If an intermediate step is only used once, you should probably delete it (unless it makes the code easier to comprehend).",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1001,7 +1001,7 @@
     "href": "1.2_Data_Wrangling.html#reformatting-the-data",
     "title": "1.2 Data Wrangling",
     "section": "Reformatting the Data",
-    "text": "Reformatting the Data\nLet’s bring the wide data in a longer, tidy format!\n\nThere are several functions in R to reformat data, but the newest ones are pivot_longer() and pivot_wider().\nRun the code and see what changes:\n\nrlong &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10, #we can select a range of column names\n    #cols = starts_with(\"Q\"), #alternative\n    names_to = \"Question\", \n    values_to = \"Response\"\n  )\n\n\n\nDescribe what the function does, what does the input/the arguments mean?",
+    "text": "Reformatting the Data\nLet’s bring the wide data in a longer, tidy format!\n\nThere are several functions in R to reformat data, but the newest ones are pivot_longer() and pivot_wider().\nRun the code and see what changes:\n\nrlong &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10, # we can select a range of column names\n    # cols = starts_with(\"Q\"), # alternative\n    names_to = \"Question\", \n    values_to = \"Response\"\n  )\n\n\n\nDescribe what the function does, what does the input/the arguments mean?",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1011,7 +1011,7 @@
     "href": "1.2_Data_Wrangling.html#joining-the-data",
     "title": "1.2 Data Wrangling",
     "section": "Joining the Data",
-    "text": "Joining the Data\nWe now want to combine the different data sets: We want to have the information how the questionnaire has to be scored included with the items.\nWe can find the scoring information (i.e. how the questions are framed, positive or negative/whether they need to be reversed) in the qformats tibble. Furthermore, we can find how many points are given to each item/response in scoring.\nWe can use the function inner_join() to merge the tibbles into one bigger tibble.\n\nActivity: Replace the NULL values in the below code with the necessary variable names to join rlong and qformats by Question.\n\nrlong2 &lt;- inner_join(x = NULL, \n                     y = NULL, \n                     by = \"NULL\")\n\n\n\n\nrlong2 &lt;- \n  inner_join(\n    x = rlong, \n    y = qformats, \n    by = \"Question\"\n  )\n\n\nDescribe what happened?\nwhat is forward and reverse scoring?",
+    "text": "Joining the Data\nWe now want to combine the different data sets: We want to have the information how the questionnaire has to be scored included with the items.\nWe can find the scoring information (i.e. how the questions are framed, positive or negative/whether they need to be reversed) in the qformats tibble. Furthermore, we can find how many points are given to each item/response in scoring.\nWe can use the function inner_join() to merge the tibbles into one bigger tibble.\n\nActivity: Replace the NULL values in the below code with the necessary variable names to join rlong and qformats by Question.\n\nrlong2 &lt;- \n  inner_join(x = NULL, y = NULL, by = \"NULL\")\n\n\n\n\nrlong2 &lt;- \n  inner_join(\n    x = rlong, \n    y = qformats, \n    by = \"Question\"\n  )\n\n\nDescribe what happened?\nwhat is forward and reverse scoring?",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1021,7 +1021,7 @@
     "href": "1.2_Data_Wrangling.html#combining-more-data",
     "title": "1.2 Data Wrangling",
     "section": "Combining more Data",
-    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- \n  rlong2 %&gt;% \n  inner_join(scoring, \n             c(\"QFormat\", \"Response\")\n  )",
+    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- \n  rlong2 %&gt;% \n  inner_join(\n    scoring, \n    c(\"QFormat\", \"Response\")\n  )",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1031,7 +1031,7 @@
     "href": "1.2_Data_Wrangling.html#calculate-the-questionnaire-scores",
     "title": "1.2 Data Wrangling",
     "section": "Calculate the Questionnaire Scores",
-    "text": "Calculate the Questionnaire Scores\nHow do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the NULL.\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(NULL), \n    .by = NULL\n  )\n\n\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(Score), # sum column Score to obtain AQ scores.\n    .by = Id #separately for each Id (participant)\n  )",
+    "text": "Calculate the Questionnaire Scores\nHow do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the NULL.\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(NULL), \n    .by = NULL\n  )\n\n\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(Score), # sum column Score to obtain AQ scores.\n    .by = Id # separately for each Id (participant)\n  )",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1041,7 +1041,7 @@
     "href": "1.2_Data_Wrangling.html#pipe-it-all-together",
     "title": "1.2 Data Wrangling",
     "section": "Pipe it all together!",
-    "text": "Pipe it all together!\n\naq_scores2 &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10,\n    names_to = \"Question\", \n    values_to = \"Response\"\n  ) %&gt;%  \n  inner_join(\n    qformats, \n    \"Question\"\n  ) %&gt;% \n  inner_join(\n    scoring, \n    c(\"QFormat\", \"Response\")\n  ) %&gt;% \n  summarize(\n    AQ = sum(Score), \n    .by=Id\n  )",
+    "text": "Pipe it all together!\n\naq_scores2 &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10,\n    names_to = \"Question\", \n    values_to = \"Response\"\n  ) %&gt;%  \n  inner_join(qformats, \"Question\") %&gt;% \n  inner_join(scoring, c(\"QFormat\", \"Response\")) %&gt;% \n  summarize(AQ = sum(Score), .by = Id)",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1071,7 +1071,7 @@
     "href": "1.2_Data_Wrangling.html#solutions-2",
     "title": "1.2 Data Wrangling",
     "section": "Solutions 2",
-    "text": "Solutions 2\n\nnew_pong_data &lt;- pong_data %&gt;% \n  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) %&gt;% \n  arrange(desc(HitOrMiss), desc(JudgedSpeed)) %&gt;% \n  filter(\n    JudgedSpeed == 1,\n    BallSpeed %in% c(\"2\", \"4\", \"5\", \"7\"),\n    HitOrMiss == 0\n  ) %&gt;% \n  filter(TrialNumber &gt; 2) %&gt;% \n  mutate(TrialNumber = TrialNumber -1) \n  \n  # summarize (use old data frame because we removed variables)\npong_data_hits &lt;- \n  pong_data %&gt;% \n  summarize(\n    total_hits = sum(HitOrMiss, na.rm = TRUE),\n    meanhits = mean(HitOrMiss, na.rm = TRUE),\n    .by=c(BackgroundColor, PaddleLength)\n  )",
+    "text": "Solutions 2\n\nnew_pong_data &lt;- pong_data %&gt;% \n  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) %&gt;% \n  arrange(desc(HitOrMiss), desc(JudgedSpeed)) %&gt;% \n  filter(\n    JudgedSpeed == 1,\n    BallSpeed %in% c(\"2\", \"4\", \"5\", \"7\"),\n    HitOrMiss == 0\n  ) %&gt;% \n  filter(TrialNumber &gt; 2) %&gt;% \n  mutate(TrialNumber = TrialNumber -1) \n  \n  # summarize (use old data frame because we removed variables)\npong_data_hits &lt;- \n  pong_data %&gt;% \n  summarize(\n    total_hits = sum(HitOrMiss, na.rm = TRUE),\n    meanhits = mean(HitOrMiss, na.rm = TRUE),\n    .by = c(BackgroundColor, PaddleLength)\n  )",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
