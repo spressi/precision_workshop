@@ -1070,23 +1070,23 @@ This is why R users like to make the distinction even bigger by using <code>&lt;
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co">#we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again</span></span>
 <span id="cb41-2"><a></a>baby_decades <span class="ot">&lt;-</span> </span>
 <span id="cb41-3"><a></a>  babynames <span class="sc">%&gt;%</span> </span>
-<span id="cb41-4"><a></a>  <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span><span class="dv">10</span>) <span class="co">#round(year, -1) works but not floor(year, -1) :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-4"><a></a>  <span class="fu">mutate</span>(<span class="at">decade =</span> <span class="fu">floor</span>(year <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>) <span class="co">#round(year, -1) works but not floor(year, -1) :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
     year decade
    &lt;dbl&gt;  &lt;dbl&gt;
- 1  1890   1890
- 2  1902   1900
- 3  1905   1900
- 4  1917   1910
- 5  1923   1920
- 6  1934   1930
- 7  1949   1940
- 8  1965   1960
- 9  1979   1970
-10  2009   2000</code></pre>
+ 1  1897   1890
+ 2  1905   1900
+ 3  1912   1910
+ 4  1919   1910
+ 5  1944   1940
+ 6  1966   1960
+ 7  1977   1970
+ 8  1989   1980
+ 9  1997   1990
+10  2016   2010</code></pre>
 </div>
 </div>
 </div>
@@ -1591,7 +1591,8 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 <aside class="notes">
 <p>The second table is the tidyest!</p>
 <p>Table 1 has cases and population mixed together in <code>count</code> variable.<br>
-Table 3 mixes them in an awkward character row <code>rate</code>. Table 4 is standard wide format.</p>
+Table 3 mixes them in an awkward character row <code>rate</code>.<br>
+Table 4 is standard wide format.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

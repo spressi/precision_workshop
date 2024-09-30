@@ -519,7 +519,7 @@ But `mutate` is much more powerful and can create variables that differ per obse
 #we can only use floor to round down to full numbers => divide year by 10, floor it, and then multiply by 10 again
 baby_decades <- 
   babynames %>% 
-  mutate(decade = floor(year/10) *10) #round(year, -1) works but not floor(year, -1) :(
+  mutate(decade = floor(year / 10) * 10) #round(year, -1) works but not floor(year, -1) :(
 
 ```
 ```{r}
@@ -880,7 +880,7 @@ left_join(table4a, table4b, by="country", suffix=c("_cases", "_population"))
 The second table is the tidyest!
 
 Table 1 has cases and population mixed together in `count` variable. \
-Table 3 mixes them in an awkward character row `rate`.
+Table 3 mixes them in an awkward character row `rate`. \
 Table 4 is standard wide format.
 :::
 
