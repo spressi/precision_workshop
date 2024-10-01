@@ -585,7 +585,7 @@ Use either name or index of column!</p>
 <p>When wrangling your data in R, you often want to access/use different columns, e.g.&nbsp;to calculate new ones. There are a number of ways you can do that:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># tidy versions (see next slides)</span></span>
-<span id="cb24-2"><a></a><span class="co"># library(tidyverse) #load tidyverse (if not already done)</span></span>
+<span id="cb24-2"><a></a><span class="co"># library(tidyverse) # load tidyverse (if not already done)</span></span>
 <span id="cb24-3"><a></a><span class="fu">pull</span>(testdata, a) <span class="co"># same as testdata$a but can be used better in pipes (see next slide)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
@@ -1097,16 +1097,16 @@ Also, there are slight differences between <code>&lt;-</code> and <code>=</code>
 <pre><code># A tibble: 10 × 2
     year decade
    &lt;dbl&gt;  &lt;dbl&gt;
- 1  1881   1880
- 2  1888   1880
- 3  1890   1890
+ 1  1882   1880
+ 2  1886   1880
+ 3  1905   1900
  4  1909   1900
- 5  1919   1910
- 6  1932   1930
- 7  1957   1950
- 8  1975   1970
- 9  1978   1970
-10  2009   2000</code></pre>
+ 5  1920   1920
+ 6  1927   1920
+ 7  1931   1930
+ 8  1940   1940
+ 9  1947   1940
+10  1994   1990</code></pre>
 </div>
 </div>
 </div>
@@ -1179,7 +1179,7 @@ There’s just one row in the resulting data frame, because <code>summarize()</c
 <span id="cb49-2"><a></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>)) <span class="sc">%&gt;%</span> <span class="co"># we start with the 4 names regardless of sex</span></span>
 <span id="cb49-3"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb49-4"><a></a>    <span class="at">total =</span> <span class="fu">sum</span>(n),</span>
-<span id="cb49-5"><a></a>    <span class="at">.by =</span> <span class="fu">c</span>(name, sex) <span class="co">#and then summarize by name, separated for sex</span></span>
+<span id="cb49-5"><a></a>    <span class="at">.by =</span> <span class="fu">c</span>(name, sex) <span class="co"># and then summarize by name, separated for sex</span></span>
 <span id="cb49-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 3
@@ -1240,7 +1240,8 @@ babynames %>%
    filter(name %in% c("Emily",
                      "Kathleen",
                      "Alexandra",
-                     "Beverly"), sex=="F") %>%
+                     "Beverly"), 
+                     sex == "F") %>%
   group_by(name) %>% 
   summarize(n = n()) %>% 
   ungroup()
@@ -1839,7 +1840,7 @@ Now add the scoring data:</p>
 <h2>Solutions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb73-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>) <span class="co">#I put the data into a separate subfolder "Data"</span></span>
+<span id="cb73-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>) <span class="co"># I put the data into a separate subfolder "Data"</span></span>
 <span id="cb73-3"><a></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    
