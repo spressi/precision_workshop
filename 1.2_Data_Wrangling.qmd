@@ -133,7 +133,7 @@ When wrangling your data in R, you often want to access/use different columns, e
 #| echo: true
 
 # tidy versions (see next slides)
-# library(tidyverse) #load tidyverse (if not already done)
+# library(tidyverse) # load tidyverse (if not already done)
 pull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)
 select(testdata, a, b) # get column(s) as a data.frame; no c() needed!
 
@@ -605,7 +605,7 @@ babynames %>%
   filter(name %in% c("Emily", "Kathleen", "Alexandra", "Beverly")) %>% # we start with the 4 names regardless of sex
   summarize(
     total = sum(n),
-    .by = c(name, sex) #and then summarize by name, separated for sex
+    .by = c(name, sex) # and then summarize by name, separated for sex
   )
 ```
 
@@ -652,7 +652,8 @@ babynames %>%
    filter(name %in% c("Emily",
                      "Kathleen",
                      "Alexandra",
-                     "Beverly"), sex=="F") %>%
+                     "Beverly"), 
+                     sex == "F") %>%
   group_by(name) %>% 
   summarize(n = n()) %>% 
   ungroup()
@@ -1109,7 +1110,7 @@ We'll use data from a [paper](https://journals.sagepub.com/doi/full/10.1177/0956
 #| echo: true
 
 library("tidyverse")
-pong_data <- read_csv("Data/PongBlueRedBack 1-16 Codebook.csv") #I put the data into a separate subfolder "Data"
+pong_data <- read_csv("Data/PongBlueRedBack 1-16 Codebook.csv") # I put the data into a separate subfolder "Data"
 summary(pong_data)
 
 # look at the data (can also use summary(), str(), head() etc.)
