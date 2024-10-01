@@ -16,7 +16,7 @@ You might already be an expert in `R` - feel free to skip this guide if all of t
 
 - You have `R` installed, and it's at least version 4.0. To check which version you have, run `R.version` in your `R` console. If your version is lower than 4, please update.
 - You have RStudio installed, or alternatively, an editor of your choice that can handle `R` and that you are comfortable with. (The instructors of the workshop will use RStudio.)
-- You have installed the following packages: `tidyverse`, `confintr`, `rstatix`, `apaTable`, `babynames`.
+- You have installed the following packages: `tidyverse`, `confintr`, `rstatix`, `apaTables`, `babynames`.
 
 If you're missing any of these, install them on your own or follow this guide. **To jump to different sections of this guide, use the menu on the right!**
 
@@ -81,7 +81,7 @@ For this workshop, please install the following packages:
 - `tidyverse`
 - `confintr`
 - `rstatix`
-- `apaTable`
+- `apaTables`
 - `babynames`
 
 ## About packages
@@ -101,7 +101,7 @@ As an example, we will install the package `babynames`, which includes data abou
 
 You can install the package by typing `install.packages("babynames")` in an `R` console (e.g., after opening RStudio) and pressing enter.
 
-You can install multiple packages at once like this: `install.packages(c("babynames", "apaTable"))`. Mind the `c()` wrapped around the package names.
+You can install multiple packages at once like this: `install.packages(c("babynames", "apaTables"))`. Mind the `c()` wrapped around the package names.
 
 ![Install packages in the console](images/babynames_console.png){width=80% fig-align="center"}
 
