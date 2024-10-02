@@ -232,6 +232,21 @@ with(data %>% filter(diagnostic == "Mouth/Nose"),
 # sobald man nämlich was Komplexeres als eine Hand voll Tests vor hat, stößt man schnell ohne data.frames an Grenzen
 
 
+# Correlation into plot
+
+analysis = with(mtcars, cor.test(wt, mpg)) %>% 
+  #apa::cor_apa(r_ci = TRUE, print = FALSE, format = "plotmath") #does not work yet
+  apa::cor_apa(r_ci = TRUE, print = FALSE)
+mtcars %>% ggplot(aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_label(aes(x = max(wt), y = max(mpg)), 
+             hjust = "inward",
+             #label = as.expression(analysis)
+             label = analysis
+  )
+
+
 # ANOVA -------------------------------------------------------------------
 ?apaTables::get.ci.partial.eta.squared
 
