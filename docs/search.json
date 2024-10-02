@@ -721,7 +721,7 @@
     "href": "1.2_Data_Wrangling.html#setting-up-libraries",
     "title": "1.2 Data Wrangling",
     "section": "Setting up libraries",
-    "text": "Setting up libraries\n\nOpen your Biostats R project.\nCreate a new R script and save it, e.g. as “DataWrangling1.R”.\nInsert code to make sure the packages “tidyverse” and “babynames” are installed and loaded.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"babynames\")\n\nlibrary(babynames)\nlibrary(tidyverse)\n\n\nload tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!",
+    "text": "Setting up libraries\n\nOpen your Workshop R project.\nCreate a new R script and save it, e.g. as “DataWrangling1.R”.\nInsert code to make sure the packages “tidyverse” and “babynames” are installed and loaded.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"babynames\")\n\nlibrary(babynames)\nlibrary(tidyverse)\n\n\nload tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -831,7 +831,7 @@
     "href": "1.2_Data_Wrangling.html#your-first-plot",
     "title": "1.2 Data Wrangling",
     "section": "Your First Plot",
-    "text": "Your First Plot\nIn your script, insert and run the following code:\n\nbabynames %&gt;% \n  filter(\n    sex == \"F\", # only female babies\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\") # reduce to these 4 names\n  ) %&gt;% \n  ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(size = 2) # plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex == \"F\" to sex == \"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
+    "text": "Your First Plot\nIn your script, insert and run the following code:\n\nbabynames %&gt;% \n  filter(\n    sex == \"F\", # only female babies\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\") # reduce to these 4 names\n  ) %&gt;% \n  ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(linewidth = 2) # plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex == \"F\" to sex == \"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -851,7 +851,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1882   1880\n 2  1886   1880\n 3  1905   1900\n 4  1909   1900\n 5  1920   1920\n 6  1927   1920\n 7  1931   1930\n 8  1940   1940\n 9  1947   1940\n10  1994   1990",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1883   1880\n 2  1892   1890\n 3  1916   1910\n 4  1931   1930\n 5  1938   1930\n 6  1950   1950\n 7  1971   1970\n 8  1984   1980\n 9  1985   1980\n10  1988   1980",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -951,7 +951,7 @@
     "href": "1.2_Data_Wrangling.html#tidy-data-wide-vs.-long-format",
     "title": "1.2 Data Wrangling",
     "section": "Tidy Data: wide vs. long format",
-    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
+    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1021,7 +1021,7 @@
     "href": "1.2_Data_Wrangling.html#combining-more-data",
     "title": "1.2 Data Wrangling",
     "section": "Combining more Data",
-    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- \n  rlong2 %&gt;% \n  inner_join(\n    scoring, \n    c(\"QFormat\", \"Response\")\n  )",
+    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- \n  rlong2 %&gt;% \n  inner_join(\n    scoring, \n    c(\"QFormat\", \"Response\")\n  )\n\n\nYou can also let the function figure out by itself which columns should be used for joining:\n\nrscores &lt;- inner_join(rlong2, scoring)\n\nJoining with `by = join_by(Response, QFormat)`\n\n\n\n\nAnd if you are happy with the result, copy the information into your code to make the join explicit:\n\nrscores &lt;- inner_join(rlong2, scoring, \n                      by = join_by(Response, QFormat)) #same as by = c(\"QFormat\", \"Response\")",
     "crumbs": [
       "1.2 Data Wrangling"
     ]

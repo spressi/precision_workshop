@@ -8,9 +8,9 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.555">
 
-  <title>Precision Workshop – 1.2 Data Wrangling</title>
+  <title>Precision Workshop - 1.2 Data Wrangling</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -69,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.cf { color: #003b4f; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -83,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.kw { color: #003b4f; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -705,7 +705,7 @@ Since <code>R 4.1.0</code>, there’s also a new base-R-pipe: <code>|&gt;</code>
 <section id="setting-up-libraries" class="slide level2 scrollable">
 <h2>Setting up libraries</h2>
 <ol type="1">
-<li><p>Open your Biostats R project.</p></li>
+<li><p>Open your Workshop R project.</p></li>
 <li><p>Create a new R script and save it, e.g.&nbsp;as “<code>DataWrangling1.R</code>”.</p></li>
 <li><p>Insert code to make sure the packages “<code>tidyverse</code>” and “<code>babynames</code>” are installed and loaded.</p></li>
 </ol>
@@ -1055,7 +1055,7 @@ Also, there are slight differences between <code>&lt;-</code> and <code>=</code>
 <span id="cb39-4"><a></a>    name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Emily"</span>, <span class="st">"Kathleen"</span>, <span class="st">"Alexandra"</span>, <span class="st">"Beverly"</span>) <span class="co"># reduce to these 4 names</span></span>
 <span id="cb39-5"><a></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb39-6"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> prop, <span class="at">colour =</span> name)) <span class="sc">+</span></span>
-<span id="cb39-7"><a></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="co"># plot data as a line (with increased size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-7"><a></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">2</span>) <span class="co"># plot data as a line (with increased size)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="1.2_Data_Wrangling_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><div class="fragment">
@@ -1097,16 +1097,16 @@ Also, there are slight differences between <code>&lt;-</code> and <code>=</code>
 <pre><code># A tibble: 10 × 2
     year decade
    &lt;dbl&gt;  &lt;dbl&gt;
- 1  1882   1880
- 2  1886   1880
- 3  1905   1900
- 4  1909   1900
- 5  1920   1920
- 6  1927   1920
- 7  1931   1930
- 8  1940   1940
- 9  1947   1940
-10  1994   1990</code></pre>
+ 1  1883   1880
+ 2  1892   1890
+ 3  1916   1910
+ 4  1931   1930
+ 5  1938   1930
+ 6  1950   1950
+ 7  1971   1970
+ 8  1984   1980
+ 9  1985   1980
+10  1988   1980</code></pre>
 </div>
 </div>
 </div>
@@ -1231,8 +1231,6 @@ Remember that the grouping done with `group_by()` is saved with the data frame (
 It is good practice to always `ungroup()` your data once you finished the operations you needed the grouping for!
 
 
-
-
 ::: {.cell}
 
 ```{.r .cell-code  code-line-numbers="8"}
@@ -1262,8 +1260,6 @@ babynames %>%
 
 :::
 :::
-
-
 
 -->
 </section>
@@ -1436,7 +1432,8 @@ there are (usually) several rows per participant</p>
 </tr>
 </tbody>
 </table>
-</div></div>
+</div>
+</div>
 <div class="fragment">
 <p>Wide format implements a sparser representation of the data but less tidy!<br>
 If you want to convert <code>Time</code> from milliseconds into seconds, what do you have to do in both formats?</p>
@@ -1522,8 +1519,6 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 :::columns
 ::: {.column width="40%"}
 
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1549,12 +1544,8 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 :::
 :::
 
-
-
 :::
 ::: {.column width="60%"}
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1575,15 +1566,11 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 :::
 :::
 
-
-
 :::
 :::
 
 :::columns
 ::: {.column width="35%"}
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1604,12 +1591,8 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 :::
 :::
 
-
-
 :::
 ::: {.column width="65%"}
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1626,8 +1609,6 @@ If you want to convert <code>Time</code> from milliseconds into seconds, what do
 
 :::
 :::
-
-
 
 :::
 :::
@@ -1782,42 +1763,58 @@ Now add the scoring data:</p>
 <span id="cb69-5"><a></a>    <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)</span>
 <span id="cb69-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="fragment">
+<p>You can also let the function figure out by itself which columns should be used for joining:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>rscores <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(rlong2, scoring)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(Response, QFormat)`</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>And if you are happy with the result, copy the information into your code to make the join explicit:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>rscores <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(rlong2, scoring, </span>
+<span id="cb72-2"><a></a>                      <span class="at">by =</span> <span class="fu">join_by</span>(Response, QFormat)) <span class="co">#same as by = c("QFormat", "Response")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section id="calculate-the-questionnaire-scores" class="slide level2">
 <h2>Calculate the Questionnaire Scores</h2>
 <p>How do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the <code>NULL</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a>aq_scores <span class="ot">&lt;-</span> </span>
-<span id="cb70-2"><a></a>  rscores <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb70-4"><a></a>    <span class="at">AQ =</span> <span class="fu">sum</span>(<span class="cn">NULL</span>), </span>
-<span id="cb70-5"><a></a>    <span class="at">.by =</span> <span class="cn">NULL</span></span>
-<span id="cb70-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a>aq_scores <span class="ot">&lt;-</span> </span>
+<span id="cb73-2"><a></a>  rscores <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb73-4"><a></a>    <span class="at">AQ =</span> <span class="fu">sum</span>(<span class="cn">NULL</span>), </span>
+<span id="cb73-5"><a></a>    <span class="at">.by =</span> <span class="cn">NULL</span></span>
+<span id="cb73-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>aq_scores <span class="ot">&lt;-</span> </span>
-<span id="cb71-2"><a></a>  rscores <span class="sc">%&gt;%</span> </span>
-<span id="cb71-3"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb71-4"><a></a>    <span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="co"># sum column Score to obtain AQ scores.</span></span>
-<span id="cb71-5"><a></a>    <span class="at">.by =</span> Id <span class="co"># separately for each Id (participant)</span></span>
-<span id="cb71-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>aq_scores <span class="ot">&lt;-</span> </span>
+<span id="cb74-2"><a></a>  rscores <span class="sc">%&gt;%</span> </span>
+<span id="cb74-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb74-4"><a></a>    <span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="co"># sum column Score to obtain AQ scores.</span></span>
+<span id="cb74-5"><a></a>    <span class="at">.by =</span> Id <span class="co"># separately for each Id (participant)</span></span>
+<span id="cb74-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="pipe-it-all-together" class="slide level2">
 <h2>Pipe it all together!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>aq_scores2 <span class="ot">&lt;-</span> </span>
-<span id="cb72-2"><a></a>  responses <span class="sc">%&gt;%</span> </span>
-<span id="cb72-3"><a></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb72-4"><a></a>    <span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
-<span id="cb72-5"><a></a>    <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
-<span id="cb72-6"><a></a>    <span class="at">values_to =</span> <span class="st">"Response"</span></span>
-<span id="cb72-7"><a></a>  ) <span class="sc">%&gt;%</span>  </span>
-<span id="cb72-8"><a></a>  <span class="fu">inner_join</span>(qformats, <span class="st">"Question"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-9"><a></a>  <span class="fu">inner_join</span>(scoring, <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-10"><a></a>  <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by =</span> Id) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>aq_scores2 <span class="ot">&lt;-</span> </span>
+<span id="cb75-2"><a></a>  responses <span class="sc">%&gt;%</span> </span>
+<span id="cb75-3"><a></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb75-4"><a></a>    <span class="at">cols =</span> Q1<span class="sc">:</span>Q10,</span>
+<span id="cb75-5"><a></a>    <span class="at">names_to =</span> <span class="st">"Question"</span>, </span>
+<span id="cb75-6"><a></a>    <span class="at">values_to =</span> <span class="st">"Response"</span></span>
+<span id="cb75-7"><a></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb75-8"><a></a>  <span class="fu">inner_join</span>(qformats, <span class="st">"Question"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-9"><a></a>  <span class="fu">inner_join</span>(scoring, <span class="fu">c</span>(<span class="st">"QFormat"</span>, <span class="st">"Response"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-10"><a></a>  <span class="fu">summarize</span>(<span class="at">AQ =</span> <span class="fu">sum</span>(Score), <span class="at">.by =</span> Id) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -1839,9 +1836,9 @@ Now add the scoring data:</p>
 <section id="solutions" class="slide level2">
 <h2>Solutions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb73-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>) <span class="co"># I put the data into a separate subfolder "Data"</span></span>
-<span id="cb73-3"><a></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb76-2"><a></a>pong_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/PongBlueRedBack 1-16 Codebook.csv"</span>) <span class="co"># I put the data into a separate subfolder "Data"</span></span>
+<span id="cb76-3"><a></a><span class="fu">summary</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    
  Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  
@@ -1858,8 +1855,8 @@ Now add the scoring data:</p>
                     3rd Qu.:1.0000   3rd Qu.: 9.25  
                     Max.   :1.0000   Max.   :12.00  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a><span class="co"># look at the data (can also use summary(), str(), head() etc.)</span></span>
-<span id="cb75-2"><a></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a><span class="co"># look at the data (can also use summary(), str(), head() etc.)</span></span>
+<span id="cb78-2"><a></a><span class="fu">glimpse</span>(pong_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4,608
 Columns: 8
@@ -1877,25 +1874,25 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 <section id="solutions-2" class="slide level2">
 <h2>Solutions 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a>new_pong_data <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb77-2"><a></a>  <span class="fu">select</span>(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-3"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(HitOrMiss), <span class="fu">desc</span>(JudgedSpeed)) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-4"><a></a>  <span class="fu">filter</span>(</span>
-<span id="cb77-5"><a></a>    JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>,</span>
-<span id="cb77-6"><a></a>    BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>),</span>
-<span id="cb77-7"><a></a>    HitOrMiss <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb77-8"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-9"><a></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-10"><a></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span><span class="dv">1</span>) </span>
-<span id="cb77-11"><a></a>  </span>
-<span id="cb77-12"><a></a>  <span class="co"># summarize (use old data frame because we removed variables)</span></span>
-<span id="cb77-13"><a></a>pong_data_hits <span class="ot">&lt;-</span> </span>
-<span id="cb77-14"><a></a>  pong_data <span class="sc">%&gt;%</span> </span>
-<span id="cb77-15"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb77-16"><a></a>    <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb77-17"><a></a>    <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb77-18"><a></a>    <span class="at">.by =</span> <span class="fu">c</span>(BackgroundColor, PaddleLength)</span>
-<span id="cb77-19"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a>new_pong_data <span class="ot">&lt;-</span> pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a></a>  <span class="fu">select</span>(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-3"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(HitOrMiss), <span class="fu">desc</span>(JudgedSpeed)) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-4"><a></a>  <span class="fu">filter</span>(</span>
+<span id="cb80-5"><a></a>    JudgedSpeed <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb80-6"><a></a>    BallSpeed <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>),</span>
+<span id="cb80-7"><a></a>    HitOrMiss <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb80-8"><a></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-9"><a></a>  <span class="fu">filter</span>(TrialNumber <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-10"><a></a>  <span class="fu">mutate</span>(<span class="at">TrialNumber =</span> TrialNumber <span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb80-11"><a></a>  </span>
+<span id="cb80-12"><a></a>  <span class="co"># summarize (use old data frame because we removed variables)</span></span>
+<span id="cb80-13"><a></a>pong_data_hits <span class="ot">&lt;-</span> </span>
+<span id="cb80-14"><a></a>  pong_data <span class="sc">%&gt;%</span> </span>
+<span id="cb80-15"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb80-16"><a></a>    <span class="at">total_hits =</span> <span class="fu">sum</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb80-17"><a></a>    <span class="at">meanhits =</span> <span class="fu">mean</span>(HitOrMiss, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb80-18"><a></a>    <span class="at">.by =</span> <span class="fu">c</span>(BackgroundColor, PaddleLength)</span>
+<span id="cb80-19"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section id="thanks" class="title-slide slide level1 center">
@@ -2235,7 +2232,18 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -2267,29 +2275,7 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2297,7 +2283,7 @@ $ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

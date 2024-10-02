@@ -208,7 +208,7 @@ This is *Data wrangling 1* of our QuantFun book: <https://psyteachr.github.io/qu
 
 ## Setting up libraries
 
-1.  Open your Biostats R project.
+1.  Open your Workshop R project.
 
 2.  Create a new R script and save it, e.g. as "`DataWrangling1.R`".
 
@@ -492,7 +492,7 @@ babynames %>%
     name %in% c("Emily", "Kathleen", "Alexandra", "Beverly") # reduce to these 4 names
   ) %>% 
   ggplot(aes(x = year, y = prop, colour = name)) +
-  geom_line(size = 2) # plot data as a line (with increased size)
+  geom_line(linewidth = 2) # plot data as a line (with increased size)
 ```
 
 . . .
@@ -1043,6 +1043,27 @@ rscores <-
     scoring, 
     c("QFormat", "Response")
   )
+```
+
+. . .
+
+You can also let the function figure out by itself which columns should be used for joining:
+
+```{r}
+#| echo: true
+#| warning: true
+#| message: true
+rscores <- inner_join(rlong2, scoring)
+```
+
+. . .
+
+And if you are happy with the result, copy the information into your code to make the join explicit:
+
+```{r}
+#| echo: true
+rscores <- inner_join(rlong2, scoring, 
+                      by = join_by(Response, QFormat)) #same as by = c("QFormat", "Response")
 ```
 
 ## Calculate the Questionnaire Scores
