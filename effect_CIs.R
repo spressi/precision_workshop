@@ -234,7 +234,10 @@ with(data %>% filter(diagnostic == "Mouth/Nose"),
 
 # Correlation into plot
 
-analysis = with(mtcars, cor.test(wt, mpg)) %>% 
+analysis <- 
+  with(mtcars, cor.test(wt, mpg)) %>% 
+  #mtcars %>% cor.test(~ wt + mpg, data=.) %>% #alternative ohne with, aber geht ja nicht mehr für paired=T => ist für mich raus
+  
   #apa::cor_apa(r_ci = TRUE, print = FALSE, format = "plotmath") #does not work yet
   apa::cor_apa(r_ci = TRUE, print = FALSE)
 mtcars %>% ggplot(aes(x = wt, y = mpg)) +
