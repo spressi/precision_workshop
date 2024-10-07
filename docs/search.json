@@ -511,7 +511,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1902   1900\n 2  1931   1930\n 3  1942   1940\n 4  1945   1940\n 5  1948   1940\n 6  1954   1950\n 7  1976   1970\n 8  1982   1980\n 9  1983   1980\n10  1994   1990",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1880   1880\n 2  1888   1880\n 3  1898   1890\n 4  1905   1900\n 5  1907   1900\n 6  1932   1930\n 7  1936   1930\n 8  1945   1940\n 9  1979   1970\n10  2004   2000",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1389,291 +1389,291 @@
   {
     "objectID": "2.2_CIs.html#data-preparation",
     "href": "2.2_CIs.html#data-preparation",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Data preparation",
     "text": "Data preparation\n\n\nIf you haven’t done so yet: Create an R project for the precision workshop.\nCreate a script for this part of the workshop (e.g., cis.R).\nLoad the tidyverse (library(tidyverse)) at the beginning of your script.\n\n\n\nNote: We show different packages that help us with confidence interval calculations, some of which may have conflicting functions. This is why in this presentation, we call each package explicitly, e.g., confintr::ci_mean().",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#why-confidence-intervals",
     "href": "2.2_CIs.html#why-confidence-intervals",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Why confidence intervals?",
     "text": "Why confidence intervals?\n\n\nGoal: indicate precision/accuracy of a point estimate (e.g., the mean).\nIf visualized, it’s often supposed to help with “inference by eye”.\nHowever, confidence intervals are often misinterpreted (e.g., Hoekstra et al., 2014)",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#what-is-a-confidence-interval",
     "href": "2.2_CIs.html#what-is-a-confidence-interval",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "What is a confidence interval?",
     "text": "What is a confidence interval?\n\n\nAssume we use a 95% CI.\nIn the long run, in 95% of our replications, the interval we calculate will contain the true population mean.\nAs with any statistical inference: no guarantee! Errors are possible.\n“If a given value is within the interval of a result, the two can be informally assimilated as being comparable.” (Cousineau, 2017)",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#confidence-interval-of-the-mean",
     "href": "2.2_CIs.html#confidence-interval-of-the-mean",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Confidence interval of the mean",
     "text": "Confidence interval of the mean\n\n\n\\(M - t_{\\gamma} \\times SE_{M}, M + t_{\\gamma} \\times SE_{M}\\)\n\n\n\n\n\\(M\\) = mean of a set of observations\n\\(SE_{M}\\) = standard error of the mean\n\\(SE_{M} = s/\\sqrt n\\)\n\\(t_{\\gamma}\\) = multiplier from a Student \\(t\\) distribution, with d.f. \\(n - 1\\) and coverage level \\(\\gamma\\) (often 95%)",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#briefly-the-iris-data",
     "href": "2.2_CIs.html#briefly-the-iris-data",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Briefly: The iris data",
     "text": "Briefly: The iris data\nData about the size of three different species of iris flowers.\n\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#in-r-confidence-interval-of-the-mean",
     "href": "2.2_CIs.html#in-r-confidence-interval-of-the-mean",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "In R: Confidence interval of the mean",
     "text": "In R: Confidence interval of the mean\nThe package confintr offers a variety of functions around confidence intervals. Default here: Student’s \\(t\\) method.\n\niris %&gt;% \n  filter(Species == \"versicolor\") %&gt;% \n  pull(Petal.Width) %&gt;% \n  confintr::ci_mean()\n\n\n    Two-sided 95% t confidence interval for the population mean\n\nSample estimate: 1.326 \nConfidence interval:\n    2.5%    97.5% \n1.269799 1.382201 \n\n\n\nAlso available: Wald and bootstrap CIs.",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#confidence-interval-of-the-mean-1",
     "href": "2.2_CIs.html#confidence-interval-of-the-mean-1",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Confidence interval of the mean",
     "text": "Confidence interval of the mean\n\n\n\\(M - t_{\\gamma} \\times SE_{M}, M + t_{\\gamma} \\times SE_{M}\\)\n\n\n\n\nHowever: very “limited” CI!\nComparison to a fixed value (e.g., population mean).\nCannot easily be used to compare different means.\nUseless to compare means of repeated-measures designs.",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-comparing-groups",
     "href": "2.2_CIs.html#cis-comparing-groups",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs: comparing groups",
     "text": "CIs: comparing groups\n\n\nPosition of each group mean as well as the relative position of the means are uncertain.\nI.e., SE for the comparison between two means is larger than for the comparison of a mean with a fixed value.\nHow much the CI needs to be expanded depends on the variance of each group.\nWhen the variance is homogeneous across conditions, there is a shortcut: The sum of two equal variances can be calculated by multiplying the common variance by two.\nI.e., the CI must be \\(\\sqrt2\\) (\\(\\approx\\) 1.41) times wider.\n\n\n\n\n\n\\(M - t_{\\gamma} \\times \\sqrt2 \\times SE_{M}, M + t_{\\gamma} \\times \\sqrt2 \\times SE_{M}\\)",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-potential-problems-when-comparing-groups",
     "href": "2.2_CIs.html#cis-potential-problems-when-comparing-groups",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs: potential problems when comparing groups",
     "text": "CIs: potential problems when comparing groups\nSee Cousineau, 2017 - more about data viz later!",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#in-r-custom-function",
     "href": "2.2_CIs.html#in-r-custom-function",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "In R: custom function",
     "text": "In R: custom function\n\nSometimes, writing your own custom function gives you the control you need over certain calculations.\n\n\n\n\n# You've seen this in the previous part :-)\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\n\n\n# CI based on t distribution\nz_CI_t &lt;- function(x, CI, na.rm = FALSE) {\n  if (na.rm) x &lt;- x[!is.na(x)]\n  ci &lt;- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI\n}",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#in-r-custom-function---applied",
     "href": "2.2_CIs.html#in-r-custom-function---applied",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "In R: custom function - applied",
     "text": "In R: custom function - applied\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  summarise(\n    ci_lower = mean(Petal.Width) - se(Petal.Width) * z_CI_t(Petal.Width, .95),\n    ci_upper = mean(Petal.Width) + se(Petal.Width) * z_CI_t(Petal.Width, .95),\n    .by = Species\n  )\n\n     Species  ci_lower  ci_upper\n1     setosa 0.2160497 0.2759503\n2 versicolor 1.2697993 1.3822007",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-comparing-groups-1",
     "href": "2.2_CIs.html#cis-comparing-groups-1",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs: comparing groups",
     "text": "CIs: comparing groups\n\nWider CIs for group comparisons, as e.g. suggested by (Cousineau, 2017).\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  summarise(\n    ci_lower = mean(Petal.Width) - se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),\n    ci_upper = mean(Petal.Width) + se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),\n    .by = Species\n  )\n\n     Species  ci_lower  ci_upper\n1     setosa 0.2036439 0.2883561\n2 versicolor 1.2465202 1.4054798\n\n\n\n\n\nAttention! Assumes equal variance!\nEven though here, we use the mean and SD/SE of each group (not e.g. the pooled SD).",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-difference-of-means",
     "href": "2.2_CIs.html#cis-difference-of-means",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs: difference of means",
     "text": "CIs: difference of means\n\nIf possible, the most elegant way is to report/plot the CI for the difference in means.\n\n\nwith(\n  iris,\n  confintr::ci_mean_diff(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\n\n    Two-sided 95% t confidence interval for the population value of\n    mean(x)-mean(y)\n\nSample estimate: 1.08 \nConfidence interval:\n    2.5%    97.5% \n1.016867 1.143133 \n\n\n\n\nNot pipe-friendly, if that’s important for you.\nCareful! Not for within-subjects comparisons!",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-difference-of-means-1",
     "href": "2.2_CIs.html#cis-difference-of-means-1",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs: difference of means",
     "text": "CIs: difference of means\n\nLooks familiar? Part of the t.test() output by default!\n\n\nwith(\n  iris,\n  t.test(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\n\n    Welch Two Sample t-test\n\ndata:  Petal.Width[Species == \"versicolor\"] and Petal.Width[Species == \"setosa\"]\nt = 34.08, df = 74.755, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n 1.016867 1.143133\nsample estimates:\nmean of x mean of y \n    1.326     0.246",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#what-about-within-subject-designs",
     "href": "2.2_CIs.html#what-about-within-subject-designs",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "What about within-subject designs?",
     "text": "What about within-subject designs?\n\n\nRepeated measures are typically correlated, which makes it possible to evaluate the difference between means more precisely.\nI.e., we adjust the width of the CI based on the correlation between measures.\nThe difference between the two means is estimated as if we had a larger sample.\n\n\n\n\n\n\\(M - t_{\\gamma} \\times \\sqrt{1-r} \\times \\sqrt2 \\times \\frac{s}{\\sqrt{n}}, M + t_{\\gamma} \\times \\sqrt{1-r} \\times \\sqrt2 \\times \\frac{s}{\\sqrt{n}}\\)\n\n\n\nNote that we still are comparing two means, so as before, the CI is “difference adjusted” using \\(\\sqrt2\\).",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#briefly-the-fhch2010-data",
     "href": "2.2_CIs.html#briefly-the-fhch2010-data",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Briefly: the fhch2010 data",
     "text": "Briefly: the fhch2010 data\n\nData from Freeman, Heathcote, Chalmers, & Hockley (2010), included in afex.\nLexical decision and word naming latencies for 300 words and 300 nonwords.\nFor simplicity, we’re only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword).\n\n\nlibrary(afex)\n\nhead(fhch2010)\n\n  id   task stimulus density frequency length   item    rt      log_rt correct\n1 N1 naming     word    high       low      6 potted 1.091  0.08709471    TRUE\n2 N1 naming     word     low      high      6 engine 0.876 -0.13238919    TRUE\n3 N1 naming     word     low      high      5  ideal 0.710 -0.34249031    TRUE\n4 N1 naming  nonword    high      high      5  uares 1.210  0.19062036    TRUE\n5 N1 naming  nonword     low      high      4   xazz 0.843 -0.17078832    TRUE\n6 N1 naming     word    high      high      4   fill 0.785 -0.24207156    TRUE\n\n\n\n\n# Aggregate to get a word/nonword reaction time per participant\nfhch2010_summary &lt;- \n  fhch2010 %&gt;% \n  summarise(rt = mean(rt), .by = c(id, task, stimulus))",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-for-within-subject-designs",
     "href": "2.2_CIs.html#cis-for-within-subject-designs",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs for within-subject designs",
     "text": "CIs for within-subject designs\nThe measures are highly correlated :-)\n\nfhch2010_summary_wf &lt;- \n  fhch2010_summary %&gt;% \n  pivot_wider(\n    id_cols = id,\n    names_from = stimulus,\n    values_from = rt\n  )\n\nfhch2010_summary_wf %&gt;% \n  rstatix::cor_test(word, nonword)\n\n# A tibble: 1 × 8\n  var1  var2      cor statistic        p conf.low conf.high method \n  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  \n1 word  nonword   0.8      8.67 5.40e-11    0.658     0.884 Pearson",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-for-within-subject-designs-1",
     "href": "2.2_CIs.html#cis-for-within-subject-designs-1",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs for within-subject designs",
     "text": "CIs for within-subject designs\n\n# without adjusting\nfhch2010_summary %&gt;% \n  summarise(\n    ci_lower = mean(rt) - se(rt) * sqrt(2) * z_CI_t(rt, .95),\n    ci_upper = mean(rt) + se(rt) * sqrt(2) * z_CI_t(rt, .95),\n    .by = stimulus\n  )\n\n  stimulus  ci_lower ci_upper\n1     word 0.8119932 1.056787\n2  nonword 0.9912777 1.206521\n\n\n\n\n# adjust for correlation\nword_cor &lt;- cor.test(fhch2010_summary_wf$word, fhch2010_summary_wf$nonword)\n\nfhch2010_summary %&gt;% \n  summarise(\n    ci_lower = mean(rt) - se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),\n    ci_upper = mean(rt) + se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),\n    .by = stimulus\n  )\n\n  stimulus  ci_lower ci_upper\n1     word 0.8793337 0.989447\n2  nonword 1.0504891 1.147310",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-for-differences-in-means-in-within-subject-designs",
     "href": "2.2_CIs.html#cis-for-differences-in-means-in-within-subject-designs",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIs for differences in means in within-subject designs",
     "text": "CIs for differences in means in within-subject designs\nAs before, the \\(t\\)-test will give us a CI for the difference in means:\n\nwith(\n  fhch2010_summary,\n  t.test(\n    rt[stimulus == \"word\"],\n    rt[stimulus == \"nonword\"]\n  )\n)\n\n\n    Welch Two Sample t-test\n\ndata:  rt[stimulus == \"word\"] and rt[stimulus == \"nonword\"]\nt = -2.8768, df = 86.583, p-value = 0.005057\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.27817603 -0.05084236\nsample estimates:\nmean of x mean of y \n0.9343903 1.0988995",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cis-caveats",
     "href": "2.2_CIs.html#cis-caveats",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CIS: caveats",
     "text": "CIS: caveats\n\n\nAssumptions: normally distributed means, homogeneity of variances, sphericity (repeated measures)\nMixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest); see upcoming data viz part!\nMost importantly: Be transparent! Describe how you calculated your CIs and what they are for!",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#cohens-d",
     "href": "2.2_CIs.html#cohens-d",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Cohen’s d",
     "text": "Cohen’s d\n\nAlso possible to report CIs on effect size estimates; different methods of calculating the desired CIs for different measures exist (beyond the scope of this workshop).\nE.g., cohens_d() from the package effectsize: “CIs are estimated using the noncentrality parameter method (also called the ‘pivot method’)”; see further details at ?effectsize::cohens_d().\n\n\nwith(\n  iris,\n  effectsize::cohens_d(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\nCohen's d |       95% CI\n------------------------\n6.82      | [5.78, 7.83]\n\n- Estimated using pooled SD.",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#rstatix-pipe-friendly-t-test",
     "href": "2.2_CIs.html#rstatix-pipe-friendly-t-test",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "rstatix: pipe-friendly t-test",
     "text": "rstatix: pipe-friendly t-test\n\nrstatix offers pipe-friendly statistical tests, and also calculates CIs.\ndetailed = TRUE will give us confidence estimates for our \\(t\\)-test.\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::t_test(Petal.Width ~ Species, detailed = TRUE)\n\n# A tibble: 1 × 15\n  estimate estimate1 estimate2 .y.         group1 group2      n1    n2 statistic\n*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;\n1    -1.08     0.246      1.33 Petal.Width setosa versico…    50    50     -34.1\n# ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,\n#   method &lt;chr&gt;, alternative &lt;chr&gt;",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
     "href": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "rstatix: pipe-friendly Cohen’s d",
-    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50    -8.23     -5.92 large",
+    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50     -8.2     -5.99 large",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#correlations-apa",
     "href": "2.2_CIs.html#correlations-apa",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Correlations: apa",
     "text": "Correlations: apa\nOption 1: Using the apa package.\n\n\niris %&gt;% \n  summarise(\n    cortest = cor.test(Petal.Width, Petal.Length) %&gt;% \n      apa::cor_apa(r_ci = TRUE, print = FALSE),\n    .by = Species\n  )\n\n     Species                          cortest\n1     setosa r(48) = .33 [.06; .56], p = .019\n2 versicolor r(48) = .79 [.65; .87], p &lt; .001\n3  virginica r(48) = .32 [.05; .55], p = .023",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#correlations-rstatix",
     "href": "2.2_CIs.html#correlations-rstatix",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "Correlations: rstatix",
     "text": "Correlations: rstatix\nOption 2: Using the rstatix package.\n\n\niris %&gt;% \n  group_by(Species) %&gt;% \n  rstatix::cor_test(Petal.Width, Petal.Length)\n\n# A tibble: 3 × 9\n  Species    var1       var2    cor statistic        p conf.low conf.high method\n  &lt;fct&gt;      &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; \n1 setosa     Petal.Wid… Peta…  0.33      2.44 1.86e- 2   0.0587     0.558 Pears…\n2 versicolor Petal.Wid… Peta…  0.79      8.83 1.27e-11   0.651      0.874 Pears…\n3 virginica  Petal.Wid… Peta…  0.32      2.36 2.25e- 2   0.0481     0.551 Pears…\n\n\n\nNote: Only gives rounded values …",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#anovas",
     "href": "2.2_CIs.html#anovas",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "ANOVAs",
     "text": "ANOVAs\n\naov_words &lt;- \n  aov_ez(\n    id = \"id\", \n    dv = \"rt\", \n    data = fhch2010_summary, \n    between = \"task\", \n    within = \"stimulus\",\n    # we want to report partial eta², and include the intercept in the output table ...\n    anova_table = list(es = \"pes\", intercept = TRUE)\n  )\n\naov_words\n\nAnova Table (Type 3 tests)\n\nResponse: rt\n         Effect    df  MSE          F  pes p.value\n1   (Intercept) 1, 43 0.10 904.33 *** .955   &lt;.001\n2          task 1, 43 0.10  15.76 *** .268   &lt;.001\n3      stimulus 1, 43 0.01  77.24 *** .642   &lt;.001\n4 task:stimulus 1, 43 0.01  31.89 *** .426   &lt;.001\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#ci-around-partial-eta²",
     "href": "2.2_CIs.html#ci-around-partial-eta²",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CI around partial eta²",
     "text": "CI around partial eta²\nIn principle, apaTables offers a function for CIs around \\(\\eta_p^2\\) …\n\n# e.g., for our task effect\napaTables::get.ci.partial.eta.squared(\n  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95\n)\n\n$LL\n[1] 0.06851017\n\n$UL\n[1] 0.4511011\n\n\n\n… but it would be tedious to copy these values.",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#ci-around-partial-eta²-1",
     "href": "2.2_CIs.html#ci-around-partial-eta²-1",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CI around partial eta²",
     "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) {\n  \n  result &lt;- \n    apply(anova_table, 1, function(x) {\n      ci &lt;- \n        apaTables::get.ci.partial.eta.squared(\n          F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n        )\n      \n      return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n    }) %&gt;% \n    t() %&gt;% \n    as.data.frame()\n  \n  result$conf.level &lt;- conf.level\n  \n  return(result)\n}",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   },
   {
     "objectID": "2.2_CIs.html#ci-around-partial-eta²-2",
     "href": "2.2_CIs.html#ci-around-partial-eta²-2",
-    "title": "2.1 Confidence Intervals",
+    "title": "2.2 Confidence Intervals",
     "section": "CI around partial eta²",
     "text": "CI around partial eta²\nThe result of custom function that applies the apaTables function to our entire ANOVA table:\n\npeta.ci(aov_words$anova_table)\n\n                      LL        UL conf.level\n(Intercept)   0.92985360 0.9656284        0.9\ntask          0.09399555 0.4224818        0.9\nstimulus      0.48335736 0.7294335        0.9\ntask:stimulus 0.23280549 0.5584355        0.9\n\n\nAlso see this blogpost by Daniel Lakens from 2014 about CIs for \\(\\eta_p^2\\).",
     "crumbs": [
-      "2.1 Confidence Intervals"
+      "2.2 Confidence Intervals"
     ]
   }
 ]
