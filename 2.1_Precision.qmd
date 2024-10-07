@@ -9,7 +9,415 @@ format:
     slide-number: true
     theme: serif
     chalkboard: true
+    width: 1280
+    height: 720
 from: markdown+emoji
 ---
 
-# TODO
+# What is (Measurement) Precision?
+
+## Interest Group: Open and Reproducible Research (IGOR)
+
+![](images/precision_IGOR.png)
+
+Part of the German Reproducibility Network:\
+<https://www.youtube.com/watch?v=sQFmB_EY1PQ>
+
+## Group-level Precision
+
+![<https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R>](images/precision_group_forest.png)
+
+&rarr; Effects in relation to their *group-level* precision
+
+
+## Group-level Precision 2
+
+![<https://www.medicowesome.com/2020/04/funnel-plot.html>](images/precision_group_funnel.jpg)
+
+&rarr; Effects in relation to their *group-level* precision
+
+## What is Precision?
+
+1. Precision is indicated by errorbars / confidence intervals
+
+## Subject-Level Precision
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor1.png)
+
+## Subject-Level Precision 2
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor2.png)
+
+## Subject-Level Precision 3
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor3.png)
+
+:::notes
+Simulated data with added noise. True score correlation *r* = 1
+
+Side note: \
+Individual errorbars = subject-level precision of each individual (across trials)\
+Confidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson's r)
+:::
+
+
+## What is Precision? 2
+
+1. Precision is indicated by errorbars / confidence intervals
+
+2. Whenever you `summarize` across a variable, you can calculate the \
+**precision of the aggregation**
+
+## Trial-Level Precision
+
+![[Holmqvist et al. (2023, retracted)](https://doi.org/10.3758/s13428-021-01762-8)](images/precision_trial.png)
+
+Only relevant for time series data (i.e., several "measurements" per trial)
+
+Note: Aggregation is not trivial here because of auto-correlation
+
+## What is Precision? 3
+
+1. Precision is indicated by errorbars / confidence intervals
+
+2. Whenever you `summarize` across a variable, you can calculate the \
+**precision of the aggregation**
+
+3. Precision exists on different levels: group, subject, trial (and more)
+
+:::notes
+"group" is a very superficial term since you can have nested groups:\
+classes in schools in cities in districts in countries, etc.
+:::
+
+## Related Concepts
+
+![cf. [Nebe, Reutter, et al. (2023)](https://doi.org/10.7554/eLife.85980); Fig. 1](images/precision_related_concepts.png)
+
+:::notes
+validity: latent ("theoretical") match between
+
+example for accuracy: systematic bias (miscalibration) in eye tracking
+
+since *criterion validity* uses a comparison of two manifest variables, this approach can be used to quantify accuracy (absolute agreement) and precision (consistency)
+:::
+
+## Precision vs. Accuracy
+
+![](images/memes/Precision_vs_Accuracy.jpg)
+
+## What is Reliability?
+
+Not this!
+
+![<http://highered.blogspot.com/2012/06/bad-reliability-part-two.html>](images/not_reliability.png)
+
+## Where is Reliability highest?
+
+![cf. [Nebe, Reutter, et al. (2023)](https://doi.org/10.7554/eLife.85980); Fig. 2](images/precision_reliability.jpg)
+
+## What is Reliability? 2
+
+:::columns
+:::column
+\
+(Intraclass) Correlation\
+&rarr; explained variance:\
+$R^2 = between / (between + within)$
+
+\
+Reliability tells you if (to what extent) you can **distinguish between low and high trait individuals**.
+
+\
+&rArr; Reliability = \
+low subject-level variability (high precision) + \
+*high* group-level variability (*low* precision!)
+
+:::
+:::column
+![cf. [Nebe, Reutter, et al. (2023)](https://doi.org/10.7554/eLife.85980); Fig. 2](images/precision_reliability.jpg)
+:::
+:::
+
+:::aside
+Note: Lack of precision does not automatically mean error variance! It can also be due to true score changes.
+:::
+
+:::notes
+Spread of bullet holes is precision, not reliability.
+
+Reliability is a COMPOUND MEASURE of high subject-level precision (i.e., low of within-subject variability) plus high between-subject variability (i.e., low group-level precision)\
+&rArr; signal-to-noise ratio with \
+between = signal & within = noise
+:::
+
+## Reliability Paradox
+
+- Paradigms that produce robust results often show low reliability ([Hedge et al., 2018](https://doi.org/10.3758/s13428-017-0935-1))
+
+- Why do statistical significance and reliability *not* go hand in hand?
+
+
+## Reliability Paradox
+
+- Paradigms that produce robust results often show low reliability ([Hedge et al., 2018](https://doi.org/10.3758/s13428-017-0935-1))
+
+- Why do statistical significance and reliability *not* go hand in hand?
+
+    * Statistical power is enhanced by high group-level precision, \
+    reliability by high group-level *variability* (cf. previous slide)
+    
+    * More subjects only increase group-level precision (high power), leaving subject-level precision constant\
+    **&rarr; sample size has no effect on the magnitude of reliability**
+
+## Reliability vs. Group-Level Precision
+
+- Group-level precision &hArr; homogenous sample
+
+- Reliability &hArr; heterogenous sample
+
+. . .
+
+\
+&rarr; Choosing your paradigm and sample, you can optimize for group-level significance OR reliability
+
+. . .
+
+\
+Basic research favors different things than (clinical) application (or individual differences research)\
+&rArr; Most of the time **group-level precision gets optimized at the cost of reliability**
+
+:::notes
+Of course, optimizing group-level significance by using homogenous samples is not good scientific practice
+:::
+
+## Trial-Level Precision to the Rescue!
+
+Improving trial-level precision of the measurement benefits both subject- and group-level precision\
+&rArr; Nested **hierarchy of precision**
+
+![cf. [Nebe, Reutter, et al. (2023)](https://doi.org/10.7554/eLife.85980); Fig. 7](images/precision_hierarchy_blank.png)
+
+## Trial-Level Precision to the Rescue!
+
+Improving trial-level precision of the measurement benefits both subject- and group-level precision\
+&rArr; Nested **hierarchy of precision**
+
+![cf. [Nebe, Reutter, et al. (2023)](https://doi.org/10.7554/eLife.85980); Fig. 7](images/precision_hierarchy.png)
+
+## Summary: What is Precision?
+
+1. Precision is indicated by errorbars / confidence intervals
+
+2. Whenever you `summarize` across a variable, you can calculate the \
+**precision of the aggregation**
+
+3. Precision exists on different levels: group, subject, trial (and more)
+
+4. Closely linked to statistical power and reliability
+
+## How Can We Enhance Precision?
+
+1. Shield the measurement from random noise &rarr; precise equipment / paradigm\
+&rArr; trial-level precision
+
+2. Identify the **aggregation level of interest**:
+    i) sample differences &rarr; optimize group-level precision: \
+    many subjects that respond homogenously
+    ii) correlational hypotheses / application &rarr; optimize subject-level precision: \
+    systematic differences between individuals but little variability within subjects across many trials (mind "sequence effects"; cf. [Nebe, Reutter, et al., 2023](https://doi.org/10.7554/eLife.85980))
+
+&rArr; “two disciplines of scientific psychology” ([Cronbach, 1957](https://psycnet.apa.org/doi/10.1037/h0043943))
+
+## Group- vs. Subject-Level Precision
+
+:::columns
+:::column
+**Group-level Precision**
+
+- Group differences (t-tests, ANOVA)
+
+- Many subjects (independent observations)
+
+- Homogenous sample (e.g., psychology students?)
+
+:::
+:::column
+**Subject-level Precision**
+
+- Correlations (e.g., Reliability)
+
+- Many trials (careful: sequence effects!)
+
+- Heterogenous/diverse sample
+
+- Low variability within subjects across trials (i.e., SD~within~)
+:::
+:::
+
+## Take Home Message
+
+- We are in a replication crisis
+
+- Increasing the number of subjects is not the only way to get out
+
+- Sample size benefits basic research on groups only 
+
+&rArr; Increase precision on the aggregate level of interest!
+
+![](images/precision_vs_sample_size.png)
+
+# Precision in `R`!
+
+```{css}
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+```
+
+## The Standard Error (SE)
+
+Calculates the (lack of) precision of a mean based on the \
+standard deviation ($SD$) of the individual observations and their number ($n$)
+
+$$SE = \frac{SD}{\sqrt{n}}$$
+
+## The Standard Error (SE) in `R`
+
+No base `R` function available &#128169;
+
+1. Use `confintr::se_mean` (not part of the tidyverse)
+
+2. Use a custom function
+
+```{r}
+#| echo: true
+
+se <- function(x, na.rm = TRUE) {
+  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
+}
+```
+
+:::aside
+Careful with custom functions! I often see people using `n()` but this does not work correctly with missing values (`NA` / `na.rm = TRUE`)
+:::
+
+## The Standard Error (SE) in `R` 2
+
+Whenever you use `mean`, also calculate the SE:
+
+```{r}
+#| echo: true
+library(tidyverse)
+
+iris %>% #helpful data set for illustration
+  summarize( #aggregation => precision
+    across(.cols = starts_with("Sepal"), #everything(), #output too wide
+           .fns = list(mean = mean, se = confintr::se_mean)),
+    .by = Species)
+```
+
+\
+&rarr; subject-level (species-level) precision
+
+## Standard Error Pitfalls in `R`
+
+What is the group-level precision of `Sepal.Length`?
+
+Note: Treat `Species` as subjects and rows within `Species` as trials.
+
+```{r}
+#| echo: true
+data <-
+  iris %>% 
+  rename(subject = Species, measure = Sepal.Length) %>% 
+  mutate(trial = 1:n(), .by = subject) %>% 
+  select(subject, trial, measure) %>% arrange(trial, subject) %>% tibble()
+print(data)
+```
+
+## Standard Error Pitfalls in `R`
+
+What is the group-level precision of `Sepal.Length`?
+
+```{r}
+#| echo: true
+data %>% 
+  summarize(m = mean(measure),
+            se = confintr::se_mean(measure))
+```
+
+. . .
+
+\
+```{r}
+#| echo: true
+data %>% 
+  summarize(m = mean(measure),
+            se = confintr::se_mean(measure),
+            n = n())
+```
+
+## Standard Error Pitfalls in `R` 2
+
+What is the group-level precision of `Sepal.Length`?
+
+```{r}
+#| echo: true
+data %>% 
+  summarize(measure.subject = mean(measure), .by = subject) %>% #subject-level averages
+  summarize(m = mean(measure.subject),
+            se = confintr::se_mean(measure.subject),
+            n = n())
+```
+
+. . .
+
+&rArr; When using trial-level data to calculate group-level precision, **summarize twice!**
+
+&rArr; Every summarize brings you up exactly *one* level - don't try to skip!\
+trial-level &rarr; subject-level &rarr; group-level
+
+:::aside
+Linear Mixed Models (LMMs) implicitly take this into account when specifying *random intercepts for subjects* `(1|subject)`.
+:::
+
+## Summary: Precision in `R`
+
+```{r}
+#| echo: true
+data %>% 
+  summarize(.by = subject, #trial- to subject-level
+            measure.subject = mean(measure), #subject-level averages
+            se.subject = confintr::se_mean(measure)) %>%  #subject-level precision
+  summarize(m = mean(measure.subject), #group-level mean ("grand average")
+            se = confintr::se_mean(measure.subject), #group-level precision
+            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)
+            n = n())
+```
+
+# Thanks!
+
+Learning objectives:
+
+-   Learn about the core concept of precision and how it relates to similar constructs (e.g., validity, reliability, statistical power)
+
+-   Recognize your aggregate level of interest for research questions and how you can improve its precision
+
+-   (Understand the reliability paradox and its relation to precision)
+
+-   Calculate precision in `R` (on different aggregation levels)
+
+Next:
+
+Confidence Intervals

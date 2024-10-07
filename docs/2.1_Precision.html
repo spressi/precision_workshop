@@ -8,10 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter &amp; Juli Nagel">
-  <title>Precision Workshop – 2.1 Measurement Precision</title>
+  <title>Precision Workshop - 2.1 Measurement Precision</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -341,8 +406,466 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
 </div>
 
 </section>
-<section id="todo" class="title-slide slide level1 center">
-<h1>TODO</h1>
+<section>
+<section id="what-is-measurement-precision" class="title-slide slide level1 center">
+<h1>What is (Measurement) Precision?</h1>
+
+</section>
+<section id="interest-group-open-and-reproducible-research-igor" class="slide level2">
+<h2>Interest Group: Open and Reproducible Research (IGOR)</h2>
+
+<img data-src="images/precision_IGOR.png" class="r-stretch"><p>Part of the German Reproducibility Network:<br>
+<a href="https://www.youtube.com/watch?v=sQFmB_EY1PQ" class="uri">https://www.youtube.com/watch?v=sQFmB_EY1PQ</a></p>
+</section>
+<section id="group-level-precision" class="slide level2">
+<h2>Group-level Precision</h2>
+
+<img data-src="images/precision_group_forest.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R" class="uri">https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R</a></p><p>→ Effects in relation to their <em>group-level</em> precision</p>
+</section>
+<section id="group-level-precision-2" class="slide level2">
+<h2>Group-level Precision 2</h2>
+
+<img data-src="images/precision_group_funnel.jpg" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.medicowesome.com/2020/04/funnel-plot.html" class="uri">https://www.medicowesome.com/2020/04/funnel-plot.html</a></p><p>→ Effects in relation to their <em>group-level</em> precision</p>
+</section>
+<section id="what-is-precision" class="slide level2 scrollable">
+<h2>What is Precision?</h2>
+<ol type="1">
+<li>Precision is indicated by errorbars / confidence intervals</li>
+</ol>
+</section>
+<section id="subject-level-precision" class="slide level2">
+<h2>Subject-Level Precision</h2>
+<p>Is there a meaningful correlation?</p>
+
+<img data-src="images/precision_subject_cor1.png" class="r-stretch"></section>
+<section id="subject-level-precision-2" class="slide level2">
+<h2>Subject-Level Precision 2</h2>
+<p>Is there a meaningful correlation?</p>
+
+<img data-src="images/precision_subject_cor2.png" class="r-stretch"></section>
+<section id="subject-level-precision-3" class="slide level2">
+<h2>Subject-Level Precision 3</h2>
+<p>Is there a meaningful correlation?</p>
+
+<img data-src="images/precision_subject_cor3.png" class="r-stretch"><aside class="notes">
+<p>Simulated data with added noise. True score correlation <em>r</em> = 1</p>
+<p>Side note:<br>
+Individual errorbars = subject-level precision of each individual (across trials)<br>
+Confidence band of regression slope = group-level precision of the regression estimate (cf.&nbsp;reporting CI around Pearson’s r)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-precision-2" class="slide level2 scrollable">
+<h2>What is Precision? 2</h2>
+<ol type="1">
+<li><p>Precision is indicated by errorbars / confidence intervals</p></li>
+<li><p>Whenever you <code>summarize</code> across a variable, you can calculate the<br>
+<strong>precision of the aggregation</strong></p></li>
+</ol>
+</section>
+<section id="trial-level-precision" class="slide level2">
+<h2>Trial-Level Precision</h2>
+
+<img data-src="images/precision_trial.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://doi.org/10.3758/s13428-021-01762-8">Holmqvist et al.&nbsp;(2023, retracted)</a></p><p>Only relevant for time series data (i.e., several “measurements” per trial)</p>
+<p>Note: Aggregation is not trivial here because of auto-correlation</p>
+</section>
+<section id="what-is-precision-3" class="slide level2 scrollable">
+<h2>What is Precision? 3</h2>
+<ol type="1">
+<li><p>Precision is indicated by errorbars / confidence intervals</p></li>
+<li><p>Whenever you <code>summarize</code> across a variable, you can calculate the<br>
+<strong>precision of the aggregation</strong></p></li>
+<li><p>Precision exists on different levels: group, subject, trial (and more)</p></li>
+</ol>
+<aside class="notes">
+<p>“group” is a very superficial term since you can have nested groups:<br>
+classes in schools in cities in districts in countries, etc.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="related-concepts" class="slide level2">
+<h2>Related Concepts</h2>
+
+<img data-src="images/precision_related_concepts.png" class="r-stretch quarto-figure-center"><p class="caption">cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al.&nbsp;(2023)</a>; Fig. 1</p><aside class="notes">
+<p>validity: latent (“theoretical”) match between</p>
+<p>example for accuracy: systematic bias (miscalibration) in eye tracking</p>
+<p>since <em>criterion validity</em> uses a comparison of two manifest variables, this approach can be used to quantify accuracy (absolute agreement) and precision (consistency)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="precision-vs.-accuracy" class="slide level2">
+<h2>Precision vs.&nbsp;Accuracy</h2>
+
+<img data-src="images/memes/Precision_vs_Accuracy.jpg" class="r-stretch"></section>
+<section id="what-is-reliability" class="slide level2">
+<h2>What is Reliability?</h2>
+<p>Not this!</p>
+
+<img data-src="images/not_reliability.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="http://highered.blogspot.com/2012/06/bad-reliability-part-two.html" class="uri">http://highered.blogspot.com/2012/06/bad-reliability-part-two.html</a></p></section>
+<section id="where-is-reliability-highest" class="slide level2">
+<h2>Where is Reliability highest?</h2>
+
+<img data-src="images/precision_reliability.jpg" class="r-stretch quarto-figure-center"><p class="caption">cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al.&nbsp;(2023)</a>; Fig. 2</p></section>
+<section id="what-is-reliability-2" class="slide level2">
+<h2>What is Reliability? 2</h2>
+<div class="columns">
+<div class="column">
+<p><br>
+(Intraclass) Correlation<br>
+→ explained variance:<br>
+<span class="math inline">\(R^2 = between / (between + within)\)</span></p>
+<p><br>
+Reliability tells you if (to what extent) you can <strong>distinguish between low and high trait individuals</strong>.</p>
+<p><br>
+⇒ Reliability =<br>
+low subject-level variability (high precision) +<br>
+<em>high</em> group-level variability (<em>low</em> precision!)</p>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/precision_reliability.jpg"></p>
+<figcaption>cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al.&nbsp;(2023)</a>; Fig. 2</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>Spread of bullet holes is precision, not reliability.</p>
+<p>Reliability is a COMPOUND MEASURE of high subject-level precision (i.e., low of within-subject variability) plus high between-subject variability (i.e., low group-level precision)<br>
+⇒ signal-to-noise ratio with<br>
+between = signal &amp; within = noise</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Note: Lack of precision does not automatically mean error variance! It can also be due to true score changes.</p>
+</div></aside></section>
+<section id="reliability-paradox" class="slide level2">
+<h2>Reliability Paradox</h2>
+<ul>
+<li><p>Paradigms that produce robust results often show low reliability (<a href="https://doi.org/10.3758/s13428-017-0935-1">Hedge et al., 2018</a>)</p></li>
+<li><p>Why do statistical significance and reliability <em>not</em> go hand in hand?</p></li>
+</ul>
+</section>
+<section id="reliability-paradox-1" class="slide level2">
+<h2>Reliability Paradox</h2>
+<ul>
+<li><p>Paradigms that produce robust results often show low reliability (<a href="https://doi.org/10.3758/s13428-017-0935-1">Hedge et al., 2018</a>)</p></li>
+<li><p>Why do statistical significance and reliability <em>not</em> go hand in hand?</p>
+<ul>
+<li><p>Statistical power is enhanced by high group-level precision,<br>
+reliability by high group-level <em>variability</em> (cf.&nbsp;previous slide)</p></li>
+<li><p>More subjects only increase group-level precision (high power), leaving subject-level precision constant<br>
+<strong>→ sample size has no effect on the magnitude of reliability</strong></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="reliability-vs.-group-level-precision" class="slide level2">
+<h2>Reliability vs.&nbsp;Group-Level Precision</h2>
+<ul>
+<li><p>Group-level precision ⇔ homogenous sample</p></li>
+<li><p>Reliability ⇔ heterogenous sample</p></li>
+</ul>
+<div class="fragment">
+<p><br>
+→ Choosing your paradigm and sample, you can optimize for group-level significance OR reliability</p>
+</div>
+<div class="fragment">
+<p><br>
+Basic research favors different things than (clinical) application (or individual differences research)<br>
+⇒ Most of the time <strong>group-level precision gets optimized at the cost of reliability</strong></p>
+<aside class="notes">
+<p>Of course, optimizing group-level significance by using homogenous samples is not good scientific practice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="trial-level-precision-to-the-rescue" class="slide level2">
+<h2>Trial-Level Precision to the Rescue!</h2>
+<p>Improving trial-level precision of the measurement benefits both subject- and group-level precision<br>
+⇒ Nested <strong>hierarchy of precision</strong></p>
+
+<img data-src="images/precision_hierarchy_blank.png" class="r-stretch quarto-figure-center"><p class="caption">cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al.&nbsp;(2023)</a>; Fig. 7</p></section>
+<section id="trial-level-precision-to-the-rescue-1" class="slide level2">
+<h2>Trial-Level Precision to the Rescue!</h2>
+<p>Improving trial-level precision of the measurement benefits both subject- and group-level precision<br>
+⇒ Nested <strong>hierarchy of precision</strong></p>
+
+<img data-src="images/precision_hierarchy.png" class="r-stretch quarto-figure-center"><p class="caption">cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al.&nbsp;(2023)</a>; Fig. 7</p></section>
+<section id="summary-what-is-precision" class="slide level2 scrollable">
+<h2>Summary: What is Precision?</h2>
+<ol type="1">
+<li><p>Precision is indicated by errorbars / confidence intervals</p></li>
+<li><p>Whenever you <code>summarize</code> across a variable, you can calculate the<br>
+<strong>precision of the aggregation</strong></p></li>
+<li><p>Precision exists on different levels: group, subject, trial (and more)</p></li>
+<li><p>Closely linked to statistical power and reliability</p></li>
+</ol>
+</section>
+<section id="how-can-we-enhance-precision" class="slide level2 scrollable">
+<h2>How Can We Enhance Precision?</h2>
+<ol type="1">
+<li><p>Shield the measurement from random noise → precise equipment / paradigm<br>
+⇒ trial-level precision</p></li>
+<li><p>Identify the <strong>aggregation level of interest</strong>:</p>
+<ol type="i">
+<li>sample differences → optimize group-level precision:<br>
+many subjects that respond homogenously</li>
+<li>correlational hypotheses / application → optimize subject-level precision:<br>
+systematic differences between individuals but little variability within subjects across many trials (mind “sequence effects”; cf.&nbsp;<a href="https://doi.org/10.7554/eLife.85980">Nebe, Reutter, et al., 2023</a>)</li>
+</ol></li>
+</ol>
+<p>⇒ “two disciplines of scientific psychology” (<a href="https://psycnet.apa.org/doi/10.1037/h0043943">Cronbach, 1957</a>)</p>
+</section>
+<section id="group--vs.-subject-level-precision" class="slide level2">
+<h2>Group- vs.&nbsp;Subject-Level Precision</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Group-level Precision</strong></p>
+<ul>
+<li><p>Group differences (t-tests, ANOVA)</p></li>
+<li><p>Many subjects (independent observations)</p></li>
+<li><p>Homogenous sample (e.g., psychology students?)</p></li>
+</ul>
+</div><div class="column">
+<p><strong>Subject-level Precision</strong></p>
+<ul>
+<li><p>Correlations (e.g., Reliability)</p></li>
+<li><p>Many trials (careful: sequence effects!)</p></li>
+<li><p>Heterogenous/diverse sample</p></li>
+<li><p>Low variability within subjects across trials (i.e., SD<sub>within</sub>)</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="take-home-message" class="slide level2">
+<h2>Take Home Message</h2>
+<ul>
+<li><p>We are in a replication crisis</p></li>
+<li><p>Increasing the number of subjects is not the only way to get out</p></li>
+<li><p>Sample size benefits basic research on groups only</p></li>
+</ul>
+<p>⇒ Increase precision on the aggregate level of interest!</p>
+
+<img data-src="images/precision_vs_sample_size.png" class="r-stretch"></section></section>
+<section>
+<section id="precision-in-r" class="title-slide slide level1 center">
+<h1>Precision in <code>R</code>!</h1>
+<div class="cell">
+<style type="text/css">
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+</style>
+</div>
+</section>
+<section id="the-standard-error-se" class="slide level2">
+<h2>The Standard Error (SE)</h2>
+<p>Calculates the (lack of) precision of a mean based on the<br>
+standard deviation (<span class="math inline">\(SD\)</span>) of the individual observations and their number (<span class="math inline">\(n\)</span>)</p>
+<p><span class="math display">\[SE = \frac{SD}{\sqrt{n}}\]</span></p>
+</section>
+<section id="the-standard-error-se-in-r" class="slide level2 scrollable">
+<h2>The Standard Error (SE) in <code>R</code></h2>
+<p>No base <code>R</code> function available 💩</p>
+<ol type="1">
+<li><p>Use <code>confintr::se_mean</code> (not part of the tidyverse)</p></li>
+<li><p>Use a custom function</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb1-2"><a></a>  <span class="fu">sd</span>(x, na.rm) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="cf">if</span>(<span class="sc">!</span>na.rm) <span class="fu">length</span>(x) <span class="cf">else</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)))</span>
+<span id="cb1-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Careful with custom functions! I often see people using <code>n()</code> but this does not work correctly with missing values (<code>NA</code> / <code>na.rm = TRUE</code>)</p>
+</div></aside></section>
+<section id="the-standard-error-se-in-r-2" class="slide level2">
+<h2>The Standard Error (SE) in <code>R</code> 2</h2>
+<p>Whenever you use <code>mean</code>, also calculate the SE:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>iris <span class="sc">%&gt;%</span> <span class="co">#helpful data set for illustration</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">summarize</span>( <span class="co">#aggregation =&gt; precision</span></span>
+<span id="cb2-5"><a></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">"Sepal"</span>), <span class="co">#everything(), #output too wide</span></span>
+<span id="cb2-6"><a></a>           <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">se =</span> confintr<span class="sc">::</span>se_mean)),</span>
+<span id="cb2-7"><a></a>    <span class="at">.by =</span> Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se
+1     setosa             5.006      0.04984957            3.428     0.05360780
+2 versicolor             5.936      0.07299762            2.770     0.04437778
+3  virginica             6.588      0.08992695            2.974     0.04560791</code></pre>
+</div>
+</div>
+<p><br>
+→ subject-level (species-level) precision</p>
+</section>
+<section id="standard-error-pitfalls-in-r" class="slide level2">
+<h2>Standard Error Pitfalls in <code>R</code></h2>
+<p>What is the group-level precision of <code>Sepal.Length</code>?</p>
+<p>Note: Treat <code>Species</code> as subjects and rows within <code>Species</code> as trials.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a></a>  iris <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a></a>  <span class="fu">rename</span>(<span class="at">subject =</span> Species, <span class="at">measure =</span> Sepal.Length) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a></a>  <span class="fu">mutate</span>(<span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a></a>  <span class="fu">select</span>(subject, trial, measure) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(trial, subject) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>()</span>
+<span id="cb4-6"><a></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 3
+   subject    trial measure
+   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;
+ 1 setosa         1     5.1
+ 2 versicolor     1     7  
+ 3 virginica      1     6.3
+ 4 setosa         2     4.9
+ 5 versicolor     2     6.4
+ 6 virginica      2     5.8
+ 7 setosa         3     4.7
+ 8 versicolor     3     6.9
+ 9 virginica      3     7.1
+10 setosa         4     4.6
+# ℹ 140 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="standard-error-pitfalls-in-r-1" class="slide level2">
+<h2>Standard Error Pitfalls in <code>R</code></h2>
+<p>What is the group-level precision of <code>Sepal.Length</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
+<span id="cb6-3"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+      m     se
+  &lt;dbl&gt;  &lt;dbl&gt;
+1  5.84 0.0676</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
+<span id="cb8-3"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure),</span>
+<span id="cb8-4"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      m     se     n
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+1  5.84 0.0676   150</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-error-pitfalls-in-r-2" class="slide level2">
+<h2>Standard Error Pitfalls in <code>R</code> 2</h2>
+<p>What is the group-level precision of <code>Sepal.Length</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a></a>  <span class="fu">summarize</span>(<span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> <span class="co">#subject-level averages</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject),</span>
+<span id="cb10-4"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject),</span>
+<span id="cb10-5"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      m    se     n
+  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1  5.84 0.459     3</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>⇒ When using trial-level data to calculate group-level precision, <strong>summarize twice!</strong></p>
+<p>⇒ Every summarize brings you up exactly <em>one</em> level - don’t try to skip!<br>
+trial-level → subject-level → group-level</p>
+
+</div>
+<aside><div>
+<p>Linear Mixed Models (LMMs) implicitly take this into account when specifying <em>random intercepts for subjects</em> <code>(1|subject)</code>.</p>
+</div></aside></section>
+<section id="summary-precision-in-r" class="slide level2">
+<h2>Summary: Precision in <code>R</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
+<span id="cb12-3"><a></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
+<span id="cb12-4"><a></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject), <span class="co">#group-level mean ("grand average")</span></span>
+<span id="cb12-6"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject), <span class="co">#group-level precision</span></span>
+<span id="cb12-7"><a></a>            <span class="at">se.subject =</span> <span class="fu">mean</span>(se.subject), <span class="co">#average subject-level precision (note: pooling should be used)</span></span>
+<span id="cb12-8"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+      m    se se.subject     n
+  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+1  5.84 0.459     0.0709     3</code></pre>
+</div>
+</div>
+</section></section>
+<section id="thanks" class="title-slide slide level1 center">
+<h1>Thanks!</h1>
+<p>Learning objectives:</p>
+<ul>
+<li><p>Learn about the core concept of precision and how it relates to similar constructs (e.g., validity, reliability, statistical power)</p></li>
+<li><p>Recognize your aggregate level of interest for research questions and how you can improve its precision</p></li>
+<li><p>(Understand the reliability paradox and its relation to precision)</p></li>
+<li><p>Calculate precision in <code>R</code> (on different aggregation levels)</p></li>
+</ul>
+<p>Next:</p>
+<p>Confidence Intervals</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -528,9 +1051,9 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -562,6 +1085,82 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -594,7 +1193,18 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -626,29 +1236,7 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -656,7 +1244,7 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
