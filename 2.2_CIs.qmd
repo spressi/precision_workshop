@@ -1,0 +1,503 @@
+---
+title: "2.1 Confidence Intervals"
+subtitle: "Workshop: \"Handling Uncertainty in your Data\""
+author: "Dr. Mario Reutter & Juli Nagel"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: serif
+    chalkboard: true
+    width: 1280
+    height: 720
+from: markdown+emoji
+execute: 
+  echo: true
+---
+
+```{css}
+#| echo: false
+
+code.sourceCode {
+font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+font-size: 1.4em;
+}
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+library(tidyverse)
+```
+
+# CIs around means
+
+## Data preparation
+
+::: {.incremental}
+-   If you haven't done so yet: Create an `R` project for the precision workshop.
+-   Create a script for this part of the workshop (e.g., `cis.R`).
+-   Load the `tidyverse` (`library(tidyverse)`) at the beginning of your script.
+:::
+
+. . .
+
+<span style="font-size: 18px">Note: We show different packages that help us with confidence interval calculations, some of which may have conflicting functions. This is why in this presentation, we call each package explicitly, e.g., `confintr::ci_mean()`.</span>
+
+## Why confidence intervals?
+
+::: {.incremental}
+-   Goal: indicate precision/accuracy of a point estimate (e.g., the mean).
+-   If visualized, it's often supposed to help with "inference by eye".
+-   However, confidence intervals are often misinterpreted (e.g., [Hoekstra et al., 2014](https://doi.org/10.3758/s13423-013-0572-3))
+:::
+
+## What is a confidence interval?
+
+::: {.incremental}
+-   Assume we use a 95% CI.
+-   In the long run, in 95% of our replications, the interval we calculate will contain the true population mean.
+-   As with any statistical inference: no guarantee! Errors are possible.
+-   "If a given value is within the interval of a result, the two can be informally  assimilated as being comparable." ([Cousineau, 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/))
+:::
+
+## Confidence interval of the mean
+
+<br>
+
+<center>
+$M - t_{\gamma} \times SE_{M}, M + t_{\gamma} \times SE_{M}$
+</center>
+
+<br>
+
+::: {.incremental}
+-   $M$ = mean of a set of observations
+-   $SE_{M}$ = standard error of the mean
+-   $SE_{M} = s/\sqrt n$
+-   $t_{\gamma}$ = multiplier from a Student $t$ distribution, with d.f. $n - 1$ and coverage level $\gamma$ (often 95%)
+:::
+
+## Briefly: The iris data
+
+Data about the size of three different species of iris flowers.
+
+```{r}
+head(iris)
+```
+
+## In R: Confidence interval of the mean
+
+The package `confintr` offers a variety of functions around confidence intervals. Default here: Student's $t$ method.
+
+```{r}
+iris %>% 
+  filter(Species == "versicolor") %>% 
+  pull(Petal.Width) %>% 
+  confintr::ci_mean()
+```
+
+. . . 
+
+Also available: Wald and bootstrap CIs.
+
+## Confidence interval of the mean
+
+<br>
+
+<center>
+$M - t_{\gamma} \times SE_{M}, M + t_{\gamma} \times SE_{M}$
+</center>
+
+<br>
+
+::: {.incremental}
+-   However: very "limited" CI!
+-   Comparison to a fixed value (e.g., population mean).
+-   Cannot easily be used to compare different means.
+-   Useless to compare means of repeated-measures designs.
+:::
+
+## CIs: comparing groups
+
+::: {.incremental}
+-   Position of each group mean as well as the relative position of the means are uncertain.
+-   I.e., SE for the comparison between two means is larger than for the comparison of a mean with a fixed value.
+-   How much the CI needs to be expanded depends on the variance of each group.
+-   When the variance is homogeneous across conditions, there is a shortcut: The sum of two equal variances can be calculated by multiplying the common variance by two.
+-   I.e., the CI must be $\sqrt2$ ($\approx$ 1.41) times wider.
+:::
+
+. . . 
+
+<br>
+
+<center>
+$M - t_{\gamma} \times \sqrt2 \times SE_{M}, M + t_{\gamma} \times \sqrt2 \times SE_{M}$
+</center>
+
+## CIs: potential problems when comparing groups
+
+See [Cousineau, 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/) - more about data viz later!
+
+![](images/cousineau_fig1.png){fig-align="center"}
+
+## In R: custom function
+
+-   Sometimes, writing your own custom function gives you the control you need over certain calculations.
+
+. . . 
+
+<br>
+
+```{r}
+# You've seen this in the previous part :-)
+se <- function(x, na.rm = TRUE) {
+  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
+}
+```
+
+. . .
+
+<br>
+
+```{r}
+# CI based on t distribution
+z_CI_t <- function(x, CI, na.rm = FALSE) {
+  if (na.rm) x <- x[!is.na(x)]
+  ci <- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI
+}
+```
+
+## In R: custom function - applied
+
+<br>
+
+```{r}
+iris %>% 
+  filter(Species %in% c("setosa", "versicolor")) %>% 
+  summarise(
+    ci_lower = mean(Petal.Width) - se(Petal.Width) * z_CI_t(Petal.Width, .95),
+    ci_upper = mean(Petal.Width) + se(Petal.Width) * z_CI_t(Petal.Width, .95),
+    .by = Species
+  )
+```
+
+## CIs: comparing groups
+
+-   Wider CIs for group comparisons, as e.g. suggested by ([Cousineau, 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/)).
+
+```{r}
+iris %>% 
+  filter(Species %in% c("setosa", "versicolor")) %>% 
+  summarise(
+    ci_lower = mean(Petal.Width) - se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),
+    ci_upper = mean(Petal.Width) + se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),
+    .by = Species
+  )
+```
+
+. . .
+
+<br>
+
+-   Attention! Assumes equal variance!
+-   Even though here, we use the mean and SD/SE of each group (*not* e.g. the pooled SD).
+
+## CIs: difference of means
+
+-   If possible, the most elegant way is to report/plot the CI for the difference in means.
+
+```{r}
+with(
+  iris,
+  confintr::ci_mean_diff(
+    Petal.Width[Species == "versicolor"],
+    Petal.Width[Species == "setosa"]
+  )
+)
+```
+
+. . .
+
+-   Not pipe-friendly, if that's important for you.
+-   Careful! Not for within-subjects comparisons!
+
+## CIs: difference of means
+
+-   Looks familiar? Part of the `t.test()` output by default!
+
+```{r}
+with(
+  iris,
+  t.test(
+    Petal.Width[Species == "versicolor"],
+    Petal.Width[Species == "setosa"]
+  )
+)
+```
+
+## What about within-subject designs?
+
+::: {.incremental}
+-   Repeated measures are typically correlated, which makes it possible to evaluate the difference between means more precisely.
+-   I.e., we adjust the width of the CI based on the correlation between measures.
+-   The difference between the two means is estimated as if we had a larger sample.
+:::
+
+. . .
+
+<br>
+
+<center>
+$M - t_{\gamma} \times \sqrt{1-r} \times \sqrt2 \times \frac{s}{\sqrt{n}}, M + t_{\gamma} \times \sqrt{1-r} \times \sqrt2 \times \frac{s}{\sqrt{n}}$
+</center>
+
+. . .
+
+<span style="font-size: 18px">Note that we still are comparing two means, so as before, the CI is "difference adjusted" using $\sqrt2$.</span>
+
+## Briefly: the fhch2010 data
+
+-   Data from Freeman, Heathcote, Chalmers, & Hockley (2010), included in `afex`.
+-   Lexical decision and word naming latencies for 300 words and 300 nonwords.
+-   For simplicity, we're only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword).
+
+```{r}
+library(afex)
+
+head(fhch2010)
+```
+
+. . . 
+
+```{r}
+# Aggregate to get a word/nonword reaction time per participant
+fhch2010_summary <- 
+  fhch2010 %>% 
+  summarise(rt = mean(rt), .by = c(id, task, stimulus))
+```
+
+## CIs for within-subject designs
+
+The measures are highly correlated :-)
+
+```{r}
+fhch2010_summary_wf <- 
+  fhch2010_summary %>% 
+  pivot_wider(
+    id_cols = id,
+    names_from = stimulus,
+    values_from = rt
+  )
+
+fhch2010_summary_wf %>% 
+  rstatix::cor_test(word, nonword)
+```
+
+## CIs for within-subject designs
+
+```{r}
+# without adjusting
+fhch2010_summary %>% 
+  summarise(
+    ci_lower = mean(rt) - se(rt) * sqrt(2) * z_CI_t(rt, .95),
+    ci_upper = mean(rt) + se(rt) * sqrt(2) * z_CI_t(rt, .95),
+    .by = stimulus
+  )
+```
+
+. . .
+
+```{r}
+# adjust for correlation
+word_cor <- cor.test(fhch2010_summary_wf$word, fhch2010_summary_wf$nonword)
+
+fhch2010_summary %>% 
+  summarise(
+    ci_lower = mean(rt) - se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),
+    ci_upper = mean(rt) + se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),
+    .by = stimulus
+  )
+```
+
+## CIs for differences in means in within-subject designs
+
+As before, the $t$-test will give us a CI for the difference in means:
+
+```{r}
+with(
+  fhch2010_summary,
+  t.test(
+    rt[stimulus == "word"],
+    rt[stimulus == "nonword"]
+  )
+)
+```
+
+## CIS: caveats
+
+::: {.incremental}
+-   Assumptions: normally distributed means, homogeneity of variances, sphericity (repeated measures)
+-   Mixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest); see upcoming data viz part!
+-   Most importantly: Be transparent! Describe how you calculated your CIs and what they are for!
+:::
+
+# CIs around effect sizes
+
+## Cohen's d
+
+-   Also possible to report CIs on effect size estimates; different methods of calculating the desired CIs for different measures exist (beyond the scope of this workshop).
+-   E.g., `cohens_d()` from the package `effectsize`: "CIs are estimated using the noncentrality parameter method (also called the 'pivot method')"; see further details at `?effectsize::cohens_d()`.
+
+```{r}
+with(
+  iris,
+  effectsize::cohens_d(
+    Petal.Width[Species == "versicolor"],
+    Petal.Width[Species == "setosa"]
+  )
+)
+```
+
+## rstatix: pipe-friendly t-test
+
+-   `rstatix` offers pipe-friendly statistical tests, and also calculates CIs.
+-   `detailed = TRUE` will give us confidence estimates for our $t$-test.
+
+. . .
+
+<br>
+
+```{r}
+iris %>% 
+  filter(Species %in% c("setosa", "versicolor")) %>% 
+  rstatix::t_test(Petal.Width ~ Species, detailed = TRUE)
+```
+
+## rstatix: pipe-friendly Cohen's d
+
+-   Also includes a pipe-friendly version of Cohen's d.
+-   Careful: CIs are bootstrapped (hence the small discrepancy to the output of `effectsize` earlier)
+
+. . .
+
+<br>
+
+```{r}
+iris %>% 
+  filter(Species %in% c("setosa", "versicolor")) %>% 
+  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)
+```
+
+## Correlations: apa
+
+Option 1: Using the `apa` package.
+
+<br>
+
+```{r}
+iris %>% 
+  summarise(
+    cortest = cor.test(Petal.Width, Petal.Length) %>% 
+      apa::cor_apa(r_ci = TRUE, print = FALSE),
+    .by = Species
+  )
+```
+
+## Correlations: rstatix
+
+Option 2: Using the `rstatix` package.
+
+<br>
+
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  rstatix::cor_test(Petal.Width, Petal.Length)
+```
+
+. . .
+
+Note: Only gives rounded values ...
+
+## ANOVAs
+
+```{r}
+aov_words <- 
+  aov_ez(
+    id = "id", 
+    dv = "rt", 
+    data = fhch2010_summary, 
+    between = "task", 
+    within = "stimulus",
+    # we want to report partial eta², and include the intercept in the output table ...
+    anova_table = list(es = "pes", intercept = TRUE)
+  )
+
+aov_words
+```
+## CI around partial eta²
+
+In principle, `apaTables` offers a function for CIs around $\eta_p^2$ ...
+
+```{r}
+# e.g., for our task effect
+apaTables::get.ci.partial.eta.squared(
+  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95
+)
+```
+
+. . . 
+
+... but it would be tedious to copy these values.
+
+## CI around partial eta²
+
+A little clunky function that can be applied to `afex` tables:
+
+```{r}
+peta.ci <- 
+  function(anova_table, conf.level = .9) {
+  
+  result <- 
+    apply(anova_table, 1, function(x) {
+      ci <- 
+        apaTables::get.ci.partial.eta.squared(
+          F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
+        )
+      
+      return(setNames(c(ci$LL, ci$UL), c("LL", "UL")))
+    }) %>% 
+    t() %>% 
+    as.data.frame()
+  
+  result$conf.level <- conf.level
+  
+  return(result)
+}
+```
+
+## CI around partial eta²
+
+The result of custom function that applies the `apaTables` function to our entire ANOVA table:
+
+```{r}
+peta.ci(aov_words$anova_table)
+```
+
+Also see this [blogpost by Daniel Lakens from 2014](https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html) about CIs for $\eta_p^2$.
+
+# Thanks!
+
+Learning objectives:
+
+-   Understand what different versions of CIs exist, and which one you need for your data.
+-   Apply different functions in `R` (and write custom ones if needed) to report CIs around means, and common effect size estimates.
+
+Next: Visualizing uncertainty
