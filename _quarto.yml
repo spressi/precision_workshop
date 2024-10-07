@@ -14,6 +14,7 @@ website:
       - 1.1_R_Intro.qmd
       - 1.2_Data_Wrangling.qmd
       - 1.3_Data_Visualization.qmd
+      - 2.1_Precision.qmd
 
 format:
   html:
