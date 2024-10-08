@@ -16,6 +16,8 @@ execute:
   echo: true
 ---
 
+# CIs around means
+
 ```{css}
 #| echo: false
 
@@ -34,8 +36,6 @@ font-size: 1.4em;
 #| echo: false
 library(tidyverse)
 ```
-
-# CIs around means
 
 ## Data preparation
 
