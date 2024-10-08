@@ -448,7 +448,7 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
 <p>Is there a meaningful correlation?</p>
 
 <img data-src="images/precision_subject_cor3.png" class="r-stretch"><aside class="notes">
-<p>Simulated data with added noise. True score correlation <em>r</em> = 1</p>
+<p>Simulated data with added noise. True score correlation <em>r</em> = 1 ⇒ We want to enable you to create plots like this one</p>
 <p>Side note:<br>
 Individual errorbars = subject-level precision of each individual (across trials)<br>
 Confidence band of regression slope = group-level precision of the regression estimate (cf.&nbsp;reporting CI around Pearson’s r)</p>
@@ -476,7 +476,7 @@ Confidence band of regression slope = group-level precision of the regression es
 <h2>Trial-Level Precision</h2>
 
 <img data-src="images/precision_trial.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://doi.org/10.3758/s13428-021-01762-8">Holmqvist et al.&nbsp;(2023, retracted)</a></p><p>Only relevant for time series data (i.e., several “measurements” per trial)</p>
-<p>Note: Aggregation is not trivial here because of auto-correlation</p>
+<p>Note: Calculating standard deviation / error is not trivial here because of auto-correlation</p>
 </section>
 <section id="what-is-precision-3" class="slide level2 scrollable">
 <h2>What is Precision? 3</h2>
@@ -523,7 +523,7 @@ classes in schools in cities in districts in countries, etc.</p>
 <section id="precision-vs.-accuracy" class="slide level2">
 <h2>Precision vs.&nbsp;Accuracy</h2>
 
-<img data-src="images/memes/Precision_vs_Accuracy.jpg" class="r-stretch"></section>
+<img data-src="images/memes/Precision_vs_Accuracy.jpg" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.reddit.com/r/OTMemes/comments/6am425/obiwan_was_right_all_along/" class="uri">https://www.reddit.com/r/OTMemes/comments/6am425/obiwan_was_right_all_along/</a></p></section>
 <section id="what-is-reliability" class="slide level2">
 <h2>What is Reliability?</h2>
 <p>Not this!</p>
@@ -599,8 +599,8 @@ reliability by high group-level <em>variability</em> (cf.&nbsp;previous slide)</
 <section id="reliability-vs.-group-level-precision" class="slide level2">
 <h2>Reliability vs.&nbsp;Group-Level Precision</h2>
 <ul>
-<li><p>Group-level precision ⇔ homogenous sample</p></li>
-<li><p>Reliability ⇔ heterogenous sample</p></li>
+<li><p>Group-level precision ⇔ homogenous sample / responses</p></li>
+<li><p>Reliability ⇔ heterogenous sample / responses</p></li>
 </ul>
 <div class="fragment">
 <p><br>
@@ -760,7 +760,7 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <span id="cb4-2"><a></a>  iris <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a></a>  <span class="fu">rename</span>(<span class="at">subject =</span> Species, <span class="at">measure =</span> Sepal.Length) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-4"><a></a>  <span class="fu">mutate</span>(<span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a></a>  <span class="fu">select</span>(subject, trial, measure) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(trial, subject) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>()</span>
+<span id="cb4-5"><a></a>  <span class="fu">select</span>(subject, trial, measure) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(trial, subject) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>() <span class="co">#neater output</span></span>
 <span id="cb4-6"><a></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 3
@@ -798,7 +798,7 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
 <span id="cb8-3"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure),</span>
 <span id="cb8-4"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -815,7 +815,7 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <h2>Standard Error Pitfalls in <code>R</code> 2</h2>
 <p>What is the group-level precision of <code>Sepal.Length</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a></a>  <span class="fu">summarize</span>(<span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> <span class="co">#subject-level averages</span></span>
 <span id="cb10-3"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject),</span>
 <span id="cb10-4"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject),</span>
@@ -839,7 +839,7 @@ trial-level → subject-level → group-level</p>
 <section id="summary-precision-in-r" class="slide level2">
 <h2>Summary: Precision in <code>R</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="2-4|5-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb12-2"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
 <span id="cb12-3"><a></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
 <span id="cb12-4"><a></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>

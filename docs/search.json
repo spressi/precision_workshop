@@ -1088,21 +1088,30 @@
     "href": "2.1_Precision.html#interest-group-open-and-reproducible-research-igor",
     "title": "2.1 Measurement Precision",
     "section": "Interest Group: Open and Reproducible Research (IGOR)",
-    "text": "Interest Group: Open and Reproducible Research (IGOR)\n\nPart of the German Reproducibility Network:\nhttps://www.youtube.com/watch?v=sQFmB_EY1PQ"
+    "text": "Interest Group: Open and Reproducible Research (IGOR)\n\nPart of the German Reproducibility Network:\nhttps://www.youtube.com/watch?v=sQFmB_EY1PQ",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#group-level-precision",
     "href": "2.1_Precision.html#group-level-precision",
     "title": "2.1 Measurement Precision",
     "section": "Group-level Precision",
-    "text": "Group-level Precision\n\nhttps://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R→ Effects in relation to their group-level precision"
+    "text": "Group-level Precision\n\nhttps://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R→ Effects in relation to their group-level precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#group-level-precision-2",
     "href": "2.1_Precision.html#group-level-precision-2",
     "title": "2.1 Measurement Precision",
     "section": "Group-level Precision 2",
-    "text": "Group-level Precision 2\n\nhttps://www.medicowesome.com/2020/04/funnel-plot.html→ Effects in relation to their group-level precision"
+    "text": "Group-level Precision 2\n\nhttps://www.medicowesome.com/2020/04/funnel-plot.html→ Effects in relation to their group-level precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-measurement-precision-1",
@@ -1116,7 +1125,10 @@
     "href": "2.1_Precision.html#what-is-precision",
     "title": "2.1 Measurement Precision",
     "section": "What is Precision?",
-    "text": "What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals"
+    "text": "What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-precision-1",
@@ -1130,7 +1142,10 @@
     "href": "2.1_Precision.html#subject-level-precision",
     "title": "2.1 Measurement Precision",
     "section": "Subject-Level Precision",
-    "text": "Subject-Level Precision\nIs there a meaningful correlation?"
+    "text": "Subject-Level Precision\nIs there a meaningful correlation?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#subject-level-precision-1",
@@ -1144,70 +1159,100 @@
     "href": "2.1_Precision.html#subject-level-precision-2",
     "title": "2.1 Measurement Precision",
     "section": "Subject-Level Precision 2",
-    "text": "Subject-Level Precision 2\nIs there a meaningful correlation?"
+    "text": "Subject-Level Precision 2\nIs there a meaningful correlation?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#subject-level-precision-3",
     "href": "2.1_Precision.html#subject-level-precision-3",
     "title": "2.1 Measurement Precision",
     "section": "Subject-Level Precision 3",
-    "text": "Subject-Level Precision 3\nIs there a meaningful correlation?\n\n\nSimulated data with added noise. True score correlation r = 1\nSide note:\nIndividual errorbars = subject-level precision of each individual (across trials)\nConfidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson’s r)"
+    "text": "Subject-Level Precision 3\nIs there a meaningful correlation?\n\n\nSimulated data with added noise. True score correlation r = 1 ⇒ We want to enable you to create plots like this one\nSide note:\nIndividual errorbars = subject-level precision of each individual (across trials)\nConfidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson’s r)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-precision-2",
     "href": "2.1_Precision.html#what-is-precision-2",
     "title": "2.1 Measurement Precision",
     "section": "What is Precision? 2",
-    "text": "What is Precision? 2\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation"
+    "text": "What is Precision? 2\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-precision-3",
     "href": "2.1_Precision.html#what-is-precision-3",
     "title": "2.1 Measurement Precision",
     "section": "What is Precision? 3",
-    "text": "What is Precision? 3\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\n\n\n“group” is a very superficial term since you can have nested groups:\nclasses in schools in cities in districts in countries, etc."
+    "text": "What is Precision? 3\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\n\n\n“group” is a very superficial term since you can have nested groups:\nclasses in schools in cities in districts in countries, etc.",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#trial-level-precision",
     "href": "2.1_Precision.html#trial-level-precision",
     "title": "2.1 Measurement Precision",
     "section": "Trial-Level Precision",
-    "text": "Trial-Level Precision\n\nHolmqvist et al. (2023, retracted)Only relevant for time series data (i.e., several “measurements” per trial)\nNote: Aggregation is not trivial here because of auto-correlation"
+    "text": "Trial-Level Precision\n\nHolmqvist et al. (2023, retracted)Only relevant for time series data (i.e., several “measurements” per trial)\nNote: Calculating standard deviation / error is not trivial here because of auto-correlation",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#related-concepts",
     "href": "2.1_Precision.html#related-concepts",
     "title": "2.1 Measurement Precision",
     "section": "Related Concepts",
-    "text": "Related Concepts\n\ncf. Nebe, Reutter, et al. (2023); Fig. 1\nvalidity: latent (“theoretical”) match between\nexample for accuracy: systematic bias (miscalibration) in eye tracking\nsince criterion validity uses a comparison of two manifest variables, this approach can be used to quantify accuracy (absolute agreement) and precision (consistency)"
+    "text": "Related Concepts\n\ncf. Nebe, Reutter, et al. (2023); Fig. 1\nvalidity: latent (“theoretical”) match between\nexample for accuracy: systematic bias (miscalibration) in eye tracking\nsince criterion validity uses a comparison of two manifest variables, this approach can be used to quantify accuracy (absolute agreement) and precision (consistency)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-reliability",
     "href": "2.1_Precision.html#what-is-reliability",
     "title": "2.1 Measurement Precision",
     "section": "What is Reliability?",
-    "text": "What is Reliability?\nNot this!\n\nhttp://highered.blogspot.com/2012/06/bad-reliability-part-two.html"
+    "text": "What is Reliability?\nNot this!\n\nhttp://highered.blogspot.com/2012/06/bad-reliability-part-two.html",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#what-is-reliability-2",
     "href": "2.1_Precision.html#what-is-reliability-2",
     "title": "2.1 Measurement Precision",
     "section": "What is Reliability? 2",
-    "text": "What is Reliability? 2\n\n\n\n(Intraclass) Correlation\n→ explained variance:\n\\(R^2 = between / (between + within)\\)\n\nReliability tells you if (to what extent) you can distinguish between low and high trait individuals.\n\n⇒ Reliability =\nlow subject-level variability (high precision) +\nhigh group-level variability (low precision!)\n\n\n\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2\n\n\n\n\n\n\nSpread of bullet holes is precision, not reliability.\nReliability is a COMPOUND MEASURE of high subject-level precision (i.e., low of within-subject variability) plus high between-subject variability (i.e., low group-level precision)\n⇒ signal-to-noise ratio with\nbetween = signal & within = noise\n\n\nNote: Lack of precision does not automatically mean error variance! It can also be due to true score changes."
+    "text": "What is Reliability? 2\n\n\n\n(Intraclass) Correlation\n→ explained variance:\n\\(R^2 = between / (between + within)\\)\n\nReliability tells you if (to what extent) you can distinguish between low and high trait individuals.\n\n⇒ Reliability =\nlow subject-level variability (high precision) +\nhigh group-level variability (low precision!)\n\n\n\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2\n\n\n\n\n\n\nSpread of bullet holes is precision, not reliability.\nReliability is a COMPOUND MEASURE of high subject-level precision (i.e., low of within-subject variability) plus high between-subject variability (i.e., low group-level precision)\n⇒ signal-to-noise ratio with\nbetween = signal & within = noise\n\n\nNote: Lack of precision does not automatically mean error variance! It can also be due to true score changes.",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#summary-what-is-precision",
     "href": "2.1_Precision.html#summary-what-is-precision",
     "title": "2.1 Measurement Precision",
     "section": "Summary: What is Precision?",
-    "text": "Summary: What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\nClosely linked to statistical power and reliability"
+    "text": "Summary: What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\nClosely linked to statistical power and reliability",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#reliability-paradox",
     "href": "2.1_Precision.html#reliability-paradox",
     "title": "2.1 Measurement Precision",
     "section": "Reliability Paradox",
-    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?"
+    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#reliability-paradox-hedge-et-al.-2018",
@@ -1228,14 +1273,20 @@
     "href": "2.1_Precision.html#reliability-paradox-1",
     "title": "2.1 Measurement Precision",
     "section": "Reliability Paradox",
-    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?\n\nStatistical power is enhanced by high group-level precision,\nreliability by high group-level variability (cf. previous slide)\nMore subjects only increase group-level precision (high power), leaving subject-level precision constant\n→ sample size has no effect on the magnitude of reliability"
+    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?\n\nStatistical power is enhanced by high group-level precision,\nreliability by high group-level variability (cf. previous slide)\nMore subjects only increase group-level precision (high power), leaving subject-level precision constant\n→ sample size has no effect on the magnitude of reliability",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#reliability-vs.-group-level-precision",
     "href": "2.1_Precision.html#reliability-vs.-group-level-precision",
     "title": "2.1 Measurement Precision",
     "section": "Reliability vs. Group-Level Precision",
-    "text": "Reliability vs. Group-Level Precision\n\nGroup-level precision ⇔ homogenous sample\nReliability ⇔ heterogenous sample\n\n\n\n→ Choosing your paradigm and sample, you can optimize for group-level significance OR reliability\n\n\n\nBasic research favors different things than (clinical) application (or individual differences research)\n⇒ Most of the time group-level precision gets optimized at the cost of reliability\n\nOf course, optimizing group-level significance by using homogenous samples is not good scientific practice"
+    "text": "Reliability vs. Group-Level Precision\n\nGroup-level precision ⇔ homogenous sample / responses\nReliability ⇔ heterogenous sample / responses\n\n\n\n→ Choosing your paradigm and sample, you can optimize for group-level significance OR reliability\n\n\n\nBasic research favors different things than (clinical) application (or individual differences research)\n⇒ Most of the time group-level precision gets optimized at the cost of reliability\n\nOf course, optimizing group-level significance by using homogenous samples is not good scientific practice",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#summary-precision",
@@ -1256,42 +1307,60 @@
     "href": "2.1_Precision.html#where-is-reliability-highest",
     "title": "2.1 Measurement Precision",
     "section": "Where is Reliability highest?",
-    "text": "Where is Reliability highest?\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2"
+    "text": "Where is Reliability highest?\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#trial-level-precision-to-the-rescue",
     "href": "2.1_Precision.html#trial-level-precision-to-the-rescue",
     "title": "2.1 Measurement Precision",
     "section": "Trial-Level Precision to the Rescue!",
-    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7"
+    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#trial-level-precision-to-the-rescue-1",
     "href": "2.1_Precision.html#trial-level-precision-to-the-rescue-1",
     "title": "2.1 Measurement Precision",
     "section": "Trial-Level Precision to the Rescue!",
-    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7"
+    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#how-can-we-enhance-precision",
     "href": "2.1_Precision.html#how-can-we-enhance-precision",
     "title": "2.1 Measurement Precision",
     "section": "How Can We Enhance Precision?",
-    "text": "How Can We Enhance Precision?\n\nShield the measurement from random noise → precise equipment / paradigm\n⇒ trial-level precision\nIdentify the aggregation level of interest:\n\nsample differences → optimize group-level precision:\nmany subjects that respond homogenously\ncorrelational hypotheses / application → optimize subject-level precision:\nsystematic differences between individuals but little variability within subjects across many trials (mind “sequence effects”; cf. Nebe, Reutter, et al., 2023)\n\n\n⇒ “two disciplines of scientific psychology” (Cronbach, 1957)"
+    "text": "How Can We Enhance Precision?\n\nShield the measurement from random noise → precise equipment / paradigm\n⇒ trial-level precision\nIdentify the aggregation level of interest:\n\nsample differences → optimize group-level precision:\nmany subjects that respond homogenously\ncorrelational hypotheses / application → optimize subject-level precision:\nsystematic differences between individuals but little variability within subjects across many trials (mind “sequence effects”; cf. Nebe, Reutter, et al., 2023)\n\n\n⇒ “two disciplines of scientific psychology” (Cronbach, 1957)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#group--vs.-subject-level-precision",
     "href": "2.1_Precision.html#group--vs.-subject-level-precision",
     "title": "2.1 Measurement Precision",
     "section": "Group- vs. Subject-Level Precision",
-    "text": "Group- vs. Subject-Level Precision\n\n\nGroup-level Precision\n\nGroup differences (t-tests, ANOVA)\nMany subjects (independent observations)\nHomogenous sample (e.g., psychology students?)\n\n\nSubject-level Precision\n\nCorrelations (e.g., Reliability)\nMany trials (careful: sequence effects!)\nHeterogenous/diverse sample\nLow variability within subjects across trials (i.e., SDwithin)"
+    "text": "Group- vs. Subject-Level Precision\n\n\nGroup-level Precision\n\nGroup differences (t-tests, ANOVA)\nMany subjects (independent observations)\nHomogenous sample (e.g., psychology students?)\n\n\nSubject-level Precision\n\nCorrelations (e.g., Reliability)\nMany trials (careful: sequence effects!)\nHeterogenous/diverse sample\nLow variability within subjects across trials (i.e., SDwithin)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#take-home-message",
     "href": "2.1_Precision.html#take-home-message",
     "title": "2.1 Measurement Precision",
     "section": "Take Home Message",
-    "text": "Take Home Message\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!"
+    "text": "Take Home Message\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#take-home-message-1",
@@ -1312,7 +1381,10 @@
     "href": "2.1_Precision.html#the-standard-error-se",
     "title": "2.1 Measurement Precision",
     "section": "The Standard Error (SE)",
-    "text": "The Standard Error (SE)\nCalculates the (lack of) precision of a mean based on the\nstandard deviation (\\(SD\\)) of the individual observations and their number (\\(n\\))\n\\[SE = \\frac{SD}{\\sqrt{n}}\\]"
+    "text": "The Standard Error (SE)\nCalculates the (lack of) precision of a mean based on the\nstandard deviation (\\(SD\\)) of the individual observations and their number (\\(n\\))\n\\[SE = \\frac{SD}{\\sqrt{n}}\\]",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#the-standard-error-in-r",
@@ -1326,48 +1398,69 @@
     "href": "2.1_Precision.html#the-standard-error-se-in-r",
     "title": "2.1 Measurement Precision",
     "section": "The Standard Error (SE) in R",
-    "text": "The Standard Error (SE) in R\nNo base R function available 💩\n\nUse confintr::se_mean (not part of the tidyverse)\nUse a custom function\n\n\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\nCareful with custom functions! I often see people using n() but this does not work correctly with missing values (NA / na.rm = TRUE)"
+    "text": "The Standard Error (SE) in R\nNo base R function available 💩\n\nUse confintr::se_mean (not part of the tidyverse)\nUse a custom function\n\n\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\nCareful with custom functions! I often see people using n() but this does not work correctly with missing values (NA / na.rm = TRUE)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#the-standard-error-se-in-r-2",
     "href": "2.1_Precision.html#the-standard-error-se-in-r-2",
     "title": "2.1 Measurement Precision",
     "section": "The Standard Error (SE) in R 2",
-    "text": "The Standard Error (SE) in R 2\nWhenever you use mean, also calculate the SE:\n\nlibrary(tidyverse)\n\niris %&gt;% #helpful data set for illustration\n  summarize( #aggregation =&gt; precision\n    across(.cols = starts_with(\"Sepal\"), #everything(), #output too wide\n           .fns = list(mean = mean, se = confintr::se_mean)),\n    .by = Species)\n\n     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se\n1     setosa             5.006      0.04984957            3.428     0.05360780\n2 versicolor             5.936      0.07299762            2.770     0.04437778\n3  virginica             6.588      0.08992695            2.974     0.04560791\n\n\n\n→ subject-level (species-level) precision"
+    "text": "The Standard Error (SE) in R 2\nWhenever you use mean, also calculate the SE:\n\nlibrary(tidyverse)\n\niris %&gt;% #helpful data set for illustration\n  summarize( #aggregation =&gt; precision\n    across(.cols = starts_with(\"Sepal\"), #everything(), #output too wide\n           .fns = list(mean = mean, se = confintr::se_mean)),\n    .by = Species)\n\n     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se\n1     setosa             5.006      0.04984957            3.428     0.05360780\n2 versicolor             5.936      0.07299762            2.770     0.04437778\n3  virginica             6.588      0.08992695            2.974     0.04560791\n\n\n\n→ subject-level (species-level) precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#precision-vs.-accuracy",
     "href": "2.1_Precision.html#precision-vs.-accuracy",
     "title": "2.1 Measurement Precision",
     "section": "Precision vs. Accuracy",
-    "text": "Precision vs. Accuracy"
+    "text": "Precision vs. Accuracy\n\nhttps://www.reddit.com/r/OTMemes/comments/6am425/obiwan_was_right_all_along/",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r",
     "href": "2.1_Precision.html#standard-error-pitfalls-in-r",
     "title": "2.1 Measurement Precision",
     "section": "Standard Error Pitfalls in R",
-    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\nNote: Treat Species as subjects and rows within Species as trials.\n\ndata &lt;-\n  iris %&gt;% \n  rename(subject = Species, measure = Sepal.Length) %&gt;% \n  mutate(trial = 1:n(), .by = subject) %&gt;% \n  select(subject, trial, measure) %&gt;% arrange(trial, subject) %&gt;% tibble()\nprint(data)\n\n# A tibble: 150 × 3\n   subject    trial measure\n   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;\n 1 setosa         1     5.1\n 2 versicolor     1     7  \n 3 virginica      1     6.3\n 4 setosa         2     4.9\n 5 versicolor     2     6.4\n 6 virginica      2     5.8\n 7 setosa         3     4.7\n 8 versicolor     3     6.9\n 9 virginica      3     7.1\n10 setosa         4     4.6\n# ℹ 140 more rows"
+    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\nNote: Treat Species as subjects and rows within Species as trials.\n\ndata &lt;-\n  iris %&gt;% \n  rename(subject = Species, measure = Sepal.Length) %&gt;% \n  mutate(trial = 1:n(), .by = subject) %&gt;% \n  select(subject, trial, measure) %&gt;% arrange(trial, subject) %&gt;% tibble() #neater output\nprint(data)\n\n# A tibble: 150 × 3\n   subject    trial measure\n   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;\n 1 setosa         1     5.1\n 2 versicolor     1     7  \n 3 virginica      1     6.3\n 4 setosa         2     4.9\n 5 versicolor     2     6.4\n 6 virginica      2     5.8\n 7 setosa         3     4.7\n 8 versicolor     3     6.9\n 9 virginica      3     7.1\n10 setosa         4     4.6\n# ℹ 140 more rows",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r-1",
     "href": "2.1_Precision.html#standard-error-pitfalls-in-r-1",
     "title": "2.1 Measurement Precision",
     "section": "Standard Error Pitfalls in R",
-    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure))\n\n# A tibble: 1 × 2\n      m     se\n  &lt;dbl&gt;  &lt;dbl&gt;\n1  5.84 0.0676\n\n\n\n\n\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure),\n            n = n())\n\n# A tibble: 1 × 3\n      m     se     n\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.0676   150"
+    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure))\n\n# A tibble: 1 × 2\n      m     se\n  &lt;dbl&gt;  &lt;dbl&gt;\n1  5.84 0.0676\n\n\n\n\n\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure),\n            n = n())\n\n# A tibble: 1 × 3\n      m     se     n\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.0676   150",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r-2",
     "href": "2.1_Precision.html#standard-error-pitfalls-in-r-2",
     "title": "2.1 Measurement Precision",
     "section": "Standard Error Pitfalls in R 2",
-    "text": "Standard Error Pitfalls in R 2\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(measure.subject = mean(measure), .by = subject) %&gt;% #subject-level averages\n  summarize(m = mean(measure.subject),\n            se = confintr::se_mean(measure.subject),\n            n = n())\n\n# A tibble: 1 × 3\n      m    se     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     3\n\n\n\n⇒ When using trial-level data to calculate group-level precision, summarize twice!\n⇒ Every summarize brings you up exactly one level - don’t try to skip!\ntrial-level → subject-level → group-level\n\n\n\nLinear Mixed Models (LMMs) implicitly take this into account when specifying random intercepts for subjects (1|subject)."
+    "text": "Standard Error Pitfalls in R 2\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(measure.subject = mean(measure), .by = subject) %&gt;% #subject-level averages\n  summarize(m = mean(measure.subject),\n            se = confintr::se_mean(measure.subject),\n            n = n())\n\n# A tibble: 1 × 3\n      m    se     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     3\n\n\n\n⇒ When using trial-level data to calculate group-level precision, summarize twice!\n⇒ Every summarize brings you up exactly one level - don’t try to skip!\ntrial-level → subject-level → group-level\n\n\n\nLinear Mixed Models (LMMs) implicitly take this into account when specifying random intercepts for subjects (1|subject).",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   },
   {
     "objectID": "2.1_Precision.html#summary-precision-in-r",
     "href": "2.1_Precision.html#summary-precision-in-r",
     "title": "2.1 Measurement Precision",
     "section": "Summary: Precision in R",
-    "text": "Summary: Precision in R\n\ndata %&gt;% \n  summarize(.by = subject, #trial- to subject-level\n            measure.subject = mean(measure), #subject-level averages\n            se.subject = confintr::se_mean(measure)) %&gt;%  #subject-level precision\n  summarize(m = mean(measure.subject), #group-level mean (\"grand average\")\n            se = confintr::se_mean(measure.subject), #group-level precision\n            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)\n            n = n())\n\n# A tibble: 1 × 4\n      m    se se.subject     n\n  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     0.0709     3"
+    "text": "Summary: Precision in R\n\ndata %&gt;% \n  summarize(.by = subject, #trial- to subject-level\n            measure.subject = mean(measure), #subject-level averages\n            se.subject = confintr::se_mean(measure)) %&gt;%  #subject-level precision\n  summarize(m = mean(measure.subject), #group-level mean (\"grand average\")\n            se = confintr::se_mean(measure.subject), #group-level precision\n            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)\n            n = n())\n\n# A tibble: 1 × 4\n      m    se se.subject     n\n  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     0.0709     3",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
   }
 ]

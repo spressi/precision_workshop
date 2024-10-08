@@ -60,6 +60,7 @@ Is there a meaningful correlation?
 
 :::notes
 Simulated data with added noise. True score correlation *r* = 1
+&rArr; We want to enable you to create plots like this one
 
 Side note: \
 Individual errorbars = subject-level precision of each individual (across trials)\
@@ -80,7 +81,7 @@ Confidence band of regression slope = group-level precision of the regression es
 
 Only relevant for time series data (i.e., several "measurements" per trial)
 
-Note: Aggregation is not trivial here because of auto-correlation
+Note: Calculating standard deviation / error is not trivial here because of auto-correlation
 
 ## What is Precision? 3
 
@@ -110,7 +111,7 @@ since *criterion validity* uses a comparison of two manifest variables, this app
 
 ## Precision vs. Accuracy
 
-![](images/memes/Precision_vs_Accuracy.jpg)
+![<https://www.reddit.com/r/OTMemes/comments/6am425/obiwan_was_right_all_along/>](images/memes/Precision_vs_Accuracy.jpg)
 
 ## What is Reliability?
 
@@ -178,9 +179,9 @@ between = signal & within = noise
 
 ## Reliability vs. Group-Level Precision
 
-- Group-level precision &hArr; homogenous sample
+- Group-level precision &hArr; homogenous sample / responses
 
-- Reliability &hArr; heterogenous sample
+- Reliability &hArr; heterogenous sample / responses
 
 . . .
 
@@ -342,7 +343,7 @@ data <-
   iris %>% 
   rename(subject = Species, measure = Sepal.Length) %>% 
   mutate(trial = 1:n(), .by = subject) %>% 
-  select(subject, trial, measure) %>% arrange(trial, subject) %>% tibble()
+  select(subject, trial, measure) %>% arrange(trial, subject) %>% tibble() #neater output
 print(data)
 ```
 
@@ -362,6 +363,7 @@ data %>%
 \
 ```{r}
 #| echo: true
+#| code-line-numbers: "4"
 data %>% 
   summarize(m = mean(measure),
             se = confintr::se_mean(measure),
@@ -374,6 +376,7 @@ What is the group-level precision of `Sepal.Length`?
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "2"
 data %>% 
   summarize(measure.subject = mean(measure), .by = subject) %>% #subject-level averages
   summarize(m = mean(measure.subject),
@@ -396,6 +399,7 @@ Linear Mixed Models (LMMs) implicitly take this into account when specifying *ra
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "2-4|5-8"
 data %>% 
   summarize(.by = subject, #trial- to subject-level
             measure.subject = mean(measure), #subject-level averages
