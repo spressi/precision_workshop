@@ -7,6 +7,1126 @@
     "text": "Welcome to the R workshop “Handling Uncertainty in your Data”!\nThe workshop consists of two afternoons from 1 - 5 pm:\n\nAn optional session on the basics of using R, RStudio, and the tidyverse\nA theoretical introduction to measurement precision (cf. Nebe, Reutter et al., 2023) and how this translates to calculating confidence intervals and visualizing uncertainty in R.\n\nThis workshop is organized by Dr. Mario Reutter and Juli Nagel. It is sponsored by the Interest Group for Open and Reproducible research (IGOR) of the section “Biological Psychology and Neuropsychology” of the German Psychological Society (DGPs). Consider following IGOR on Twitter/X.\nPlease use the navigation on the left to select the slides for each topic (recommendation: open in new tab).\n\n\n\nDate\nTopic\n\n\n\n\n02.10.\nGeneral R Intro\n\n\n\nData Wrangling\n\n\n\nData Visualization\n\n\n\n\n\n\n09.10.\nMeasurement Precision\n\n\n\nConfidence Intervals\n\n\n\nVisualize Uncertainty"
   },
   {
+    "objectID": "2.1_Precision.html#interest-group-open-and-reproducible-research-igor",
+    "href": "2.1_Precision.html#interest-group-open-and-reproducible-research-igor",
+    "title": "2.1 Measurement Precision",
+    "section": "Interest Group: Open and Reproducible Research (IGOR)",
+    "text": "Interest Group: Open and Reproducible Research (IGOR)\n\nPart of the German Reproducibility Network:\nhttps://www.youtube.com/watch?v=sQFmB_EY1PQ",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#group-level-precision",
+    "href": "2.1_Precision.html#group-level-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Group-level Precision",
+    "text": "Group-level Precision\n\nhttps://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R→ Effects in relation to their group-level precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#group-level-precision-2",
+    "href": "2.1_Precision.html#group-level-precision-2",
+    "title": "2.1 Measurement Precision",
+    "section": "Group-level Precision 2",
+    "text": "Group-level Precision 2\n\nhttps://www.medicowesome.com/2020/04/funnel-plot.html→ Effects in relation to their group-level precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#what-is-precision",
+    "href": "2.1_Precision.html#what-is-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "What is Precision?",
+    "text": "What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#subject-level-precision",
+    "href": "2.1_Precision.html#subject-level-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Subject-Level Precision",
+    "text": "Subject-Level Precision\nIs there a meaningful correlation?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#subject-level-precision-2",
+    "href": "2.1_Precision.html#subject-level-precision-2",
+    "title": "2.1 Measurement Precision",
+    "section": "Subject-Level Precision 2",
+    "text": "Subject-Level Precision 2\nIs there a meaningful correlation?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#subject-level-precision-3",
+    "href": "2.1_Precision.html#subject-level-precision-3",
+    "title": "2.1 Measurement Precision",
+    "section": "Subject-Level Precision 3",
+    "text": "Subject-Level Precision 3\nIs there a meaningful correlation?\n\n\nSimulated data with added noise. True score correlation r = 1\nSide note:\nIndividual errorbars = subject-level precision of each individual (across trials)\nConfidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson’s r)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#what-is-precision-2",
+    "href": "2.1_Precision.html#what-is-precision-2",
+    "title": "2.1 Measurement Precision",
+    "section": "What is Precision? 2",
+    "text": "What is Precision? 2\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#trial-level-precision",
+    "href": "2.1_Precision.html#trial-level-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Trial-Level Precision",
+    "text": "Trial-Level Precision\n\nHolmqvist et al. (2023, retracted)Only relevant for time series data (i.e., several “measurements” per trial)\nNote: Aggregation is not trivial here because of auto-correlation",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#what-is-precision-3",
+    "href": "2.1_Precision.html#what-is-precision-3",
+    "title": "2.1 Measurement Precision",
+    "section": "What is Precision? 3",
+    "text": "What is Precision? 3\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\n\n\n“group” is a very superficial term since you can have nested groups:\nclasses in schools in cities in districts in countries, etc.",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#related-concepts",
+    "href": "2.1_Precision.html#related-concepts",
+    "title": "2.1 Measurement Precision",
+    "section": "Related Concepts",
+    "text": "Related Concepts\n\ncf. Nebe, Reutter, et al. (2023); Fig. 1\nvalidity: latent (“theoretical”) match between\nexample for accuracy: systematic bias (miscalibration) in eye tracking\nsince criterion validity uses a comparison of two manifest variables, this approach can be used to quantify accuracy (absolute agreement) and precision (consistency)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#precision-vs.-accuracy",
+    "href": "2.1_Precision.html#precision-vs.-accuracy",
+    "title": "2.1 Measurement Precision",
+    "section": "Precision vs. Accuracy",
+    "text": "Precision vs. Accuracy",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#what-is-reliability",
+    "href": "2.1_Precision.html#what-is-reliability",
+    "title": "2.1 Measurement Precision",
+    "section": "What is Reliability?",
+    "text": "What is Reliability?\nNot this!\n\nhttp://highered.blogspot.com/2012/06/bad-reliability-part-two.html",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#where-is-reliability-highest",
+    "href": "2.1_Precision.html#where-is-reliability-highest",
+    "title": "2.1 Measurement Precision",
+    "section": "Where is Reliability highest?",
+    "text": "Where is Reliability highest?\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#what-is-reliability-2",
+    "href": "2.1_Precision.html#what-is-reliability-2",
+    "title": "2.1 Measurement Precision",
+    "section": "What is Reliability? 2",
+    "text": "What is Reliability? 2\n\n\n\n(Intraclass) Correlation\n→ explained variance:\n\\(R^2 = between / (between + within)\\)\n\nReliability tells you if (to what extent) you can distinguish between low and high trait individuals.\n\n⇒ Reliability =\nlow subject-level variability (high precision) +\nhigh group-level variability (low precision!)\n\n\n\n\ncf. Nebe, Reutter, et al. (2023); Fig. 2\n\n\n\n\n\nSpread of bullet holes is precision, not reliability.\nReliability is a COMPOUND MEASURE of high subject-level precision (i.e., low of within-subject variability) plus high between-subject variability (i.e., low group-level precision)\n⇒ signal-to-noise ratio with\nbetween = signal & within = noise\n\n\nNote: Lack of precision does not automatically mean error variance! It can also be due to true score changes.",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#reliability-paradox",
+    "href": "2.1_Precision.html#reliability-paradox",
+    "title": "2.1 Measurement Precision",
+    "section": "Reliability Paradox",
+    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#reliability-paradox-1",
+    "href": "2.1_Precision.html#reliability-paradox-1",
+    "title": "2.1 Measurement Precision",
+    "section": "Reliability Paradox",
+    "text": "Reliability Paradox\n\nParadigms that produce robust results often show low reliability (Hedge et al., 2018)\nWhy do statistical significance and reliability not go hand in hand?\n\nStatistical power is enhanced by high group-level precision,\nreliability by high group-level variability (cf. previous slide)\nMore subjects only increase group-level precision (high power), leaving subject-level precision constant\n→ sample size has no effect on the magnitude of reliability",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#reliability-vs.-group-level-precision",
+    "href": "2.1_Precision.html#reliability-vs.-group-level-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Reliability vs. Group-Level Precision",
+    "text": "Reliability vs. Group-Level Precision\n\nGroup-level precision ⇔ homogenous sample\nReliability ⇔ heterogenous sample\n\n\n\n→ Choosing your paradigm and sample, you can optimize for group-level significance OR reliability\n\n\n\nBasic research favors different things than (clinical) application (or individual differences research)\n⇒ Most of the time group-level precision gets optimized at the cost of reliability\n\nOf course, optimizing group-level significance by using homogenous samples is not good scientific practice",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#trial-level-precision-to-the-rescue",
+    "href": "2.1_Precision.html#trial-level-precision-to-the-rescue",
+    "title": "2.1 Measurement Precision",
+    "section": "Trial-Level Precision to the Rescue!",
+    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#trial-level-precision-to-the-rescue-1",
+    "href": "2.1_Precision.html#trial-level-precision-to-the-rescue-1",
+    "title": "2.1 Measurement Precision",
+    "section": "Trial-Level Precision to the Rescue!",
+    "text": "Trial-Level Precision to the Rescue!\nImproving trial-level precision of the measurement benefits both subject- and group-level precision\n⇒ Nested hierarchy of precision\n\ncf. Nebe, Reutter, et al. (2023); Fig. 7",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#summary-what-is-precision",
+    "href": "2.1_Precision.html#summary-what-is-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Summary: What is Precision?",
+    "text": "Summary: What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\nClosely linked to statistical power and reliability",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#how-can-we-enhance-precision",
+    "href": "2.1_Precision.html#how-can-we-enhance-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "How Can We Enhance Precision?",
+    "text": "How Can We Enhance Precision?\n\nShield the measurement from random noise → precise equipment / paradigm\n⇒ trial-level precision\nIdentify the aggregation level of interest:\n\nsample differences → optimize group-level precision:\nmany subjects that respond homogenously\ncorrelational hypotheses / application → optimize subject-level precision:\nsystematic differences between individuals but little variability within subjects across many trials (mind “sequence effects”; cf. Nebe, Reutter, et al., 2023)\n\n\n⇒ “two disciplines of scientific psychology” (Cronbach, 1957)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#group--vs.-subject-level-precision",
+    "href": "2.1_Precision.html#group--vs.-subject-level-precision",
+    "title": "2.1 Measurement Precision",
+    "section": "Group- vs. Subject-Level Precision",
+    "text": "Group- vs. Subject-Level Precision\n\n\nGroup-level Precision\n\nGroup differences (t-tests, ANOVA)\nMany subjects (independent observations)\nHomogenous sample (e.g., psychology students?)\n\n\nSubject-level Precision\n\nCorrelations (e.g., Reliability)\nMany trials (careful: sequence effects!)\nHeterogenous/diverse sample\nLow variability within subjects across trials (i.e., SDwithin)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#take-home-message",
+    "href": "2.1_Precision.html#take-home-message",
+    "title": "2.1 Measurement Precision",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#the-standard-error-se",
+    "href": "2.1_Precision.html#the-standard-error-se",
+    "title": "2.1 Measurement Precision",
+    "section": "The Standard Error (SE)",
+    "text": "The Standard Error (SE)\nCalculates the (lack of) precision of a mean based on the\nstandard deviation (\\(SD\\)) of the individual observations and their number (\\(n\\))\n\\[SE = \\frac{SD}{\\sqrt{n}}\\]",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#the-standard-error-se-in-r",
+    "href": "2.1_Precision.html#the-standard-error-se-in-r",
+    "title": "2.1 Measurement Precision",
+    "section": "The Standard Error (SE) in R",
+    "text": "The Standard Error (SE) in R\nNo base R function available 💩\n\nUse confintr::se_mean (not part of the tidyverse)\nUse a custom function\n\n\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\nCareful with custom functions! I often see people using n() but this does not work correctly with missing values (NA / na.rm = TRUE)",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#the-standard-error-se-in-r-2",
+    "href": "2.1_Precision.html#the-standard-error-se-in-r-2",
+    "title": "2.1 Measurement Precision",
+    "section": "The Standard Error (SE) in R 2",
+    "text": "The Standard Error (SE) in R 2\nWhenever you use mean, also calculate the SE:\n\nlibrary(tidyverse)\n\niris %&gt;% #helpful data set for illustration\n  summarize( #aggregation =&gt; precision\n    across(.cols = starts_with(\"Sepal\"), #everything(), #output too wide\n           .fns = list(mean = mean, se = confintr::se_mean)),\n    .by = Species)\n\n     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se\n1     setosa             5.006      0.04984957            3.428     0.05360780\n2 versicolor             5.936      0.07299762            2.770     0.04437778\n3  virginica             6.588      0.08992695            2.974     0.04560791\n\n\n\n→ subject-level (species-level) precision",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r",
+    "href": "2.1_Precision.html#standard-error-pitfalls-in-r",
+    "title": "2.1 Measurement Precision",
+    "section": "Standard Error Pitfalls in R",
+    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\nNote: Treat Species as subjects and rows within Species as trials.\n\ndata &lt;-\n  iris %&gt;% \n  rename(subject = Species, measure = Sepal.Length) %&gt;% \n  mutate(trial = 1:n(), .by = subject) %&gt;% \n  select(subject, trial, measure) %&gt;% arrange(trial, subject) %&gt;% tibble()\nprint(data)\n\n# A tibble: 150 × 3\n   subject    trial measure\n   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;\n 1 setosa         1     5.1\n 2 versicolor     1     7  \n 3 virginica      1     6.3\n 4 setosa         2     4.9\n 5 versicolor     2     6.4\n 6 virginica      2     5.8\n 7 setosa         3     4.7\n 8 versicolor     3     6.9\n 9 virginica      3     7.1\n10 setosa         4     4.6\n# ℹ 140 more rows",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r-1",
+    "href": "2.1_Precision.html#standard-error-pitfalls-in-r-1",
+    "title": "2.1 Measurement Precision",
+    "section": "Standard Error Pitfalls in R",
+    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure))\n\n# A tibble: 1 × 2\n      m     se\n  &lt;dbl&gt;  &lt;dbl&gt;\n1  5.84 0.0676\n\n\n\n\n\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure),\n            n = n())\n\n# A tibble: 1 × 3\n      m     se     n\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.0676   150",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#standard-error-pitfalls-in-r-2",
+    "href": "2.1_Precision.html#standard-error-pitfalls-in-r-2",
+    "title": "2.1 Measurement Precision",
+    "section": "Standard Error Pitfalls in R 2",
+    "text": "Standard Error Pitfalls in R 2\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(measure.subject = mean(measure), .by = subject) %&gt;% #subject-level averages\n  summarize(m = mean(measure.subject),\n            se = confintr::se_mean(measure.subject),\n            n = n())\n\n# A tibble: 1 × 3\n      m    se     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     3\n\n\n\n⇒ When using trial-level data to calculate group-level precision, summarize twice!\n⇒ Every summarize brings you up exactly one level - don’t try to skip!\ntrial-level → subject-level → group-level\n\n\n\nLinear Mixed Models (LMMs) implicitly take this into account when specifying random intercepts for subjects (1|subject).",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "2.1_Precision.html#summary-precision-in-r",
+    "href": "2.1_Precision.html#summary-precision-in-r",
+    "title": "2.1 Measurement Precision",
+    "section": "Summary: Precision in R",
+    "text": "Summary: Precision in R\n\ndata %&gt;% \n  summarize(.by = subject, #trial- to subject-level\n            measure.subject = mean(measure), #subject-level averages\n            se.subject = confintr::se_mean(measure)) %&gt;%  #subject-level precision\n  summarize(m = mean(measure.subject), #group-level mean (\"grand average\")\n            se = confintr::se_mean(measure.subject), #group-level precision\n            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)\n            n = n())\n\n# A tibble: 1 × 4\n      m    se se.subject     n\n  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     0.0709     3",
+    "crumbs": [
+      "2.1 Measurement Precision"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#accessing-variablescolumns",
+    "href": "1.2_Data_Wrangling.html#accessing-variablescolumns",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns",
+    "text": "Accessing Variables/Columns\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# create a small data set for this example:\ntestdata &lt;- data.frame(a = c(1, 2, 3),  # c() creates a vector!\n                       b = c(\"a\", \"b\", \"c\"),\n                       c = c(4, 5, 6),\n                       d = c(7, 8, 9),\n                       e = c(10, 11, 12))\n\nprint(testdata)\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n3 3 c 6 9 12\n\nstr(testdata)\n\n'data.frame':   3 obs. of  5 variables:\n $ a: num  1 2 3\n $ b: chr  \"a\" \"b\" \"c\"\n $ c: num  4 5 6\n $ d: num  7 8 9\n $ e: num  10 11 12\n\n\n\ndata.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)\nc() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#accessing-variablescolumns-2",
+    "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns 2",
+    "text": "Accessing Variables/Columns 2\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# in baseR, we access elements of a data.frame with square brackets\ntestdata[1, 2] # get cell that is in first row and second column\n\n[1] \"a\"\n\ntestdata[1:2, 4:5] # use a colon to create ranges of values: first two rows and column numbers 4 and 5\n\n  d  e\n1 7 10\n2 8 11\n\n# we can leave one part empty to select ALL available columns/rows\ntestdata[1:2, ] # first two rows, all columns\n\n  a b c d  e\n1 1 a 4 7 10\n2 2 b 5 8 11\n\ntestdata[, 4:5] # columns number 4 and 5, all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n\n\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#accessing-variablescolumns-3",
+    "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns 3",
+    "text": "Accessing Variables/Columns 3\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# it is usually better to access columns by their column name:\ntestdata[c(\"d\", \"e\")] # columns with names \"d\" and \"e\", all rows\n\n  d  e\n1 7 10\n2 8 11\n3 9 12\n\n# access a column only:\ntestdata[[\"a\"]] # double square brackets to get a vector (not a data.frame)\n\n[1] 1 2 3\n\ntestdata$a # short notation to get column \"a\" as a vector\n\n[1] 1 2 3\n\n\n\nbetter avoid the comma when accessing by column name:\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n[1] 1 2 3\n\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n\n  a\n1 1\n2 2\n3 3\n\n\n[1] 1 2 3\n\n\n=&gt; consistent data format without leading comma",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#accessing-variablescolumns-4",
+    "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-4",
+    "title": "1.2 Data Wrangling",
+    "section": "Accessing Variables/Columns 4",
+    "text": "Accessing Variables/Columns 4\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# tidy versions (see next slides)\n# library(tidyverse) # load tidyverse (if not already done)\npull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a, b) # get column(s) as a data.frame; no c() needed!\n\n  a b\n1 1 a\n2 2 b\n3 3 c",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#tidyverse-2",
+    "href": "1.2_Data_Wrangling.html#tidyverse-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidyverse 2",
+    "text": "Tidyverse 2\nBase R:\noutput_data1 &lt;- function1(data)\noutput_data2 &lt;- function2(output_data1, param1)\noutput_data3 &lt;- function3(output_data2, param2, param3)\n\nOr:\noutput_data &lt;- function3(function2(function1(data), param1), param2, param3)\n\n\nTidyverse:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2(param1) %&gt;% function3(param2, param3)\n\n\nYou can insert a pipe %&gt;% (including spaces) by pressing Ctrl + Shift + M\n\n\nThe shortcut for the pipe (and other useful things like the assignment operator) can be adjusted in Tools -&gt; Modify Keyboard Shortcuts...\n\n\n\n%&gt;% is called the pipe. It takes the output of whatever happens to its left and “hands it over” to the right.\nSince R 4.1.0, there’s also a new base-R-pipe: |&gt;. It is very similar, but has a slightly limited functionality (see here).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#tidyverse-3",
+    "href": "1.2_Data_Wrangling.html#tidyverse-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidyverse 3",
+    "text": "Tidyverse 3\nlibrary(tidyverse) will load a number of packages, such as dplyr, ggplot2, readr, forcats, tibble etc., which are all usefuls for data wrangling.\nWe will work mainly with functions from the dplyr package, but also use readr to read in data. We will also use ggplot2 to visualize data.\nThe most important dplyr functions for data wrangling are:\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\nselect()\nInclude or exclude certain columns (variables)\n\n\nfilter()\nInclude or exclude certain rows (observations)\n\n\nmutate()\nCreate new columns (variables)\n\n\nsummarize()\nCreate new columns that aggregate data/create summary variables for groups of observations (data frame will become smaller)\n\n\ngroup_by()\nOrganize the rows (observations) into groups\n\n\narrange()\nChange the order of rows (observations)\n\n\n\n\nfunction names very self-explanatory!\nWe don’t create new observations in R - this is job of the data acquisition - we just read the existing data",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#setting-up-libraries",
+    "href": "1.2_Data_Wrangling.html#setting-up-libraries",
+    "title": "1.2 Data Wrangling",
+    "section": "Setting up libraries",
+    "text": "Setting up libraries\n\nOpen your Workshop R project.\nCreate a new R script and save it, e.g. as “DataWrangling1.R”.\nInsert code to make sure the packages “tidyverse” and “babynames” are installed and loaded.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"babynames\")\n\nlibrary(babynames)\nlibrary(tidyverse)\n\n\nload tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#look-at-the-data",
+    "href": "1.2_Data_Wrangling.html#look-at-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Look at the Data",
+    "text": "Look at the Data\n\n\nType the word babynames into your console pane and press enter. What kind of information do you get?\n\n“A tibble: 1,924,665 x 5”\n\ntibble is an extension of the data.frame with more convenient output (e.g., values rounded to significant digits)\n~1.9 million rows/observations\n5 columns/variables\n\n\nWhat kind of columns/variables do we have?\n\ndbl = double/numeric (can take decimals)\nchr = character/string (letters or words)\nint = integer (only whole numbers)\n\n\n\n\nask first for 1 and 2",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#selecting-variables-of-interest",
+    "href": "1.2_Data_Wrangling.html#selecting-variables-of-interest",
+    "title": "1.2 Data Wrangling",
+    "section": "Selecting Variables of Interest",
+    "text": "Selecting Variables of Interest\nUse select() to choose only the columns year, sex, name, and prop and store it as a new tibble called babynames_reduced.\nRemember that you can run ?select in the console if you need help about, e.g., input/arguments to the function.\n\n\n# my favorite:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- \n  babynames %&gt;% \n  select(-n) # remove columns by using -\n\nRemoving columns vs. selecting columns: Results may change if the data get updated!\n\n\nSimilar to optional spaces for better readability, R allows for optional line breakes. You can try out what works best for you or look up some style guides.\n\n\n\nIt is encouraged to use many line breakes for better readability. Check out the Tidyverse Style Guide for suggestions.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#arranging-data",
+    "href": "1.2_Data_Wrangling.html#arranging-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Arranging Data",
+    "text": "Arranging Data\nChange the order of the data (oberservations/rows)!\n\n\nUsing arrange(), try sorting the data according to the names column. What happens?\nHow can you sort a column in a descending fashion? Check out the help file (?arrange).\nLet’s sort by year descendingly and within each year, sort names alphabetically.\n\n\n\n\nsort_asc &lt;- babynames %&gt;% arrange(name)\n\nsort_desc &lt;- babynames %&gt;% arrange(desc(year)) \n\nbabynames %&gt;% arrange(desc(year), name) \n\n# A tibble: 1,924,665 × 5\n    year sex   name          n       prop\n   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;      &lt;dbl&gt;\n 1  2017 M     Aaban        11 0.0000056 \n 2  2017 F     Aabriella     6 0.0000032 \n 3  2017 M     Aadam        18 0.00000917\n 4  2017 M     Aadan         8 0.00000407\n 5  2017 M     Aadarsh      15 0.00000764\n 6  2017 M     Aaden       240 0.000122  \n 7  2017 M     Aadesh        7 0.00000357\n 8  2017 M     Aadhav       31 0.0000158 \n 9  2017 M     Aadhavan      6 0.00000306\n10  2017 M     Aadhi        10 0.00000509\n# ℹ 1,924,655 more rows\n\n\n\nremember to save data in new tibble/data frame!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#filter-observations",
+    "href": "1.2_Data_Wrangling.html#filter-observations",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter Observations",
+    "text": "Filter Observations\nWe have already used select() to keep only certain variables (columns), but often we also want to keep only certain observations (rows), e.g. babies born in the year 2000 and later.\nWe use the function filter() for this.\n\nLook at the following code and think about what it might do.\n\nbabynames %&gt;% \n  filter(year &gt; 2000)\n\n\n\n\n\n# A tibble: 562,156 × 5\n    year sex   name          n    prop\n   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;\n 1  2001 F     Emily     25055 0.0127 \n 2  2001 F     Madison   22164 0.0112 \n 3  2001 F     Hannah    20712 0.0105 \n 4  2001 F     Ashley    16526 0.00835\n 5  2001 F     Alexis    16401 0.00828\n 6  2001 F     Sarah     15896 0.00803\n 7  2001 F     Samantha  15862 0.00801\n 8  2001 F     Abigail   14807 0.00748\n 9  2001 F     Elizabeth 14784 0.00747\n10  2001 F     Olivia    13978 0.00706\n# ℹ 562,146 more rows\n\n\nThe data starts at 2001! :(",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#boolean-expressions",
+    "href": "1.2_Data_Wrangling.html#boolean-expressions",
+    "title": "1.2 Data Wrangling",
+    "section": "Boolean Expressions",
+    "text": "Boolean Expressions\nThe second argument, year &gt; 2000, is a Boolean or logical expression, which means that it results in a value of either TRUE or FALSE. filter() runs this expression and then removes all values/rows that contain FALSE.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#boolean-expressions-2",
+    "href": "1.2_Data_Wrangling.html#boolean-expressions-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Boolean Expressions 2",
+    "text": "Boolean Expressions 2\n\nBoolean expressions\n\n\n\n\n\n\n\nOperator\nName\nis TRUE if and only if\n\n\n\n\nA &lt; B\nless than\nA is less than B\n\n\nA &lt;= B\nless than or equal\nA is less than or equal to B\n\n\nA &gt; B\ngreater than\nA is greater than B\n\n\nA &gt;= B\ngreater than or equal\nA is greater than or equal to B\n\n\nA == B\nequivalence\nA exactly equals B\n\n\nA != B\nnot equal\nA does not exactly equal B\n\n\nA %in% B\nin\nA is an element of vector B\n\n\n\n\n\nA double equality sign == is a comparison, a single equals = is a variable or parameter assignment.\nThis is why R users like to make the distinction even bigger by using &lt;- for variable assignment (your environment in the top right pane) and = for parameter assignment in functions (a hidden so-called local environment only visible to the function).\nAlso, there are slight differences between &lt;- and = for variable assignment, see here.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#filter-some-more-1",
+    "href": "1.2_Data_Wrangling.html#filter-some-more-1",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter some more 1",
+    "text": "Filter some more 1\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\n\nFirst task:\n\nmarys &lt;- \n  babynames %&gt;% \n  filter(name == \"Mary\")",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#filter-some-more-2",
+    "href": "1.2_Data_Wrangling.html#filter-some-more-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter some more 2",
+    "text": "Filter some more 2\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nSecond task:\nThis might be difficult because you have two expressions, name != \"Mary\" and year &gt; 2000. You can simply add several expressions separated by commas in filter (commas are treated like a “logical and” &):\n\nno_marys_young &lt;- \n  babynames %&gt;% \n  filter(name != \"Mary\", year &gt; 2000)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#filter-some-more-3",
+    "href": "1.2_Data_Wrangling.html#filter-some-more-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter some more 3",
+    "text": "Filter some more 3\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nThird task:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(\n    name == \"Mary\" | # the vertical line is a logical OR\n    name == \"Elizabeth\" | \n    name == \"Victoria\"\n  ) \n\n\nA better shorthand exists with the operator %in%:\n\nqueens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#filter-some-more-4",
+    "href": "1.2_Data_Wrangling.html#filter-some-more-4",
+    "title": "1.2 Data Wrangling",
+    "section": "Filter some more 4",
+    "text": "Filter some more 4\n\nKeep only those observations with the name “Mary”.\nDiscard all observations with name “Mary” and keep only those from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\nFourth task:\nThis is very tricky! You could use three filters in a row with:\nname != \"Mary\", name != \"Elizabeth\", name != \"Victoria\".\nThere is no function “not in” but you can negate the result in two ways:\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(!name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\")) # ! is a negation (\"not\")\n\nno_queens &lt;- \n  babynames %&gt;% \n  filter(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\") == FALSE)\n\n\nCareful with precedence! %in% is evaluated before !:\n!(name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))\n=&gt; I prefer to add == FALSE in the end",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#your-first-plot",
+    "href": "1.2_Data_Wrangling.html#your-first-plot",
+    "title": "1.2 Data Wrangling",
+    "section": "Your First Plot",
+    "text": "Your First Plot\nIn your script, insert and run the following code:\n\nbabynames %&gt;% \n  filter(\n    sex == \"F\", # only female babies\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\") # reduce to these 4 names\n  ) %&gt;% \n  ggplot(aes(x = year, y = prop, colour = name)) +\n  geom_line(linewidth = 2) # plot data as a line (with increased size)\n\n\n\nAlter the code to check for male babies with the same names (change sex == \"F\" to sex == \"M\").\nOptional: Plot the absolute number n instead of the relative proportion prop.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#create-new-variables",
+    "href": "1.2_Data_Wrangling.html#create-new-variables",
+    "title": "1.2 Data Wrangling",
+    "section": "Create New Variables",
+    "text": "Create New Variables\nIf we want to create variables that do not exist yet (i.e. by calculating values, combining other variables, etc.), we can use mutate()!\n\nAdd a variable called “country” that contains the value “USA” for all observations\n\n\n\nbaby_where &lt;- \n  babynames %&gt;% \n  mutate(country = \"USA\")\n\n\n\nBut mutate is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#create-new-variables-2",
+    "href": "1.2_Data_Wrangling.html#create-new-variables-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Create New Variables 2",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1880   1880\n 2  1888   1880\n 3  1898   1890\n 4  1905   1900\n 5  1907   1900\n 6  1932   1930\n 7  1936   1930\n 8  1945   1940\n 9  1979   1970\n10  2004   2000",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#summarizing",
+    "href": "1.2_Data_Wrangling.html#summarizing",
+    "title": "1.2 Data Wrangling",
+    "section": "Summarizing",
+    "text": "Summarizing\nThe goal of data wrangling is often to summarize (or aggregate) the data, e.g. to have an average value per condition. Sometimes you’d also want to calculate descriptive statistics to report.\n\nYou can do so using the function summarize():\n\n# run the filter function just like above again:\ndat &lt;- \n  babynames %&gt;% \n  filter(\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"), \n    sex == \"F\"\n  )\n\n# summarize the data, calculating the number of oberservations:\ndat_sum &lt;- dat %&gt;% summarize(total = sum(n))\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#summarizing-2",
+    "href": "1.2_Data_Wrangling.html#summarizing-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Summarizing 2",
+    "text": "Summarizing 2\n\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374\n\n\nAs you can see, a new variable named total is created, which contains the total number of observations (in this case, it is different from the number of rows because each row already contains a count n).\nThere’s just one row in the resulting data frame, because summarize() reduces the data frame (to only include the necessary information)!",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#grouping-and-summarizing",
+    "href": "1.2_Data_Wrangling.html#grouping-and-summarizing",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing",
+    "text": "Grouping and Summarizing\nOften, we want to summarize data for specific subgroups. For this aim, summarize() has the .by parameter:\n\ngroup_sum &lt;- \n  dat %&gt;% \n  summarize(total = sum(n), .by = name) \n\ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Emily     841491\n2 Kathleen  711605\n3 Beverly   376914\n4 Alexandra 231364",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#grouping-and-summarizing-2",
+    "href": "1.2_Data_Wrangling.html#grouping-and-summarizing-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing 2",
+    "text": "Grouping and Summarizing 2\nYou can also subgroup by a combination of variables:\n\nbabynames %&gt;% \n  filter(name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\")) %&gt;% # we start with the 4 names regardless of sex\n  summarize(\n    total = sum(n),\n    .by = c(name, sex) # and then summarize by name, separated for sex\n  )\n\n# A tibble: 8 × 3\n  name      sex    total\n  &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt;\n1 Emily     F     841491\n2 Kathleen  F     711605\n3 Beverly   M       4633\n4 Beverly   F     376914\n5 Alexandra F     231364\n6 Emily     M       1744\n7 Kathleen  M       1692\n8 Alexandra M        859",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#grouping-and-summarizing-3",
+    "href": "1.2_Data_Wrangling.html#grouping-and-summarizing-3",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing 3",
+    "text": "Grouping and Summarizing 3\nIn earlier versions, we had to use summarize() together with group_by():\n\ngroup_sum &lt;- dat %&gt;% group_by(name) %&gt;% summarize(total = sum(n)) \n\nWe avoid using group_by() like this because it can have unintended side effects.\nIt is just part of this class because you will likely encounter it in somebody else’s (old) code.\n\nIf you do have to use it, make sure to ungroup() after summarize() (or mutate()) to avoid unintended effects:\n\ngroup_sum &lt;- dat %&gt;% group_by(name) %&gt;% summarize(total = sum(n)) %&gt;% ungroup()\ngroup_sum &lt;- dat %&gt;% group_by(name) %&gt;% summarize(total = sum(n), .groups = \"drop\")\n\n\nUnintended side effects: grouping stays active and affects future calls to summarize or mutate, which may be hundreds of lines of code away!\n=&gt; Fatal when, e.g., calculating z-scores after having summarized the trial-level data into subject-level averages.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#grouping-and-summarizing-4",
+    "href": "1.2_Data_Wrangling.html#grouping-and-summarizing-4",
+    "title": "1.2 Data Wrangling",
+    "section": "Grouping and Summarizing 4",
+    "text": "Grouping and Summarizing 4\nUse the baby_decades data frame to calculate the mean and median number of observations, grouped by sex & decade.\n\n\nbaby_decades %&gt;% \n  summarize(\n    mean_year = mean(n),\n    median_year = median(n),\n    .by = c(sex, decade)\n  )\n\n# A tibble: 28 × 4\n   sex   decade mean_year median_year\n   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;\n 1 F       1880     111.           13\n 2 M       1880     101.           12\n 3 F       1890     128.           13\n 4 M       1890      93.6          12\n 5 F       1900     131.           12\n 6 M       1900      94.4          12\n 7 F       1910     187.           12\n 8 M       1910     181.           12\n 9 F       1920     211.           12\n10 M       1920     227.           13\n# ℹ 18 more rows",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#counting-data",
+    "href": "1.2_Data_Wrangling.html#counting-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Counting Data",
+    "text": "Counting Data\nThere are several ways to get the number of rows per group. You can use the function n() within a call to summarize() (or mutate()). A shortcut is to use count():\n\ndat %&gt;% summarize(n = n(), .by = name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Emily       138\n2 Kathleen    138\n3 Beverly     122\n4 Alexandra   117\n\ndat %&gt;% count(name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138\n\n\nInterestingly, the order of the output may vary. summarize() leaves the data in the original order (i.e., by prop, which (likely) translates to an order by n()). count() arranges the output by the variables for which the counting is done (here: alphabetically by name).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#bigger-pipes",
+    "href": "1.2_Data_Wrangling.html#bigger-pipes",
+    "title": "1.2 Data Wrangling",
+    "section": "Bigger Pipes!",
+    "text": "Bigger Pipes!\nSo far we have often saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the environment with intermediate data.frames or tibbles!\n\npipe_summary &lt;- \n  babynames %&gt;%\n  mutate(decade = floor(year / 10) * 10) %&gt;%\n  filter(\n    name %in% c(\"Emily\", \"Kathleen\", \"Alexandra\", \"Beverly\"),\n    sex == \"F\"\n  ) %&gt;%\n  summarize(\n    mean_decade = mean(n),\n    .by = c(name, decade)\n  )\n\nIt’s not easy to decide which intermediate steps to save and which not. Usually, it involves some sort of trial and error. Sometimes you go back and break a pipe apart. Sometimes you get overwhelmed by the number of variables in your environment and create bigger pipes.\nAs a rule of thumb: If an intermediate step is only used once, you should probably delete it (unless it makes the code easier to comprehend).",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#tidy-data",
+    "href": "1.2_Data_Wrangling.html#tidy-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidy Data",
+    "text": "Tidy Data\nTidy data: Data that is easily processed by tidyverse functions (also for visualizations and statistical analyses).\nThree principles:\n\nEach variable has its own column.\nEach observation has its own row.\nEach value has its own cell.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#tidy-data-wide-vs.-long-format",
+    "href": "1.2_Data_Wrangling.html#tidy-data-wide-vs.-long-format",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidy Data: wide vs. long format",
+    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#tidy-data-2",
+    "href": "1.2_Data_Wrangling.html#tidy-data-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Tidy Data 2",
+    "text": "Tidy Data 2\nWhat do you think, which of the following data sets is tidy?\n1:\n\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\n\n2:\n\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n3:\n\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n4:\n\n\n# A tibble: 3 × 5\n  country     `1999_cases` `2000_cases` `1999_population` `2000_population`\n  &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;\n1 Afghanistan          745         2666          19987071          20595360\n2 Brazil             37737        80488         172006362         174504898\n3 China             212258       213766        1272915272        1280428583\n\n\n\n\nThe second table is the tidyest!\nTable 1 has cases and population mixed together in count variable.\nTable 3 mixes them in an awkward character row rate.\nTable 4 is standard wide format.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#analyzing-the-autism-spectrum-quotient",
+    "href": "1.2_Data_Wrangling.html#analyzing-the-autism-spectrum-quotient",
+    "title": "1.2 Data Wrangling",
+    "section": "Analyzing the Autism Spectrum Quotient",
+    "text": "Analyzing the Autism Spectrum Quotient\nFor the following activities, we will need the following files:\n\nresponses.csv containing the AQ survey responses to each of the 10 questions for the 66 participants\nqformats.csv containing information on how a question should be coded - i.e. forward or reverse coding\nscoring.csv containing information on how many points a specific response should get; depending on whether it is forward or reverse coded\npinfo.csv containing participant information such as Age, Sex and importantly ID number.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#set-up",
+    "href": "1.2_Data_Wrangling.html#set-up",
+    "title": "1.2 Data Wrangling",
+    "section": "Set Up",
+    "text": "Set Up\n\nCreate a new script, e.g. as “DataWrangling3.R” (remember we skipped #2 in the book).\nDownload the data into your project folder:\nresponses.csv\nqformats.csv\nscoring.csv\npinfo.csv\nClear your environment (the brush in the top right pane) and/or restart the R session (Session -&gt; Restart R).\nLoad the four .csv files into your environment, e.g.:\n\n\nlibrary(tidyverse)\nresponses &lt;- read_csv(\"responses.csv\") \nqformats &lt;- read_csv(\"qformats.csv\")\nscoring &lt;- read_csv(\"scoring.csv\")\npinfo &lt;- read_csv(\"pinfo.csv\")",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#look-at-the-data-1",
+    "href": "1.2_Data_Wrangling.html#look-at-the-data-1",
+    "title": "1.2 Data Wrangling",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nIs the data (responses) in a tidy format?\n\n\n# A tibble: 6 × 11\n     Id Q1                 Q2    Q3    Q4    Q5    Q6    Q7    Q8    Q9    Q10  \n  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n1    16 Slightly Disagree  Defi… Slig… Defi… Slig… Slig… Slig… Defi… Slig… Slig…\n2    17 Definitely Agree   Slig… Slig… Defi… Defi… Defi… Slig… Slig… Slig… Slig…\n3    18 Definitely Agree   Defi… Slig… Defi… Defi… Defi… Slig… Defi… Defi… Defi…\n4    19 Definitely Agree   Defi… Defi… Slig… Defi… Defi… Slig… Slig… Defi… Slig…\n5    20 Definitely Disagr… Slig… Defi… Slig… Slig… Slig… Slig… Slig… Slig… Slig…\n6    21 Slightly Disagree  Slig… Defi… Slig… Slig… Slig… Defi… Defi… Slig… Slig…\n\n\n\nWhy is it not tidy?\n\nwide format",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#reformatting-the-data",
+    "href": "1.2_Data_Wrangling.html#reformatting-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Reformatting the Data",
+    "text": "Reformatting the Data\nLet’s bring the wide data in a longer, tidy format!\n\nThere are several functions in R to reformat data, but the newest ones are pivot_longer() and pivot_wider().\nRun the code and see what changes:\n\nrlong &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10, # we can select a range of column names\n    # cols = starts_with(\"Q\"), # alternative\n    names_to = \"Question\", \n    values_to = \"Response\"\n  )\n\n\n\nDescribe what the function does, what does the input/the arguments mean?",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#joining-the-data",
+    "href": "1.2_Data_Wrangling.html#joining-the-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Joining the Data",
+    "text": "Joining the Data\nWe now want to combine the different data sets: We want to have the information how the questionnaire has to be scored included with the items.\nWe can find the scoring information (i.e. how the questions are framed, positive or negative/whether they need to be reversed) in the qformats tibble. Furthermore, we can find how many points are given to each item/response in scoring.\nWe can use the function inner_join() to merge the tibbles into one bigger tibble.\n\nActivity: Replace the NULL values in the below code with the necessary variable names to join rlong and qformats by Question.\n\nrlong2 &lt;- \n  inner_join(x = NULL, y = NULL, by = \"NULL\")\n\n\n\n\nrlong2 &lt;- \n  inner_join(\n    x = rlong, \n    y = qformats, \n    by = \"Question\"\n  )\n\n\nDescribe what happened?\nwhat is forward and reverse scoring?",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#combining-more-data",
+    "href": "1.2_Data_Wrangling.html#combining-more-data",
+    "title": "1.2 Data Wrangling",
+    "section": "Combining more Data",
+    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- \n  rlong2 %&gt;% \n  inner_join(\n    scoring, \n    c(\"QFormat\", \"Response\")\n  )\n\n\nYou can also let the function figure out by itself which columns should be used for joining:\n\nrscores &lt;- inner_join(rlong2, scoring)\n\nJoining with `by = join_by(Response, QFormat)`\n\n\n\n\nAnd if you are happy with the result, copy the information into your code to make the join explicit:\n\nrscores &lt;- inner_join(rlong2, scoring, \n                      by = join_by(Response, QFormat)) #same as by = c(\"QFormat\", \"Response\")",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#calculate-the-questionnaire-scores",
+    "href": "1.2_Data_Wrangling.html#calculate-the-questionnaire-scores",
+    "title": "1.2 Data Wrangling",
+    "section": "Calculate the Questionnaire Scores",
+    "text": "Calculate the Questionnaire Scores\nHow do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the NULL.\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(NULL), \n    .by = NULL\n  )\n\n\n\naq_scores &lt;- \n  rscores %&gt;% \n  summarize(\n    AQ = sum(Score), # sum column Score to obtain AQ scores.\n    .by = Id # separately for each Id (participant)\n  )",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#pipe-it-all-together",
+    "href": "1.2_Data_Wrangling.html#pipe-it-all-together",
+    "title": "1.2 Data Wrangling",
+    "section": "Pipe it all together!",
+    "text": "Pipe it all together!\n\naq_scores2 &lt;- \n  responses %&gt;% \n  pivot_longer(\n    cols = Q1:Q10,\n    names_to = \"Question\", \n    values_to = \"Response\"\n  ) %&gt;%  \n  inner_join(qformats, \"Question\") %&gt;% \n  inner_join(scoring, c(\"QFormat\", \"Response\")) %&gt;% \n  summarize(AQ = sum(Score), .by = Id)",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#background",
+    "href": "1.2_Data_Wrangling.html#background",
+    "title": "1.2 Data Wrangling",
+    "section": "Background",
+    "text": "Background\nWe’ll use data from a paper that investigates whether the ability to perform an action influences perception. In particular, the authors wondered whether participants who played Pong would perceive the ball to move faster when they have a small paddle.\n\n\nDownload the data, create a new script.\nClear the environment if you prefer.\nLook at the data.",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#solutions",
+    "href": "1.2_Data_Wrangling.html#solutions",
+    "title": "1.2 Data Wrangling",
+    "section": "Solutions",
+    "text": "Solutions\n\nlibrary(\"tidyverse\")\npong_data &lt;- read_csv(\"Data/PongBlueRedBack 1-16 Codebook.csv\") # I put the data into a separate subfolder \"Data\"\nsummary(pong_data)\n\n  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    \n Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  \n 1st Qu.: 4.75   1st Qu.:0.0000   1st Qu.: 50   1st Qu.:3.0   1st Qu.: 72.75  \n Median : 8.50   Median :1.0000   Median :150   Median :4.5   Median :144.50  \n Mean   : 8.50   Mean   :0.5471   Mean   :150   Mean   :4.5   Mean   :144.50  \n 3rd Qu.:12.25   3rd Qu.:1.0000   3rd Qu.:250   3rd Qu.:6.0   3rd Qu.:216.25  \n Max.   :16.00   Max.   :1.0000   Max.   :250   Max.   :7.0   Max.   :288.00  \n BackgroundColor      HitOrMiss       BlockNumber   \n Length:4608        Min.   :0.0000   Min.   : 1.00  \n Class :character   1st Qu.:0.0000   1st Qu.: 3.75  \n Mode  :character   Median :1.0000   Median : 6.50  \n                    Mean   :0.6866   Mean   : 6.50  \n                    3rd Qu.:1.0000   3rd Qu.: 9.25  \n                    Max.   :1.0000   Max.   :12.00  \n\n# look at the data (can also use summary(), str(), head() etc.)\nglimpse(pong_data)\n\nRows: 4,608\nColumns: 8\n$ Participant     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ JudgedSpeed     &lt;dbl&gt; 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, …\n$ PaddleLength    &lt;dbl&gt; 50, 250, 50, 250, 250, 50, 250, 50, 250, 50, 50, 250, …\n$ BallSpeed       &lt;dbl&gt; 5, 3, 4, 3, 7, 5, 6, 2, 4, 4, 7, 7, 3, 6, 5, 7, 2, 5, …\n$ TrialNumber     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…\n$ BackgroundColor &lt;chr&gt; \"red\", \"blue\", \"red\", \"red\", \"blue\", \"blue\", \"red\", \"r…\n$ HitOrMiss       &lt;dbl&gt; 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, …\n$ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "1.2_Data_Wrangling.html#solutions-2",
+    "href": "1.2_Data_Wrangling.html#solutions-2",
+    "title": "1.2 Data Wrangling",
+    "section": "Solutions 2",
+    "text": "Solutions 2\n\nnew_pong_data &lt;- pong_data %&gt;% \n  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, TrialNumber) %&gt;% \n  arrange(desc(HitOrMiss), desc(JudgedSpeed)) %&gt;% \n  filter(\n    JudgedSpeed == 1,\n    BallSpeed %in% c(\"2\", \"4\", \"5\", \"7\"),\n    HitOrMiss == 0\n  ) %&gt;% \n  filter(TrialNumber &gt; 2) %&gt;% \n  mutate(TrialNumber = TrialNumber -1) \n  \n  # summarize (use old data frame because we removed variables)\npong_data_hits &lt;- \n  pong_data %&gt;% \n  summarize(\n    total_hits = sum(HitOrMiss, na.rm = TRUE),\n    meanhits = mean(HitOrMiss, na.rm = TRUE),\n    .by = c(BackgroundColor, PaddleLength)\n  )",
+    "crumbs": [
+      "1.2 Data Wrangling"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html",
+    "href": "0.2_Further_Reading.html",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "Oh, you’re still here. You must be really hyped for the workshop!\nThis page is dedicated to some (maybe more niche) topics that might be interesting within the broader context of this workshop. However, they are neither crucial, nor is everyone interested in reading pages upon pages about R. If you are, though, go ahead! Some of this content will make more sense after the introductory part of the workshop (or if you have pre-existing R knowledge).\n\n\nIn this course, we will mainly use the tidyverse, and sometimes, we will refer to base R. But what is the difference, and does it matter?\nThe term base R can be a little bit ambiguous. In this course, we refer to base R as “R without any packages installed”, i.e., what you get after a new installation of R. When you hear someone say, “base R vs. tidyverse”, the term “base R” may also refer to a programming style in the broader sense. Because usually, this debate is not about people using the tidyverse vs. no packages at all, but rather about people using the tidyverse coding style vs. the coding style that is used in base R, and usually for other packages outside of the tidyverse. This is all a bit abstract, but it will make more sense at the end.\nAnother important thing to know is that the tidyverse is actually not a package (well, technically, it is, but that’s not the point), but a collection of packages. For example, the packages ggplot2 (the famous package for plotting) or dplyr (famous for data wrangling) are both part of the tidyverse among many others! What these packages have in common is a certain way of coding. Most notably, the tidyverse works with “pipes” (%&gt;%) that allow you to chain function calls one after the other (top to bottom, or left to right), instead of the “onion style” (inside to outside) in base R. See:\n\nmy_data &lt;- c(1, 10, 12, 5)\n\nas.character(round(mean(my_data), 2)) # base R\n\n# tidyverse\nmy_data %&gt;% \n  mean() %&gt;% \n  round(2) %&gt;% \n  as.character()\n\nCentral to the tidyverse is also “tidy evaluation”, a special form of so-called “non-standard evaluation”. A popular example is “data masking”: In base R, you always have to call the data source explicitly if you access a column of e.g. a data.frame. Within the tidyverse, you provide the data source once, and can then access the columns without having to name the data again. See:\n\n# base R\niris$new_col &lt;- iris$Sepal.Length + iris$Petal.Length\n\n# tidyverse\niris %&gt;% \n  mutate(new_col = Sepal.Length + Petal.Length)\n\nWe won’t go into further details here, but all packages within the tidyverse adhere to the “tidy philosophy”. Importantly, fierce debates have been fought over “base R” vs. tidyverse - meaning “tidy style” vs. “base R style” rather than “tidyverse vs. no packages at all”. People particularly disagree on the question what you should teach beginners. Very briefly, some people think that the tidyverse is easier to read and understand, especially for beginners. Others argue that only knowing how to code “tidy style” will make you dependent on certain packages, and less capable of navigating “pure” R. Sometimes, it might seem whether people are coding in two different languages, not simply R.\nWhile most of the examples in this code follow the tidyverse, it’s important to note that it’s not necessarily either/or. You can use functionalities of the tidyverse, and other wise stick to a more “base R style”. Or you can switch your approach depending on the task you need to do. Despite occasional debates like these, the R community is generally speaking very friendly and inclusive.\nPS: Sometimes, you will see scripts where people loaded both the tidyverse, and packages included in the tidyverse, e.g. ggplot2, dplyr etc. This is not necessary, because those packages are already loaded as part of the tidyverse. Sometimes, it might make more sense to load individual packages if you only need a couple of functions. But within the tidyverse, it’s also fairly common to just load the whole bunch using library(tidyverse). Loading packages of the tidyverse after already loading the tidyverse will not break anything, but it clutters your code unnecessarily.\n\n\n\nIn this workshop, we encouraged you to work with R projects, which a) help you to organize files of code that belong together, b) offer you some convenience functions (i.e., RStudio will remember which scripts you had opened last and will open these automatically for you if you open your project again) and most importantly c) enhance the reproducibility of your code. Here are some additional information why projects are more reproducible, and how you (or someone else using your code) might run into trouble if you don’t use them. Most of my arguments are paraphrased from Jenny Bryan’s 2017 post about a project-oriented workflow. Note that Jenny may come and set your computer on fire of you don’t heed my (her) advice, so pay close attention :-)\n\n\n\nJenny Bryan’s “hot take” on a non-project-oriented workflow\n\n\n\n\nLet’s start with the general issue we have (and the first point addressed in Jenny’s “fiery” tweet). If you run code (or at least when you want to read in files, e.g. data files), R will need to know “where you are” on your computer. For example, if I want to open my file “my_data.csv”, I’d need to let R know where said file can be found at (e.g. C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv). So, I could read in my data like this: data &lt;- read.csv(\"C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv\"). However, it is quite tedious to spell out very long file paths for every single file you want to read in. So what some people do instead is to set the “working directory” to the location where their code/data lives. E.g., if I set my working directory to \"C:/Users/juliane.nagel/Documents/code/r_workshop/\", we start from the folder r_workshop, and if I ask R to read in a data file, it will search for it in the working directory (but not elsewhere!). This allows me to shorten my code to read.csv(\"my_data.csv\") - much cleaner! This is the difference between “absolute paths” and “relative paths”. An absolute path is like the “full address” that can be found regardless from where you start in the world (e.g., the Central Institute of Mental health can be found in J5, Mannheim, Germany). A relative path is the address relative to a certain location (e.g, start from Mannheim main station, turn left, and you’ll find Mannheim castle after 1 km).\nSo, setting a working directory and setting relative paths may look like a good solution - but it isn’t in terms of reproducibility. First of all, setting the working directory isn’t permanent. You’d need to run it every time (e.g., include it at the beginning of your scripts). But that’s just a minor inconvenience. More troubling is what happens if you share your code with a colleague, or even try to use it yourself on a different computer. An absolute path like \"C:/Users/juliane.nagel/Documents/code/r_workshop/\" is unique to a specific computer. Note my name in the path - I’m fairly certain this location does not exist on your computer. That means that whenever the code is used on another computer, you will need to change the working directory manually. (Plus, you might accidentally reveal the embarrassing path structure you have on your computer - think \"C:/Users/cutiepie123/Documents/code/i_hate_my_thesis/\".) R projects take this hassle away.\nIf you create an R project, an .Rproj file will be created in the folder you specified. Within a project, the working directory will always be the location where the .Rproj is, so there is no need to set the working directory every time. It will be handled automatically when opening a project. Furthermore, if the location of the project folder changes, the working directory will “move along” with it: Suppose I have set up a project in \"C:/Users/juliane.nagel/Documents/code/r_workshop/\". If I now move the folder \"r_workshop\" to, say, \"C:/Users/juliane.nagel/Documents/code/subfolder/another_subfolder/r_workshop/\", I can simply open the project there and continue working on my code, without changing anything. Likewise, I can give the entire folder \"r_workshop\" to a colleague, they can put it anywhere they want on their computer, simply open the R project and work on the code without having to change anything.\n\n\n\nNow for Jenny’s second case, the rm(list = ls()). This line of code might look a bit obscure, but it’s used to simply clear your entire environment. The same thing will happen if you click the little broom icon in your Environment Pane - all variables that are currently in there will be deleted. You will probably have noticed that by default, RStudio asks you whether you want to save your workspace (i.e., the content of your Environment) whenever you close it. Which somehow suggests that that’s a good idea - which it is usually not (at least not in its entirety!). The issue with saving (and then loading) your workspace every time is: you might not be able to rely on your script anymore, and might not notice. Imagine the following (stupid) example:\n\na &lt;- 12\na + b\n\nNotice how we did not define a variable b. If I run this code as it is, it will throw an error and tell me that b is missing. However, imagine I had saved my previous workspace, which happened to contain a variable b with the value 3. In this case, the code from above will happily return 15, even though b was not created in the script. If something like this gets overlooked, your results might be wrong, or you may not be able to run your script again if your workspace gets deleted/overwritten at some point. And also - you guessed it - other will not be able to reproduce your results (unless you give them your workspace along with your script).\nWhat Jenny refers to here with rm(list = ls()) at the very beginning of a script is: The person who wrote this script probably regularly saves their workspace, but to prevent it from interfering with the script they want to run, they start with a clean slate by running rm(list = ls()) at the beginning. If you do this anyways, saving the workspace in the first place didn’t really make sense.\nOf course, no one is against saving workspaces per se! Especially if you have long calculations or want to work with the results of previous scripts, you might want to save these results and work on them later. It would be silly to re-run calculations that take hours or even days from scratch every time. However, instead of simply saving the entire workspace at the end of each session (which, by the way, gets saved to the same file every time, i.e., is overwritten every time), you can be a bit more mindful about which things you want to keep - and which not. For example, you could save the variables a and b in a file called previous_results.RData like this:\n\nsave(a, b, file = \"previous_results.RData\")\n\nIf you want to try this out, create the variables a and b, and run the line of code above. Then, clear your workspace. In your next script, you can then load in the variables you saved like this:\n\nload(\"previous_results.RData\")\n\na + b # can now be used!\n\nPS: If you want to disable the annoying behaviour of RStudio where it asks you whether you want to save your workspace every time you close it - go to Tools \\(\\to\\) Global options. Then, for “Save workspace to .RData on exit”, select “Never”.\nOf course, there are exceptions to every rule and there might be very good arguments for doing things differently in some scenarios. However, it is important to understand what the pitfalls and consequences of different approaches are, and how to navigate them.\n\n\n\n\nA consistent coding style helps to make your code more readable and prevents errors. Some general things apply to every programming language, such as meaningful variable names. However, in other aspects, different programming languages my vary in what they consider “good coding style”. If you want to learn about how to write “good code” (at least on the surface :-) ) tidyverse style, take a look at the tidyverse style guide.\nThe “style” of your code refers to things such as naming schemes (e.g., day_one instead of DayOne), spacing (e.g., 2 + 4 instead of 2+4), when to add line breaks etc. None of these things will affect how your code works, but it may help readers of your code (including you) to find their way around the code. While you can follow any style guide to improve the readability of your code, it makes sense to adapt a language-specific style guide, so other users of the language (following the same style guide) will find it easier to work with your code. As a beginner, you might find it overwhelming to take care of your code style when you might already be struggling to make the code work in the first place. However, it pays off to adopt a good coding style right from the start (before you get used to a bad one), and might even help you to understand your code better.\n\n\nWhitespace refers to blank spaces in your code, whether that’s within lines, or between them (see examples below). Unlike some other programming languages, R (mostly) doesn’t care about whitespace. So, technically, you can put it wherever you want.\nThis means that this code will work:\n\niris %&gt;% \n  mutate(sepal_length_mm = Sepal.Length * 100) %&gt;% \n  summarise(sepal_length_mm = mean(sepal_length_mm), .by = Species)\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\n… and so will this:\n\niris%&gt;%mutate(sepal_length_mm=Sepal.Length*100)%&gt;%summarise(sepal_length_mm=mean(sepal_length_mm),.by=Species)\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\n… and also this:\n\niris %&gt;% \n  mutate(\n             sepal_length_mm = Sepal.Length * \n               100) %&gt;% \n  summarise(\n    \n    \n    \n    sepal_length_mm = mean(\n      \n      \n      sepal_length_mm), \n    \n    \n    \n    .by = Species\n    \n    \n    )\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\nNeedless to say, the second and the third example are not recommended (mildly put). This is just to emphasize that R really does not care about your whitespace.\n\n\n\nIf you have experience with other programming languages, you might find the assignment operator &lt;- a bit weird. Many other languages use = to assign variables, i.e., my_var = 2 instead of my_var &lt;- 2. In R, it is possible to use = instead of &lt;-. In the vast majority of scenarios, you will achieve the same results. There are subtle and rather technical details between = and &lt;-; if you are interested, here is a discussion on Stack Overflow about the topic. Within the R community, the use of = for assigning variables is discouraged. By convention, the majority of R programmers uses &lt;-. Note that the shortcut for inserting &lt;- is alt + -, which will make your life a lot easier in the long run.\nAlso note that the &lt;- operator is only used for assigning variables - for arguments within functions (e.g., mean(c(1, 10, 2), na.rm = TRUE)) or within pipes (e.g., iris %&gt;% mutate(new_col = Sepal.Length * 100)), = is the correct operator.\n\n\n\nThis workshop follows the tidyverse style guide - however, we sometimes deviate from it to e.g. shorten code that would otherwise not fit on the slides, or to make it easier to highlight certain important lines of code.\n\n\n\n\nIn the installation guide, we briefly talked about R and its packages changing constantly. Sometimes, new versions of software can lead to different results, which we generally do not want for our old analyses (which are e.g. tied to publications). There are ways how to manage several R versions or older R package versions, but those will not be covered here, because that would be enough material for at least two workshops. If you want to read about the topic, a rather lightweight alternative for managing different package versions is renv. Another pretty common tool to manage software and package versions is Docker - but it takes time to master it. This tutorial might be a good start.\n\n\n\nWhile we’re here:\n\nEach R version is named after Peanuts comic strips/films. If you run R.version in the console, you’ll find a “nickname”. E.g. for 4.4.1, it’s “Race for Your Life”, a 1977 film.\nEver wondered why the function head() shows you exactly six entries (elements in a vector, rows in a data frame …)? Not an “obvious” number like five, or ten? Well, it’s basically: “You can cover my homework, but don’t make it seem too obvious.” As Patrick Burns, the author of the function, said: “I came upon ‘head’ and ‘tail’ at one of my clients. That implementation had n = 5. I didn’t think there would ever be an issue regarding ownership of the code, but I changed to 6 just to help if there were a conflict.” (see this discussion).",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html#base-r-vs.-tidyverse",
+    "href": "0.2_Further_Reading.html#base-r-vs.-tidyverse",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "In this course, we will mainly use the tidyverse, and sometimes, we will refer to base R. But what is the difference, and does it matter?\nThe term base R can be a little bit ambiguous. In this course, we refer to base R as “R without any packages installed”, i.e., what you get after a new installation of R. When you hear someone say, “base R vs. tidyverse”, the term “base R” may also refer to a programming style in the broader sense. Because usually, this debate is not about people using the tidyverse vs. no packages at all, but rather about people using the tidyverse coding style vs. the coding style that is used in base R, and usually for other packages outside of the tidyverse. This is all a bit abstract, but it will make more sense at the end.\nAnother important thing to know is that the tidyverse is actually not a package (well, technically, it is, but that’s not the point), but a collection of packages. For example, the packages ggplot2 (the famous package for plotting) or dplyr (famous for data wrangling) are both part of the tidyverse among many others! What these packages have in common is a certain way of coding. Most notably, the tidyverse works with “pipes” (%&gt;%) that allow you to chain function calls one after the other (top to bottom, or left to right), instead of the “onion style” (inside to outside) in base R. See:\n\nmy_data &lt;- c(1, 10, 12, 5)\n\nas.character(round(mean(my_data), 2)) # base R\n\n# tidyverse\nmy_data %&gt;% \n  mean() %&gt;% \n  round(2) %&gt;% \n  as.character()\n\nCentral to the tidyverse is also “tidy evaluation”, a special form of so-called “non-standard evaluation”. A popular example is “data masking”: In base R, you always have to call the data source explicitly if you access a column of e.g. a data.frame. Within the tidyverse, you provide the data source once, and can then access the columns without having to name the data again. See:\n\n# base R\niris$new_col &lt;- iris$Sepal.Length + iris$Petal.Length\n\n# tidyverse\niris %&gt;% \n  mutate(new_col = Sepal.Length + Petal.Length)\n\nWe won’t go into further details here, but all packages within the tidyverse adhere to the “tidy philosophy”. Importantly, fierce debates have been fought over “base R” vs. tidyverse - meaning “tidy style” vs. “base R style” rather than “tidyverse vs. no packages at all”. People particularly disagree on the question what you should teach beginners. Very briefly, some people think that the tidyverse is easier to read and understand, especially for beginners. Others argue that only knowing how to code “tidy style” will make you dependent on certain packages, and less capable of navigating “pure” R. Sometimes, it might seem whether people are coding in two different languages, not simply R.\nWhile most of the examples in this code follow the tidyverse, it’s important to note that it’s not necessarily either/or. You can use functionalities of the tidyverse, and other wise stick to a more “base R style”. Or you can switch your approach depending on the task you need to do. Despite occasional debates like these, the R community is generally speaking very friendly and inclusive.\nPS: Sometimes, you will see scripts where people loaded both the tidyverse, and packages included in the tidyverse, e.g. ggplot2, dplyr etc. This is not necessary, because those packages are already loaded as part of the tidyverse. Sometimes, it might make more sense to load individual packages if you only need a couple of functions. But within the tidyverse, it’s also fairly common to just load the whole bunch using library(tidyverse). Loading packages of the tidyverse after already loading the tidyverse will not break anything, but it clutters your code unnecessarily.",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html#project-oriented-workflows",
+    "href": "0.2_Further_Reading.html#project-oriented-workflows",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "In this workshop, we encouraged you to work with R projects, which a) help you to organize files of code that belong together, b) offer you some convenience functions (i.e., RStudio will remember which scripts you had opened last and will open these automatically for you if you open your project again) and most importantly c) enhance the reproducibility of your code. Here are some additional information why projects are more reproducible, and how you (or someone else using your code) might run into trouble if you don’t use them. Most of my arguments are paraphrased from Jenny Bryan’s 2017 post about a project-oriented workflow. Note that Jenny may come and set your computer on fire of you don’t heed my (her) advice, so pay close attention :-)\n\n\n\nJenny Bryan’s “hot take” on a non-project-oriented workflow\n\n\n\n\nLet’s start with the general issue we have (and the first point addressed in Jenny’s “fiery” tweet). If you run code (or at least when you want to read in files, e.g. data files), R will need to know “where you are” on your computer. For example, if I want to open my file “my_data.csv”, I’d need to let R know where said file can be found at (e.g. C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv). So, I could read in my data like this: data &lt;- read.csv(\"C:/Users/juliane.nagel/Documents/code/r_workshop/my_data.csv\"). However, it is quite tedious to spell out very long file paths for every single file you want to read in. So what some people do instead is to set the “working directory” to the location where their code/data lives. E.g., if I set my working directory to \"C:/Users/juliane.nagel/Documents/code/r_workshop/\", we start from the folder r_workshop, and if I ask R to read in a data file, it will search for it in the working directory (but not elsewhere!). This allows me to shorten my code to read.csv(\"my_data.csv\") - much cleaner! This is the difference between “absolute paths” and “relative paths”. An absolute path is like the “full address” that can be found regardless from where you start in the world (e.g., the Central Institute of Mental health can be found in J5, Mannheim, Germany). A relative path is the address relative to a certain location (e.g, start from Mannheim main station, turn left, and you’ll find Mannheim castle after 1 km).\nSo, setting a working directory and setting relative paths may look like a good solution - but it isn’t in terms of reproducibility. First of all, setting the working directory isn’t permanent. You’d need to run it every time (e.g., include it at the beginning of your scripts). But that’s just a minor inconvenience. More troubling is what happens if you share your code with a colleague, or even try to use it yourself on a different computer. An absolute path like \"C:/Users/juliane.nagel/Documents/code/r_workshop/\" is unique to a specific computer. Note my name in the path - I’m fairly certain this location does not exist on your computer. That means that whenever the code is used on another computer, you will need to change the working directory manually. (Plus, you might accidentally reveal the embarrassing path structure you have on your computer - think \"C:/Users/cutiepie123/Documents/code/i_hate_my_thesis/\".) R projects take this hassle away.\nIf you create an R project, an .Rproj file will be created in the folder you specified. Within a project, the working directory will always be the location where the .Rproj is, so there is no need to set the working directory every time. It will be handled automatically when opening a project. Furthermore, if the location of the project folder changes, the working directory will “move along” with it: Suppose I have set up a project in \"C:/Users/juliane.nagel/Documents/code/r_workshop/\". If I now move the folder \"r_workshop\" to, say, \"C:/Users/juliane.nagel/Documents/code/subfolder/another_subfolder/r_workshop/\", I can simply open the project there and continue working on my code, without changing anything. Likewise, I can give the entire folder \"r_workshop\" to a colleague, they can put it anywhere they want on their computer, simply open the R project and work on the code without having to change anything.\n\n\n\nNow for Jenny’s second case, the rm(list = ls()). This line of code might look a bit obscure, but it’s used to simply clear your entire environment. The same thing will happen if you click the little broom icon in your Environment Pane - all variables that are currently in there will be deleted. You will probably have noticed that by default, RStudio asks you whether you want to save your workspace (i.e., the content of your Environment) whenever you close it. Which somehow suggests that that’s a good idea - which it is usually not (at least not in its entirety!). The issue with saving (and then loading) your workspace every time is: you might not be able to rely on your script anymore, and might not notice. Imagine the following (stupid) example:\n\na &lt;- 12\na + b\n\nNotice how we did not define a variable b. If I run this code as it is, it will throw an error and tell me that b is missing. However, imagine I had saved my previous workspace, which happened to contain a variable b with the value 3. In this case, the code from above will happily return 15, even though b was not created in the script. If something like this gets overlooked, your results might be wrong, or you may not be able to run your script again if your workspace gets deleted/overwritten at some point. And also - you guessed it - other will not be able to reproduce your results (unless you give them your workspace along with your script).\nWhat Jenny refers to here with rm(list = ls()) at the very beginning of a script is: The person who wrote this script probably regularly saves their workspace, but to prevent it from interfering with the script they want to run, they start with a clean slate by running rm(list = ls()) at the beginning. If you do this anyways, saving the workspace in the first place didn’t really make sense.\nOf course, no one is against saving workspaces per se! Especially if you have long calculations or want to work with the results of previous scripts, you might want to save these results and work on them later. It would be silly to re-run calculations that take hours or even days from scratch every time. However, instead of simply saving the entire workspace at the end of each session (which, by the way, gets saved to the same file every time, i.e., is overwritten every time), you can be a bit more mindful about which things you want to keep - and which not. For example, you could save the variables a and b in a file called previous_results.RData like this:\n\nsave(a, b, file = \"previous_results.RData\")\n\nIf you want to try this out, create the variables a and b, and run the line of code above. Then, clear your workspace. In your next script, you can then load in the variables you saved like this:\n\nload(\"previous_results.RData\")\n\na + b # can now be used!\n\nPS: If you want to disable the annoying behaviour of RStudio where it asks you whether you want to save your workspace every time you close it - go to Tools \\(\\to\\) Global options. Then, for “Save workspace to .RData on exit”, select “Never”.\nOf course, there are exceptions to every rule and there might be very good arguments for doing things differently in some scenarios. However, it is important to understand what the pitfalls and consequences of different approaches are, and how to navigate them.",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html#coding-style",
+    "href": "0.2_Further_Reading.html#coding-style",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "A consistent coding style helps to make your code more readable and prevents errors. Some general things apply to every programming language, such as meaningful variable names. However, in other aspects, different programming languages my vary in what they consider “good coding style”. If you want to learn about how to write “good code” (at least on the surface :-) ) tidyverse style, take a look at the tidyverse style guide.\nThe “style” of your code refers to things such as naming schemes (e.g., day_one instead of DayOne), spacing (e.g., 2 + 4 instead of 2+4), when to add line breaks etc. None of these things will affect how your code works, but it may help readers of your code (including you) to find their way around the code. While you can follow any style guide to improve the readability of your code, it makes sense to adapt a language-specific style guide, so other users of the language (following the same style guide) will find it easier to work with your code. As a beginner, you might find it overwhelming to take care of your code style when you might already be struggling to make the code work in the first place. However, it pays off to adopt a good coding style right from the start (before you get used to a bad one), and might even help you to understand your code better.\n\n\nWhitespace refers to blank spaces in your code, whether that’s within lines, or between them (see examples below). Unlike some other programming languages, R (mostly) doesn’t care about whitespace. So, technically, you can put it wherever you want.\nThis means that this code will work:\n\niris %&gt;% \n  mutate(sepal_length_mm = Sepal.Length * 100) %&gt;% \n  summarise(sepal_length_mm = mean(sepal_length_mm), .by = Species)\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\n… and so will this:\n\niris%&gt;%mutate(sepal_length_mm=Sepal.Length*100)%&gt;%summarise(sepal_length_mm=mean(sepal_length_mm),.by=Species)\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\n… and also this:\n\niris %&gt;% \n  mutate(\n             sepal_length_mm = Sepal.Length * \n               100) %&gt;% \n  summarise(\n    \n    \n    \n    sepal_length_mm = mean(\n      \n      \n      sepal_length_mm), \n    \n    \n    \n    .by = Species\n    \n    \n    )\n\n     Species sepal_length_mm\n1     setosa           500.6\n2 versicolor           593.6\n3  virginica           658.8\n\n\nNeedless to say, the second and the third example are not recommended (mildly put). This is just to emphasize that R really does not care about your whitespace.\n\n\n\nIf you have experience with other programming languages, you might find the assignment operator &lt;- a bit weird. Many other languages use = to assign variables, i.e., my_var = 2 instead of my_var &lt;- 2. In R, it is possible to use = instead of &lt;-. In the vast majority of scenarios, you will achieve the same results. There are subtle and rather technical details between = and &lt;-; if you are interested, here is a discussion on Stack Overflow about the topic. Within the R community, the use of = for assigning variables is discouraged. By convention, the majority of R programmers uses &lt;-. Note that the shortcut for inserting &lt;- is alt + -, which will make your life a lot easier in the long run.\nAlso note that the &lt;- operator is only used for assigning variables - for arguments within functions (e.g., mean(c(1, 10, 2), na.rm = TRUE)) or within pipes (e.g., iris %&gt;% mutate(new_col = Sepal.Length * 100)), = is the correct operator.\n\n\n\nThis workshop follows the tidyverse style guide - however, we sometimes deviate from it to e.g. shorten code that would otherwise not fit on the slides, or to make it easier to highlight certain important lines of code.",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html#managing-different-versions",
+    "href": "0.2_Further_Reading.html#managing-different-versions",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "In the installation guide, we briefly talked about R and its packages changing constantly. Sometimes, new versions of software can lead to different results, which we generally do not want for our old analyses (which are e.g. tied to publications). There are ways how to manage several R versions or older R package versions, but those will not be covered here, because that would be enough material for at least two workshops. If you want to read about the topic, a rather lightweight alternative for managing different package versions is renv. Another pretty common tool to manage software and package versions is Docker - but it takes time to master it. This tutorial might be a good start.",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.2_Further_Reading.html#fun-trivia",
+    "href": "0.2_Further_Reading.html#fun-trivia",
+    "title": "0.2 R - Further Reading",
+    "section": "",
+    "text": "While we’re here:\n\nEach R version is named after Peanuts comic strips/films. If you run R.version in the console, you’ll find a “nickname”. E.g. for 4.4.1, it’s “Race for Your Life”, a 1977 film.\nEver wondered why the function head() shows you exactly six entries (elements in a vector, rows in a data frame …)? Not an “obvious” number like five, or ten? Well, it’s basically: “You can cover my homework, but don’t make it seem too obvious.” As Patrick Burns, the author of the function, said: “I came upon ‘head’ and ‘tail’ at one of my clients. That implementation had n = 5. I didn’t think there would ever be an issue regarding ownership of the code, but I changed to 6 just to help if there were a conflict.” (see this discussion).",
+    "crumbs": [
+      "0.2 R - Further Reading"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html",
+    "href": "0.1_R_Installation.html",
+    "title": "0.1 R - Installation and Updating",
+    "section": "",
+    "text": "Hello future participants of the workshop “Handling Uncertainty in your Data”!\nThis guide will help you to install R if you haven’t installed it yet, or update your R in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.\nYou might already be an expert in R - feel free to skip this guide if all of the following conditions are met:\n\nYou have R installed, and it’s at least version 4.0. To check which version you have, run R.version in your R console. If your version is lower than 4, please update.\nYou have RStudio installed, or alternatively, an editor of your choice that can handle R and that you are comfortable with. (The instructors of the workshop will use RStudio.)\nYou have installed the following packages: tidyverse, confintr, rstatix, apaTables, babynames.\n\nIf you’re missing any of these, install them on your own or follow this guide. To jump to different sections of this guide, use the menu on the right!\n\n\n\nWe want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we’ll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you. This guide is written from a Windows 11 perspective - should something not work for your setup, don’t hesitate to email juliane.nagel@zi-mannheim.de - happy to help!\nSometimes, people will say they hate re-installing, updating R, but it’s honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.\n\n\nYou can download R at https://www.r-project.org/. Right on the start page, you can find a download link via CRAN (“The Comprehensive R Archive Network”).\n\n\n\nDownload R\n\n\nWhen clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of R. Even if one of the servers should be down, you can still get R from any of the other servers. You can download R using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.\n\n\n\nR for Windows\n\n\nOn the next page, what you want is “base” - base R is the “basic version” of R, i.e., R without any additions.\n\n\n\nDownload base R\n\n\nOn the next page, click the download link at the top (in my case “Download R-4.4.1 for Windows”). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.\n\n\n\nIf you are using Windows, you might also want to install Rtools (but you don’t have to). Here is what it does (so you can make an informed decision): In R, you will frequently use additional “packages” that offer additional functionalities beyond base R (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built “binary version” of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, R will ask you whether it should “compile” the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don’t need this additional tool, and Linux users are usually compile everything anyways :-) )\nYou don’t have to use Rtools on Windows - if you don’t have it, you won’t be able to compile packages “from source”, but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that’s fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.\nIf you want to install Rtools (honestly, it doesn’t hurt and isn’t complicated at all), you can find it on the same page where we previously found “base” (R) - see screenshot above. This time, click “Rtools”. Pick the version that corresponds to the R version you just installed (in my case, that’s 4.4). The download link is a bit hidden on the page:\n\n\n\nRtools installer\n\n\nAfter downloading, execute the installation file (default options are recommended).\n\n\n\nR is just a programming language - where you write your R code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with R code. One of these, probably the most popular right now, is RStudio.\nBelow, you can find a screenshot of what RStudio can look like. (Without going into detail, it’s obvious that it comes with a lot of useful gadgets.)\n\n\n\nRStudio Screenshot\n\n\nWhat you want to download is the free version of RStudio Desktop here: https://rstudio.com/products/rstudio/download/. (In my case, there’s a “download RStudio Desktop for Windows” button. No need to download R - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.\nIf you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under Tools \\(\\to\\) Global Options \\(\\to\\) Appearance.\nBy the way, RStudio is such a common editor for R that people frequently confuse it with R itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of R they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - R and RStudio are completely different things!\nAaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run R code. If you type in 41 + 1 and press Enter, [1] 42 should appear below. If it doesn’t, contact juliane.nagel@zi-mannheim.de for trouble shooting.",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#important-information",
+    "href": "0.1_R_Installation.html#important-information",
+    "title": "0.1 R - Installation and Updating",
+    "section": "",
+    "text": "Hello future participants of the workshop “Handling Uncertainty in your Data”!\nThis guide will help you to install R if you haven’t installed it yet, or update your R in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.\nYou might already be an expert in R - feel free to skip this guide if all of the following conditions are met:\n\nYou have R installed, and it’s at least version 4.0. To check which version you have, run R.version in your R console. If your version is lower than 4, please update.\nYou have RStudio installed, or alternatively, an editor of your choice that can handle R and that you are comfortable with. (The instructors of the workshop will use RStudio.)\nYou have installed the following packages: tidyverse, confintr, rstatix, apaTables, babynames.\n\nIf you’re missing any of these, install them on your own or follow this guide. To jump to different sections of this guide, use the menu on the right!",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#installation-guide",
+    "href": "0.1_R_Installation.html#installation-guide",
+    "title": "0.1 R - Installation and Updating",
+    "section": "",
+    "text": "We want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we’ll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you. This guide is written from a Windows 11 perspective - should something not work for your setup, don’t hesitate to email juliane.nagel@zi-mannheim.de - happy to help!\nSometimes, people will say they hate re-installing, updating R, but it’s honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.\n\n\nYou can download R at https://www.r-project.org/. Right on the start page, you can find a download link via CRAN (“The Comprehensive R Archive Network”).\n\n\n\nDownload R\n\n\nWhen clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of R. Even if one of the servers should be down, you can still get R from any of the other servers. You can download R using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.\n\n\n\nR for Windows\n\n\nOn the next page, what you want is “base” - base R is the “basic version” of R, i.e., R without any additions.\n\n\n\nDownload base R\n\n\nOn the next page, click the download link at the top (in my case “Download R-4.4.1 for Windows”). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.\n\n\n\nIf you are using Windows, you might also want to install Rtools (but you don’t have to). Here is what it does (so you can make an informed decision): In R, you will frequently use additional “packages” that offer additional functionalities beyond base R (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built “binary version” of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, R will ask you whether it should “compile” the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don’t need this additional tool, and Linux users are usually compile everything anyways :-) )\nYou don’t have to use Rtools on Windows - if you don’t have it, you won’t be able to compile packages “from source”, but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that’s fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.\nIf you want to install Rtools (honestly, it doesn’t hurt and isn’t complicated at all), you can find it on the same page where we previously found “base” (R) - see screenshot above. This time, click “Rtools”. Pick the version that corresponds to the R version you just installed (in my case, that’s 4.4). The download link is a bit hidden on the page:\n\n\n\nRtools installer\n\n\nAfter downloading, execute the installation file (default options are recommended).\n\n\n\nR is just a programming language - where you write your R code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with R code. One of these, probably the most popular right now, is RStudio.\nBelow, you can find a screenshot of what RStudio can look like. (Without going into detail, it’s obvious that it comes with a lot of useful gadgets.)\n\n\n\nRStudio Screenshot\n\n\nWhat you want to download is the free version of RStudio Desktop here: https://rstudio.com/products/rstudio/download/. (In my case, there’s a “download RStudio Desktop for Windows” button. No need to download R - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.\nIf you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under Tools \\(\\to\\) Global Options \\(\\to\\) Appearance.\nBy the way, RStudio is such a common editor for R that people frequently confuse it with R itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of R they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - R and RStudio are completely different things!\nAaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run R code. If you type in 41 + 1 and press Enter, [1] 42 should appear below. If it doesn’t, contact juliane.nagel@zi-mannheim.de for trouble shooting.",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#about-packages",
+    "href": "0.1_R_Installation.html#about-packages",
+    "title": "0.1 R - Installation and Updating",
+    "section": "About packages",
+    "text": "About packages\nWhen we’ve installed R, it can already do quite a lot of things (if not everything). However, the question is how conveniently (and standardized) we can achieve something. For example, we could write code that computes a linear mixed model for us - but most of us would certainly prefer to use a pre-existing function for that. Luckily, someone already wrote such a function, but it’s not included in R from the start. If we want to use additional functions (or additional data sets!), we have to install additional “packages”. It is very common to have many different additional packages installed.",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#how-to-install-packages",
+    "href": "0.1_R_Installation.html#how-to-install-packages",
+    "title": "0.1 R - Installation and Updating",
+    "section": "How to install packages",
+    "text": "How to install packages\nAs often the case in R, there are several ways to achieve what we want (here, install a package). We will describe several options here - you can just stick to the one you like best. Either way, if you install a package you do not have yet, it will get installed (duh!), but if you install a package you have already installed, the version you currently have will be overwritten by the latest version of the package that’s available.\nWhichever method you use, R will then tell you some things about the installation status of the package (e.g., where the package was installed, how large it is etc.) in the console. Most importantly, whether the installation was successful. It should say “package ‘babynames’ successfully unpacked and MD5 sums checked” somewhere at the end.\nAs an example, we will install the package babynames, which includes data about the popularity of different baby names over the years. (Packages that provide additional functions for R are more common, but packages are also a great way to provide toy data sets to other people!) For this package, the “report” R gives you is very short - don’t worry if the console goes a little crazy if you install bigger packages with a lot of “dependencies” (i.e., that require additional packages to work and install those as well during the process).\n\ninstall.packages()\nYou can install the package by typing install.packages(\"babynames\") in an R console (e.g., after opening RStudio) and pressing enter.\nYou can install multiple packages at once like this: install.packages(c(\"babynames\", \"apaTables\")). Mind the c() wrapped around the package names.\n\n\n\nInstall packages in the console\n\n\n\n\nRStudio Tools\nWithin RStudio, click on Tools at the top, and then Install Packages…. Enter the package you would like to install (babynames). Autocomplete should help you. The installation report in the console should look like the screenshot you can find above (under “install.packages()”). All the other default options are fine (in fact, if you use install.packages() as shown above, it will use the same default options).\nYou can install multiple packages at once by entering multiple package names (separated by a space or comma).\n\n\n\nInstall packages via the RStudio tools\n\n\n\n\nRStudio autodetect\nIt is worth noting that RStudio will warn you if you open a script that loads a package that you have not installed. (We did not talk about loading packages yet - more about that in the introductory workshop - but briefly, you need to load packages that you want to use first in your R scripts.) You can simply click on “install” and any missing packages you need for the script in question will automatically be installed. Once again, the report in the console should look the same as above. Note that this method does not work for updating packages that you already have installed.\n\n\n\nRStudio missing packages autodetect\n\n\n\n\nIf things go wrong\nSometimes, installing packages can lead to unexpected errors. In many cases, the issue is not caused by the package you are trying to install itself, but rather by another package that it requires and also installs in the process. Surprisingly often, the issue can be fixed by directly re-installing the package that caused the process to fail, and then trying to install the original package you wanted again. If a package is very stubborn and does not want to be installed, contact juliane.nagel@zi-mannheim.de for trouble shooting.\n\n\nSidenote\nBy the way: Anyone can write an R package. That means that you should not install any packages that you do not trust. Packages that you can get from CRAN have to pass several quality checks and have to fulfill certain requirements (e.g., that no sneaky .exe files are included in the package), so they are safe to install. It is also possible to e.g. get packages from users on GitHub, but you can’t install them using e.g. install.packages(), but will need additional tools for this (such as the package devtools).",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#quick-detour",
+    "href": "0.1_R_Installation.html#quick-detour",
+    "title": "0.1 R - Installation and Updating",
+    "section": "Quick Detour",
+    "text": "Quick Detour\nA general word of caution: As other programming languages, R develops constantly - new functions are added, old ones change etc. This means that over time, more powerful versions of R are available, bugs get fixed - but it also means that your old code won’t work anymore if it relies on the behaviour of an old R version. There are a few links in the “Further Reading” section if you want to get into the topic, but we will not discuss it here in detail. Most updates don’t break your code, and it’s even more rare that they change your results, especially when it’s “minor” updates, e.g., from R 4.2.1 to 4.2.2. That being said, if you are still running some version of R 3, updating might affect your current code. If you are unsure about updating before the workshop, e.g. because you’re in the middle of an important analysis, feel free to talk to juliane.nagel@zi-mannheim.de (if you do, please mention your current R version).",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#the-dirty-way",
+    "href": "0.1_R_Installation.html#the-dirty-way",
+    "title": "0.1 R - Installation and Updating",
+    "section": "The dirty way",
+    "text": "The dirty way\nIn principle, you could simply follow the installation guide above and end up with a clean new version of R. Both the old and the new version will be installed on your computer, but RStudio should automatically detect the latest version (or at least ask you which version it should use). With this approach, you will need to re-install all packages you need afterwards, or copy them over manually (error-prone!). If you’re fine with re-installing a few packages (that’s what I always to after updating anyways), you can simply follow the installation guide above, or …",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "0.1_R_Installation.html#the-clean-way",
+    "href": "0.1_R_Installation.html#the-clean-way",
+    "title": "0.1 R - Installation and Updating",
+    "section": "The clean way",
+    "text": "The clean way\n… you can use the package installr, which, as the name suggests, helps you to install R-related things and is often recommended for a clean update. (Note that with this approach, just as with the “dirty way”, the old R version will stay installed on your computer.) If you don’t have installr installed yet, do so by running install.packages(\"installr\") in the console.\nFor the following steps, don’t use RStudio, but the R GUI. This works best with a “pure” version of R, without any magic that RStudio might want to add. For good measure, close RStudio if you haven’t already, and search for R in your apps. If you have several installations (which you might have if you updated before, just pick the most recent one). Take a deep breath, admire the R GUI and appreciate that modern editors exist to take away this pain from you.\n\n\n\nR GUI\n\n\nRun installr::updateR(). A message like this should pop up - klick OK.\n\n\n\ninstallr dialogue\n\n\nNext, installr will ask you whether you would like to see the NEWS regarding the new version of R. This is a good idea to get an overview about what changed, and whether any functions that you are using might be affected by the changes. Or whether there’s a cool new feature. You can also always read about the news later, e.g. for R 4.4.1, the link is &gt;https://cran.rstudio.com/bin/windows/base/NEWS.R-4.4.1.html&gt;. If you click “yes” the news page will open in a new tab in your browser - the installation will not be cancelled.\ninstallr will then ask you whether you want to install the new version - click yes. You might need to choose a mirror from where to download R (see installation guide above). When installing R, accept the defaults. After clicking “finish”, installr has a few more tricks up it’s sleeve:\n\n\n\ninstallr dialogue\n\n\nIf you click “Yes”, all your packages you had installed from your previous R version will be copied over to the new version. In the next step, installr will ask you whether you want to keep the packages from your old version (otherwise, they will be deleted). Lastly, installr even offers to update the packages you copied to the new version of R. For all of these steps, there are no right or wrong answers. You can choose whatever fits your needs. (E.g., I like to start with a clean slate.) Note that the whole process of copying and updating might take a little bit of time, and you will not see a progress bar or anything else that indicates what is happening.\nFinally, installr will ask you whether you want to start a GUI of the new R installation. You don’t need to do that, but you could to quickly confirm that everything worked as intended (e.g., your old packages are there).\nWhen you start RStudio the next time, it might either automatically detect your latest R version, or it should ask you which one it should use.",
+    "crumbs": [
+      "0.1 R - Installation and Updating"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#general-working-with-r-in-this-course",
+    "href": "1.1_R_Intro.html#general-working-with-r-in-this-course",
+    "title": "1.1 Intro to R",
+    "section": "General: Working with R in this course",
+    "text": "General: Working with R in this course\n\nYou should have RStudio open and your precision workshop project loaded (we will set up the project today).\nHave the slides open in the background - handy to copy R code (top right button if you hover over a code chunk) or click on links.\nIf possible, use two screens with the slides (Zoom) opened on one and RStudio on the other\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\"\n\n\n\nNote: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#why-write-code",
+    "href": "1.1_R_Intro.html#why-write-code",
+    "title": "1.1 Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g., SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nScience/Academia is a marathon and not a sprint\n=&gt; it is worthwhile investing in skills with a slow learning curve that will pay off in the long run\n\n\n\nChat: What are advantages (or disadvantages!) of coding?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#why-write-code-1",
+    "href": "1.1_R_Intro.html#why-write-code-1",
+    "title": "1.1 Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#managing-expectations",
+    "href": "1.1_R_Intro.html#managing-expectations",
+    "title": "1.1 Intro to R",
+    "section": "Managing Expectations",
+    "text": "Managing Expectations\n\nYou will learn a new (programming) language. Don’t expect to “speak” it fluently right away.\nDuring the workshop, it is more important that you can roughly comprehend written code and “translate” it into natural language.\nThe second step is to be able to make small adjustments to code that is given to you.\nOnly then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ).\nBut: Use it or loose it! Don’t wait to use R in your research projects until you’re “good enough”. It’s more fun to use it on “actual” problems, and makes it much easier to learn.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#install-r-rstudio",
+    "href": "1.1_R_Intro.html#install-r-rstudio",
+    "title": "1.1 Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed R & RStudio by now! Who had problems doing so?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#overview-rstudio",
+    "href": "1.1_R_Intro.html#overview-rstudio",
+    "title": "1.1 Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen R!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#rstudio-panes",
+    "href": "1.1_R_Intro.html#rstudio-panes",
+    "title": "1.1 Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane: view, edit, & save your code\nConsole: here the commands are run and rudimentary output may be provided\nEnvironment: which variables/data are available\nFiles, plots, help etc.\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\nConsole vs. Script (Rmarkdown later)",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#using-the-console-as-a-calculator",
+    "href": "1.1_R_Intro.html#using-the-console-as-a-calculator",
+    "title": "1.1 Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console.\nAlso: Notice that you have the option to include spaces are not between commands, i.e., 100 + 1 vs. 100+1.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#saving-the-results-as-a-variableobject",
+    "href": "1.1_R_Intro.html#saving-the-results-as-a-variableobject",
+    "title": "1.1 Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n\n&lt;- is used to assign values to variables (= is also possible, but discouraged in R)\na, multi etc. are the variable names (some naming rules, e.g., no whitespace, must not start with an number, many special characters not allowed)\n\nYou can find those now in your Environment! (top right panel)\nNo feedback in the console for saving variables (2*3 outputs 6, but multi &lt;- 2*3 doesn’t)\n\nvariables can contain basically anything (words, numbers, entire tables of data …)\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#working-with-variables",
+    "href": "1.1_R_Intro.html#working-with-variables",
+    "title": "1.1 Intro to R",
+    "section": "Working with variables",
+    "text": "Working with variables\n\na + multi\n\n[1] 107\n\na\n\n[1] 101\n\nmulti\n\n[1] 6\n\n\n\n\n\nYou can use those variables for further calculations, e.g., a + multi\nNote that neither a nor multi change their value.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#working-with-variables-1",
+    "href": "1.1_R_Intro.html#working-with-variables-1",
+    "title": "1.1 Intro to R",
+    "section": "Working with variables",
+    "text": "Working with variables\n\na\n\n[1] 101\n\na &lt;- 42\n\na\n\n[1] 42\n\n\n\n\nVariables can be overwritten (R won’t warn you about this!)",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#functions",
+    "href": "1.1_R_Intro.html#functions",
+    "title": "1.1 Intro to R",
+    "section": "Functions",
+    "text": "Functions\nThis code with sqrt(9) looked unfamiliar. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: ?functionname\n\n\n?sqrt\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\nYou can also click on a function in the script or console pane and press the F1 key.\n\nSometimes, the help page can be a bit overwhelming (lots of technical details etc.). It might help you to scroll down to the examples at the bottom to see the function in action!\n\nDo this now! Anything unclear?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#functions-1",
+    "href": "1.1_R_Intro.html#functions-1",
+    "title": "1.1 Intro to R",
+    "section": "Functions",
+    "text": "Functions\nFunctions often take more than one argument (which have names):\n\nrnorm(n = 6, mean = 3, sd = 1)\nrnorm(6, 3, 1) # this outputs the same as above\n\n\nYou can explicitly name your arguments (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).\n\n\n\n\n\nrnorm(n = 6, mean = 3, sd = 1)\n\nrnorm(6, 3, 1) # this outputs the same as above\nrnorm(sd = 1, n = 6, mean = 3) # still the same result\nrnorm(1, 6, 3) # different result - R thinks n = 1 and mean = 6!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#comments",
+    "href": "1.1_R_Intro.html#comments",
+    "title": "1.1 Intro to R",
+    "section": "Comments",
+    "text": "Comments\n\nrnorm(n = 6, mean = 3, sd = 1)\nrnorm(6, 3, 1) # this outputs the same as above\n\n# By the way, # denotes a comment - very important for documentation!\n# Anything after # will be ignored by R\n# To (un)comment the line you are in/multiple lines you selected: ctrl + shift + C",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#packages",
+    "href": "1.1_R_Intro.html#packages",
+    "title": "1.1 Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions already included with Base R (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages can e.g. contain collections of functions someone else wrote, or even data.\nYou should already have the tidyverse installed (if not, quickly run install.packages(\"tidyverse\") :-) )\n\n\n\nBut installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package with the library() function. This is the first thing you do at the top of an R script:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\n\n\n\n\n(If you don’t load a package, you have to call functions explicitly by packagename::function)\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#new-project",
+    "href": "1.1_R_Intro.html#new-project",
+    "title": "1.1 Intro to R",
+    "section": "New Project",
+    "text": "New Project\n\n\n\nCreate a new project by clicking on “File” on the top left and then “New Project…”\nSelect “New Directory” (if you already have a folder for this course, you can choose “Existing directory” and select that folder) and then choose “New Project” at the top of the list.\nChoose a project name, e.g., as “r_workshop” (this will create a folder in which the project lives)\nBrowse where you want to put your project folder (in my case, “C:/r_stuff/”)\n\n\n\nPS: R can deal with folder and file names that contain spaces, but since some programms can’t, it’s best practice not to use whitespaces for file/folder naming.",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#existing-projects",
+    "href": "1.1_R_Intro.html#existing-projects",
+    "title": "1.1 Intro to R",
+    "section": "Existing Projects",
+    "text": "Existing Projects\nYou will find the current project on the top right corner of RStudio\nIf you click on the current project, you can open new projects by choosing “Open Project” and select the .Rproj file of the project.\nYou can also just double click on .Rproj files and RStudio will open with the project loaded.\n\nExisting projects",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#why-projects",
+    "href": "1.1_R_Intro.html#why-projects",
+    "title": "1.1 Intro to R",
+    "section": "Why Projects",
+    "text": "Why Projects\n\nProjects are not only convenient for us (e.g., scripts that we had opened before are re-opened when we open the project), they are also great for reproducibility.\nWe won’t cover the details here - see the “Further Reading” section of the course page!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#using-scripts",
+    "href": "1.1_R_Intro.html#using-scripts",
+    "title": "1.1 Intro to R",
+    "section": "Using Scripts",
+    "text": "Using Scripts\nTo open a new script, click File \\(\\to\\) New File \\(\\to\\) R Script. (Ctrl + Shift + N)\nTo run a line of the script, you can either click Run at the top right of the pane or Ctrl + Enter. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command).\nTo run the whole script/chunk, press Ctrl + Shift + Enter (with full console output) or Ctrl + Shift + S (limited output).\n\n\nUsing scripts",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#working-with-vectors",
+    "href": "1.1_R_Intro.html#working-with-vectors",
+    "title": "1.1 Intro to R",
+    "section": "Working with vectors",
+    "text": "Working with vectors\n\nOf course, vectors can be stored in variables.\n\n\n\nmy_vector &lt;- c(1, 2, 10)\n\nshopping_list &lt;- c(\"flour\", \"eggs\", \"apples\")",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#vector-operations",
+    "href": "1.1_R_Intro.html#vector-operations",
+    "title": "1.1 Intro to R",
+    "section": "Vector operations",
+    "text": "Vector operations\n\nBut the real fun is that R is “vectorized”, which allows us to do some funny tricks.\nNote that this is different from usual “vector math”.\n\n\n\nc(1, 2, 5) + 1\n\n[1] 2 3 6\n\nc(2, 4, 6) + c(1, 0, 2)\n\n[1] 3 4 8\n\n# Can you spot what happens HERE?!\nc(2, 4, 6, 5, 0, 0) + c(1, 10)\n\n[1]  3 14  7 15  1 10",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#get-the-data",
+    "href": "1.1_R_Intro.html#get-the-data",
+    "title": "1.1 Intro to R",
+    "section": "Get the data",
+    "text": "Get the data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).\nWe will use the files from Fundamentals of Quantitative Analysis: ahi-cesd.csv and participant-info.csv. Save these directly in your project folder on your computer (do not open them!).\n\n\n\nDid you find the files? Here are the direct links:\n\nhttps://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv\nhttps://psyteachr.github.io/quant-fun-v2/participant-info.csv",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#read-in-the-data",
+    "href": "1.1_R_Intro.html#read-in-the-data",
+    "title": "1.1 Intro to R",
+    "section": "Read in the data",
+    "text": "Read in the data\nCreate a new script with the following content:\n\nlibrary(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#looking-at-the-data",
+    "href": "1.1_R_Intro.html#looking-at-the-data",
+    "title": "1.1 Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on dat and pinfo in your Environment.\nType View(dat) into the console or into the script pane and run it.\nRun str(dat) or str(pinfo) to get an overview of the data.\nRun summary(dat).\nRun head(dat), print(dat), or even just dat.\nWhat is the difference between these commands?",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
+    "objectID": "1.1_R_Intro.html#looking-at-the-data-2",
+    "href": "1.1_R_Intro.html#looking-at-the-data-2",
+    "title": "1.1 Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nRStudio’s Environment panel\nThe two objects we just read in are data frames, which are “tables” of data (they can contain entire data sets). The objects we assigned earlier were simpler (single values, or “one-dimensional” vectors).\nData frames usually have several rows and columns. The columns are the variables and the rows are the observations (more about that later).",
+    "crumbs": [
+      "1.1 Intro to R"
+    ]
+  },
+  {
     "objectID": "1.3_Data_Visualization.html#ggplot",
     "href": "1.3_Data_Visualization.html#ggplot",
     "title": "1.3 Data Visualization",
@@ -267,294 +1387,295 @@
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#general-working-with-r-in-this-course",
-    "href": "1.1_R_Intro.html#general-working-with-r-in-this-course",
-    "title": "1.1 Intro to R",
-    "section": "General: Working with R in this course",
-    "text": "General: Working with R in this course\n\nYou should have RStudio open and your precision workshop project loaded (we will set up the project today).\nHave the slides open in the background - handy to copy R code (top right button if you hover over a code chunk) or click on links.\nIf possible, use two screens with the slides (Zoom) opened on one and RStudio on the other\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\"\n\n\n\nNote: You can navigate through the slides quickly by clicking on the three dashes in the bottom left.",
+    "objectID": "2.2_CIs.html#data-preparation",
+    "href": "2.2_CIs.html#data-preparation",
+    "title": "2.2 Confidence Intervals",
+    "section": "Data preparation",
+    "text": "Data preparation\n\n\nIf you haven’t done so yet: Create an R project for the precision workshop.\nCreate a script for this part of the workshop (e.g., cis.R).\nLoad the tidyverse (library(tidyverse)) at the beginning of your script.\n\n\n\nNote: We show different packages that help us with confidence interval calculations, some of which may have conflicting functions. This is why in this presentation, we call each package explicitly, e.g., confintr::ci_mean().",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#why-write-code",
-    "href": "1.1_R_Intro.html#why-write-code",
-    "title": "1.1 Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g., SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nScience/Academia is a marathon and not a sprint\n=&gt; it is worthwhile investing in skills with a slow learning curve that will pay off in the long run\n\n\n\nChat: What are advantages (or disadvantages!) of coding?",
+    "objectID": "2.2_CIs.html#why-confidence-intervals",
+    "href": "2.2_CIs.html#why-confidence-intervals",
+    "title": "2.2 Confidence Intervals",
+    "section": "Why confidence intervals?",
+    "text": "Why confidence intervals?\n\n\nGoal: indicate precision/accuracy of a point estimate (e.g., the mean).\nIf visualized, it’s often supposed to help with “inference by eye”.\nHowever, confidence intervals are often misinterpreted (e.g., Hoekstra et al., 2014)",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#why-write-code-1",
-    "href": "1.1_R_Intro.html#why-write-code-1",
-    "title": "1.1 Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?",
+    "objectID": "2.2_CIs.html#what-is-a-confidence-interval",
+    "href": "2.2_CIs.html#what-is-a-confidence-interval",
+    "title": "2.2 Confidence Intervals",
+    "section": "What is a confidence interval?",
+    "text": "What is a confidence interval?\n\n\nAssume we use a 95% CI.\nIn the long run, in 95% of our replications, the interval we calculate will contain the true population mean.\nAs with any statistical inference: no guarantee! Errors are possible.\n“If a given value is within the interval of a result, the two can be informally assimilated as being comparable.” (Cousineau, 2017)",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#managing-expectations",
-    "href": "1.1_R_Intro.html#managing-expectations",
-    "title": "1.1 Intro to R",
-    "section": "Managing Expectations",
-    "text": "Managing Expectations\n\nYou will learn a new (programming) language. Don’t expect to “speak” it fluently right away.\nDuring the workshop, it is more important that you can roughly comprehend written code and “translate” it into natural language.\nThe second step is to be able to make small adjustments to code that is given to you.\nOnly then, the last step is to be able to produce code yourself (with the help of Google, Stackoverflow, templates of this course, etc. :) ).\nBut: Use it or loose it! Don’t wait to use R in your research projects until you’re “good enough”. It’s more fun to use it on “actual” problems, and makes it much easier to learn.",
+    "objectID": "2.2_CIs.html#confidence-interval-of-the-mean",
+    "href": "2.2_CIs.html#confidence-interval-of-the-mean",
+    "title": "2.2 Confidence Intervals",
+    "section": "Confidence interval of the mean",
+    "text": "Confidence interval of the mean\n\n\n\\(M - t_{\\gamma} \\times SE_{M}, M + t_{\\gamma} \\times SE_{M}\\)\n\n\n\n\n\\(M\\) = mean of a set of observations\n\\(SE_{M}\\) = standard error of the mean\n\\(SE_{M} = s/\\sqrt n\\)\n\\(t_{\\gamma}\\) = multiplier from a Student \\(t\\) distribution, with d.f. \\(n - 1\\) and coverage level \\(\\gamma\\) (often 95%)",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#install-r-rstudio",
-    "href": "1.1_R_Intro.html#install-r-rstudio",
-    "title": "1.1 Intro to R",
-    "section": "Install R & RStudio",
-    "text": "Install R & RStudio\nYou should all have installed R & RStudio by now! Who had problems doing so?",
+    "objectID": "2.2_CIs.html#briefly-the-iris-data",
+    "href": "2.2_CIs.html#briefly-the-iris-data",
+    "title": "2.2 Confidence Intervals",
+    "section": "Briefly: The iris data",
+    "text": "Briefly: The iris data\nData about the size of three different species of iris flowers.\n\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#overview-rstudio",
-    "href": "1.1_R_Intro.html#overview-rstudio",
-    "title": "1.1 Intro to R",
-    "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen R!",
+    "objectID": "2.2_CIs.html#in-r-confidence-interval-of-the-mean",
+    "href": "2.2_CIs.html#in-r-confidence-interval-of-the-mean",
+    "title": "2.2 Confidence Intervals",
+    "section": "In R: Confidence interval of the mean",
+    "text": "In R: Confidence interval of the mean\nThe package confintr offers a variety of functions around confidence intervals. Default here: Student’s \\(t\\) method.\n\niris %&gt;% \n  filter(Species == \"versicolor\") %&gt;% \n  pull(Petal.Width) %&gt;% \n  confintr::ci_mean()\n\n\n    Two-sided 95% t confidence interval for the population mean\n\nSample estimate: 1.326 \nConfidence interval:\n    2.5%    97.5% \n1.269799 1.382201 \n\n\n\nAlso available: Wald and bootstrap CIs.",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#rstudio-panes",
-    "href": "1.1_R_Intro.html#rstudio-panes",
-    "title": "1.1 Intro to R",
-    "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane: view, edit, & save your code\nConsole: here the commands are run and rudimentary output may be provided\nEnvironment: which variables/data are available\nFiles, plots, help etc.\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\nConsole vs. Script (Rmarkdown later)",
+    "objectID": "2.2_CIs.html#confidence-interval-of-the-mean-1",
+    "href": "2.2_CIs.html#confidence-interval-of-the-mean-1",
+    "title": "2.2 Confidence Intervals",
+    "section": "Confidence interval of the mean",
+    "text": "Confidence interval of the mean\n\n\n\\(M - t_{\\gamma} \\times SE_{M}, M + t_{\\gamma} \\times SE_{M}\\)\n\n\n\n\nHowever: very “limited” CI!\nComparison to a fixed value (e.g., population mean).\nCannot easily be used to compare different means.\nUseless to compare means of repeated-measures designs.",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#using-the-console-as-a-calculator",
-    "href": "1.1_R_Intro.html#using-the-console-as-a-calculator",
-    "title": "1.1 Intro to R",
-    "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console.\nAlso: Notice that you have the option to include spaces are not between commands, i.e., 100 + 1 vs. 100+1.",
+    "objectID": "2.2_CIs.html#cis-comparing-groups",
+    "href": "2.2_CIs.html#cis-comparing-groups",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: comparing groups",
+    "text": "CIs: comparing groups\n\n\nPosition of each group mean as well as the relative position of the means are uncertain.\nI.e., SE for the comparison between two means is larger than for the comparison of a mean with a fixed value.\nHow much the CI needs to be expanded depends on the variance of each group.\nWhen the variance is homogeneous across conditions, there is a shortcut: The sum of two equal variances can be calculated by multiplying the common variance by two.\nI.e., the CI must be \\(\\sqrt2\\) (\\(\\approx\\) 1.41) times wider.\n\n\n\n\n\n\\(M - t_{\\gamma} \\times \\sqrt2 \\times SE_{M}, M + t_{\\gamma} \\times \\sqrt2 \\times SE_{M}\\)",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#saving-the-results-as-a-variableobject",
-    "href": "1.1_R_Intro.html#saving-the-results-as-a-variableobject",
-    "title": "1.1 Intro to R",
-    "section": "Saving the Results as a Variable/Object",
-    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n\n&lt;- is used to assign values to variables (= is also possible, but discouraged in R)\na, multi etc. are the variable names (some naming rules, e.g., no whitespace, must not start with an number, many special characters not allowed)\n\nYou can find those now in your Environment! (top right panel)\nNo feedback in the console for saving variables (2*3 outputs 6, but multi &lt;- 2*3 doesn’t)\n\nvariables can contain basically anything (words, numbers, entire tables of data …)\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?",
+    "objectID": "2.2_CIs.html#cis-potential-problems-when-comparing-groups",
+    "href": "2.2_CIs.html#cis-potential-problems-when-comparing-groups",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: potential problems when comparing groups",
+    "text": "CIs: potential problems when comparing groups\nSee Cousineau, 2017 - more about data viz later!",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#working-with-variables",
-    "href": "1.1_R_Intro.html#working-with-variables",
-    "title": "1.1 Intro to R",
-    "section": "Working with variables",
-    "text": "Working with variables\n\na + multi\n\n[1] 107\n\na\n\n[1] 101\n\nmulti\n\n[1] 6\n\n\n\n\n\nYou can use those variables for further calculations, e.g., a + multi\nNote that neither a nor multi change their value.",
+    "objectID": "2.2_CIs.html#in-r-custom-function",
+    "href": "2.2_CIs.html#in-r-custom-function",
+    "title": "2.2 Confidence Intervals",
+    "section": "In R: custom function",
+    "text": "In R: custom function\n\nSometimes, writing your own custom function gives you the control you need over certain calculations.\n\n\n\n\n# You've seen this in the previous part :-)\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\n\n\n# CI based on t distribution\nz_CI_t &lt;- function(x, CI, na.rm = FALSE) {\n  if (na.rm) x &lt;- x[!is.na(x)]\n  ci &lt;- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI\n}",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#working-with-variables-1",
-    "href": "1.1_R_Intro.html#working-with-variables-1",
-    "title": "1.1 Intro to R",
-    "section": "Working with variables",
-    "text": "Working with variables\n\na\n\n[1] 101\n\na &lt;- 42\n\na\n\n[1] 42\n\n\n\n\nVariables can be overwritten (R won’t warn you about this!)",
+    "objectID": "2.2_CIs.html#in-r-custom-function---applied",
+    "href": "2.2_CIs.html#in-r-custom-function---applied",
+    "title": "2.2 Confidence Intervals",
+    "section": "In R: custom function - applied",
+    "text": "In R: custom function - applied\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  summarise(\n    ci_lower = mean(Petal.Width) - se(Petal.Width) * z_CI_t(Petal.Width, .95),\n    ci_upper = mean(Petal.Width) + se(Petal.Width) * z_CI_t(Petal.Width, .95),\n    .by = Species\n  )\n\n     Species  ci_lower  ci_upper\n1     setosa 0.2160497 0.2759503\n2 versicolor 1.2697993 1.3822007",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#functions",
-    "href": "1.1_R_Intro.html#functions",
-    "title": "1.1 Intro to R",
-    "section": "Functions",
-    "text": "Functions\nThis code with sqrt(9) looked unfamiliar. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type into the console: ?functionname\n\n\n?sqrt\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\nYou can also click on a function in the script or console pane and press the F1 key.\n\nSometimes, the help page can be a bit overwhelming (lots of technical details etc.). It might help you to scroll down to the examples at the bottom to see the function in action!\n\nDo this now! Anything unclear?",
+    "objectID": "2.2_CIs.html#cis-comparing-groups-1",
+    "href": "2.2_CIs.html#cis-comparing-groups-1",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: comparing groups",
+    "text": "CIs: comparing groups\n\nWider CIs for group comparisons, as e.g. suggested by (Cousineau, 2017).\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  summarise(\n    ci_lower = mean(Petal.Width) - se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),\n    ci_upper = mean(Petal.Width) + se(Petal.Width) * sqrt(2) * z_CI_t(Petal.Width, .95),\n    .by = Species\n  )\n\n     Species  ci_lower  ci_upper\n1     setosa 0.2036439 0.2883561\n2 versicolor 1.2465202 1.4054798\n\n\n\n\n\nAttention! Assumes equal variance!\nEven though here, we use the mean and SD/SE of each group (not e.g. the pooled SD).",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#functions-1",
-    "href": "1.1_R_Intro.html#functions-1",
-    "title": "1.1 Intro to R",
-    "section": "Functions",
-    "text": "Functions\nFunctions often take more than one argument (which have names):\n\nrnorm(n = 6, mean = 3, sd = 1)\nrnorm(6, 3, 1) # this outputs the same as above\n\n\nYou can explicitly name your arguments (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file).\n\n\n\n\n\nrnorm(n = 6, mean = 3, sd = 1)\n\nrnorm(6, 3, 1) # this outputs the same as above\nrnorm(sd = 1, n = 6, mean = 3) # still the same result\nrnorm(1, 6, 3) # different result - R thinks n = 1 and mean = 6!",
+    "objectID": "2.2_CIs.html#cis-difference-of-means",
+    "href": "2.2_CIs.html#cis-difference-of-means",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: difference of means",
+    "text": "CIs: difference of means\n\nIf possible, the most elegant way is to report/plot the CI for the difference in means.\n\n\nwith(\n  iris,\n  confintr::ci_mean_diff(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\n\n    Two-sided 95% t confidence interval for the population value of\n    mean(x)-mean(y)\n\nSample estimate: 1.08 \nConfidence interval:\n    2.5%    97.5% \n1.016867 1.143133 \n\n\n\n\nNot pipe-friendly, if that’s important for you.\nCareful! Not for within-subjects comparisons!",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#comments",
-    "href": "1.1_R_Intro.html#comments",
-    "title": "1.1 Intro to R",
-    "section": "Comments",
-    "text": "Comments\n\nrnorm(n = 6, mean = 3, sd = 1)\nrnorm(6, 3, 1) # this outputs the same as above\n\n# By the way, # denotes a comment - very important for documentation!\n# Anything after # will be ignored by R\n# To (un)comment the line you are in/multiple lines you selected: ctrl + shift + C",
+    "objectID": "2.2_CIs.html#cis-difference-of-means-1",
+    "href": "2.2_CIs.html#cis-difference-of-means-1",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: difference of means",
+    "text": "CIs: difference of means\n\nLooks familiar? Part of the t.test() output by default!\n\n\nwith(\n  iris,\n  t.test(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\n\n    Welch Two Sample t-test\n\ndata:  Petal.Width[Species == \"versicolor\"] and Petal.Width[Species == \"setosa\"]\nt = 34.08, df = 74.755, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n 1.016867 1.143133\nsample estimates:\nmean of x mean of y \n    1.326     0.246",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#packages",
-    "href": "1.1_R_Intro.html#packages",
-    "title": "1.1 Intro to R",
-    "section": "Packages",
-    "text": "Packages\nThere are a number of functions already included with Base R (i.e., R after a new installation), but you can greatly extend the power of R by loading packages (and we will!). Packages can e.g. contain collections of functions someone else wrote, or even data.\nYou should already have the tidyverse installed (if not, quickly run install.packages(\"tidyverse\") :-) )\n\n\n\nBut installing is not enough to be able to actually use the functions from that package directly. Usually, you also want to load the package with the library() function. This is the first thing you do at the top of an R script:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\n\n\n\n\n(If you don’t load a package, you have to call functions explicitly by packagename::function)\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!",
+    "objectID": "2.2_CIs.html#what-about-within-subject-designs",
+    "href": "2.2_CIs.html#what-about-within-subject-designs",
+    "title": "2.2 Confidence Intervals",
+    "section": "What about within-subject designs?",
+    "text": "What about within-subject designs?\n\n\nRepeated measures are typically correlated, which makes it possible to evaluate the difference between means more precisely.\nI.e., we adjust the width of the CI based on the correlation between measures.\nThe difference between the two means is estimated as if we had a larger sample.\n\n\n\n\n\n\\(M - t_{\\gamma} \\times \\sqrt{1-r} \\times \\sqrt2 \\times \\frac{s}{\\sqrt{n}}, M + t_{\\gamma} \\times \\sqrt{1-r} \\times \\sqrt2 \\times \\frac{s}{\\sqrt{n}}\\)\n\n\n\nNote that we still are comparing two means, so as before, the CI is “difference adjusted” using \\(\\sqrt2\\).",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#new-project",
-    "href": "1.1_R_Intro.html#new-project",
-    "title": "1.1 Intro to R",
-    "section": "New Project",
-    "text": "New Project\n\n\n\nCreate a new project by clicking on “File” on the top left and then “New Project…”\nSelect “New Directory” (if you already have a folder for this course, you can choose “Existing directory” and select that folder) and then choose “New Project” at the top of the list.\nChoose a project name, e.g., as “r_workshop” (this will create a folder in which the project lives)\nBrowse where you want to put your project folder (in my case, “C:/r_stuff/”)\n\n\n\nPS: R can deal with folder and file names that contain spaces, but since some programms can’t, it’s best practice not to use whitespaces for file/folder naming.",
+    "objectID": "2.2_CIs.html#briefly-the-fhch2010-data",
+    "href": "2.2_CIs.html#briefly-the-fhch2010-data",
+    "title": "2.2 Confidence Intervals",
+    "section": "Briefly: the fhch2010 data",
+    "text": "Briefly: the fhch2010 data\n\nData from Freeman, Heathcote, Chalmers, & Hockley (2010), included in afex.\nLexical decision and word naming latencies for 300 words and 300 nonwords.\nFor simplicity, we’re only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword).\n\n\nlibrary(afex)\n\nhead(fhch2010)\n\n  id   task stimulus density frequency length   item    rt      log_rt correct\n1 N1 naming     word    high       low      6 potted 1.091  0.08709471    TRUE\n2 N1 naming     word     low      high      6 engine 0.876 -0.13238919    TRUE\n3 N1 naming     word     low      high      5  ideal 0.710 -0.34249031    TRUE\n4 N1 naming  nonword    high      high      5  uares 1.210  0.19062036    TRUE\n5 N1 naming  nonword     low      high      4   xazz 0.843 -0.17078832    TRUE\n6 N1 naming     word    high      high      4   fill 0.785 -0.24207156    TRUE\n\n\n\n\n# Aggregate to get a word/nonword reaction time per participant\nfhch2010_summary &lt;- \n  fhch2010 %&gt;% \n  summarise(rt = mean(rt), .by = c(id, task, stimulus))",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#existing-projects",
-    "href": "1.1_R_Intro.html#existing-projects",
-    "title": "1.1 Intro to R",
-    "section": "Existing Projects",
-    "text": "Existing Projects\nYou will find the current project on the top right corner of RStudio\nIf you click on the current project, you can open new projects by choosing “Open Project” and select the .Rproj file of the project.\nYou can also just double click on .Rproj files and RStudio will open with the project loaded.\n\nExisting projects",
+    "objectID": "2.2_CIs.html#cis-for-within-subject-designs",
+    "href": "2.2_CIs.html#cis-for-within-subject-designs",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs for within-subject designs",
+    "text": "CIs for within-subject designs\nThe measures are highly correlated :-)\n\nfhch2010_summary_wf &lt;- \n  fhch2010_summary %&gt;% \n  pivot_wider(\n    id_cols = id,\n    names_from = stimulus,\n    values_from = rt\n  )\n\nfhch2010_summary_wf %&gt;% \n  rstatix::cor_test(word, nonword)\n\n# A tibble: 1 × 8\n  var1  var2      cor statistic        p conf.low conf.high method \n  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  \n1 word  nonword   0.8      8.67 5.40e-11    0.658     0.884 Pearson",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#why-projects",
-    "href": "1.1_R_Intro.html#why-projects",
-    "title": "1.1 Intro to R",
-    "section": "Why Projects",
-    "text": "Why Projects\n\nProjects are not only convenient for us (e.g., scripts that we had opened before are re-opened when we open the project), they are also great for reproducibility.\nWe won’t cover the details here - see the “Further Reading” section of the course page!",
+    "objectID": "2.2_CIs.html#cis-for-within-subject-designs-1",
+    "href": "2.2_CIs.html#cis-for-within-subject-designs-1",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs for within-subject designs",
+    "text": "CIs for within-subject designs\n\n# without adjusting\nfhch2010_summary %&gt;% \n  summarise(\n    ci_lower = mean(rt) - se(rt) * sqrt(2) * z_CI_t(rt, .95),\n    ci_upper = mean(rt) + se(rt) * sqrt(2) * z_CI_t(rt, .95),\n    .by = stimulus\n  )\n\n  stimulus  ci_lower ci_upper\n1     word 0.8119932 1.056787\n2  nonword 0.9912777 1.206521\n\n\n\n\n# adjust for correlation\nword_cor &lt;- cor.test(fhch2010_summary_wf$word, fhch2010_summary_wf$nonword)\n\nfhch2010_summary %&gt;% \n  summarise(\n    ci_lower = mean(rt) - se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),\n    ci_upper = mean(rt) + se(rt) * sqrt(1 - word_cor$estimate) * sqrt(2) * z_CI_t(rt, .95),\n    .by = stimulus\n  )\n\n  stimulus  ci_lower ci_upper\n1     word 0.8793337 0.989447\n2  nonword 1.0504891 1.147310",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#using-scripts",
-    "href": "1.1_R_Intro.html#using-scripts",
-    "title": "1.1 Intro to R",
-    "section": "Using Scripts",
-    "text": "Using Scripts\nTo open a new script, click File \\(\\to\\) New File \\(\\to\\) R Script. (Ctrl + Shift + N)\nTo run a line of the script, you can either click Run at the top right of the pane or Ctrl + Enter. It will run the code that is highlighted/selected or automatically select the current line (or the complete multi-line command).\nTo run the whole script/chunk, press Ctrl + Shift + Enter (with full console output) or Ctrl + Shift + S (limited output).\n\n\nUsing scripts",
+    "objectID": "2.2_CIs.html#cis-for-differences-in-means-in-within-subject-designs",
+    "href": "2.2_CIs.html#cis-for-differences-in-means-in-within-subject-designs",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs for differences in means in within-subject designs",
+    "text": "CIs for differences in means in within-subject designs\nAs before, the \\(t\\)-test will give us a CI for the difference in means:\n\nwith(\n  fhch2010_summary,\n  t.test(\n    rt[stimulus == \"word\"],\n    rt[stimulus == \"nonword\"]\n  )\n)\n\n\n    Welch Two Sample t-test\n\ndata:  rt[stimulus == \"word\"] and rt[stimulus == \"nonword\"]\nt = -2.8768, df = 86.583, p-value = 0.005057\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.27817603 -0.05084236\nsample estimates:\nmean of x mean of y \n0.9343903 1.0988995",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#working-with-vectors",
-    "href": "1.1_R_Intro.html#working-with-vectors",
-    "title": "1.1 Intro to R",
-    "section": "Working with vectors",
-    "text": "Working with vectors\n\nOf course, vectors can be stored in variables.\n\n\n\nmy_vector &lt;- c(1, 2, 10)\n\nshopping_list &lt;- c(\"flour\", \"eggs\", \"apples\")",
+    "objectID": "2.2_CIs.html#cis-caveats",
+    "href": "2.2_CIs.html#cis-caveats",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIS: caveats",
+    "text": "CIS: caveats\n\n\nAssumptions: normally distributed means, homogeneity of variances, sphericity (repeated measures)\nMixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest); see upcoming data viz part!\nMost importantly: Be transparent! Describe how you calculated your CIs and what they are for!",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#vector-operations",
-    "href": "1.1_R_Intro.html#vector-operations",
-    "title": "1.1 Intro to R",
-    "section": "Vector operations",
-    "text": "Vector operations\n\nBut the real fun is that R is “vectorized”, which allows us to do some funny tricks.\nNote that this is different from usual “vector math”.\n\n\n\nc(1, 2, 5) + 1\n\n[1] 2 3 6\n\nc(2, 4, 6) + c(1, 0, 2)\n\n[1] 3 4 8\n\n# Can you spot what happens HERE?!\nc(2, 4, 6, 5, 0, 0) + c(1, 10)\n\n[1]  3 14  7 15  1 10",
+    "objectID": "2.2_CIs.html#cohens-d",
+    "href": "2.2_CIs.html#cohens-d",
+    "title": "2.2 Confidence Intervals",
+    "section": "Cohen’s d",
+    "text": "Cohen’s d\n\nAlso possible to report CIs on effect size estimates; different methods of calculating the desired CIs for different measures exist (beyond the scope of this workshop).\nE.g., cohens_d() from the package effectsize: “CIs are estimated using the noncentrality parameter method (also called the ‘pivot method’)”; see further details at ?effectsize::cohens_d().\n\n\nwith(\n  iris,\n  effectsize::cohens_d(\n    Petal.Width[Species == \"versicolor\"],\n    Petal.Width[Species == \"setosa\"]\n  )\n)\n\nCohen's d |       95% CI\n------------------------\n6.82      | [5.78, 7.83]\n\n- Estimated using pooled SD.",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#get-the-data",
-    "href": "1.1_R_Intro.html#get-the-data",
-    "title": "1.1 Intro to R",
-    "section": "Get the data",
-    "text": "Get the data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats like Excel (.xlsx).\nWe will use the files from Fundamentals of Quantitative Analysis: ahi-cesd.csv and participant-info.csv. Save these directly in your project folder on your computer (do not open them!).\n\n\n\nDid you find the files? Here are the direct links:\n\nhttps://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv\nhttps://psyteachr.github.io/quant-fun-v2/participant-info.csv",
+    "objectID": "2.2_CIs.html#rstatix-pipe-friendly-t-test",
+    "href": "2.2_CIs.html#rstatix-pipe-friendly-t-test",
+    "title": "2.2 Confidence Intervals",
+    "section": "rstatix: pipe-friendly t-test",
+    "text": "rstatix: pipe-friendly t-test\n\nrstatix offers pipe-friendly statistical tests, and also calculates CIs.\ndetailed = TRUE will give us confidence estimates for our \\(t\\)-test.\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::t_test(Petal.Width ~ Species, detailed = TRUE)\n\n# A tibble: 1 × 15\n  estimate estimate1 estimate2 .y.         group1 group2      n1    n2 statistic\n*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;\n1    -1.08     0.246      1.33 Petal.Width setosa versico…    50    50     -34.1\n# ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,\n#   method &lt;chr&gt;, alternative &lt;chr&gt;",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#read-in-the-data",
-    "href": "1.1_R_Intro.html#read-in-the-data",
-    "title": "1.1 Intro to R",
-    "section": "Read in the data",
-    "text": "Read in the data\nCreate a new script with the following content:\n\nlibrary(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!",
+    "objectID": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
+    "href": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
+    "title": "2.2 Confidence Intervals",
+    "section": "rstatix: pipe-friendly Cohen’s d",
+    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50     -8.2     -5.99 large",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#looking-at-the-data",
-    "href": "1.1_R_Intro.html#looking-at-the-data",
-    "title": "1.1 Intro to R",
-    "section": "Looking at the Data",
-    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on dat and pinfo in your Environment.\nType View(dat) into the console or into the script pane and run it.\nRun str(dat) or str(pinfo) to get an overview of the data.\nRun summary(dat).\nRun head(dat), print(dat), or even just dat.\nWhat is the difference between these commands?",
+    "objectID": "2.2_CIs.html#correlations-apa",
+    "href": "2.2_CIs.html#correlations-apa",
+    "title": "2.2 Confidence Intervals",
+    "section": "Correlations: apa",
+    "text": "Correlations: apa\nOption 1: Using the apa package.\n\n\niris %&gt;% \n  summarise(\n    cortest = cor.test(Petal.Width, Petal.Length) %&gt;% \n      apa::cor_apa(r_ci = TRUE, print = FALSE),\n    .by = Species\n  )\n\n     Species                          cortest\n1     setosa r(48) = .33 [.06; .56], p = .019\n2 versicolor r(48) = .79 [.65; .87], p &lt; .001\n3  virginica r(48) = .32 [.05; .55], p = .023",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "1.1_R_Intro.html#looking-at-the-data-2",
-    "href": "1.1_R_Intro.html#looking-at-the-data-2",
-    "title": "1.1 Intro to R",
-    "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nRStudio’s Environment panel\nThe two objects we just read in are data frames, which are “tables” of data (they can contain entire data sets). The objects we assigned earlier were simpler (single values, or “one-dimensional” vectors).\nData frames usually have several rows and columns. The columns are the variables and the rows are the observations (more about that later).",
+    "objectID": "2.2_CIs.html#correlations-rstatix",
+    "href": "2.2_CIs.html#correlations-rstatix",
+    "title": "2.2 Confidence Intervals",
+    "section": "Correlations: rstatix",
+    "text": "Correlations: rstatix\nOption 2: Using the rstatix package.\n\n\niris %&gt;% \n  group_by(Species) %&gt;% \n  rstatix::cor_test(Petal.Width, Petal.Length)\n\n# A tibble: 3 × 9\n  Species    var1       var2    cor statistic        p conf.low conf.high method\n  &lt;fct&gt;      &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; \n1 setosa     Petal.Wid… Peta…  0.33      2.44 1.86e- 2   0.0587     0.558 Pears…\n2 versicolor Petal.Wid… Peta…  0.79      8.83 1.27e-11   0.651      0.874 Pears…\n3 virginica  Petal.Wid… Peta…  0.32      2.36 2.25e- 2   0.0481     0.551 Pears…\n\n\n\nNote: Only gives rounded values …",
     "crumbs": [
-      "1.1 Intro to R"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "0.1_R_Installation.html",
-    "href": "0.1_R_Installation.html",
-    "title": "0.1 R - Installation and Updating",
-    "section": "",
-    "text": "Hello future participants of the workshop “Handling Uncertainty in your Data”!\nThis guide will help you to install R if you haven’t installed it yet, or update your R in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.\nYou might already be an expert in R - feel free to skip this guide if all of the following conditions are met:\n\nYou have R installed, and it’s at least version 4.0. To check which version you have, run R.version in your R console. If your version is lower than 4, please update.\nYou have RStudio installed, or alternatively, an editor of your choice that can handle R and that you are comfortable with. (The instructors of the workshop will use RStudio.)\nYou have installed the following packages: tidyverse, confintr, rstatix, apaTables, babynames.\n\nIf you’re missing any of these, install them on your own or follow this guide. To jump to different sections of this guide, use the menu on the right!\n\n\n\nWe want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we’ll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you. This guide is written from a Windows 11 perspective - should something not work for your setup, don’t hesitate to email juliane.nagel@zi-mannheim.de - happy to help!\nSometimes, people will say they hate re-installing, updating R, but it’s honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.\n\n\nYou can download R at https://www.r-project.org/. Right on the start page, you can find a download link via CRAN (“The Comprehensive R Archive Network”).\n\n\n\nDownload R\n\n\nWhen clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of R. Even if one of the servers should be down, you can still get R from any of the other servers. You can download R using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.\n\n\n\nR for Windows\n\n\nOn the next page, what you want is “base” - base R is the “basic version” of R, i.e., R without any additions.\n\n\n\nDownload base R\n\n\nOn the next page, click the download link at the top (in my case “Download R-4.4.1 for Windows”). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.\n\n\n\nIf you are using Windows, you might also want to install Rtools (but you don’t have to). Here is what it does (so you can make an informed decision): In R, you will frequently use additional “packages” that offer additional functionalities beyond base R (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built “binary version” of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, R will ask you whether it should “compile” the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don’t need this additional tool, and Linux users are usually compile everything anyways :-) )\nYou don’t have to use Rtools on Windows - if you don’t have it, you won’t be able to compile packages “from source”, but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that’s fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.\nIf you want to install Rtools (honestly, it doesn’t hurt and isn’t complicated at all), you can find it on the same page where we previously found “base” (R) - see screenshot above. This time, click “Rtools”. Pick the version that corresponds to the R version you just installed (in my case, that’s 4.4). The download link is a bit hidden on the page:\n\n\n\nRtools installer\n\n\nAfter downloading, execute the installation file (default options are recommended).\n\n\n\nR is just a programming language - where you write your R code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with R code. One of these, probably the most popular right now, is RStudio.\nBelow, you can find a screenshot of what RStudio can look like. (Without going into detail, it’s obvious that it comes with a lot of useful gadgets.)\n\n\n\nRStudio Screenshot\n\n\nWhat you want to download is the free version of RStudio Desktop here: https://rstudio.com/products/rstudio/download/. (In my case, there’s a “download RStudio Desktop for Windows” button. No need to download R - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.\nIf you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under Tools \\(\\to\\) Global Options \\(\\to\\) Appearance.\nBy the way, RStudio is such a common editor for R that people frequently confuse it with R itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of R they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - R and RStudio are completely different things!\nAaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run R code. If you type in 41 + 1 and press Enter, [1] 42 should appear below. If it doesn’t, contact juliane.nagel@zi-mannheim.de for trouble shooting.",
+    "objectID": "2.2_CIs.html#anovas",
+    "href": "2.2_CIs.html#anovas",
+    "title": "2.2 Confidence Intervals",
+    "section": "ANOVAs",
+    "text": "ANOVAs\n\naov_words &lt;- \n  aov_ez(\n    id = \"id\", \n    dv = \"rt\", \n    data = fhch2010_summary, \n    between = \"task\", \n    within = \"stimulus\",\n    # we want to report partial eta², and include the intercept in the output table ...\n    anova_table = list(es = \"pes\", intercept = TRUE)\n  )\n\naov_words\n\nAnova Table (Type 3 tests)\n\nResponse: rt\n         Effect    df  MSE          F  pes p.value\n1   (Intercept) 1, 43 0.10 904.33 *** .955   &lt;.001\n2          task 1, 43 0.10  15.76 *** .268   &lt;.001\n3      stimulus 1, 43 0.01  77.24 *** .642   &lt;.001\n4 task:stimulus 1, 43 0.01  31.89 *** .426   &lt;.001\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1",
     "crumbs": [
-      "0.1 R - Installation and Updating"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "0.1_R_Installation.html#important-information",
-    "href": "0.1_R_Installation.html#important-information",
-    "title": "0.1 R - Installation and Updating",
-    "section": "",
-    "text": "Hello future participants of the workshop “Handling Uncertainty in your Data”!\nThis guide will help you to install R if you haven’t installed it yet, or update your R in case you have an older version. We will also cover how to install all packages you will need for the workshop, and other things you might want to prepare in advance.\nYou might already be an expert in R - feel free to skip this guide if all of the following conditions are met:\n\nYou have R installed, and it’s at least version 4.0. To check which version you have, run R.version in your R console. If your version is lower than 4, please update.\nYou have RStudio installed, or alternatively, an editor of your choice that can handle R and that you are comfortable with. (The instructors of the workshop will use RStudio.)\nYou have installed the following packages: tidyverse, confintr, rstatix, apaTables, babynames.\n\nIf you’re missing any of these, install them on your own or follow this guide. To jump to different sections of this guide, use the menu on the right!",
+    "objectID": "2.2_CIs.html#ci-around-partial-eta²",
+    "href": "2.2_CIs.html#ci-around-partial-eta²",
+    "title": "2.2 Confidence Intervals",
+    "section": "CI around partial eta²",
+    "text": "CI around partial eta²\nIn principle, apaTables offers a function for CIs around \\(\\eta_p^2\\) …\n\n# e.g., for our task effect\napaTables::get.ci.partial.eta.squared(\n  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95\n)\n\n$LL\n[1] 0.06851017\n\n$UL\n[1] 0.4511011\n\n\n\n… but it would be tedious to copy these values.",
     "crumbs": [
-      "0.1 R - Installation and Updating"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "0.1_R_Installation.html#installation-guide",
-    "href": "0.1_R_Installation.html#installation-guide",
-    "title": "0.1 R - Installation and Updating",
-    "section": "",
-    "text": "We want to spend as much time as possible with actual coding during the workshop, and since installing things always takes up a bit of time, we’ll frontload that bit. You all have different computers with different operating systems, and sometimes that means that some details in this guide will be slightly different for you. This guide is written from a Windows 11 perspective - should something not work for your setup, don’t hesitate to email juliane.nagel@zi-mannheim.de - happy to help!\nSometimes, people will say they hate re-installing, updating R, but it’s honestly not that bad. In fact, I (Juli) always strip my entire computer of any R-related content whenever I re-write this installation guide, so I can go through the exact same steps as you do.\n\n\nYou can download R at https://www.r-project.org/. Right on the start page, you can find a download link via CRAN (“The Comprehensive R Archive Network”).\n\n\n\nDownload R\n\n\nWhen clicking it, you will be asked to choose a CRAN mirror, which might sound a bit obscure. Simply put, those “mirrors” around the world are servers containing identical information, in this case, the source code, additional packages and all the documentation of R. Even if one of the servers should be down, you can still get R from any of the other servers. You can download R using any mirror that you like, but you can choose a server near your location for better bandwidth. Whichever mirror you pick: Dowload R for your operating system on the next page. In my case, that’s windows.\n\n\n\nR for Windows\n\n\nOn the next page, what you want is “base” - base R is the “basic version” of R, i.e., R without any additions.\n\n\n\nDownload base R\n\n\nOn the next page, click the download link at the top (in my case “Download R-4.4.1 for Windows”). Once the download is complete, execute the installation file and simply click through the installation - the default settings are fine.\n\n\n\nIf you are using Windows, you might also want to install Rtools (but you don’t have to). Here is what it does (so you can make an informed decision): In R, you will frequently use additional “packages” that offer additional functionalities beyond base R (e.g., functions that run fancy statistical models). Most of the time, you just download and install the pre-built “binary version” of a package, which means it is ready to be used on Windows. Sometimes, the latest version of a package is not available as a binary (yet). In this case, R will ask you whether it should “compile” the package from source, i.e., build it on your computer. For this, Rtools is needed on Windows. (Mac users don’t need this additional tool, and Linux users are usually compile everything anyways :-) )\nYou don’t have to use Rtools on Windows - if you don’t have it, you won’t be able to compile packages “from source”, but will have to wait until a binary version is available. I.e., you might end up with a package version that is slightly older. In most cases, that’s fine. Sometimes, when installing packages without Rtools, you might get a warning that Rtools is missing, but you can just ignore that.\nIf you want to install Rtools (honestly, it doesn’t hurt and isn’t complicated at all), you can find it on the same page where we previously found “base” (R) - see screenshot above. This time, click “Rtools”. Pick the version that corresponds to the R version you just installed (in my case, that’s 4.4). The download link is a bit hidden on the page:\n\n\n\nRtools installer\n\n\nAfter downloading, execute the installation file (default options are recommended).\n\n\n\nR is just a programming language - where you write your R code is up to you. However, some options are better than others. For example, writing it on a piece of paper or in Word is inconvenient, because it will be difficult to run the code afterwards. There are several code editors around that are much more helpful. Code editors offer some convenient features to help you code (e.g., displaying your code in different colours to make it more readable). Some editors are specialized to work with R code. One of these, probably the most popular right now, is RStudio.\nBelow, you can find a screenshot of what RStudio can look like. (Without going into detail, it’s obvious that it comes with a lot of useful gadgets.)\n\n\n\nRStudio Screenshot\n\n\nWhat you want to download is the free version of RStudio Desktop here: https://rstudio.com/products/rstudio/download/. (In my case, there’s a “download RStudio Desktop for Windows” button. No need to download R - if you followed this guide, you already did that.) Execute the installation file - the default options are fine.\nIf you open RStudio after the installation, don’t be worried when it doesn’t look like the screenshot above. I customized the appearance of my RStudio because this is what works best for me. Don’t hesitate to play around under Tools \\(\\to\\) Global Options \\(\\to\\) Appearance.\nBy the way, RStudio is such a common editor for R that people frequently confuse it with R itself! E.g., sometimes, in scientific papers, you will read things like “we used RStudio version 2024.4.2.764 for all analyses”. However, that does not tell me much (if anything) about their analyses, because the important information is what version of R they used. It’s a bit like writing “I’ve written the paper in Word” when what you want to say is “I’ve written the paper in English”. Don’t make this mistake in the future - R and RStudio are completely different things!\nAaaaand we’re done! To confirm that everything worked, open RStudio. There should be a tab that says “console” somewhere. Here, you can run R code. If you type in 41 + 1 and press Enter, [1] 42 should appear below. If it doesn’t, contact juliane.nagel@zi-mannheim.de for trouble shooting.",
+    "objectID": "2.2_CIs.html#ci-around-partial-eta²-1",
+    "href": "2.2_CIs.html#ci-around-partial-eta²-1",
+    "title": "2.2 Confidence Intervals",
+    "section": "CI around partial eta²",
+    "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) {\n  \n  result &lt;- \n    apply(anova_table, 1, function(x) {\n      ci &lt;- \n        apaTables::get.ci.partial.eta.squared(\n          F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n        )\n      \n      return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n    }) %&gt;% \n    t() %&gt;% \n    as.data.frame()\n  \n  result$conf.level &lt;- conf.level\n  \n  return(result)\n}",
     "crumbs": [
-      "0.1 R - Installation and Updating"
+      "2.2 Confidence Intervals"
     ]
   },
   {
-    "objectID": "0.1_R_Installation.html#about-packages",
-    "href": "0.1_R_Installation.html#about-packages",
-    "title": "0.1 R - Installation and Updating",
-    "section": "About packages",
-    "text": "About packages\nWhen we’ve installed R, it can already do quite a lot of things (if not everything). However, the question is how conveniently (and standardized) we can achieve something. For example, we could write code that computes a linear mixed model for us - but most of us would certainly prefer to use a pre-existing function for that. Luckily, someone already wrote such a function, but it’s not included in R from the start. If we want to use additional functions (or additional data sets!), we have to install additional “packages”. It is very common to have many different additional packages installed.",
+    "objectID": "2.2_CIs.html#ci-around-partial-eta²-2",
+    "href": "2.2_CIs.html#ci-around-partial-eta²-2",
+    "title": "2.2 Confidence Intervals",
+    "section": "CI around partial eta²",
+    "text": "CI around partial eta²\nThe result of custom function that applies the apaTables function to our entire ANOVA table:\n\npeta.ci(aov_words$anova_table)\n\n                      LL        UL conf.level\n(Intercept)   0.92985360 0.9656284        0.9\ntask          0.09399555 0.4224818        0.9\nstimulus      0.48335736 0.7294335        0.9\ntask:stimulus 0.23280549 0.5584355        0.9\n\n\nAlso see this blogpost by Daniel Lakens from 2014 about CIs for \\(\\eta_p^2\\).",
     "crumbs": [
-      "0.1 R - Installation and Updating"
+      "2.2 Confidence Intervals"
     ]
+<<<<<<< HEAD
   },
   {
     "objectID": "0.1_R_Installation.html#how-to-install-packages",
@@ -1462,5 +2583,7 @@
     "crumbs": [
       "2.1 Measurement Precision"
     ]
+=======
+>>>>>>> 013b4075cda43abcd0752ec88aa6883f8ac82654
   }
 ]
