@@ -8,10 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter &amp; Juli Nagel">
-  <title>Precision Workshop – 2.2 Confidence Intervals</title>
+  <title>Precision Workshop - 2.2 Confidence Intervals</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.cf { color: #003b4f; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.kw { color: #003b4f; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -406,8 +406,9 @@ Dr.&nbsp;Mario Reutter &amp; Juli Nagel
 </div>
 
 </section>
-<section class="slide level2">
-
+<section>
+<section id="cis-around-means" class="title-slide slide level1 center">
+<h1>CIs around means</h1>
 <div class="cell">
 <style type="text/css">
 code.sourceCode {
@@ -419,11 +420,6 @@ font-size: 1.4em;
 }
 </style>
 </div>
-</section>
-<section>
-<section id="cis-around-means" class="title-slide slide level1 center">
-<h1>CIs around means</h1>
-
 </section>
 <section id="data-preparation" class="slide level2">
 <h2>Data preparation</h2>
@@ -442,7 +438,7 @@ font-size: 1.4em;
 <h2>Why confidence intervals?</h2>
 <div>
 <ul>
-<li class="fragment">Goal: indicate precision/accuracy of a point estimate (e.g., the mean).</li>
+<li class="fragment">Goal: indicate precision of a point estimate (e.g., the mean).</li>
 <li class="fragment">If visualized, it’s often supposed to help with “inference by eye”.</li>
 <li class="fragment">However, confidence intervals are often misinterpreted (e.g., <a href="https://doi.org/10.3758/s13423-013-0572-3">Hoekstra et al., 2014</a>)</li>
 </ul>
@@ -537,7 +533,7 @@ Confidence interval:
 <li class="fragment">I.e., SE for the comparison between two means is larger than for the comparison of a mean with a fixed value.</li>
 <li class="fragment">How much the CI needs to be expanded depends on the variance of each group.</li>
 <li class="fragment">When the variance is homogeneous across conditions, there is a shortcut: The sum of two equal variances can be calculated by multiplying the common variance by two.</li>
-<li class="fragment">I.e., the CI must be <span class="math inline">\(\sqrt2\)</span> (<span class="math inline">\(\approx\)</span> 1.41) times wider.</li>
+<li class="fragment">I.e., the CI must be <span class="math inline">\(\sqrt2\)</span> (<span class="math inline">\(\approx\)</span> 1.41) times wider (<span class="math inline">\(SE_{M} = \sqrt{Var_{SEM}}\)</span>).</li>
 </ul>
 </div>
 <div class="fragment">
@@ -598,7 +594,7 @@ Confidence interval:
 <section id="cis-comparing-groups-1" class="slide level2">
 <h2>CIs: comparing groups</h2>
 <ul>
-<li>Wider CIs for group comparisons, as e.g.&nbsp;suggested by (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/">Cousineau, 2017</a>).</li>
+<li>Wider CIs for group comparisons, as e.g.&nbsp;suggested by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/">Cousineau (2017)</a>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
@@ -687,7 +683,7 @@ mean of x mean of y
 <ul>
 <li class="fragment">Repeated measures are typically correlated, which makes it possible to evaluate the difference between means more precisely.</li>
 <li class="fragment">I.e., we adjust the width of the CI based on the correlation between measures.</li>
-<li class="fragment">The difference between the two means is estimated as if we had a larger sample.</li>
+<li class="fragment">The difference between the two means is estimated as if we had a larger (independent) sample.</li>
 </ul>
 </div>
 <div class="fragment">
@@ -814,7 +810,7 @@ mean of x mean of y
 </div>
 </section>
 <section id="cis-caveats" class="slide level2">
-<h2>CIS: caveats</h2>
+<h2>CIs: caveats</h2>
 <div>
 <ul>
 <li class="fragment">Assumptions: normally distributed means, homogeneity of variances, sphericity (repeated measures)</li>
@@ -832,7 +828,8 @@ mean of x mean of y
 <h2>Cohen’s d</h2>
 <ul>
 <li>Also possible to report CIs on effect size estimates; different methods of calculating the desired CIs for different measures exist (beyond the scope of this workshop).</li>
-<li>E.g., <code>cohens_d()</code> from the package <code>effectsize</code>: “CIs are estimated using the noncentrality parameter method (also called the ‘pivot method’)”; see further details at <code>?effectsize::cohens_d()</code>.</li>
+<li>E.g., <code>cohens_d()</code> from the package <code>effectsize</code>: “CIs are estimated using the noncentrality parameter method (also called the ‘pivot method’)”; see further details at<br>
+<code>?effectsize::cohens_d()</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">with</span>(</span>
@@ -862,14 +859,13 @@ mean of x mean of y
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb28-2"><a></a>  <span class="fu">filter</span>(Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"setosa"</span>, <span class="st">"versicolor"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-3"><a></a>  rstatix<span class="sc">::</span><span class="fu">t_test</span>(Petal.Width <span class="sc">~</span> Species, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-3"><a></a>  rstatix<span class="sc">::</span><span class="fu">t_test</span>(Petal.Width <span class="sc">~</span> Species, <span class="at">detailed =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"estimate"</span>), statistic<span class="sc">:</span>conf.high) <span class="co">#reduce output for slide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 15
-  estimate estimate1 estimate2 .y.         group1 group2      n1    n2 statistic
-*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
-1    -1.08     0.246      1.33 Petal.Width setosa versico…    50    50     -34.1
-# ℹ 6 more variables: p &lt;dbl&gt;, df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;,
-#   method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 1 × 8
+  estimate estimate1 estimate2 statistic        p    df conf.low conf.high
+     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1    -1.08     0.246      1.33     -34.1 2.72e-47  74.8    -1.14     -1.02</code></pre>
 </div>
 </div>
 </div>
@@ -890,7 +886,7 @@ mean of x mean of y
 <pre><code># A tibble: 1 × 9
   .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude
 * &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    
-1 Petal.Width setosa versicolor   -6.82    50    50     -8.2     -5.99 large    </code></pre>
+1 Petal.Width setosa versicolor   -6.82    50    50    -8.28     -5.89 large    </code></pre>
 </div>
 </div>
 </div>
@@ -921,7 +917,7 @@ mean of x mean of y
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb34-2"><a></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a></a>  rstatix<span class="sc">::</span><span class="fu">cor_test</span>(Petal.Width, Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-3"><a></a>  rstatix<span class="sc">::</span><span class="fu">cor_test</span>(Petal.Width, Petal.Length) <span class="co">#implicitly ungroups the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 9
   Species    var1       var2    cor statistic        p conf.low conf.high method
@@ -945,7 +941,7 @@ mean of x mean of y
 <span id="cb36-5"><a></a>    <span class="at">data =</span> fhch2010_summary, </span>
 <span id="cb36-6"><a></a>    <span class="at">between =</span> <span class="st">"task"</span>, </span>
 <span id="cb36-7"><a></a>    <span class="at">within =</span> <span class="st">"stimulus"</span>,</span>
-<span id="cb36-8"><a></a>    <span class="co"># we want to report partial eta², and include the intercept in the output table ...</span></span>
+<span id="cb36-8"><a></a>    <span class="co"># we want to report partial eta² ("pes"), and include the intercept in the output table ...</span></span>
 <span id="cb36-9"><a></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb36-10"><a></a>  )</span>
 <span id="cb36-11"><a></a></span>
@@ -989,7 +985,7 @@ $UL
 <p>A little clunky function that can be applied to <code>afex</code> tables:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>peta.ci <span class="ot">&lt;-</span> </span>
-<span id="cb40-2"><a></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) {</span>
+<span id="cb40-2"><a></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) { <span class="co"># 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)</span></span>
 <span id="cb40-3"><a></a>  </span>
 <span id="cb40-4"><a></a>  result <span class="ot">&lt;-</span> </span>
 <span id="cb40-5"><a></a>    <span class="fu">apply</span>(anova_table, <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
@@ -1359,7 +1355,18 @@ task:stimulus 0.23280549 0.5584355        0.9</code></pre>
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1391,29 +1398,7 @@ task:stimulus 0.23280549 0.5584355        0.9</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1421,7 +1406,7 @@ task:stimulus 0.23280549 0.5584355        0.9</code></pre>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

@@ -52,7 +52,7 @@ library(tidyverse)
 ## Why confidence intervals?
 
 ::: {.incremental}
--   Goal: indicate precision/accuracy of a point estimate (e.g., the mean).
+-   Goal: indicate precision of a point estimate (e.g., the mean).
 -   If visualized, it's often supposed to help with "inference by eye".
 -   However, confidence intervals are often misinterpreted (e.g., [Hoekstra et al., 2014](https://doi.org/10.3758/s13423-013-0572-3))
 :::
@@ -130,7 +130,7 @@ $M - t_{\gamma} \times SE_{M}, M + t_{\gamma} \times SE_{M}$
 -   I.e., SE for the comparison between two means is larger than for the comparison of a mean with a fixed value.
 -   How much the CI needs to be expanded depends on the variance of each group.
 -   When the variance is homogeneous across conditions, there is a shortcut: The sum of two equal variances can be calculated by multiplying the common variance by two.
--   I.e., the CI must be $\sqrt2$ ($\approx$ 1.41) times wider.
+-   I.e., the CI must be $\sqrt2$ ($\approx$ 1.41) times wider ($SE_{M} = \sqrt{Var_{SEM}}$).
 :::
 
 . . . 
@@ -190,7 +190,7 @@ iris %>%
 
 ## CIs: comparing groups
 
--   Wider CIs for group comparisons, as e.g. suggested by ([Cousineau, 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/)).
+-   Wider CIs for group comparisons, as e.g. suggested by [Cousineau (2017)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5511611/).
 
 ```{r}
 iris %>% 
@@ -247,7 +247,7 @@ with(
 ::: {.incremental}
 -   Repeated measures are typically correlated, which makes it possible to evaluate the difference between means more precisely.
 -   I.e., we adjust the width of the CI based on the correlation between measures.
--   The difference between the two means is estimated as if we had a larger sample.
+-   The difference between the two means is estimated as if we had a larger (independent) sample.
 :::
 
 . . .
@@ -340,7 +340,7 @@ with(
 )
 ```
 
-## CIS: caveats
+## CIs: caveats
 
 ::: {.incremental}
 -   Assumptions: normally distributed means, homogeneity of variances, sphericity (repeated measures)
@@ -353,7 +353,8 @@ with(
 ## Cohen's d
 
 -   Also possible to report CIs on effect size estimates; different methods of calculating the desired CIs for different measures exist (beyond the scope of this workshop).
--   E.g., `cohens_d()` from the package `effectsize`: "CIs are estimated using the noncentrality parameter method (also called the 'pivot method')"; see further details at `?effectsize::cohens_d()`.
+-   E.g., `cohens_d()` from the package `effectsize`: "CIs are estimated using the noncentrality parameter method (also called the 'pivot method')"; see further details at \
+`?effectsize::cohens_d()`.
 
 ```{r}
 with(
@@ -377,7 +378,8 @@ with(
 ```{r}
 iris %>% 
   filter(Species %in% c("setosa", "versicolor")) %>% 
-  rstatix::t_test(Petal.Width ~ Species, detailed = TRUE)
+  rstatix::t_test(Petal.Width ~ Species, detailed = TRUE) %>% 
+  select(contains("estimate"), statistic:conf.high) #reduce output for slide
 ```
 
 ## rstatix: pipe-friendly Cohen's d
@@ -419,7 +421,7 @@ Option 2: Using the `rstatix` package.
 ```{r}
 iris %>% 
   group_by(Species) %>% 
-  rstatix::cor_test(Petal.Width, Petal.Length)
+  rstatix::cor_test(Petal.Width, Petal.Length) #implicitly ungroups the data
 ```
 
 . . .
@@ -436,7 +438,7 @@ aov_words <-
     data = fhch2010_summary, 
     between = "task", 
     within = "stimulus",
-    # we want to report partial eta², and include the intercept in the output table ...
+    # we want to report partial eta² ("pes"), and include the intercept in the output table ...
     anova_table = list(es = "pes", intercept = TRUE)
   )
 
@@ -463,7 +465,7 @@ A little clunky function that can be applied to `afex` tables:
 
 ```{r}
 peta.ci <- 
-  function(anova_table, conf.level = .9) {
+  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)
   
   result <- 
     apply(anova_table, 1, function(x) {
