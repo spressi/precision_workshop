@@ -646,7 +646,7 @@ aov3 +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
   geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
-                color = "black", size = 1.125)
+                color = "black", linewidth = 1.125)
 ```
 
 ::: notes
@@ -691,7 +691,7 @@ aov3 +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
   geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
-                color = "black", size = 1.125)
+                color = "black", linewidth = 1.125)
 ```
 
 <!--
@@ -745,7 +745,7 @@ aov3 +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
   geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
-                color = "black", size = 1.125)
+                color = "black", linewidth = 1.125)
 ```
 
 ## Tough Decisions
