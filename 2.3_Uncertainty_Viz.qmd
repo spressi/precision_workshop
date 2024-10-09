@@ -32,6 +32,7 @@ font-size: 1.4em;
 ```{r}
 #| message: false
 #| warning: false
+#| echo: false
 library(tidyverse)
 ```
 
@@ -236,7 +237,8 @@ istt2 <-
   
   ggplot(aes(y = rt.m, x = "difference")) +
   geom_point() + #plot the mean difference
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) #plot the difference CI
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) + #plot the difference CI
+  geom_hline(yintercept = 0, linetype = "dashed") #plot the population mean to test against
 ```
 ## Independent Samples t-test: CI of the difference: Figure
 
