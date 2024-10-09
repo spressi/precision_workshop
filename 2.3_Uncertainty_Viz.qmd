@@ -668,6 +668,30 @@ aov3 +
     alpha = .5
   )
 ```
+
+## Jittered Points with Individual Slopes
+
+Only `geom_path()` is able to align points + lines! `geom_line()` will not work here. (Ordering can be important: `geom_path()` connects the observations in the order in which they appear in the data.)
+
+```{r}
+#| code-line-numbers: "2-5"
+#| output-location: slide
+aov3 +
+  geom_jitter(
+    data = fhch2010_summary %>% rename(rt.m = rt),
+    position = position_jitter(width = .25, seed = 1337),
+  ) +
+  geom_path( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), 
+    aes(group = id),
+    position = position_jitter(width = .25, seed = 1337),
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+                color = "black", size = 1.125)
+```
+
 <!--
 ## Jittered Points with Individual Slopes
 
