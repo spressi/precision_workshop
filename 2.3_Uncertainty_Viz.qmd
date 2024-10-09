@@ -549,99 +549,178 @@ correlplot
 
 # Visualizing "Raw Data"
 
-Usually, we do not visualize the "raw" (trial-level) data but the subject-level aggregates. \
+As we see from the previous scatter plot, it is informative to see individual "raw data" points. Wouldn't this be nice to have for the group-differences plots (t-tests + ANOVA), too?
+
+With `ggplot`, we can simply add a new layer on our previous plots `aov1` and `aov2`.
+
+\
+Quick technical note: Usually, we do not visualize the "raw" (trial-level) data but the subject-level *aggregates* (&rarr; we could always visualize subject-level precision!). \
+<!--
 But, hey! It's at least one additional level of information! &#128517;
+-->
+
+:::notes
+We will not include subject-level precision in the next plots because it is irrelevant for group-level significance (except for its contribution to increasing group-level variance, which is already depicted in the group-level errorbars). Thus, the additional informational value is usually extremely limited while strongly decreasing readability of the plots (a lot of busy errorbars!).
+:::
 
 ## Stacked Points
-TODO geom_dotplot
+```{r}
+#| code-line-numbers: "2|3-5|6"
+#| output-location: slide
+aov1 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% #I should have saved this calculation step...
+      pivot_wider(names_from = "stimulus", values_from = "rt", id_cols = c(id, task)) %>% 
+      mutate(diff.m = word - nonword), #if we call this diff.m, it conforms to aov1
+    #aes(y = diff.m, x = task), #inherited from aov1
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  )
+```
+
+## Stacked Points 2
+
+```{r}
+#| code-line-numbers: "3|4-5"
+#| output-location: slide
+aov2 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov2
+    #aes(y = rt.m, x = task), #inherited from aov2
+    aes(fill = stimulus), #dotplot dots have color = outer border, fill = inner color
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  )
+```
+
+## Stacked Points 3
+
+Now that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?
+
+::: notes
+Go back to previous slide and ask where these lines would have to be added.
+:::
+
+. . .
+
+```{r}
+#| code-line-numbers: "9-10"
+#| output-location: slide
+aov3 <-
+  fhch2010_summary %>% 
+  summarize(
+    .by = c(task, stimulus), #for each condition combination
+    rt.m = mean(rt), 
+    rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
+    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %>% 
+  
+  ggplot(aes(y = rt.m, x = stimulus, color = task)) + #task and stimulus switched compared to aov2
+  facet_wrap(vars(task), labeller = label_both) + #task and stimulus switched compared to aov2
+  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9)) + #explicitly specify default width = .9
+  theme(legend.position = "top")
+print(aov3)
+```
+## Stacked Points 3
+
+```{r}
+#| code-line-numbers: "1,4-5|10-13|14-18"
+#| output-location: slide
+aov3 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    #aes(y = rt.m, x = stimulus), #inherited from aov3
+    aes(fill = task), #dotplot dots have color = outer border, fill = inner color
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  ) +
+  geom_line( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+                color = "black", size = 1.125)
+```
+
+::: notes
+Beautiful! So much information!
+
+The slopes for naming are more pronounced and homogenous compared to lexdec.
+
+But be careful! Between subjects errorbars! Can only compare across facets (tasks) but not within (words vs. non-words of the same task)\
+&rArr; This is why some authors suggest to have another plot showing the paired differences only (i.e., `aov1` alongside `aov3`).
+:::
 
 ## Jittered Points
+
+```{r}
+#| code-line-numbers: "2-6"
+#| output-location: slide
+aov3 +
+  geom_jitter( # geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    position = position_jitterdodge(dodge.width = .5),
+    alpha = .5
+  )
+```
+<!--
+## Jittered Points with Individual Slopes
+
+```{r}
+#| code-line-numbers: "2-5"
+#| output-location: slide
+aov3 +
+  geom_jitter(
+    data = fhch2010_summary %>% rename(rt.m = rt) %>% filter(stimulus == "word"),
+    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
+  ) +
+  geom_jitter(
+    data = fhch2010_summary %>% rename(rt.m = rt) %>% filter(stimulus == "nonword"),
+    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
+  ) +
+  geom_line( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), 
+    aes(group = id),
+    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+                color = "black", size = 1.125)
+```
 
 ```{r}
 fhch2010_summary %>% 
   ggplot(aes(x = task, y = rt, colour = stimulus)) +
-  # geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to 
-  # the same result
-  geom_jitter(position = position_jitterdodge(dodge.width = .75)) +
   theme(legend.position = "top")
 ```
-
-## Jittered Points
-
-Combine with ANOVA interaction plot:
-
-```{r}
-#| eval: false
-# individual data sets for different geoms
-ggplot() +
-  geom_jitter(
-    aes(x = task, y = rt, colour = stimulus),
-    data = fhch2010_summary,
-    position = position_jitterdodge(dodge.width = .75),
-    alpha = .4
-  ) +
-  geom_errorbar(
-    aes(y = rt.m, ymin = rt.m.low, ymax = rt.m.high, x = task, group = stimulus), 
-    position = position_dodge(.75), width = .25,
-    data = fhch2010_summary %>% 
-      summarize(
-        .by = c(task, stimulus), #for each condition combination
-        rt.m = mean(rt), 
-        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
-  ) +
-  geom_point(
-    aes(x = task, y = rt.m, colour = stimulus),
-    position = position_dodge(.75), size = 3,
-    data = fhch2010_summary %>% 
-      summarize(
-        .by = c(task, stimulus), #for each condition combination
-        rt.m = mean(rt), 
-        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
-  ) +
-  theme(legend.position = "top")
-```
-
-## Jittered Points
-
-The result:
-
-```{r}
-#| echo: false
-# individual data sets for different geoms
-ggplot() +
-  geom_jitter(
-    aes(x = task, y = rt, colour = stimulus),
-    data = fhch2010_summary,
-    position = position_jitterdodge(dodge.width = .75),
-    alpha = .4
-  ) +
-  geom_errorbar(
-    aes(y = rt.m, ymin = rt.m.low, ymax = rt.m.high, x = task, group = stimulus), 
-    position = position_dodge(.75), width = .25,
-    data = fhch2010_summary %>% 
-      summarize(
-        .by = c(task, stimulus), #for each condition combination
-        rt.m = mean(rt), 
-        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
-  ) +
-  geom_point(
-    aes(x = task, y = rt.m, colour = stimulus),
-    position = position_dodge(.75), size = 3,
-    data = fhch2010_summary %>% 
-      summarize(
-        .by = c(task, stimulus), #for each condition combination
-        rt.m = mean(rt), 
-        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
-  ) +
-  theme(legend.position = "top")
-```
+-->
 
 ## Density
-TODO violin
+```{r}
+#| code-line-numbers: "2"
+#| output-location: slide
+aov3 +
+  geom_violin( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    #aes(y = rt.m, x = stimulus), #inherited from aov3
+    aes(fill = task), #dotplot dots have color = outer border, fill = inner color
+    alpha = .5
+  ) +
+  geom_line( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+                color = "black", size = 1.125)
+```
 
 ## Tough Decisions
 What looks most insightful (or most pleasing) depends heavily on your sample size (and your personal preference).
@@ -657,11 +736,9 @@ Usually, the plots shown here work best with sample size in ascending order:
 ## Everything Everywhere All at Once
 
 If you are prone to decision paralysis, try a mixture of jittered points and violin plot: \
-the `Raincloud Plot`
+the `Raincloud Plot` ([Allen et al., 2019](https://doi.org/10.12688%2Fwellcomeopenres.15191.2))
 
-TODO
-
-Check out [Allen et al. (2019)](https://doi.org/10.12688%2Fwellcomeopenres.15191.2) for more advanced versions.
+![<https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif>](images/raincloud.gif)
 
 # Thanks for Your Attention!
 
