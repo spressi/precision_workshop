@@ -29,6 +29,12 @@ div.cell-output-stdout {
 font-size: 1.4em;
 }
 ```
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+```
+
 
 In the previous part, you learned about CIs around *means* and *effect sizes*.
 
@@ -160,7 +166,7 @@ fhch2010_summary_words <-
 with(fhch2010_summary_words,
      t.test(rt ~ task) #Welch test
      #t.test(rt ~ task, var.equal = TRUE) #assume equal variances
-     ) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
+) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
 ```
 
 :::notes
@@ -171,7 +177,7 @@ with(fhch2010_summary_words %>%
        pivot_wider(names_from = task, values_from = rt), #ignore the NAs
      t.test(naming, lexdec) #Welch test
      #t.test(rt ~ task, var.equal = TRUE) #assume equal variances
-     ) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
+) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
 ```
 :::
 
@@ -213,7 +219,7 @@ Remember: `confintr::ci_mean` is for obtaining CIs to **test a single mean again
 ```{r}
 with(fhch2010_summary_words %>% 
        pivot_wider(names_from = task, values_from = rt),
-confintr::ci_mean_diff(naming, lexdec))
+     confintr::ci_mean_diff(naming, lexdec))
 ```
 
 ## Independent Samples t-test: CI of the difference: Viz Code
@@ -386,16 +392,16 @@ The main effect of the **between-subjects** factor `task`
 
 ```{r}
 aov_words$anova_table %>% 
-  rownames_to_column("effect") %>% #output looks weird but works!
-  filter(effect == "task")
+rownames_to_column("effect") %>% #output looks weird but works!
+filter(effect == "task")
 ```
 
 ... is the **independent samples** t-test for `task` collapsed across `stimulus`
 
 ```{r}
 with(fhch2010_summary %>% 
-       summarize(rt = mean(rt), .by = c(id, task)), #collapse across stimulus (words vs. non-words)
-     t.test(rt ~ task, var.equal = TRUE)$p.value) #just check p value
+summarize(rt = mean(rt), .by = c(id, task)), #collapse across stimulus (words vs. non-words)
+t.test(rt ~ task, var.equal = TRUE)$p.value) #just check p value
 ```
 
 ## ANOVA Insights 2
@@ -405,16 +411,16 @@ The main effect of the **within-subjects** factor `stimulus`
 ```{r}
 #| code-line-numbers: "3"
 aov_words$anova_table %>% 
-  rownames_to_column("effect") %>% #output looks weird but works!
-  filter(effect == "stimulus")
+rownames_to_column("effect") %>% #output looks weird but works!
+filter(effect == "stimulus")
 ```
 
 ... is **NOT?** the **paired samples** t-test for `stimulus` (ignoring `task`)
 
 ```{r}
 fhch2010_summary %>% 
-  summarize(rt = mean(rt), .by = c(id, stimulus)) %>% #collapse across task (naming vs. lexical decision)
-  rstatix::t_test(rt ~ stimulus, paired = TRUE) %>% pull(p) #just check p value
+summarize(rt = mean(rt), .by = c(id, stimulus)) %>% #collapse across task (naming vs. lexical decision)
+rstatix::t_test(rt ~ stimulus, paired = TRUE) %>% pull(p) #just check p value
 ```
 -->
 
@@ -550,7 +556,89 @@ But, hey! It's at least one additional level of information! &#128517;
 TODO geom_dotplot
 
 ## Jittered Points
-TODO geom_jitter
+
+```{r}
+fhch2010_summary %>% 
+  ggplot(aes(x = task, y = rt, colour = stimulus)) +
+  # geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to 
+  # the same result
+  geom_jitter(position = position_jitterdodge(dodge.width = .75)) +
+  theme(legend.position = "top")
+```
+
+## Jittered Points
+
+Combine with ANOVA interaction plot:
+
+```{r}
+#| eval: false
+# individual data sets for different geoms
+ggplot() +
+  geom_jitter(
+    aes(x = task, y = rt, colour = stimulus),
+    data = fhch2010_summary,
+    position = position_jitterdodge(dodge.width = .75),
+    alpha = .4
+  ) +
+  geom_errorbar(
+    aes(y = rt.m, ymin = rt.m.low, ymax = rt.m.high, x = task, group = stimulus), 
+    position = position_dodge(.75), width = .25,
+    data = fhch2010_summary %>% 
+      summarize(
+        .by = c(task, stimulus), #for each condition combination
+        rt.m = mean(rt), 
+        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
+        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
+  ) +
+  geom_point(
+    aes(x = task, y = rt.m, colour = stimulus),
+    position = position_dodge(.75), size = 3,
+    data = fhch2010_summary %>% 
+      summarize(
+        .by = c(task, stimulus), #for each condition combination
+        rt.m = mean(rt), 
+        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
+        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
+  ) +
+  theme(legend.position = "top")
+```
+
+## Jittered Points
+
+The result:
+
+```{r}
+#| echo: false
+# individual data sets for different geoms
+ggplot() +
+  geom_jitter(
+    aes(x = task, y = rt, colour = stimulus),
+    data = fhch2010_summary,
+    position = position_jitterdodge(dodge.width = .75),
+    alpha = .4
+  ) +
+  geom_errorbar(
+    aes(y = rt.m, ymin = rt.m.low, ymax = rt.m.high, x = task, group = stimulus), 
+    position = position_dodge(.75), width = .25,
+    data = fhch2010_summary %>% 
+      summarize(
+        .by = c(task, stimulus), #for each condition combination
+        rt.m = mean(rt), 
+        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
+        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
+  ) +
+  geom_point(
+    aes(x = task, y = rt.m, colour = stimulus),
+    position = position_dodge(.75), size = 3,
+    data = fhch2010_summary %>% 
+      summarize(
+        .by = c(task, stimulus), #for each condition combination
+        rt.m = mean(rt), 
+        rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
+        rt.m.high = confintr::ci_mean(rt)$interval[[2]]) 
+  ) +
+  theme(legend.position = "top")
+```
 
 ## Density
 TODO violin
