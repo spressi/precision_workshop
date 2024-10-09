@@ -8,10 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter &amp; Juli Nagel">
-  <title>Precision Workshop - 2.3 Visualizing Uncertainty</title>
+  <title>Precision Workshop – 2.3 Visualizing Uncertainty</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -711,8 +711,7 @@ Confidence interval:
 </figure>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="fragment">
 <p><br>
 There is a difference between the precision of the means (aggregated <strong>across subjects</strong>) and the<br>
@@ -825,6 +824,8 @@ within-subject variance increases the estimate of between-subject variance (<a h
 The main effect of the **between-subjects** factor `task`
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -850,7 +851,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
+
+
 ... is the **independent samples** t-test for `task` collapsed across `stimulus`
+
+
 
 
 ::: {.cell}
@@ -872,9 +877,13 @@ t.test(rt ~ task, var.equal = TRUE)$p.value) #just check p value
 :::
 
 
+
+
 ## ANOVA Insights 2
 
 The main effect of the **within-subjects** factor `stimulus`
+
+
 
 
 ::: {.cell}
@@ -902,7 +911,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
+
+
 ... is **NOT?** the **paired samples** t-test for `stimulus` (ignoring `task`)
+
+
 
 
 ::: {.cell}
@@ -922,6 +935,8 @@ rstatix::t_test(rt ~ stimulus, paired = TRUE) %>% pull(p) #just check p value
 
 :::
 :::
+
+
 
 -->
 </div>
@@ -1179,7 +1194,7 @@ But, hey! It's at least one additional level of information! &#128517;
 <span id="cb34-14"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
 <span id="cb34-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
 <span id="cb34-16"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb34-17"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-17"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <aside class="notes">
@@ -1244,11 +1259,13 @@ But, hey! It's at least one additional level of information! &#128517;
 <span id="cb36-11"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
 <span id="cb36-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
 <span id="cb36-13"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb36-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <!--
 ## Jittered Points with Individual Slopes
+
+
 
 
 ::: {.cell output-location='slide'}
@@ -1292,6 +1309,8 @@ fhch2010_summary %>%
 :::
 :::
 
+
+
 -->
 </section>
 <section id="jittered-points-with-individual-slopes-output" class="slide level2 output-location-slide"><h2>Jittered Points with Individual Slopes</h2><div class="cell output-location-slide">
@@ -1319,7 +1338,7 @@ fhch2010_summary %>%
 <span id="cb37-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
 <span id="cb37-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
 <span id="cb37-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb37-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1684,18 +1703,7 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1727,7 +1735,29 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1735,7 +1765,7 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
