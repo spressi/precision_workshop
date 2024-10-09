@@ -22,4 +22,4 @@ Please use the navigation on the left to select the slides for each topic (recom
 |                 |                              |
 | 09.10.          | Measurement Precision        |
 |                 | Confidence Intervals         |
-|                 | Visualize Uncertainty        |
+|                 | Visualizing Uncertainty      |

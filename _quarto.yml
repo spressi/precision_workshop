@@ -16,6 +16,7 @@ website:
       - 1.3_Data_Visualization.qmd
       - 2.1_Precision.qmd
       - 2.2_CIs.qmd
+      - 2.3_Uncertainty_Viz.qmd
 
 format:
   html:
