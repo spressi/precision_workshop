@@ -335,7 +335,8 @@ with(
   fhch2010_summary,
   t.test(
     rt[stimulus == "word"],
-    rt[stimulus == "nonword"]
+    rt[stimulus == "nonword"],
+    paired = TRUE
   )
 )
 ```
