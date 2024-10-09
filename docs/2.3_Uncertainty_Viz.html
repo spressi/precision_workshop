@@ -1218,6 +1218,35 @@ But, hey! It's at least one additional level of information! &#128517;
 <span id="cb35-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
+</section>
+<section id="jittered-points-output" class="slide level2 output-location-slide"><h2>Jittered Points</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="jittered-points-with-individual-slopes" class="slide level2">
+<h2>Jittered Points with Individual Slopes</h2>
+<p>Only <code>geom_path()</code> is able to align points + lines! <code>geom_line()</code> will not work here. (Ordering can be important: <code>geom_path()</code> connects the observations in the order in which they appear in the data.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-5|6-10|4,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb36-2"><a></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb36-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt),</span>
+<span id="cb36-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb36-5"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb36-6"><a></a>  <span class="fu">geom_path</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb36-7"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), </span>
+<span id="cb36-8"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb36-9"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb36-10"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb36-11"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb36-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb36-13"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb36-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
 <!--
 ## Jittered Points with Individual Slopes
 
@@ -1246,7 +1275,7 @@ aov3 +
 ```
 
 ::: {.cell-output-display}
-![](2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-38-1.png){width=960}
+![](2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-39-1.png){width=960}
 :::
 :::
 
@@ -1259,38 +1288,38 @@ fhch2010_summary %>%
 ```
 
 ::: {.cell-output-display}
-![](2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-39-1.png){width=960}
+![](2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-40-1.png){width=960}
 :::
 :::
 
 -->
 </section>
-<section id="jittered-points-output" class="slide level2 output-location-slide"><h2>Jittered Points</h2><div class="cell output-location-slide">
+<section id="jittered-points-with-individual-slopes-output" class="slide level2 output-location-slide"><h2>Jittered Points with Individual Slopes</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="density" class="slide level2">
 <h2>Density</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb36-2"><a></a>  <span class="fu">geom_violin</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb36-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb36-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
-<span id="cb36-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb36-6"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb36-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb36-8"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb36-9"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb36-10"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
-<span id="cb36-11"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb36-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb36-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb36-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb36-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb37-2"><a></a>  <span class="fu">geom_violin</span>( </span>
+<span id="cb37-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb37-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
+<span id="cb37-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb37-6"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb37-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb37-8"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb37-9"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb37-10"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
+<span id="cb37-11"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb37-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb37-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low, <span class="at">ymax =</span> rt.m.high), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb37-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1298,7 +1327,7 @@ fhch2010_summary %>%
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
 </figure>
 </div>
 </div>

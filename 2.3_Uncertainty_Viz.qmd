@@ -676,17 +676,17 @@ aov3 +
 Only `geom_path()` is able to align points + lines! `geom_line()` will not work here. (Ordering can be important: `geom_path()` connects the observations in the order in which they appear in the data.)
 
 ```{r}
-#| code-line-numbers: "2-5"
+#| code-line-numbers: "2-5|6-10|4,9"
 #| output-location: slide
 aov3 +
   geom_jitter(
     data = fhch2010_summary %>% rename(rt.m = rt),
-    position = position_jitter(width = .25, seed = 1337),
+    position = position_jitter(width = .25, seed = 1337), #same seed needed!
   ) +
   geom_path( #add individual slopes
     data = fhch2010_summary %>% rename(rt.m = rt), 
     aes(group = id),
-    position = position_jitter(width = .25, seed = 1337),
+    position = position_jitter(width = .25, seed = 1337), #same seed needed!
     alpha = .5) +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
@@ -732,7 +732,7 @@ fhch2010_summary %>%
 #| code-line-numbers: "2"
 #| output-location: slide
 aov3 +
-  geom_violin( # experts can try ggbeeswarm::geom_beeswarm()
+  geom_violin( 
     data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
     #aes(y = rt.m, x = stimulus), #inherited from aov3
     aes(fill = task), #dotplot dots have color = outer border, fill = inner color
