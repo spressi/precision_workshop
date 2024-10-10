@@ -459,19 +459,23 @@ Is the reaction time difference between naming and lexical decision different fo
 . . .
 
 ```{r}
-#| code-line-numbers: "4|9-10|11-12"
+#| code-line-numbers: "3,6,15|3,7-8,10"
 aov2 <-
   fhch2010_summary %>% 
-  summarize(
-    .by = c(task, stimulus), #for each condition combination
-    rt.m = mean(rt), 
-    rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %>% 
+    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %>% 
+    summarize(
+      .by = stimulus, #task is implicitly kept due to pivot_wider
+      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %>% diff(), #do this first so we can overwrite naming & lexdec
+      naming = mean(naming, na.rm = TRUE), 
+      lexdec = mean(lexdec, na.rm = TRUE)
+    ) %>% 
+    pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
   
   ggplot(aes(y = rt.m, x = task, color = stimulus)) +
   facet_wrap(vars(stimulus), labeller = label_both) +
   geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + #explicitly specify default width = .9
   theme(legend.position = "top")
 ```
 
@@ -608,20 +612,24 @@ Go back to previous slide and ask where these lines would have to be added.
 . . .
 
 ```{r}
-#| code-line-numbers: "9-10"
+#| code-line-numbers: "12-13"
 #| output-location: slide
 aov3 <-
   fhch2010_summary %>% 
-  summarize(
-    .by = c(task, stimulus), #for each condition combination
-    rt.m = mean(rt), 
-    rt.m.low = confintr::ci_mean(rt)$interval[[1]], 
-    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %>% 
+    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %>% 
+    summarize(
+      .by = stimulus, #task is implicitly kept due to pivot_wider
+      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %>% diff(), #do this first so we can overwrite naming & lexdec
+      naming = mean(naming, na.rm = TRUE), 
+      lexdec = mean(lexdec, na.rm = TRUE)
+    ) %>% 
+    pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
   
   ggplot(aes(y = rt.m, x = stimulus, color = task)) + #task and stimulus switched compared to aov2
   facet_wrap(vars(task), labeller = label_both) + #task and stimulus switched compared to aov2
   geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + #explicitly specify default width = .9
   theme(legend.position = "top")
 print(aov3)
 ```
@@ -645,7 +653,8 @@ aov3 +
     alpha = .5) +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9), 
                 color = "black", linewidth = 1.125)
 ```
 
@@ -690,42 +699,9 @@ aov3 +
     alpha = .5) +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), 
                 color = "black", linewidth = 1.125)
 ```
-
-<!--
-## Jittered Points with Individual Slopes
-
-```{r}
-#| code-line-numbers: "2-5"
-#| output-location: slide
-aov3 +
-  geom_jitter(
-    data = fhch2010_summary %>% rename(rt.m = rt) %>% filter(stimulus == "word"),
-    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
-  ) +
-  geom_jitter(
-    data = fhch2010_summary %>% rename(rt.m = rt) %>% filter(stimulus == "nonword"),
-    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
-  ) +
-  geom_line( #add individual slopes
-    data = fhch2010_summary %>% rename(rt.m = rt), 
-    aes(group = id),
-    position = position_jitterdodge(jitter.width = .25, dodge.width = .5, seed = 1337),
-    alpha = .5) +
-  #plot group-level information again (on top) but black and bigger
-  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
-                color = "black", size = 1.125)
-```
-
-```{r}
-fhch2010_summary %>% 
-  ggplot(aes(x = task, y = rt, colour = stimulus)) +
-  theme(legend.position = "top")
-```
--->
 
 ## Density
 ```{r}
@@ -744,7 +720,7 @@ aov3 +
     alpha = .5) +
   #plot group-level information again (on top) but black and bigger
   geom_point(position = position_dodge(.9), color = "black", size = 3) + 
-  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high), position = position_dodge(.9), 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), 
                 color = "black", linewidth = 1.125)
 ```
 
