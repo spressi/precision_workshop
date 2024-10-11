@@ -569,7 +569,8 @@ Confidence interval:
 <span id="cb6-2"><a></a>z_CI_t <span class="ot">&lt;-</span> <span class="cf">function</span>(x, CI, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb6-3"><a></a>  <span class="cf">if</span> (na.rm) x <span class="ot">&lt;-</span> x[<span class="sc">!</span><span class="fu">is.na</span>(x)]</span>
 <span id="cb6-4"><a></a>  ci <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> CI) <span class="sc">/</span> <span class="dv">2</span>, <span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>) <span class="co"># two-sided CI</span></span>
-<span id="cb6-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a></a>  <span class="fu">return</span>(ci)</span>
+<span id="cb6-6"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -887,7 +888,7 @@ mean difference
 <pre><code># A tibble: 1 × 9
   .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude
 * &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    
-1 Petal.Width setosa versicolor   -6.82    50    50    -8.27     -5.96 large    </code></pre>
+1 Petal.Width setosa versicolor   -6.82    50    50    -8.29     -5.93 large    </code></pre>
 </div>
 </div>
 </div>

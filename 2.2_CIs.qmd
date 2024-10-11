@@ -171,6 +171,7 @@ se <- function(x, na.rm = TRUE) {
 z_CI_t <- function(x, CI, na.rm = FALSE) {
   if (na.rm) x <- x[!is.na(x)]
   ci <- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI
+  return(ci)
 }
 ```
 

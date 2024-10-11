@@ -101,7 +101,7 @@
     "href": "2.2_CIs.html#in-r-custom-function",
     "title": "2.2 Confidence Intervals",
     "section": "In R: custom function",
-    "text": "In R: custom function\n\nSometimes, writing your own custom function gives you the control you need over certain calculations.\n\n\n\n\n# You've seen this in the previous part :-)\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\n\n\n# CI based on t distribution\nz_CI_t &lt;- function(x, CI, na.rm = FALSE) {\n  if (na.rm) x &lt;- x[!is.na(x)]\n  ci &lt;- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI\n}",
+    "text": "In R: custom function\n\nSometimes, writing your own custom function gives you the control you need over certain calculations.\n\n\n\n\n# You've seen this in the previous part :-)\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\n\n\n# CI based on t distribution\nz_CI_t &lt;- function(x, CI, na.rm = FALSE) {\n  if (na.rm) x &lt;- x[!is.na(x)]\n  ci &lt;- qt(1 - (1 - CI) / 2, length(x) - 1) # two-sided CI\n  return(ci)\n}",
     "crumbs": [
       "2.2 Confidence Intervals"
     ]
@@ -231,7 +231,7 @@
     "href": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
     "title": "2.2 Confidence Intervals",
     "section": "rstatix: pipe-friendly Cohen’s d",
-    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50    -8.27     -5.96 large",
+    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50    -8.29     -5.93 large",
     "crumbs": [
       "2.2 Confidence Intervals"
     ]
@@ -1141,7 +1141,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1894   1890\n 2  1906   1900\n 3  1907   1900\n 4  1923   1920\n 5  1930   1930\n 6  1937   1930\n 7  1962   1960\n 8  1987   1980\n 9  1992   1990\n10  2002   2000",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1918   1910\n 2  1922   1920\n 3  1930   1930\n 4  1946   1940\n 5  1948   1940\n 6  1956   1950\n 7  1966   1960\n 8  1977   1970\n 9  1992   1990\n10  2016   2010",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1811,7 +1811,7 @@
     "href": "2.3_Uncertainty_Viz.html#paired-samples-t-test-viz-code",
     "title": "2.3 Visualizing Uncertainty",
     "section": "Paired Samples t-test: Viz Code?",
-    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
+    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]
