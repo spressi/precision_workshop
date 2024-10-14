@@ -247,6 +247,8 @@ istt2 <-
 istt2
 ```
 
+<!-- TODO: Option to plot this CI on both individual mean RTs (cf. ANOVA Viz Code 2) instead of plotting the mean difference -->
+
 ## Paired Samples t-test
 
 Are the mean reaction times for **naming words** different from **naming non-words**?
