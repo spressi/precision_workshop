@@ -1811,7 +1811,7 @@
     "href": "2.3_Uncertainty_Viz.html#paired-samples-t-test-viz-code",
     "title": "2.3 Visualizing Uncertainty",
     "section": "Paired Samples t-test: Viz Code?",
-    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
+    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]
@@ -2112,6 +2112,16 @@
     "title": "2.3 Visualizing Uncertainty",
     "section": "Everything Everywhere All at Once",
     "text": "Everything Everywhere All at Once\nIf you are prone to decision paralysis, try a mixture of jittered points and violin plot:\nthe Raincloud Plot (Allen et al., 2019)\n\nhttps://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif",
+    "crumbs": [
+      "2.3 Visualizing Uncertainty"
+    ]
+  },
+  {
+    "objectID": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
+    "href": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
+    "title": "2.3 Visualizing Uncertainty",
+    "section": "ANOVA interaction: Viz Code 2.2",
+    "text": "ANOVA interaction: Viz Code 2.2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  # alternative: spare the first pivot by using base R indexing\n  summarize(\n    .by = stimulus,\n    ci.length = confintr::ci_mean_diff(rt[task == \"naming\"], rt[task == \"lexdec\"])$interval %&gt;% diff(),\n    naming = mean(rt[task == \"naming\"]),\n    lexdec = mean(rt[task == \"lexdec\"])\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]

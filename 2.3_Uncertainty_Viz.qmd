@@ -479,6 +479,32 @@ aov2 <-
   theme(legend.position = "top")
 ```
 
+## ANOVA interaction: Viz Code 2.2
+
+Between-effect modulated by within-variable:\
+Is the reaction time difference between naming and lexical decision different for words vs. non-words?
+
+```{r}
+#| code-line-numbers: "3,6-8"
+aov2 <-
+  fhch2010_summary %>% 
+  # alternative: spare the first pivot by using base R indexing
+  summarize(
+    .by = stimulus,
+    ci.length = confintr::ci_mean_diff(rt[task == "naming"], rt[task == "lexdec"])$interval %>% diff(),
+    naming = mean(rt[task == "naming"]),
+    lexdec = mean(rt[task == "lexdec"])
+  ) %>% 
+  pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
+  
+  ggplot(aes(y = rt.m, x = task, color = stimulus)) +
+  facet_wrap(vars(stimulus), labeller = label_both) +
+  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + #explicitly specify default width = .9
+  theme(legend.position = "top")
+```
+
 ## ANOVA interaction: Figures
 
 :::notes

@@ -8,10 +8,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter &amp; Juli Nagel">
-  <title>Precision Workshop – 2.3 Visualizing Uncertainty</title>
+  <title>Precision Workshop - 2.3 Visualizing Uncertainty</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -42,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.cf { color: #003b4f; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.kw { color: #003b4f; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -666,6 +666,7 @@ Confidence interval:
 <section id="independent-samples-t-test-ci-of-the-difference-figure" class="slide level2">
 <h2>Independent Samples t-test: CI of the difference: Figure</h2>
 
+<!-- TODO: Option to plot this CI on both individual mean RTs (cf. ANOVA Viz Code 2) instead of plotting the mean difference -->
 <img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="paired-samples-t-test" class="slide level2">
 <h2>Paired Samples t-test</h2>
@@ -711,7 +712,8 @@ Confidence interval:
 </figure>
 </div>
 </div>
-</div></div>
+</div>
+</div>
 <div class="fragment">
 <p><br>
 There is a difference between the precision of the means (aggregated <strong>across subjects</strong>) and the<br>
@@ -824,8 +826,6 @@ within-subject variance increases the estimate of between-subject variance (<a h
 The main effect of the **between-subjects** factor `task`
 
 
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -851,11 +851,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
 ... is the **independent samples** t-test for `task` collapsed across `stimulus`
-
-
 
 
 ::: {.cell}
@@ -877,13 +873,9 @@ t.test(rt ~ task, var.equal = TRUE)$p.value) #just check p value
 :::
 
 
-
-
 ## ANOVA Insights 2
 
 The main effect of the **within-subjects** factor `stimulus`
-
-
 
 
 ::: {.cell}
@@ -911,11 +903,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
 ... is **NOT?** the **paired samples** t-test for `stimulus` (ignoring `task`)
-
-
 
 
 ::: {.cell}
@@ -935,8 +923,6 @@ rstatix::t_test(rt ~ stimulus, paired = TRUE) %>% pull(p) #just check p value
 
 :::
 :::
-
-
 
 -->
 </div>
@@ -992,6 +978,30 @@ Is the reaction time difference between naming and lexical decision different fo
 </div>
 </div>
 </section>
+<section id="anova-interaction-viz-code-2.2" class="slide level2">
+<h2>ANOVA interaction: Viz Code 2.2</h2>
+<p>Between-effect modulated by within-variable:<br>
+Is the reaction time difference between naming and lexical decision different for words vs.&nbsp;non-words?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="3,6-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>aov2 <span class="ot">&lt;-</span></span>
+<span id="cb28-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a></a>  <span class="co"># alternative: spare the first pivot by using base R indexing</span></span>
+<span id="cb28-4"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb28-5"><a></a>    <span class="at">.by =</span> stimulus,</span>
+<span id="cb28-6"><a></a>    <span class="at">ci.length =</span> confintr<span class="sc">::</span><span class="fu">ci_mean_diff</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>], rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])<span class="sc">$</span>interval <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
+<span id="cb28-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>]),</span>
+<span id="cb28-8"><a></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])</span>
+<span id="cb28-9"><a></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-11"><a></a>  </span>
+<span id="cb28-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
+<span id="cb28-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb28-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb28-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb28-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb28-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="anova-interaction-figures" class="slide level2">
 <h2>ANOVA interaction: Figures</h2>
 <aside class="notes">
@@ -1009,7 +1019,7 @@ Is the reaction time difference between naming and lexical decision different fo
           display:block!important;
       }</style></aside>
 
-<img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
+<img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
 <section id="within-errors-on-marginal-means" class="slide level2">
 <h2>Within-Errors on Marginal Means</h2>
 <p>There are methods to draw within-subject errors directly on marginal means instead of on paired differences (e.g., <a href="https://doi.org/10.20982/tqmp.01.1.p042">Morey, 2008</a>).</p>
@@ -1025,19 +1035,19 @@ Is the reaction time difference between naming and lexical decision different fo
 <div class="fragment">
 <p>We want to include subject-level CIs, so we need to start with the trial-level data!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28" data-code-line-numbers="2,6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>fhch2010_summary2 <span class="ot">&lt;-</span> </span>
-<span id="cb28-2"><a></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> <span class="co">#trial-level data!</span></span>
-<span id="cb28-3"><a></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"lexdec"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-4"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus), <span class="co">#retain task column for future reference</span></span>
-<span id="cb28-5"><a></a>            <span class="at">rt.m =</span> <span class="fu">mean</span>(rt),</span>
-<span id="cb28-6"><a></a>            <span class="at">rt.m.low =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(rt)<span class="sc">$</span>interval[[<span class="dv">1</span>]], <span class="co">#subject-level CIs!</span></span>
-<span id="cb28-7"><a></a>            <span class="at">rt.m.high =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(rt)<span class="sc">$</span>interval[[<span class="dv">2</span>]]) <span class="co">#subject-level CIs!</span></span>
-<span id="cb28-8"><a></a></span>
-<span id="cb28-9"><a></a>correl <span class="ot">&lt;-</span> </span>
-<span id="cb28-10"><a></a>  <span class="fu">with</span>(fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
-<span id="cb28-11"><a></a>         <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt.m, <span class="at">id_cols =</span> id),</span>
-<span id="cb28-12"><a></a>       <span class="fu">cor.test</span>(word, nonword)) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb28-13"><a></a>correl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29" data-code-line-numbers="2,6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>fhch2010_summary2 <span class="ot">&lt;-</span> </span>
+<span id="cb29-2"><a></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> <span class="co">#trial-level data!</span></span>
+<span id="cb29-3"><a></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"lexdec"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus), <span class="co">#retain task column for future reference</span></span>
+<span id="cb29-5"><a></a>            <span class="at">rt.m =</span> <span class="fu">mean</span>(rt),</span>
+<span id="cb29-6"><a></a>            <span class="at">rt.m.low =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(rt)<span class="sc">$</span>interval[[<span class="dv">1</span>]], <span class="co">#subject-level CIs!</span></span>
+<span id="cb29-7"><a></a>            <span class="at">rt.m.high =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(rt)<span class="sc">$</span>interval[[<span class="dv">2</span>]]) <span class="co">#subject-level CIs!</span></span>
+<span id="cb29-8"><a></a></span>
+<span id="cb29-9"><a></a>correl <span class="ot">&lt;-</span> </span>
+<span id="cb29-10"><a></a>  <span class="fu">with</span>(fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-11"><a></a>         <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt.m, <span class="at">id_cols =</span> id),</span>
+<span id="cb29-12"><a></a>       <span class="fu">cor.test</span>(word, nonword)) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-13"><a></a>correl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "r(23) = .85 [.69; .93], p &lt; .001"</code></pre>
 </div>
@@ -1047,23 +1057,23 @@ Is the reaction time difference between naming and lexical decision different fo
 <section id="correlations-viz-code" class="slide level2">
 <h2>Correlations: Viz Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30" data-code-line-numbers="3|4,6|7-8|5|9-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>correlplot <span class="ot">&lt;-</span></span>
-<span id="cb30-2"><a></a>  fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
-<span id="cb30-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> <span class="fu">starts_with</span>(<span class="st">"rt.m"</span>)) <span class="sc">%&gt;%</span> <span class="co">#also rt.m.low &amp; rt.m.high</span></span>
-<span id="cb30-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt.m_nonword, <span class="at">y =</span> rt.m_word)) <span class="sc">+</span> <span class="co">#non-words vs. words</span></span>
-<span id="cb30-5"><a></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#linear regression line with confidence bands</span></span>
-<span id="cb30-6"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#rt means of individual subjects</span></span>
-<span id="cb30-7"><a></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rt.m.low_nonword, <span class="at">xmax =</span> rt.m.high_nonword)) <span class="sc">+</span> <span class="co">#horizontal CIs: non-words</span></span>
-<span id="cb30-8"><a></a>  <span class="fu">geom_errorbar</span> (<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low_word,    <span class="at">ymax =</span> rt.m.high_word)) <span class="sc">+</span>    <span class="co">#vertical   CIs: words</span></span>
-<span id="cb30-9"><a></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">min</span>(rt.m.low_nonword), <span class="at">y =</span> <span class="fu">max</span>(rt.m.high_word)), <span class="co">#statistics to show off</span></span>
-<span id="cb30-10"><a></a>             <span class="at">hjust =</span> <span class="st">"inward"</span>,</span>
-<span id="cb30-11"><a></a>             <span class="at">label =</span> correl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="3|4,6|7-8|5|9-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>correlplot <span class="ot">&lt;-</span></span>
+<span id="cb31-2"><a></a>  fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> <span class="fu">starts_with</span>(<span class="st">"rt.m"</span>)) <span class="sc">%&gt;%</span> <span class="co">#also rt.m.low &amp; rt.m.high</span></span>
+<span id="cb31-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt.m_nonword, <span class="at">y =</span> rt.m_word)) <span class="sc">+</span> <span class="co">#non-words vs. words</span></span>
+<span id="cb31-5"><a></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#linear regression line with confidence bands</span></span>
+<span id="cb31-6"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#rt means of individual subjects</span></span>
+<span id="cb31-7"><a></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rt.m.low_nonword, <span class="at">xmax =</span> rt.m.high_nonword)) <span class="sc">+</span> <span class="co">#horizontal CIs: non-words</span></span>
+<span id="cb31-8"><a></a>  <span class="fu">geom_errorbar</span> (<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low_word,    <span class="at">ymax =</span> rt.m.high_word)) <span class="sc">+</span>    <span class="co">#vertical   CIs: words</span></span>
+<span id="cb31-9"><a></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">min</span>(rt.m.low_nonword), <span class="at">y =</span> <span class="fu">max</span>(rt.m.high_word)), <span class="co">#statistics to show off</span></span>
+<span id="cb31-10"><a></a>             <span class="at">hjust =</span> <span class="st">"inward"</span>,</span>
+<span id="cb31-11"><a></a>             <span class="at">label =</span> correl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="correlations-figure" class="slide level2">
 <h2>Correlations: Figure</h2>
 
-<img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="visualizing-raw-data" class="title-slide slide level1 center">
 <h1>Visualizing “Raw Data”</h1>
@@ -1091,16 +1101,16 @@ But, hey! It's at least one additional level of information! &#128517;
 <section id="stacked-points" class="slide level2">
 <h2>Stacked Points</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="2|3-5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>aov1 <span class="sc">+</span></span>
-<span id="cb31-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb31-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="co">#I should have saved this calculation step...</span></span>
-<span id="cb31-4"><a></a>      <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"stimulus"</span>, <span class="at">values_from =</span> <span class="st">"rt"</span>, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-5"><a></a>      <span class="fu">mutate</span>(<span class="at">diff.m =</span> word <span class="sc">-</span> nonword), <span class="co">#if we call this diff.m, it conforms to aov1</span></span>
-<span id="cb31-6"><a></a>    <span class="co">#aes(y = diff.m, x = task), #inherited from aov1</span></span>
-<span id="cb31-7"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb31-8"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb31-9"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb31-10"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32" data-code-line-numbers="2|3-5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>aov1 <span class="sc">+</span></span>
+<span id="cb32-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb32-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="co">#I should have saved this calculation step...</span></span>
+<span id="cb32-4"><a></a>      <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"stimulus"</span>, <span class="at">values_from =</span> <span class="st">"rt"</span>, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-5"><a></a>      <span class="fu">mutate</span>(<span class="at">diff.m =</span> word <span class="sc">-</span> nonword), <span class="co">#if we call this diff.m, it conforms to aov1</span></span>
+<span id="cb32-6"><a></a>    <span class="co">#aes(y = diff.m, x = task), #inherited from aov1</span></span>
+<span id="cb32-7"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb32-8"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb32-9"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb32-10"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1108,22 +1118,22 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="stacked-points-2" class="slide level2">
 <h2>Stacked Points 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>aov2 <span class="sc">+</span></span>
-<span id="cb32-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb32-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov2</span></span>
-<span id="cb32-4"><a></a>    <span class="co">#aes(y = rt.m, x = task), #inherited from aov2</span></span>
-<span id="cb32-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> stimulus), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb32-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb32-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb32-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb32-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>aov2 <span class="sc">+</span></span>
+<span id="cb33-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb33-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov2</span></span>
+<span id="cb33-4"><a></a>    <span class="co">#aes(y = rt.m, x = task), #inherited from aov2</span></span>
+<span id="cb33-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> stimulus), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb33-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb33-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb33-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb33-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1131,7 +1141,7 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1153,24 +1163,24 @@ But, hey! It's at least one additional level of information! &#128517;
       }</style></aside>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="12-13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>aov3 <span class="ot">&lt;-</span></span>
-<span id="cb33-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, stimulus)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-4"><a></a>    <span class="fu">summarize</span>(</span>
-<span id="cb33-5"><a></a>      <span class="at">.by =</span> stimulus, <span class="co">#task is implicitly kept due to pivot_wider</span></span>
-<span id="cb33-6"><a></a>      <span class="at">ci.length =</span> confintr<span class="sc">::</span><span class="fu">ci_mean_diff</span>(naming, lexdec)<span class="sc">$</span>interval <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co">#do this first so we can overwrite naming &amp; lexdec</span></span>
-<span id="cb33-7"><a></a>      <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb33-8"><a></a>      <span class="at">lexdec =</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-9"><a></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-10"><a></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-11"><a></a>  </span>
-<span id="cb33-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus, <span class="at">color =</span> task)) <span class="sc">+</span> <span class="co">#task and stimulus switched compared to aov2</span></span>
-<span id="cb33-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(task), <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co">#task and stimulus switched compared to aov2</span></span>
-<span id="cb33-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
-<span id="cb33-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb33-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
-<span id="cb33-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb33-18"><a></a><span class="fu">print</span>(aov3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="12-13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>aov3 <span class="ot">&lt;-</span></span>
+<span id="cb34-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, stimulus)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a></a>    <span class="fu">summarize</span>(</span>
+<span id="cb34-5"><a></a>      <span class="at">.by =</span> stimulus, <span class="co">#task is implicitly kept due to pivot_wider</span></span>
+<span id="cb34-6"><a></a>      <span class="at">ci.length =</span> confintr<span class="sc">::</span><span class="fu">ci_mean_diff</span>(naming, lexdec)<span class="sc">$</span>interval <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co">#do this first so we can overwrite naming &amp; lexdec</span></span>
+<span id="cb34-7"><a></a>      <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb34-8"><a></a>      <span class="at">lexdec =</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-9"><a></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-10"><a></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-11"><a></a>  </span>
+<span id="cb34-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus, <span class="at">color =</span> task)) <span class="sc">+</span> <span class="co">#task and stimulus switched compared to aov2</span></span>
+<span id="cb34-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(task), <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co">#task and stimulus switched compared to aov2</span></span>
+<span id="cb34-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb34-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb34-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb34-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb34-18"><a></a><span class="fu">print</span>(aov3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </div>
@@ -1179,31 +1189,31 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="stacked-points-3-1" class="slide level2">
 <h2>Stacked Points 3</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34" data-code-line-numbers="1,4-5|10-13|14-18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb34-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb34-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb34-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
-<span id="cb34-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb34-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb34-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb34-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb34-9"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb34-10"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb34-11"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb34-12"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
-<span id="cb34-13"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb34-14"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb34-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb34-16"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb34-17"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb34-18"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="1,4-5|10-13|14-18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb35-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb35-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb35-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
+<span id="cb35-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb35-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb35-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb35-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb35-9"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb35-10"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb35-11"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb35-12"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
+<span id="cb35-13"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb35-14"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb35-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb35-16"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb35-17"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb35-18"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <aside class="notes">
@@ -1227,19 +1237,19 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="jittered-points" class="slide level2">
 <h2>Jittered Points</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="2-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb35-2"><a></a>  <span class="fu">geom_jitter</span>( <span class="co"># geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result</span></span>
-<span id="cb35-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb35-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span> .<span class="dv">5</span>),</span>
-<span id="cb35-5"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb35-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb36-2"><a></a>  <span class="fu">geom_jitter</span>( <span class="co"># geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result</span></span>
+<span id="cb36-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb36-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span> .<span class="dv">5</span>),</span>
+<span id="cb36-5"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb36-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1247,7 +1257,7 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1255,20 +1265,20 @@ But, hey! It's at least one additional level of information! &#128517;
 <h2>Jittered Points with Individual Slopes</h2>
 <p>Only <code>geom_path()</code> is able to align points + lines! <code>geom_line()</code> will not work here. (Ordering can be important: <code>geom_path()</code> connects the observations in the order in which they appear in the data.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-5|6-10|4,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb36-2"><a></a>  <span class="fu">geom_jitter</span>(</span>
-<span id="cb36-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt),</span>
-<span id="cb36-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
-<span id="cb36-5"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb36-6"><a></a>  <span class="fu">geom_path</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb36-7"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), </span>
-<span id="cb36-8"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb36-9"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
-<span id="cb36-10"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb36-11"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb36-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb36-13"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb36-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="2-5|6-10|4,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb37-2"><a></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb37-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt),</span>
+<span id="cb37-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb37-5"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb37-6"><a></a>  <span class="fu">geom_path</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb37-7"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), </span>
+<span id="cb37-8"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb37-9"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb37-10"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb37-11"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb37-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb37-13"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb37-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1276,28 +1286,28 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="density" class="slide level2">
 <h2>Density</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb37-2"><a></a>  <span class="fu">geom_violin</span>( </span>
-<span id="cb37-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb37-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
-<span id="cb37-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb37-6"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb37-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb37-8"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb37-9"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb37-10"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
-<span id="cb37-11"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb37-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb37-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb37-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb37-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>aov3 <span class="sc">+</span></span>
+<span id="cb38-2"><a></a>  <span class="fu">geom_violin</span>( </span>
+<span id="cb38-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb38-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
+<span id="cb38-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb38-6"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb38-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb38-8"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb38-9"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb38-10"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
+<span id="cb38-11"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb38-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb38-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb38-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb38-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1305,7 +1315,7 @@ But, hey! It's at least one additional level of information! &#128517;
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+<p><img data-src="2.3_Uncertainty_Viz_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1662,7 +1672,18 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1694,29 +1715,7 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1724,7 +1723,7 @@ Please fill out the evaluation! (link will be shared in Zoom)</p>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
