@@ -83,7 +83,8 @@ new_plot <-
   pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %>% 
   summarize(
     .by = task, # stimulus is implicitly kept due to pivot_wider
-    ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %>% diff(), # do this first so we can overwrite word & nonword
+    #ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %>% diff(), # do this first so we can overwrite word & nonword
+    ci.length = confintr::ci_mean(word - nonword)$interval %>% diff(), # do this first so we can overwrite word & nonword
     word = mean(word, na.rm = TRUE), 
     nonword = mean(nonword, na.rm = TRUE)
   ) %>% 
