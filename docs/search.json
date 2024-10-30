@@ -981,7 +981,7 @@
     "href": "1.2_Data_Wrangling.html#accessing-variablescolumns-4",
     "title": "1.2 Data Wrangling",
     "section": "Accessing Variables/Columns 4",
-    "text": "Accessing Variables/Columns 4\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# tidy versions (see next slides)\n# library(tidyverse) # load tidyverse (if not already done)\npull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a, b) # get column(s) as a data.frame; no c() needed!\n\n  a b\n1 1 a\n2 2 b\n3 3 c",
+    "text": "Accessing Variables/Columns 4\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# tidy versions (see next slides)\nlibrary(tidyverse) # load tidyverse (if not already done)\npull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)\n\n[1] 1 2 3\n\nselect(testdata, a, b) # get column(s) as a data.frame; no c() needed!\n\n  a b\n1 1 a\n2 2 b\n3 3 c",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1141,7 +1141,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1918   1910\n 2  1922   1920\n 3  1930   1930\n 4  1946   1940\n 5  1948   1940\n 6  1956   1950\n 7  1966   1960\n 8  1977   1970\n 9  1992   1990\n10  2016   2010",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1888   1880\n 2  1934   1930\n 3  1943   1940\n 4  1948   1940\n 5  1950   1950\n 6  1964   1960\n 7  1969   1960\n 8  2001   2000\n 9  2015   2010\n10  2016   2010",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1241,7 +1241,7 @@
     "href": "1.2_Data_Wrangling.html#tidy-data-wide-vs.-long-format",
     "title": "1.2 Data Wrangling",
     "section": "Tidy Data: wide vs. long format",
-    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
+    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
     "crumbs": [
       "1.2 Data Wrangling"
     ]

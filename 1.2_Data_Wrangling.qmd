@@ -133,7 +133,7 @@ When wrangling your data in R, you often want to access/use different columns, e
 #| echo: true
 
 # tidy versions (see next slides)
-# library(tidyverse) # load tidyverse (if not already done)
+library(tidyverse) # load tidyverse (if not already done)
 pull(testdata, a) # same as testdata$a but can be used better in pipes (see next slide)
 select(testdata, a, b) # get column(s) as a data.frame; no c() needed!
 
