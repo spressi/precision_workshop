@@ -151,6 +151,26 @@ fhch2010_summary_wordnaming %>%
 ostt
 ```
 
+## One Sample t-test - using a t.test()
+
+Possible to use `t.test()` instead of `confintr::ci_mean()`!
+
+```{r}
+#| echo: true
+#| code-line-numbers: "5-6"
+ostt2 <- 
+  fhch2010_summary_wordnaming %>% 
+  summarize(
+    rt.m = mean(rt),
+    rt.m.low = t.test(rt)$conf.int[1], # also not tidy
+    rt.m.high = t.test(rt)$conf.int[2]) %>% 
+  
+  ggplot(aes(y = rt.m, x = "naming words")) +
+  geom_point() +
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) +
+  geom_hline(yintercept = 1, linetype = "dashed")
+```
+
 ## Independent Samples t-test
 
 Are the mean reaction times for **naming words** different from **lexically identifying words**?
@@ -248,6 +268,24 @@ istt2
 ```
 
 <!-- TODO: Option to plot this CI on both individual mean RTs (cf. ANOVA Viz Code 2) instead of plotting the mean difference -->
+
+## Independent Samples t-test: using t.test()
+
+```{r}
+#| code-line-numbers: "6-7"
+istt3 <-
+  fhch2010_summary_words %>% 
+  pivot_wider(names_from = task, values_from = rt) %>% 
+  summarize(
+    rt.m = mean(naming, na.rm = TRUE) - mean(lexdec, na.rm = TRUE),
+    rt.m.low = t.test(naming, lexdec)$conf.int[1], # also not tidy
+    rt.m.high = t.test(naming, lexdec)$conf.int[2]) %>% 
+  
+  ggplot(aes(y = rt.m, x = "difference")) +
+  geom_point() +
+  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) +
+  geom_hline(yintercept = 0, linetype = "dashed")
+```
 
 ## Paired Samples t-test
 
@@ -461,13 +499,14 @@ Is the reaction time difference between naming and lexical decision different fo
 . . .
 
 ```{r}
-#| code-line-numbers: "3,6,15|3,7-8,10"
+#| code-line-numbers: "3,6,16|7|3,8-9,11"
 aov2 <-
   fhch2010_summary %>% 
     pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %>% 
     summarize(
-      .by = stimulus, #task is implicitly kept due to pivot_wider
-      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %>% diff(), #do this first so we can overwrite naming & lexdec
+      .by = stimulus, # task is implicitly kept due to pivot_wider
+      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %>% diff(), # do this first so we can overwrite naming & lexdec
+      # ci.length = t.test(naming, lexdec)$conf.int[1:2] %>% diff(), # alternative - same results!
       naming = mean(naming, na.rm = TRUE), 
       lexdec = mean(lexdec, na.rm = TRUE)
     ) %>% 
@@ -475,9 +514,9 @@ aov2 <-
   
   ggplot(aes(y = rt.m, x = task, color = stimulus)) +
   facet_wrap(vars(stimulus), labeller = label_both) +
-  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
   geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
-                position = position_dodge(.9)) + #explicitly specify default width = .9
+                position = position_dodge(.9)) + # explicitly specify default width = .9
   theme(legend.position = "top")
 ```
 
@@ -640,27 +679,35 @@ Go back to previous slide and ask where these lines would have to be added.
 . . .
 
 ```{r}
-#| code-line-numbers: "12-13"
+#| code-line-numbers: "6"
 #| output-location: slide
 aov3 <-
   fhch2010_summary %>% 
-    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %>% 
-    summarize(
-      .by = stimulus, #task is implicitly kept due to pivot_wider
-      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %>% diff(), #do this first so we can overwrite naming & lexdec
-      naming = mean(naming, na.rm = TRUE), 
-      lexdec = mean(lexdec, na.rm = TRUE)
-    ) %>% 
-    pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
+  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %>% 
+  summarize(
+    .by = task, # stimulus is implicitly kept due to pivot_wider
+    ci.length = confintr::ci_mean(word - nonword)$interval %>% diff(), # do this first so we can overwrite word & nonword
+    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %>% diff(), # alternative - same result!
+    word = mean(word, na.rm = TRUE), 
+    nonword = mean(nonword, na.rm = TRUE)
+  ) %>% 
+  pivot_longer(cols = c(word, nonword), names_to = "stimulus", values_to = "rt.m") %>% 
   
-  ggplot(aes(y = rt.m, x = stimulus, color = task)) + #task and stimulus switched compared to aov2
-  facet_wrap(vars(task), labeller = label_both) + #task and stimulus switched compared to aov2
-  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2
+  facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2
+  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
   geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
-                position = position_dodge(.9)) + #explicitly specify default width = .9
+                position = position_dodge(.9)) + # explicitly specify default width = .9
+  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable
+  myGgTheme +
   theme(legend.position = "top")
-print(aov3)
 ```
+
+```{r}
+#| echo: false
+aov3
+```
+
 ## Stacked Points 3
 
 ```{r}
