@@ -147,6 +147,16 @@
     ]
   },
   {
+    "objectID": "2.2_CIs.html#cis-difference-of-means-2",
+    "href": "2.2_CIs.html#cis-difference-of-means-2",
+    "title": "2.2 Confidence Intervals",
+    "section": "CIs: difference of means",
+    "text": "CIs: difference of means\n\nLooks familiar? Part of the t.test() output by default!\nCan be accessed like this:\n\n\nttest_between &lt;- \n  with(\n    iris,\n    t.test(\n      Petal.Width[Species == \"versicolor\"],\n      Petal.Width[Species == \"setosa\"]\n    )\n  )\n\nttest_between$conf.int[1:2]\n\n[1] 1.016867 1.143133",
+    "crumbs": [
+      "2.2 Confidence Intervals"
+    ]
+  },
+  {
     "objectID": "2.2_CIs.html#what-about-within-subject-designs",
     "href": "2.2_CIs.html#what-about-within-subject-designs",
     "title": "2.2 Confidence Intervals",
@@ -191,7 +201,7 @@
     "href": "2.2_CIs.html#cis-for-differences-in-means-in-within-subject-designs",
     "title": "2.2 Confidence Intervals",
     "section": "CIs for differences in means in within-subject designs",
-    "text": "CIs for differences in means in within-subject designs\nAs before, the \\(t\\)-test will give us a CI for the difference in means:\n\nwith(\n  fhch2010_summary,\n  t.test(\n    rt[stimulus == \"word\"],\n    rt[stimulus == \"nonword\"],\n    paired = TRUE\n  )\n)\n\n\n    Paired t-test\n\ndata:  rt[stimulus == \"word\"] and rt[stimulus == \"nonword\"]\nt = -6.2944, df = 44, p-value = 1.245e-07\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -0.2171825 -0.1118359\nsample estimates:\nmean difference \n     -0.1645092",
+    "text": "CIs for differences in means in within-subject designs\nAs before, the \\(t\\)-test will give us a CI for the difference in means:\n\nwith(\n  fhch2010_summary,\n  t.test(\n    rt[stimulus == \"word\"],\n    rt[stimulus == \"nonword\"],\n    paired = TRUE\n  )\n)\n\n\n    Paired t-test\n\ndata:  rt[stimulus == \"word\"] and rt[stimulus == \"nonword\"]\nt = -6.2944, df = 44, p-value = 1.245e-07\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -0.2171825 -0.1118359\nsample estimates:\nmean difference \n     -0.1645092 \n\n# can be accessed using $conf.int[1:2]!",
     "crumbs": [
       "2.2 Confidence Intervals"
     ]
@@ -231,7 +241,7 @@
     "href": "2.2_CIs.html#rstatix-pipe-friendly-cohens-d",
     "title": "2.2 Confidence Intervals",
     "section": "rstatix: pipe-friendly Cohen’s d",
-    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50    -8.29     -5.93 large",
+    "text": "rstatix: pipe-friendly Cohen’s d\n\nAlso includes a pipe-friendly version of Cohen’s d.\nCareful: CIs are bootstrapped (hence the small discrepancy to the output of effectsize earlier)\n\n\n\n\niris %&gt;% \n  filter(Species %in% c(\"setosa\", \"versicolor\")) %&gt;% \n  rstatix::cohens_d(Petal.Width ~ Species, ci = TRUE)\n\n# A tibble: 1 × 9\n  .y.         group1 group2     effsize    n1    n2 conf.low conf.high magnitude\n* &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;ord&gt;    \n1 Petal.Width setosa versicolor   -6.82    50    50    -8.31     -5.87 large",
     "crumbs": [
       "2.2 Confidence Intervals"
     ]
@@ -281,7 +291,7 @@
     "href": "2.2_CIs.html#ci-around-partial-eta²-1",
     "title": "2.2 Confidence Intervals",
     "section": "CI around partial eta²",
-    "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)\n  \n  result &lt;- \n    apply(anova_table, 1, function(x) {\n      ci &lt;- \n        apaTables::get.ci.partial.eta.squared(\n          F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n        )\n      \n      return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n    }) %&gt;% \n    t() %&gt;% \n    as.data.frame()\n  \n  result$conf.level &lt;- conf.level\n  \n  return(result)\n}",
+    "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)\n    \n    result &lt;- \n      apply(anova_table, 1, function(x) {\n        ci &lt;- \n          apaTables::get.ci.partial.eta.squared(\n            F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n          )\n        \n        return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n      }) %&gt;% \n      t() %&gt;% \n      as.data.frame()\n    \n    result$conf.level &lt;- conf.level\n    \n    return(result)\n  }",
     "crumbs": [
       "2.2 Confidence Intervals"
     ]
@@ -1141,7 +1151,7 @@
     "href": "1.2_Data_Wrangling.html#create-new-variables-2",
     "title": "1.2 Data Wrangling",
     "section": "Create New Variables 2",
-    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1888   1880\n 2  1934   1930\n 3  1943   1940\n 4  1948   1940\n 5  1950   1950\n 6  1964   1960\n 7  1969   1960\n 8  2001   2000\n 9  2015   2010\n10  2016   2010",
+    "text": "Create New Variables 2\n\nCreate a variable that denotes the decade a baby was born:\n\n\n\n# we can only use floor to round down to full numbers =&gt; divide year by 10, floor it, and then multiply by 10 again\nbaby_decades &lt;- \n  babynames %&gt;% \n  mutate(decade = floor(year / 10) * 10) # round(year, -1) works but not floor(year, -1) :(\n\n\n\n# A tibble: 10 × 2\n    year decade\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  1902   1900\n 2  1909   1900\n 3  1914   1910\n 4  1934   1930\n 5  1966   1960\n 6  1986   1980\n 7  1990   1990\n 8  1999   1990\n 9  2006   2000\n10  2012   2010",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1241,7 +1251,7 @@
     "href": "1.2_Data_Wrangling.html#tidy-data-wide-vs.-long-format",
     "title": "1.2 Data Wrangling",
     "section": "Tidy Data: wide vs. long format",
-    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
+    "text": "Tidy Data: wide vs. long format\n\n\nWide format: Each participant/animal has one row;\nrepeated observations are in several columns\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\nLong format: Each observation has its own row;\nthere are (usually) several rows per participant\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\nWide format implements a sparser representation of the data but less tidy!\nIf you want to convert Time from milliseconds into seconds, what do you have to do in both formats?\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)",
     "crumbs": [
       "1.2 Data Wrangling"
     ]
@@ -1727,6 +1737,16 @@
     ]
   },
   {
+    "objectID": "2.3_Uncertainty_Viz.html#one-sample-t-test---using-a-t.test",
+    "href": "2.3_Uncertainty_Viz.html#one-sample-t-test---using-a-t.test",
+    "title": "2.3 Visualizing Uncertainty",
+    "section": "One Sample t-test - using a t.test()",
+    "text": "One Sample t-test - using a t.test()\nPossible to use t.test() instead of confintr::ci_mean()!\n\nostt2 &lt;- \n  fhch2010_summary_wordnaming %&gt;% \n  summarize(\n    rt.m = mean(rt),\n    rt.m.low = t.test(rt)$conf.int[1], # also not tidy\n    rt.m.high = t.test(rt)$conf.int[2]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = \"naming words\")) +\n  geom_point() +\n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) +\n  geom_hline(yintercept = 1, linetype = \"dashed\")",
+    "crumbs": [
+      "2.3 Visualizing Uncertainty"
+    ]
+  },
+  {
     "objectID": "2.3_Uncertainty_Viz.html#independent-samples-t-test",
     "href": "2.3_Uncertainty_Viz.html#independent-samples-t-test",
     "title": "2.3 Visualizing Uncertainty",
@@ -1797,6 +1817,16 @@
     ]
   },
   {
+    "objectID": "2.3_Uncertainty_Viz.html#independent-samples-t-test-using-t.test",
+    "href": "2.3_Uncertainty_Viz.html#independent-samples-t-test-using-t.test",
+    "title": "2.3 Visualizing Uncertainty",
+    "section": "Independent Samples t-test: using t.test()",
+    "text": "Independent Samples t-test: using t.test()\n\nistt3 &lt;-\n  fhch2010_summary_words %&gt;% \n  pivot_wider(names_from = task, values_from = rt) %&gt;% \n  summarize(\n    rt.m = mean(naming, na.rm = TRUE) - mean(lexdec, na.rm = TRUE),\n    rt.m.low = t.test(naming, lexdec)$conf.int[1], # also not tidy\n    rt.m.high = t.test(naming, lexdec)$conf.int[2]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = \"difference\")) +\n  geom_point() +\n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high)) +\n  geom_hline(yintercept = 0, linetype = \"dashed\")",
+    "crumbs": [
+      "2.3 Visualizing Uncertainty"
+    ]
+  },
+  {
     "objectID": "2.3_Uncertainty_Viz.html#paired-samples-t-test",
     "href": "2.3_Uncertainty_Viz.html#paired-samples-t-test",
     "title": "2.3 Visualizing Uncertainty",
@@ -1811,7 +1841,7 @@
     "href": "2.3_Uncertainty_Viz.html#paired-samples-t-test-viz-code",
     "title": "2.3 Visualizing Uncertainty",
     "section": "Paired Samples t-test: Viz Code?",
-    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
+    "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.m.low = confintr::ci_mean(rt)$interval[[1]], \n    rt.m.high = confintr::ci_mean(rt)$interval[[2]]) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m.low, ymax = rt.m.high))\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across).",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]
@@ -1901,7 +1931,17 @@
     "href": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2",
     "title": "2.3 Visualizing Uncertainty",
     "section": "ANOVA interaction: Viz Code 2",
-    "text": "ANOVA interaction: Viz Code 2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %&gt;% \n    summarize(\n      .by = stimulus, #task is implicitly kept due to pivot_wider\n      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %&gt;% diff(), #do this first so we can overwrite naming & lexdec\n      naming = mean(naming, na.rm = TRUE), \n      lexdec = mean(lexdec, na.rm = TRUE)\n    ) %&gt;% \n    pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")",
+    "text": "ANOVA interaction: Viz Code 2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %&gt;% \n    summarize(\n      .by = stimulus, # task is implicitly kept due to pivot_wider\n      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %&gt;% diff(), # do this first so we can overwrite naming & lexdec\n      # ci.length = t.test(naming, lexdec)$conf.int[1:2] %&gt;% diff(), # alternative - same results!\n      naming = mean(naming, na.rm = TRUE), \n      lexdec = mean(lexdec, na.rm = TRUE)\n    ) %&gt;% \n    pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + # explicitly specify default width = .9\n  theme(legend.position = \"top\")",
+    "crumbs": [
+      "2.3 Visualizing Uncertainty"
+    ]
+  },
+  {
+    "objectID": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
+    "href": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
+    "title": "2.3 Visualizing Uncertainty",
+    "section": "ANOVA interaction: Viz Code 2.2",
+    "text": "ANOVA interaction: Viz Code 2.2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  # alternative: spare the first pivot by using base R indexing\n  summarize(\n    .by = stimulus,\n    ci.length = confintr::ci_mean_diff(rt[task == \"naming\"], rt[task == \"lexdec\"])$interval %&gt;% diff(),\n    naming = mean(rt[task == \"naming\"]),\n    lexdec = mean(rt[task == \"lexdec\"])\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]
@@ -2001,7 +2041,7 @@
     "href": "2.3_Uncertainty_Viz.html#stacked-points-3",
     "title": "2.3 Visualizing Uncertainty",
     "section": "Stacked Points 3",
-    "text": "Stacked Points 3\nNow that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?\n\nGo back to previous slide and ask where these lines would have to be added.\n\n\n\naov3 &lt;-\n  fhch2010_summary %&gt;% \n    pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %&gt;% \n    summarize(\n      .by = stimulus, #task is implicitly kept due to pivot_wider\n      ci.length = confintr::ci_mean_diff(naming, lexdec)$interval %&gt;% diff(), #do this first so we can overwrite naming & lexdec\n      naming = mean(naming, na.rm = TRUE), \n      lexdec = mean(lexdec, na.rm = TRUE)\n    ) %&gt;% \n    pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus, color = task)) + #task and stimulus switched compared to aov2\n  facet_wrap(vars(task), labeller = label_both) + #task and stimulus switched compared to aov2\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")\nprint(aov3)",
+    "text": "Stacked Points 3\nNow that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?\n\nGo back to previous slide and ask where these lines would have to be added.\n\n\n\naov3 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %&gt;% \n  summarize(\n    .by = task, # stimulus is implicitly kept due to pivot_wider\n    ci.length = confintr::ci_mean(word - nonword)$interval %&gt;% diff(), # do this first so we can overwrite word & nonword\n    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %&gt;% diff(), # alternative - same result!\n    word = mean(word, na.rm = TRUE), \n    nonword = mean(nonword, na.rm = TRUE)\n  ) %&gt;% \n  pivot_longer(cols = c(word, nonword), names_to = \"stimulus\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2\n  facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2\n  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + # explicitly specify default width = .9\n  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable\n  myGgTheme +\n  theme(legend.position = \"top\")",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]
@@ -2112,16 +2152,6 @@
     "title": "2.3 Visualizing Uncertainty",
     "section": "Everything Everywhere All at Once",
     "text": "Everything Everywhere All at Once\nIf you are prone to decision paralysis, try a mixture of jittered points and violin plot:\nthe Raincloud Plot (Allen et al., 2019)\n\nhttps://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif",
-    "crumbs": [
-      "2.3 Visualizing Uncertainty"
-    ]
-  },
-  {
-    "objectID": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
-    "href": "2.3_Uncertainty_Viz.html#anova-interaction-viz-code-2.2",
-    "title": "2.3 Visualizing Uncertainty",
-    "section": "ANOVA interaction: Viz Code 2.2",
-    "text": "ANOVA interaction: Viz Code 2.2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  # alternative: spare the first pivot by using base R indexing\n  summarize(\n    .by = stimulus,\n    ci.length = confintr::ci_mean_diff(rt[task == \"naming\"], rt[task == \"lexdec\"])$interval %&gt;% diff(),\n    naming = mean(rt[task == \"naming\"]),\n    lexdec = mean(rt[task == \"lexdec\"])\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")",
     "crumbs": [
       "2.3 Visualizing Uncertainty"
     ]

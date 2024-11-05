@@ -243,6 +243,24 @@ with(
 )
 ```
 
+## CIs: difference of means
+
+-   Looks familiar? Part of the `t.test()` output by default!
+-   Can be accessed like this:
+
+```{r}
+ttest_between <- 
+  with(
+    iris,
+    t.test(
+      Petal.Width[Species == "versicolor"],
+      Petal.Width[Species == "setosa"]
+    )
+  )
+
+ttest_between$conf.int[1:2]
+```
+
 ## What about within-subject designs?
 
 ::: {.incremental}
@@ -340,6 +358,8 @@ with(
     paired = TRUE
   )
 )
+
+# can be accessed using $conf.int[1:2]!
 ```
 
 ## CIs: caveats
@@ -468,23 +488,23 @@ A little clunky function that can be applied to `afex` tables:
 ```{r}
 peta.ci <- 
   function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)
-  
-  result <- 
-    apply(anova_table, 1, function(x) {
-      ci <- 
-        apaTables::get.ci.partial.eta.squared(
-          F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
-        )
-      
-      return(setNames(c(ci$LL, ci$UL), c("LL", "UL")))
-    }) %>% 
-    t() %>% 
-    as.data.frame()
-  
-  result$conf.level <- conf.level
-  
-  return(result)
-}
+    
+    result <- 
+      apply(anova_table, 1, function(x) {
+        ci <- 
+          apaTables::get.ci.partial.eta.squared(
+            F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
+          )
+        
+        return(setNames(c(ci$LL, ci$UL), c("LL", "UL")))
+      }) %>% 
+      t() %>% 
+      as.data.frame()
+    
+    result$conf.level <- conf.level
+    
+    return(result)
+  }
 ```
 
 ## CI around partial eta²
