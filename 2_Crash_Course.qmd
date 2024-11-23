@@ -1,0 +1,1165 @@
+---
+title: "Crash Course on Handling Uncertainty"
+subtitle: "Extracted from Workshop: \"Handling Uncertainty in your Data\""
+author: "Dr. Mario Reutter"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: serif
+    chalkboard: true
+    width: 1280
+    height: 720
+from: markdown+emoji
+---
+
+# Agenda
+
+1. Measurement Precision
+
+2. Confidence Intervals
+
+3. Visualizing Uncertainty
+
+# Measurement Precision
+
+## Group-level Precision
+
+![<https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R>](images/precision_group_forest.png)
+
+&rarr; Effects in relation to their *group-level* precision
+
+
+## Group-level Precision 2
+
+![<https://www.medicowesome.com/2020/04/funnel-plot.html>](images/precision_group_funnel.jpg)
+
+&rarr; Effects in relation to their *group-level* precision
+
+## Subject-Level Precision
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor1.png)
+
+## Subject-Level Precision 2
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor2.png)
+
+## Subject-Level Precision 3
+
+Is there a meaningful correlation?
+
+![](images/precision_subject_cor3.png)
+
+:::notes
+Simulated data with added noise. True score correlation *r* = 1
+&rArr; We want to enable you to create plots like this one
+
+Side note: \
+Individual errorbars = subject-level precision of each individual (across trials)\
+Confidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson's r)
+:::
+
+## Trial-Level Precision
+
+![[Holmqvist et al. (2023, retracted)](https://doi.org/10.3758/s13428-021-01762-8)](images/precision_trial.png)
+
+Only relevant for time series data (i.e., several "measurements" per trial)
+
+Note: Calculating standard deviation / error is not trivial here because of auto-correlation
+
+## What is Precision?
+
+1. Precision is indicated by errorbars / confidence intervals
+
+2. Whenever you `summarize` across a variable, you can calculate the \
+**precision of the aggregation**
+
+3. Precision exists on different levels: group, subject, trial (and more)
+
+4. Closely linked to statistical power and reliability
+
+## How Can We Enhance Precision?
+
+1. Shield the measurement from random noise &rarr; precise equipment / paradigm\
+&rArr; trial-level precision
+
+2. Identify the **aggregation level of interest**:
+    i) sample differences &rarr; optimize group-level precision: \
+    many subjects that respond homogenously
+    ii) correlational hypotheses / application &rarr; optimize subject-level precision: \
+    systematic differences between individuals but little variability within subjects across many trials (mind "sequence effects"; cf. [Nebe, Reutter, et al., 2023](https://doi.org/10.7554/eLife.85980))
+
+&rArr; “two disciplines of scientific psychology” ([Cronbach, 1957](https://psycnet.apa.org/doi/10.1037/h0043943))
+
+## Group- vs. Subject-Level Precision
+
+:::columns
+:::column
+**Group-level Precision**
+
+- Group differences (t-tests, ANOVA)
+
+- Many subjects (independent observations)
+
+- Homogenous sample (e.g., psychology students?)
+
+:::
+:::column
+**Subject-level Precision**
+
+- Correlations (e.g., Reliability)
+
+- Many trials (careful: sequence effects!)
+
+- Heterogenous/diverse sample
+
+- Low variability within subjects across trials (i.e., SD~within~)
+:::
+:::
+
+## Take Home Message
+
+- We are in a replication crisis
+
+- Increasing the number of subjects is not the only way to get out
+
+- Sample size benefits basic research on groups only 
+
+&rArr; Increase precision on the aggregate level of interest!
+
+![](images/precision_vs_sample_size.png)
+
+# Precision in `R`!
+
+```{css}
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+```
+
+## The Standard Error (SE)
+
+Calculates the (lack of) precision of a mean based on the \
+standard deviation ($SD$) of the individual observations and their number ($n$)
+
+$$SE = \frac{SD}{\sqrt{n}}$$
+
+## The Standard Error (SE) in `R`
+
+No base `R` function available &#128169;
+
+1. Use `confintr::se_mean` (not part of the tidyverse)
+
+2. Use a custom function
+
+```{r}
+#| echo: true
+
+se <- function(x, na.rm = TRUE) {
+  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))
+}
+```
+
+:::aside
+Careful with custom functions! I often see people using `n()` but this does not work correctly with missing values (`NA` / `na.rm = TRUE`)
+:::
+
+## The Standard Error (SE) in `R` 2
+
+Whenever you use `mean`, also calculate the SE:
+
+```{r}
+#| echo: true
+library(tidyverse)
+
+iris %>% #helpful data set for illustration
+  summarize( #aggregation => precision
+    across(.cols = starts_with("Sepal"), #everything(), #output too wide
+           .fns = list(mean = mean, se = confintr::se_mean)),
+    .by = Species)
+```
+
+\
+&rarr; subject-level (species-level) precision
+
+## Standard Error Pitfalls in `R`
+
+What is the group-level precision of `Sepal.Length`?
+
+Note: Treat `Species` as subjects and rows within `Species` as trials.
+
+```{r}
+#| echo: true
+data <-
+  iris %>% 
+  rename(subject = Species, measure = Sepal.Length) %>% 
+  mutate(trial = 1:n(), .by = subject) %>% 
+  select(subject, trial, measure) %>% arrange(trial, subject) %>% tibble() #neater output
+print(data)
+```
+
+## Standard Error Pitfalls in `R`
+
+What is the group-level precision of `Sepal.Length`?
+
+```{r}
+#| echo: true
+data %>% 
+  summarize(m = mean(measure),
+            se = confintr::se_mean(measure))
+```
+
+. . .
+
+\
+```{r}
+#| echo: true
+#| code-line-numbers: "4"
+data %>% 
+  summarize(m = mean(measure),
+            se = confintr::se_mean(measure),
+            n = n())
+```
+
+## Standard Error Pitfalls in `R` 2
+
+What is the group-level precision of `Sepal.Length`?
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2"
+data %>% 
+  summarize(measure.subject = mean(measure), .by = subject) %>% #subject-level averages
+  summarize(m = mean(measure.subject),
+            se = confintr::se_mean(measure.subject),
+            n = n())
+```
+
+. . .
+
+&rArr; When using trial-level data to calculate group-level precision, **summarize twice!**
+
+&rArr; Every summarize brings you up exactly *one* level - don't try to skip!\
+trial-level &rarr; subject-level &rarr; group-level
+
+:::aside
+Linear Mixed Models (LMMs) implicitly take this into account when specifying *random intercepts for subjects* `(1|subject)`.
+:::
+
+## Summary: Precision in `R`
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2-4|5-8"
+data %>% 
+  summarize(.by = subject, #trial- to subject-level
+            measure.subject = mean(measure), #subject-level averages
+            se.subject = confintr::se_mean(measure)) %>%  #subject-level precision
+  summarize(m = mean(measure.subject), #group-level mean ("grand average")
+            se = confintr::se_mean(measure.subject), #group-level precision
+            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)
+            n = n())
+```
+
+# Confidence Intervals (CIs)
+
+1. CIs around means
+
+2. CIs around effect sizes
+
+# CIs around means
+
+## CIs in `R`
+
+Easiest way is to use calls to `t.test`:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "5-7|3,7"
+iris %>% 
+  mutate(subject = 1:n(), .by = Species) %>% 
+  pivot_wider(names_from = Species, values_from = Petal.Width) %>% 
+  summarize(
+    setosa.ci.size = t.test(setosa)$conf.int %>% diff(), # or confintr::se_mean(setosa)
+    versicolor.ci.size = t.test(versicolor)$conf.int %>% diff(), # or confintr::se_mean(versicolor)
+    diff.ci.size = t.test(setosa, versicolor)$conf.int %>% diff() # or confintr::se_mean_diff(setosa, versicolor)
+  )
+```
+
+## CIs in `R`: Within-Subjects Design
+
+It works similar with paired t-tests (but the pivoting is slightly different):
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3,7"
+iris %>% 
+  mutate(subject = 1:n(), .by = Species) %>% 
+  pivot_wider(names_from = Species, values_from = Petal.Width, id_cols = subject) %>% 
+  summarize(
+    setosa.ci.size = t.test(setosa)$conf.int %>% diff(),
+    versicolor.ci.size = t.test(versicolor)$conf.int %>% diff(),
+    diff.ci.size = t.test(setosa, versicolor, paired = TRUE)$conf.int %>% diff() #or confintr::se_mean(setosa - versicolor)
+  )
+```
+
+## Take Home Message
+::: incremental
+-   CIs around means are different for one sample vs. independent samples vs. paired samples
+-   Mixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)\
+&rArr; Be transparent! Describe how you calculated your CIs!
+-   Assumption: Normally distributed means \
+&rArr; Might want to plot raw data (see last part!)
+:::
+
+# CIs around effect sizes
+
+## Cohen's d
+
+```{r}
+#| echo: true
+#| code-line-numbers: "5-7"
+iris %>% 
+  mutate(subject = 1:n(), .by = Species) %>% 
+  pivot_wider(names_from = Species, values_from = Petal.Width) %>% 
+  summarize(
+    setosa.test = t.test(setosa) %>% apa::t_apa(es_ci = TRUE, print = FALSE),
+    versicolor.test = t.test(versicolor) %>% apa::t_apa(es_ci = TRUE, print = FALSE),
+    diff.test = t.test(setosa, versicolor, var.equal = TRUE) %>% apa::t_apa(es_ci = TRUE, print = FALSE)
+  ) %>% 
+  pivot_longer(everything(), names_to = "test", values_to = "output") # nicer output
+```
+
+## Correlations
+
+```{r}
+#| echo: true
+iris %>% 
+  summarise(
+    cortest = cor.test(Petal.Width, Petal.Length) %>% 
+      apa::cor_apa(r_ci = TRUE, print = FALSE),
+    .by = Species
+  )
+```
+
+## ANOVAs: Preparation
+
+The fhch2010 data set:
+
+-   Data from Freeman, Heathcote, Chalmers, & Hockley (2010), included in `afex`.
+-   Lexical decision and word naming latencies for 300 words and 300 nonwords.
+-   For simplicity, we're only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword; within subjects).
+
+```{r}
+library(afex)
+
+head(fhch2010)
+```
+
+. . . 
+
+```{r}
+#| echo: true
+# Aggregate to get a word/nonword reaction time per participant
+fhch2010_summary <- 
+  fhch2010 %>% 
+  summarise(rt = mean(rt), .by = c(id, task, stimulus))
+```
+
+## ANOVAs
+
+```{r}
+#| echo: true
+aov_words <- 
+  afex::aov_ez(
+    id = "id", 
+    dv = "rt", 
+    data = fhch2010_summary, 
+    between = "task", 
+    within = "stimulus",
+    # we want to report partial eta² ("pes"), and include the intercept in the output table ...
+    anova_table = list(es = "pes", intercept = TRUE)
+  )
+
+aov_words
+```
+## CI around partial eta²
+
+In principle, `apaTables` offers a function for CIs around $\eta_p^2$ ...
+
+```{r}
+#| echo: true
+# e.g., for our task effect
+apaTables::get.ci.partial.eta.squared(
+  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95
+)
+```
+
+. . . 
+
+... but it would be tedious to copy these values.
+
+## CI around partial eta²
+
+A little clunky function that can be applied to `afex` tables:
+
+```{r}
+#| echo: true
+peta.ci <- 
+  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)
+    
+    result <- 
+      apply(anova_table, 1, function(x) {
+        ci <- 
+          apaTables::get.ci.partial.eta.squared(
+            F.value = x["F"], df1 = x["num Df"], df2 = x["den Df"], conf.level = conf.level
+          )
+        
+        return(setNames(c(ci$LL, ci$UL), c("LL", "UL")))
+      }) %>% 
+      t() %>% 
+      as.data.frame()
+    
+    result$conf.level <- conf.level
+    
+    return(result)
+  }
+```
+
+## CI around partial eta²
+
+The result of custom function that applies the `apaTables` function to our entire ANOVA table:
+
+```{r}
+#| echo: true
+peta.ci(aov_words$anova_table)
+```
+
+Also see this [blogpost by Daniel Lakens from 2014](https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html) about CIs for $\eta_p^2$.
+
+# Visualizing CIs
+
+In the previous part, you learned about CIs around *means* and *effect sizes*.
+
+CIs around means are for Figures.\
+CIs around effect sizes are for the statistical reporting section.
+
+## Visualizing CIs around means
+
+In this part, we will visualize CIs around means for:
+
+- t-tests (one sample, independent samples, & paired samples), 
+
+- ANOVAs (a simple 2x2 interaction),
+
+- and correlations.
+
+You have already learned how to calculate CIs around their effect sizes (Cohen's *d*, $\eta_p^2$, and Pearson's *r*)
+
+. . .
+
+\
+For all examples, we will use the `fhch2010` data set of the `afex` package that we have encountered before. Make sure that you have the subject-level aggregates ready:
+
+```{r}
+#| echo: true
+fhch2010_summary <- 
+  afex::fhch2010 %>% 
+  summarise(rt = mean(rt), .by = c(id, task, stimulus))
+```
+
+## GgThemes
+
+The default options in `ggplot` have some problems: Most importantly, text is too small. The easiest solution is to create your own theme that you apply to your plots.
+
+I am currently using this theme adapted from an old script of [Lara Rösler](https://lararoesler.nl/).
+
+```{r}
+#| echo: true
+theme_set( # theme_set has to be executed every session; cf. library(tidyverse)
+  myGgTheme <- # you can save your theme in a local variable instead, add it to every plot, and save your environment across sessions
+    theme_bw() + # start with the black-and-white theme
+    theme( 
+      #aspect.ratio = 1,
+      plot.title = element_text(hjust = 0.5),
+      panel.background = element_rect(fill = "white", color = "white"),
+      legend.background = element_rect(fill = "white", color = "grey"),
+      legend.key = element_rect(fill = "white"),
+      strip.background = element_rect(fill = "white"),
+      axis.ticks.x = element_line(color = "black"),
+      axis.line.x = element_line(color = "black"),
+      axis.line.y = element_line(color = "black"),
+      axis.text = element_text(color = "black"),
+      axis.text.x = element_text(size = 16, color = "black"),
+      axis.text.y = element_text(size = 16, color = "black"),
+      axis.title = element_text(size = 16, color = "black"),
+      legend.text = element_text(size = 14, color = "black"),
+      legend.title = element_text(size = 14, color = "black"),
+      strip.text = element_text(size = 12, color = "black"))
+)
+```
+
+## One Sample t-test
+
+Are the mean reaction times **for naming words** faster than 1 sec?
+
+. . .
+
+```{r}
+#| echo: true
+fhch2010_summary_wordnaming <- 
+  fhch2010_summary %>% 
+  filter(task == "naming", stimulus == "word")
+
+fhch2010_summary_wordnaming %>% 
+  pull(rt) %>% 
+  t.test(mu = 1, alternative = "less") %>% 
+  apa::t_apa(es_ci = TRUE) # output to APA format
+```
+
+## One Sample t-test: Visualization Code
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2-6|4|8|5|10"
+ostt <-
+  fhch2010_summary_wordnaming %>% 
+  summarize(
+    rt.m = mean(rt), #careful! if you do rt = mean(rt), you cannot calculate ci_mean(rt) afterwards
+    rt.ci.length = t.test(rt)$conf.int %>% diff()
+  ) %>% 
+  
+  ggplot(aes(y = rt.m, x = "naming words")) +
+  geom_point() + #plot the mean
+  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2)) + #plot the CI
+  geom_hline(yintercept = 1, linetype = "dashed") #plot the population mean to test against
+```
+
+::: notes
+"Beautiful" alternative:
+```{r}
+fhch2010_summary_wordnaming %>% 
+  pull(rt) %>% 
+  confintr::ci_mean() %>% 
+  lapply(function(x) {
+    attr(x, "class") <- NULL; #delete class attribute which kills bind_cols()
+    return(x)}) %>% #return altered object for pipe-friendliness
+  bind_cols()
+```
+:::
+## One Sample t-test: Figure
+
+```{r}
+#| echo: false
+ostt
+```
+
+## Independent Samples t-test
+
+Are the mean reaction times for **naming words** different from **lexically identifying words**?
+
+. . .
+
+```{r}
+#| echo: true
+#| results: hold
+fhch2010_summary_words <- 
+  fhch2010_summary %>% 
+  filter(stimulus == "word")
+
+with(fhch2010_summary_words,
+     t.test(rt ~ task) #Welch test
+     #t.test(rt ~ task, var.equal = TRUE) #assume equal variances
+) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
+```
+
+:::notes
+You can also `pivot_wider` instead of using the formula notation:
+
+```{r}
+with(fhch2010_summary_words %>% 
+       pivot_wider(names_from = task, values_from = rt), #ignore the NAs
+     t.test(naming, lexdec) #Welch test
+     #t.test(rt ~ task, var.equal = TRUE) #assume equal variances
+) #%>% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(
+```
+:::
+
+## Independent Samples t-test: Viz Code
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3|5|6-7|9"
+istt2 <-
+  fhch2010_summary_words %>% 
+  pivot_wider(names_from = task, values_from = rt) %>% 
+  summarize(
+    rt.m = mean(naming, na.rm = TRUE) - mean(lexdec, na.rm = TRUE), #difference of the means == mean difference
+    rt.ci.length = t.test(naming, lexdec)$conf.int %>% diff()
+  ) %>% 
+  
+  ggplot(aes(y = rt.m, x = "difference")) +
+  geom_point() + #plot the mean difference
+  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2)) + #plot the difference CI
+  geom_hline(yintercept = 0, linetype = "dashed") #plot the population mean to test against
+```
+
+## Independent Samples t-test: CI of the difference: Figure
+
+```{r}
+#| echo: false
+istt2
+```
+
+<!-- TODO: Option to plot this CI on both individual mean RTs (cf. ANOVA Viz Code 2) instead of plotting the mean difference -->
+
+## Paired Samples t-test
+
+Are the mean reaction times for **naming words** different from **naming non-words**?
+
+. . .
+
+```{r}
+#| echo: true
+#| results: hold
+fhch2010_summary_naming <- 
+  fhch2010_summary %>% 
+  filter(task == "naming")
+
+# with(fhch2010_summary_naming, t.test(rt ~ stimulus, paired = TRUE)) #not allowed anymore :(
+# fhch2010_summary_naming %>% rstatix::t_test(rt ~ stimulus, paired = TRUE, detailed = TRUE) # alternative!
+
+with(fhch2010_summary_naming %>% 
+       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit
+     t.test(word, nonword, paired = TRUE)) %>% 
+  apa::t_apa(es_ci = TRUE) # output to APA format
+```
+
+## Paired Samples t-test: Viz Code?
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1,3,8"
+#| output-location: column-fragment
+fhch2010_summary_naming %>% 
+  summarize(
+    .by = stimulus,
+    rt.m = mean(rt), 
+    rt.ci.length = t.test(rt)$conf.int %>% diff()
+  ) %>% 
+  
+  ggplot(aes(y = rt.m, x = stimulus)) +
+  geom_point() + 
+  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2))
+```
+
+. . .
+
+\
+There is a difference between the precision of the means (aggregated **across subjects**) and the \
+precision of the paired differences (paired **within the same subjects** and then aggregated across).
+
+## Between- vs. Within-Subject Error
+
+Between- and within-subject variance can be (partially) independent.
+
+:::notes
+Use `Notes Canvas` (paint brush icon on bottom left) to draw worst possibility of paired differences in "Raw Data" and resulting increase in within-subjects error variance while between-subjects variance remains fixed.
+:::
+
+<!-- DOI not working: https://doi.org/10.2478/v10053-008-0133-x -->
+![[Pfister & Janczyk (2013)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3699740/), Fig. 1](images/PfisterJanczyk2013.png)
+
+## Paired Samples t-test: Insight
+
+The paired samples t-test of two factor levels
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3"
+with(fhch2010_summary_naming %>% 
+       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit
+     t.test(word, nonword, paired = TRUE)) %>% 
+  apa::t_apa(es_ci = TRUE) # output to APA format
+```
+
+... is the **one sample t-test** of the paired differences (i.e., slopes between the factor levels).
+
+```{r}
+#| echo: true
+#| code-line-numbers: 3-4
+with(fhch2010_summary_naming %>% 
+       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id) %>%  #make pairing by id explicit
+       mutate(diff = word - nonword),
+     t.test(diff)) %>% # one sample t-test of paired differences
+  apa::t_apa(es_ci = TRUE) # output to APA format
+```
+
+## Paired Samples t-test: Viz Code
+
+```{r}
+#| echo: true
+#| code-line-numbers: 3-5
+pstt <- 
+  fhch2010_summary_naming %>% 
+  pivot_wider(names_from = stimulus, values_from = rt, id_cols = id) %>%  #make pairing by id explicit
+  mutate(diff = word - nonword) %>% 
+  #almost identical to one sample t-test from here
+  summarize(diff.m = mean(diff),
+            diff.ci.length = t.test(word, nonword, paired = TRUE)$conf.int %>% diff()
+  ) %>% 
+  
+  ggplot(aes(y = diff.m, x = "naming words vs. non-words")) +
+  geom_point() + #plot the mean
+  geom_errorbar(aes(ymin = diff.m - diff.ci.length/2, ymax = diff.m + diff.ci.length/2)) + #plot the CI
+  geom_hline(yintercept = 0, linetype = "dashed") #plot the population mean to test against
+```
+
+## Paired Samples t-test: Figure
+
+```{r}
+#| echo: false
+pstt
+```
+
+## ANOVA
+
+Is the reaction time difference between words and non-words different for naming vs. lexical decision?
+
+:::aside
+The question above is equivalent to: "Is the reaction time difference between naming and lexical decision different for words vs. non-words?"
+:::
+
+. . .
+
+```{r}
+#| echo: true
+aov_words <- 
+  afex::aov_ez(
+    id = "id", 
+    dv = "rt", 
+    data = fhch2010_summary, 
+    between = "task", 
+    within = "stimulus",
+    # we want to report partial eta² ("pes"), and include the intercept in the output table ...
+    anova_table = list(es = "pes", intercept = TRUE))
+
+aov_words %>% apa::anova_apa() #optional: slightly different (APA-conform) output
+```
+<!--
+## ANOVA Insights
+
+The main effect of the **between-subjects** factor `task`
+
+```{r}
+aov_words$anova_table %>% 
+rownames_to_column("effect") %>% #output looks weird but works!
+filter(effect == "task")
+```
+
+... is the **independent samples** t-test for `task` collapsed across `stimulus`
+
+```{r}
+with(fhch2010_summary %>% 
+summarize(rt = mean(rt), .by = c(id, task)), #collapse across stimulus (words vs. non-words)
+t.test(rt ~ task, var.equal = TRUE)$p.value) #just check p value
+```
+
+## ANOVA Insights 2
+
+The main effect of the **within-subjects** factor `stimulus`
+
+```{r}
+#| code-line-numbers: "3"
+aov_words$anova_table %>% 
+rownames_to_column("effect") %>% #output looks weird but works!
+filter(effect == "stimulus")
+```
+
+... is **NOT?** the **paired samples** t-test for `stimulus` (ignoring `task`)
+
+```{r}
+fhch2010_summary %>% 
+summarize(rt = mean(rt), .by = c(id, stimulus)) %>% #collapse across task (naming vs. lexical decision)
+rstatix::t_test(rt ~ stimulus, paired = TRUE) %>% pull(p) #just check p value
+```
+-->
+
+## ANOVA interaction: Viz Code 1
+
+*Within-effect* modulated by *between-variable*:\
+Is the reaction time difference between *words and non-words* different for *naming vs. lexical decision*?
+
+. . .
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3|5-7|10,12"
+aov1 <-
+  fhch2010_summary %>% 
+  pivot_wider(names_from = "stimulus", values_from = "rt", id_cols = c(id, task)) %>% 
+  summarize(
+    .by = task, #for each condition combination
+    diff.m = mean(word - nonword), 
+    diff.ci.length = t.test(word, nonword, paired = TRUE)$conf.int %>% diff()
+  ) %>% 
+  
+  ggplot(aes(y = diff.m, x = task)) +
+  geom_point() + #plot the mean
+  geom_errorbar(aes(ymin = diff.m - diff.ci.length/2, ymax = diff.m + diff.ci.length/2)) + #plot the CI
+  geom_hline(yintercept = 0, linetype = "dashed") #plot the population mean to test against
+```
+
+## ANOVA interaction: Viz Code 2
+
+*Between-effect* modulated by *within-variable*:\
+Is the reaction time difference between *naming and lexical decision* different for *words vs. non-words*?
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3,5,12,13|3,6-8,10|13-16"
+aov2 <-
+  fhch2010_summary %>% 
+  pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %>% 
+  summarize(
+    .by = stimulus, # task is implicitly kept due to pivot_wider
+    ci.length = t.test(naming, lexdec)$conf.int %>% diff(), # do this first so we can overwrite naming & lexdec
+    naming = mean(naming, na.rm = TRUE), 
+    lexdec = mean(lexdec, na.rm = TRUE)
+  ) %>% 
+  pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
+  
+  ggplot(aes(y = rt.m, x = task, color = stimulus)) +
+  facet_wrap(vars(stimulus), labeller = label_both) +
+  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + # explicitly specify default width = .9
+  theme(legend.position = "top")
+```
+
+## ANOVA interaction: Viz Code 2.2
+
+*Between-effect* modulated by *within-variable*:\
+Is the reaction time difference between *naming and lexical decision* different for *words vs. non-words*?
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3,6-8"
+aov2 <-
+  fhch2010_summary %>% 
+  # alternative: spare the first pivot by using base R indexing
+  summarize(
+    .by = stimulus,
+    ci.length = t.test(rt[task == "naming"], rt[task == "lexdec"])$conf.int %>% diff(),
+    naming = mean(rt[task == "naming"]),
+    lexdec = mean(rt[task == "lexdec"])
+  ) %>% 
+  pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
+  
+  ggplot(aes(y = rt.m, x = task, color = stimulus)) +
+  facet_wrap(vars(stimulus), labeller = label_both) +
+  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + #explicitly specify default width = .9
+  theme(legend.position = "top")
+```
+
+## ANOVA interaction: Figures
+
+:::notes
+If you are asking: Can I do the plot on the right but ordered by stimulus first and with within-errors to show the within effect modulated by the between factor?
+
+&rarr; next slide :)
+:::
+
+```{r}
+#| echo: false
+cowplot::plot_grid(aov1, aov2, nrow = 1, labels = "AUTO")
+```
+
+## Within-Errors on Marginal Means
+
+There are methods to draw within-subject errors directly on marginal means instead of on paired differences (e.g., [Morey, 2008](https://doi.org/10.20982/tqmp.01.1.p042)).
+
+While this is okay for the simplest design including **one within-variable with just two factor levels**, this already becomes problematic at 3 levels because sphericity may not hold, i.e., the variance may be heterogenous across paired differences (level 1-2 vs. 2-3).
+
+&rarr; If the CI for 1-2 is small but CI for 2-3 is large. What do you plot on factor level 2?
+
+. . .
+
+&rArr; The within-subjects standard error is a characteristic of paired differences and should thus not be plotted on factor levels.
+
+## Correlations
+
+What is the correlation between reactions to words and non-words in the lexical decision task?
+
+. . .
+
+We want to include subject-level CIs, so we need to start with the trial-level data!
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2,6-7"
+fhch2010_summary2 <- 
+  afex::fhch2010 %>% #trial-level data!
+  filter(task == "lexdec") %>% 
+  summarize(.by = c(id, task, stimulus), #retain task column for future reference
+            rt.m = mean(rt),
+            rt.m.low = t.test(rt)$conf.int[[1]], #subject-level CIs!
+            rt.m.high = t.test(rt)$conf.int[[2]]) #subject-level CIs!
+
+correl <- 
+  with(fhch2010_summary2 %>% 
+         pivot_wider(names_from = stimulus, values_from = rt.m, id_cols = id),
+       cor.test(word, nonword)) %>% apa::cor_apa(r_ci = TRUE, print = FALSE)
+correl
+```
+
+## Correlations: Viz Code
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3|4,6|7-8|5|9-11"
+correlplot <-
+  fhch2010_summary2 %>% 
+  pivot_wider(names_from = stimulus, values_from = starts_with("rt.m")) %>% #also rt.m.low & rt.m.high
+  ggplot(aes(x = rt.m_nonword, y = rt.m_word)) + #non-words vs. words
+  stat_smooth(method = "lm", se = TRUE) + #linear regression line with confidence bands
+  geom_point() + #rt means of individual subjects
+  geom_errorbarh(aes(xmin = rt.m.low_nonword, xmax = rt.m.high_nonword)) + #horizontal CIs: non-words
+  geom_errorbar (aes(ymin = rt.m.low_word,    ymax = rt.m.high_word)) +    #vertical   CIs: words
+  geom_label(aes(x = min(rt.m.low_nonword), y = max(rt.m.high_word)), #statistics to show off
+             hjust = "inward",
+             label = correl)
+```
+
+## Correlations: Figure
+
+```{r}
+#| echo: false
+correlplot
+```
+
+# Visualizing "Raw Data"
+
+As we see from the previous scatter plot, it is informative to see individual "raw data" points. Wouldn't this be nice to have for the group-differences plots (t-tests + ANOVA), too?
+
+With `ggplot`, we can simply add a new layer on our previous plots `aov1` and `aov2`.
+
+\
+Quick technical note: Usually, we do not visualize the "raw" (trial-level) data but the subject-level *aggregates* (&rarr; we could always visualize subject-level precision!). \
+<!--
+But, hey! It's at least one additional level of information! &#128517;
+-->
+
+:::notes
+We will not include subject-level precision in the next plots because it is irrelevant for group-level significance (except for its contribution to increasing group-level variance, which is already depicted in the group-level errorbars). Thus, the additional informational value is usually extremely limited while strongly decreasing readability of the plots (a lot of busy errorbars!).
+:::
+
+## Stacked Points
+```{r}
+#| echo: true
+#| code-line-numbers: "2|3-5|6"
+#| output-location: slide
+aov1 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% #I should have saved this calculation step...
+      pivot_wider(names_from = "stimulus", values_from = "rt", id_cols = c(id, task)) %>% 
+      mutate(diff.m = word - nonword), #if we call this diff.m, it conforms to aov1
+    #aes(y = diff.m, x = task), #inherited from aov1
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  )
+```
+
+## Stacked Points 2
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3|4-5"
+#| output-location: slide
+aov2 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov2
+    #aes(y = rt.m, x = task), #inherited from aov2
+    aes(fill = stimulus), #dotplot dots have color = outer border, fill = inner color
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  )
+```
+
+## Stacked Points 3
+
+Now that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?
+
+::: notes
+Go back to previous slide and ask where these lines would have to be added.
+:::
+
+. . .
+
+```{r}
+#| echo: true
+#| code-line-numbers: "6"
+#| output-location: slide
+aov3 <-
+  fhch2010_summary %>% 
+  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %>% 
+  summarize(
+    .by = task, # stimulus is implicitly kept due to pivot_wider
+    ci.length = confintr::ci_mean(word - nonword)$interval %>% diff(), # do this first so we can overwrite word & nonword
+    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %>% diff(), # alternative - same result!
+    word = mean(word, na.rm = TRUE), 
+    nonword = mean(nonword, na.rm = TRUE)
+  ) %>% 
+  pivot_longer(cols = c(word, nonword), names_to = "stimulus", values_to = "rt.m") %>% 
+  
+  ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2
+  facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2
+  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9)) + # explicitly specify default width = .9
+  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable
+  myGgTheme +
+  theme(legend.position = "top")
+```
+
+```{r}
+#| echo: false
+aov3
+```
+
+## Stacked Points 3
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1,4-5|10-13|14-18"
+#| output-location: slide
+aov3 +
+  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    #aes(y = rt.m, x = stimulus), #inherited from aov3
+    aes(fill = task), #dotplot dots have color = outer border, fill = inner color
+    binaxis = "y",
+    stackdir = "center",
+    alpha = .5
+  ) +
+  geom_line( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
+                position = position_dodge(.9), 
+                color = "black", linewidth = 1.125)
+```
+
+::: notes
+Beautiful! So much information!
+
+The slopes for naming are more pronounced and homogenous compared to lexdec.
+
+But be careful! Between subjects errorbars! Can only compare across facets (tasks) but not within (words vs. non-words of the same task)\
+&rArr; This is why some authors suggest to have another plot showing the paired differences only (i.e., `aov1` alongside `aov3`).
+:::
+
+## Jittered Points
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2-6"
+#| output-location: slide
+aov3 +
+  geom_jitter( # geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    position = position_jitterdodge(dodge.width = .5),
+    alpha = .5
+  )
+```
+
+## Jittered Points with Individual Slopes
+
+Only `geom_path()` is able to align points + lines! `geom_line()` will not work here. (Ordering can be important: `geom_path()` connects the observations in the order in which they appear in the data.)
+
+```{r}
+#| echo: true
+#| code-line-numbers: "2-5|6-10|4,9"
+#| output-location: slide
+aov3 +
+  geom_jitter(
+    data = fhch2010_summary %>% rename(rt.m = rt),
+    position = position_jitter(width = .25, seed = 1337), #same seed needed!
+  ) +
+  geom_path( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), 
+    aes(group = id),
+    position = position_jitter(width = .25, seed = 1337), #same seed needed!
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), 
+                color = "black", linewidth = 1.125)
+```
+
+## Density
+```{r}
+#| echo: true
+#| code-line-numbers: "2"
+#| output-location: slide
+aov3 +
+  geom_violin( 
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    #aes(y = rt.m, x = stimulus), #inherited from aov3
+    aes(fill = task), #dotplot dots have color = outer border, fill = inner color
+    alpha = .5
+  ) +
+  geom_line( #add individual slopes
+    data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov3
+    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)
+    alpha = .5) +
+  #plot group-level information again (on top) but black and bigger
+  geom_point(position = position_dodge(.9), color = "black", size = 3) + 
+  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), 
+                color = "black", linewidth = 1.125)
+```
+
+## Tough Decisions
+What looks most insightful (or most pleasing) depends heavily on your sample size (and your personal preference).
+
+Usually, the plots shown here work best with sample size in ascending order:
+
+1. `dot plot` for small samples
+
+2. `jittered points` for medium samples
+
+3. `violin plot` for large samples
+
+## Everything Everywhere All at Once
+
+If you are prone to decision paralysis, try a mixture of jittered points and violin plot: \
+the `Raincloud Plot` ([Allen et al., 2019](https://doi.org/10.12688%2Fwellcomeopenres.15191.2))
+
+![<https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif>](images/raincloud.gif)
+
+# Thanks for Your Attention!
+
+Learning objectives:
+
+-   Recognize your aggregate level of interest for research questions and how you can improve its precision
+-   Calculate precision in R (on different aggregation levels)
+-   Understand different versions of CIs and which one you need for your data
+-   Calculate the appropriate CI (around means vs. around effects) in `R`
+-   Be aware of the difference between the variance components between and within subjects
+-   Know how to plot subject-level averages with group-level aggregates and CIs
