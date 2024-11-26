@@ -839,7 +839,7 @@ aov2 <-
   summarize(
     .by = stimulus, # task is implicitly kept due to pivot_wider
     ci.length = t.test(naming, lexdec)$conf.int %>% diff(), # do this first so we can overwrite naming & lexdec
-    naming = mean(naming, na.rm = TRUE), 
+    naming = mean(naming, na.rm = TRUE), # we want to put CIs on RT this time, not on RT difference
     lexdec = mean(lexdec, na.rm = TRUE)
   ) %>% 
   pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
@@ -873,9 +873,9 @@ aov2 <-
   
   ggplot(aes(y = rt.m, x = task, color = stimulus)) +
   facet_wrap(vars(stimulus), labeller = label_both) +
-  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9
+  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
   geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
-                position = position_dodge(.9)) + #explicitly specify default width = .9
+                position = position_dodge(.9)) + # explicitly specify default width = .9
   theme(legend.position = "top")
 ```
 

@@ -1384,7 +1384,7 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 <span id="cb53-4"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb53-5"><a></a>    <span class="at">.by =</span> stimulus, <span class="co"># task is implicitly kept due to pivot_wider</span></span>
 <span id="cb53-6"><a></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(naming, lexdec)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># do this first so we can overwrite naming &amp; lexdec</span></span>
-<span id="cb53-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb53-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
 <span id="cb53-8"><a></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb53-9"><a></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb53-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
@@ -1415,9 +1415,9 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 <span id="cb54-11"><a></a>  </span>
 <span id="cb54-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
 <span id="cb54-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
-<span id="cb54-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb54-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
 <span id="cb54-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb54-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co">#explicitly specify default width = .9</span></span>
+<span id="cb54-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
 <span id="cb54-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
