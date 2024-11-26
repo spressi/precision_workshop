@@ -1,5 +1,5 @@
 ---
-title: "Crash Course on Handling Uncertainty"
+title: "Handling Uncertainty Crash Course"
 subtitle: "Extracted from Workshop: \"Handling Uncertainty in your Data\""
 author: "Dr. Mario Reutter"
 format: 
@@ -24,18 +24,12 @@ from: markdown+emoji
 
 # Measurement Precision
 
-## Group-level Precision
+## Group-Level Precision
 
 ![<https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R>](images/precision_group_forest.png)
 
 &rarr; Effects in relation to their *group-level* precision
 
-
-## Group-level Precision 2
-
-![<https://www.medicowesome.com/2020/04/funnel-plot.html>](images/precision_group_funnel.jpg)
-
-&rarr; Effects in relation to their *group-level* precision
 
 ## Subject-Level Precision
 
@@ -43,13 +37,13 @@ Is there a meaningful correlation?
 
 ![](images/precision_subject_cor1.png)
 
-## Subject-Level Precision 2
+## Subject-Level Precision
 
 Is there a meaningful correlation?
 
 ![](images/precision_subject_cor2.png)
 
-## Subject-Level Precision 3
+## Subject-Level Precision
 
 Is there a meaningful correlation?
 
@@ -100,7 +94,7 @@ Note: Calculating standard deviation / error is not trivial here because of auto
 
 :::columns
 :::column
-**Group-level Precision**
+**Group-Level Precision**
 
 - Group differences (t-tests, ANOVA)
 
@@ -110,7 +104,7 @@ Note: Calculating standard deviation / error is not trivial here because of auto
 
 :::
 :::column
-**Subject-level Precision**
+**Subject-Level Precision**
 
 - Correlations (e.g., Reliability)
 
@@ -122,7 +116,7 @@ Note: Calculating standard deviation / error is not trivial here because of auto
 :::
 :::
 
-## Take Home Message
+## Summary: Precision
 
 - We are in a replication crisis
 
@@ -173,6 +167,12 @@ se <- function(x, na.rm = TRUE) {
 Careful with custom functions! I often see people using `n()` but this does not work correctly with missing values (`NA` / `na.rm = TRUE`)
 :::
 
+::: notes
+Thanks to [Juli Nagel](https://juli-nagel.de/) for suggesting the `confintr` package!
+
+Thanks to [Daniel Gromer](https://www.psychologie.uni-wuerzburg.de/bioklin/team/dr-daniel-gromer/) for sharing his custom function!
+:::
+
 ## The Standard Error (SE) in `R` 2
 
 Whenever you use `mean`, also calculate the SE:
@@ -195,7 +195,7 @@ iris %>% #helpful data set for illustration
 
 What is the group-level precision of `Sepal.Length`?
 
-Note: Treat `Species` as subjects and rows within `Species` as trials.
+Note: Treat `Species` as subjects (`N = 3`) and rows within `Species` as trials.
 
 ```{r}
 #| echo: true
@@ -259,11 +259,13 @@ Linear Mixed Models (LMMs) implicitly take this into account when specifying *ra
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "2-4|5-8"
+#| code-line-numbers: "2-5|6-10"
 data %>% 
+  # from trial- to subject-level
   summarize(.by = subject, #trial- to subject-level
             measure.subject = mean(measure), #subject-level averages
             se.subject = confintr::se_mean(measure)) %>%  #subject-level precision
+  # from subject- to group-level
   summarize(m = mean(measure.subject), #group-level mean ("grand average")
             se = confintr::se_mean(measure.subject), #group-level precision
             se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)
@@ -289,15 +291,15 @@ iris %>%
   mutate(subject = 1:n(), .by = Species) %>% 
   pivot_wider(names_from = Species, values_from = Petal.Width) %>% 
   summarize(
-    setosa.ci.size = t.test(setosa)$conf.int %>% diff(), # or confintr::se_mean(setosa)
-    versicolor.ci.size = t.test(versicolor)$conf.int %>% diff(), # or confintr::se_mean(versicolor)
-    diff.ci.size = t.test(setosa, versicolor)$conf.int %>% diff() # or confintr::se_mean_diff(setosa, versicolor)
+    setosa.ci.size = t.test(setosa)$conf.int %>% diff(), # or confintr::ci_mean(setosa)$interval %>% diff()
+    versicolor.ci.size = t.test(versicolor)$conf.int %>% diff(), # or confintr::ci_mean(versicolor)$interval %>% diff()
+    diff.ci.size = t.test(setosa, versicolor)$conf.int %>% diff() # or confintr::ci_mean_diff(setosa, versicolor)$interval %>% diff()
   )
 ```
 
 ## CIs in `R`: Within-Subjects Design
 
-It works similar with paired t-tests (but the pivoting is slightly different):
+It works similarly with paired t-tests (but the pivoting is slightly different):
 
 ```{r}
 #| echo: true
@@ -308,15 +310,15 @@ iris %>%
   summarize(
     setosa.ci.size = t.test(setosa)$conf.int %>% diff(),
     versicolor.ci.size = t.test(versicolor)$conf.int %>% diff(),
-    diff.ci.size = t.test(setosa, versicolor, paired = TRUE)$conf.int %>% diff() #or confintr::se_mean(setosa - versicolor)
+    diff.ci.size = t.test(setosa, versicolor, paired = TRUE)$conf.int %>% diff() #or confintr::ci_mean(setosa - versicolor)$interval %>% diff()
   )
 ```
 
-## Take Home Message
+## Summary: CIs around means
 ::: incremental
 -   CIs around means are different for one sample vs. independent samples vs. paired samples
 -   Mixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)\
-&rArr; Be transparent! Describe how you calculated your CIs!
+&rArr; Be transparent! Describe how you calculated your CIs! (between vs. within, SE vs. CI)
 -   Assumption: Normally distributed means \
 &rArr; Might want to plot raw data (see last part!)
 :::
@@ -344,7 +346,7 @@ iris %>%
 ```{r}
 #| echo: true
 iris %>% 
-  summarise(
+  summarize(
     cortest = cor.test(Petal.Width, Petal.Length) %>% 
       apa::cor_apa(r_ci = TRUE, print = FALSE),
     .by = Species
@@ -367,12 +369,13 @@ head(fhch2010)
 
 . . . 
 
+\
 ```{r}
 #| echo: true
 # Aggregate to get a word/nonword reaction time per participant
 fhch2010_summary <- 
   fhch2010 %>% 
-  summarise(rt = mean(rt), .by = c(id, task, stimulus))
+  summarize(rt = mean(rt), .by = c(id, task, stimulus))
 ```
 
 ## ANOVAs
@@ -390,11 +393,11 @@ aov_words <-
     anova_table = list(es = "pes", intercept = TRUE)
   )
 
-aov_words
+aov_words %>% apa::anova_apa() #optional: slightly different (APA-conform) output
 ```
 ## CI around partial eta²
 
-In principle, `apaTables` offers a function for CIs around $\eta_p^2$ ...
+In principle, `apaTables` offers a (non-vectorized) function for CIs around $\eta_p^2$ ...
 
 ```{r}
 #| echo: true
@@ -415,7 +418,7 @@ A little clunky function that can be applied to `afex` tables:
 ```{r}
 #| echo: true
 peta.ci <- 
-  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)
+  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta²:  https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F
     
     result <- 
       apply(anova_table, 1, function(x) {
@@ -446,6 +449,10 @@ peta.ci(aov_words$anova_table)
 
 Also see this [blogpost by Daniel Lakens from 2014](https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html) about CIs for $\eta_p^2$.
 
+::: notes
+We cross-checked the results between `apaTables` and Daniel Lakens's blog post: they are identical!
+:::
+
 # Visualizing CIs
 
 In the previous part, you learned about CIs around *means* and *effect sizes*.
@@ -459,7 +466,7 @@ In this part, we will visualize CIs around means for:
 
 - t-tests (one sample, independent samples, & paired samples), 
 
-- ANOVAs (a simple 2x2 interaction),
+- ANOVAs (a simple $2 \times 2$ interaction),
 
 - and correlations.
 
@@ -474,7 +481,7 @@ For all examples, we will use the `fhch2010` data set of the `afex` package that
 #| echo: true
 fhch2010_summary <- 
   afex::fhch2010 %>% 
-  summarise(rt = mean(rt), .by = c(id, task, stimulus))
+  summarize(rt = mean(rt), .by = c(id, task, stimulus))
 ```
 
 ## GgThemes
@@ -530,11 +537,11 @@ fhch2010_summary_wordnaming %>%
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "2-6|4|8|5|10"
+#| code-line-numbers: "2-6|4|4,8|5|5,10"
 ostt <-
   fhch2010_summary_wordnaming %>% 
   summarize(
-    rt.m = mean(rt), #careful! if you do rt = mean(rt), you cannot calculate ci_mean(rt) afterwards
+    rt.m = mean(rt), #careful! if you do rt = mean(rt), you cannot calculate t.test(rt) afterwards
     rt.ci.length = t.test(rt)$conf.int %>% diff()
   ) %>% 
   
@@ -598,7 +605,7 @@ with(fhch2010_summary_words %>%
 
 ```{r}
 #| echo: true
-#| code-line-numbers: "3|5|6-7|9"
+#| code-line-numbers: "3|3,5|3,5,6"
 istt2 <-
   fhch2010_summary_words %>% 
   pivot_wider(names_from = task, values_from = rt) %>% 
@@ -696,11 +703,10 @@ with(fhch2010_summary_naming %>%
 
 ```{r}
 #| echo: true
-#| code-line-numbers: 3-4
+#| code-line-numbers: "3"
 with(fhch2010_summary_naming %>% 
-       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id) %>%  #make pairing by id explicit
-       mutate(diff = word - nonword),
-     t.test(diff)) %>% # one sample t-test of paired differences
+       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit
+     t.test(word - nonword)) %>% # one sample t-test of paired differences
   apa::t_apa(es_ci = TRUE) # output to APA format
 ```
 
@@ -806,7 +812,7 @@ Is the reaction time difference between *words and non-words* different for *nam
 #| code-line-numbers: "3|5-7|10,12"
 aov1 <-
   fhch2010_summary %>% 
-  pivot_wider(names_from = "stimulus", values_from = "rt", id_cols = c(id, task)) %>% 
+  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %>% 
   summarize(
     .by = task, #for each condition combination
     diff.m = mean(word - nonword), 
@@ -856,11 +862,11 @@ Is the reaction time difference between *naming and lexical decision* different 
 #| code-line-numbers: "3,6-8"
 aov2 <-
   fhch2010_summary %>% 
-  # alternative: spare the first pivot by using base R indexing
+  # alternative: spare the first pivot by using base R indexing (only safe for between-subjects variables)
   summarize(
     .by = stimulus,
     ci.length = t.test(rt[task == "naming"], rt[task == "lexdec"])$conf.int %>% diff(),
-    naming = mean(rt[task == "naming"]),
+    naming = mean(rt[task == "naming"]), # we want to put CIs on RT this time, not on RT difference
     lexdec = mean(rt[task == "lexdec"])
   ) %>% 
   pivot_longer(cols = c(naming, lexdec), names_to = "task", values_to = "rt.m") %>% 
@@ -988,7 +994,7 @@ aov1 +
 #| echo: true
 #| code-line-numbers: "3|4-5"
 #| output-location: slide
-aov2 +
+aov2.plot <- aov2 +
   geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()
     data = fhch2010_summary %>% rename(rt.m = rt), #conform to naming in aov2
     #aes(y = rt.m, x = task), #inherited from aov2
@@ -997,21 +1003,29 @@ aov2 +
     stackdir = "center",
     alpha = .5
   )
+
+aov2.plot
 ```
 
 ## Stacked Points 3
 
 Now that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?
 
-::: notes
-Go back to previous slide and ask where these lines would have to be added.
-:::
+```{r}
+#| echo: false
+aov2.plot
+```
 
 . . .
 
+No! Within-subject variable levels need to be next to each other!\
+&rArr; Switch the position of both variables in the plot
+
+## Stacked Points 3: Switched 
+
 ```{r}
 #| echo: true
-#| code-line-numbers: "6"
+#| code-line-numbers: "6,15-16"
 #| output-location: slide
 aov3 <-
   fhch2010_summary %>% 
@@ -1027,16 +1041,15 @@ aov3 <-
   
   ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2
   facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2
+  scale_color_viridis_d(option = "H") + # switch color palette to make different variables more apparent
+  scale_fill_viridis_d(option = "H") + # also for fill because this is needed in dot plot
   geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
   geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
                 position = position_dodge(.9)) + # explicitly specify default width = .9
   scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable
   myGgTheme +
   theme(legend.position = "top")
-```
 
-```{r}
-#| echo: false
 aov3
 ```
 
@@ -1152,6 +1165,19 @@ If you are prone to decision paralysis, try a mixture of jittered points and vio
 the `Raincloud Plot` ([Allen et al., 2019](https://doi.org/10.12688%2Fwellcomeopenres.15191.2))
 
 ![<https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif>](images/raincloud.gif)
+
+## Summary: Visualizing Uncertainty
+
+::: incremental
+- Vital difference between i) between- and ii) within-subject variability (slopes / paired differences)\
+&rArr; Oftentimes, between-subject uncertainty is visualized for within-subject designs &#128561;
+- CIs of differences (e.g., independent or paired samples t-test) belong on difference scores
+- CIs of differences can be transferred to individual factor levels but this creates \
+problems esp. if homoscedasticity or sphericity is not met\
+&rArr; **Plots should inform about violations of statistical assumptions**, not cover them up!
+&rArr; If you plot individual factor levels instead of differences, show their one sample CI (or SE) on them
+- Visualizing "raw" data (i.e., subject-level aggregates) helps with detecting violations of normality
+:::
 
 # Thanks for Your Attention!
 

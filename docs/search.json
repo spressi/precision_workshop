@@ -2159,147 +2159,147 @@
   {
     "objectID": "2_Crash_Course.html#group-level-precision",
     "href": "2_Crash_Course.html#group-level-precision",
-    "title": "Crash Course on Handling Uncertainty",
-    "section": "Group-level Precision",
-    "text": "Group-level Precision\n\nhttps://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R→ Effects in relation to their group-level precision"
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Group-Level Precision",
+    "text": "Group-Level Precision\n\nhttps://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R→ Effects in relation to their group-level precision"
   },
   {
     "objectID": "2_Crash_Course.html#group-level-precision-2",
     "href": "2_Crash_Course.html#group-level-precision-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty (Crash Course)",
     "section": "Group-level Precision 2",
     "text": "Group-level Precision 2\n\nhttps://www.medicowesome.com/2020/04/funnel-plot.html→ Effects in relation to their group-level precision"
   },
   {
     "objectID": "2_Crash_Course.html#subject-level-precision",
     "href": "2_Crash_Course.html#subject-level-precision",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Subject-Level Precision",
     "text": "Subject-Level Precision\nIs there a meaningful correlation?"
   },
   {
     "objectID": "2_Crash_Course.html#subject-level-precision-2",
     "href": "2_Crash_Course.html#subject-level-precision-2",
-    "title": "Crash Course on Handling Uncertainty",
-    "section": "Subject-Level Precision 2",
-    "text": "Subject-Level Precision 2\nIs there a meaningful correlation?"
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Subject-Level Precision",
+    "text": "Subject-Level Precision\nIs there a meaningful correlation?\n\n\nSimulated data with added noise. True score correlation r = 1 ⇒ We want to enable you to create plots like this one\nSide note:\nIndividual errorbars = subject-level precision of each individual (across trials)\nConfidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson’s r)"
   },
   {
     "objectID": "2_Crash_Course.html#subject-level-precision-3",
     "href": "2_Crash_Course.html#subject-level-precision-3",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty (Crash Course)",
     "section": "Subject-Level Precision 3",
     "text": "Subject-Level Precision 3\nIs there a meaningful correlation?\n\n\nSimulated data with added noise. True score correlation r = 1 ⇒ We want to enable you to create plots like this one\nSide note:\nIndividual errorbars = subject-level precision of each individual (across trials)\nConfidence band of regression slope = group-level precision of the regression estimate (cf. reporting CI around Pearson’s r)"
   },
   {
     "objectID": "2_Crash_Course.html#trial-level-precision",
     "href": "2_Crash_Course.html#trial-level-precision",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Trial-Level Precision",
     "text": "Trial-Level Precision\n\nHolmqvist et al. (2023, retracted)Only relevant for time series data (i.e., several “measurements” per trial)\nNote: Calculating standard deviation / error is not trivial here because of auto-correlation"
   },
   {
     "objectID": "2_Crash_Course.html#what-is-precision",
     "href": "2_Crash_Course.html#what-is-precision",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "What is Precision?",
     "text": "What is Precision?\n\nPrecision is indicated by errorbars / confidence intervals\nWhenever you summarize across a variable, you can calculate the\nprecision of the aggregation\nPrecision exists on different levels: group, subject, trial (and more)\nClosely linked to statistical power and reliability"
   },
   {
     "objectID": "2_Crash_Course.html#how-can-we-enhance-precision",
     "href": "2_Crash_Course.html#how-can-we-enhance-precision",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "How Can We Enhance Precision?",
     "text": "How Can We Enhance Precision?\n\nShield the measurement from random noise → precise equipment / paradigm\n⇒ trial-level precision\nIdentify the aggregation level of interest:\n\nsample differences → optimize group-level precision:\nmany subjects that respond homogenously\ncorrelational hypotheses / application → optimize subject-level precision:\nsystematic differences between individuals but little variability within subjects across many trials (mind “sequence effects”; cf. Nebe, Reutter, et al., 2023)\n\n\n⇒ “two disciplines of scientific psychology” (Cronbach, 1957)"
   },
   {
     "objectID": "2_Crash_Course.html#group--vs.-subject-level-precision",
     "href": "2_Crash_Course.html#group--vs.-subject-level-precision",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Group- vs. Subject-Level Precision",
-    "text": "Group- vs. Subject-Level Precision\n\n\nGroup-level Precision\n\nGroup differences (t-tests, ANOVA)\nMany subjects (independent observations)\nHomogenous sample (e.g., psychology students?)\n\n\nSubject-level Precision\n\nCorrelations (e.g., Reliability)\nMany trials (careful: sequence effects!)\nHeterogenous/diverse sample\nLow variability within subjects across trials (i.e., SDwithin)"
+    "text": "Group- vs. Subject-Level Precision\n\n\nGroup-Level Precision\n\nGroup differences (t-tests, ANOVA)\nMany subjects (independent observations)\nHomogenous sample (e.g., psychology students?)\n\n\nSubject-Level Precision\n\nCorrelations (e.g., Reliability)\nMany trials (careful: sequence effects!)\nHeterogenous/diverse sample\nLow variability within subjects across trials (i.e., SDwithin)"
   },
   {
     "objectID": "2_Crash_Course.html#take-home-message",
     "href": "2_Crash_Course.html#take-home-message",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Take Home Message",
-    "text": "Take Home Message\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!"
+    "text": "Take Home Message\n\n\nCIs around means are different for one sample vs. independent samples vs. paired samples\nMixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)\n⇒ Be transparent! Describe how you calculated your CIs!\nAssumption: Normally distributed means\n⇒ Might want to plot raw data (see last part!)"
   },
   {
     "objectID": "2_Crash_Course.html#the-standard-error-se",
     "href": "2_Crash_Course.html#the-standard-error-se",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "The Standard Error (SE)",
     "text": "The Standard Error (SE)\nCalculates the (lack of) precision of a mean based on the\nstandard deviation (\\(SD\\)) of the individual observations and their number (\\(n\\))\n\\[SE = \\frac{SD}{\\sqrt{n}}\\]"
   },
   {
     "objectID": "2_Crash_Course.html#the-standard-error-se-in-r",
     "href": "2_Crash_Course.html#the-standard-error-se-in-r",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "The Standard Error (SE) in R",
-    "text": "The Standard Error (SE) in R\nNo base R function available 💩\n\nUse confintr::se_mean (not part of the tidyverse)\nUse a custom function\n\n\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\nCareful with custom functions! I often see people using n() but this does not work correctly with missing values (NA / na.rm = TRUE)"
+    "text": "The Standard Error (SE) in R\nNo base R function available 💩\n\nUse confintr::se_mean (not part of the tidyverse)\nUse a custom function\n\n\nse &lt;- function(x, na.rm = TRUE) {\n  sd(x, na.rm) / sqrt(if(!na.rm) length(x) else sum(!is.na(x)))\n}\n\n\n\nThanks to Juli Nagel for suggesting the confintr package!\nThanks to Daniel Gromer for sharing his custom function!\n\n\nCareful with custom functions! I often see people using n() but this does not work correctly with missing values (NA / na.rm = TRUE)"
   },
   {
     "objectID": "2_Crash_Course.html#the-standard-error-se-in-r-2",
     "href": "2_Crash_Course.html#the-standard-error-se-in-r-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "The Standard Error (SE) in R 2",
     "text": "The Standard Error (SE) in R 2\nWhenever you use mean, also calculate the SE:\n\nlibrary(tidyverse)\n\niris %&gt;% #helpful data set for illustration\n  summarize( #aggregation =&gt; precision\n    across(.cols = starts_with(\"Sepal\"), #everything(), #output too wide\n           .fns = list(mean = mean, se = confintr::se_mean)),\n    .by = Species)\n\n     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se\n1     setosa             5.006      0.04984957            3.428     0.05360780\n2 versicolor             5.936      0.07299762            2.770     0.04437778\n3  virginica             6.588      0.08992695            2.974     0.04560791\n\n\n\n→ subject-level (species-level) precision"
   },
   {
     "objectID": "2_Crash_Course.html#standard-error-pitfalls-in-r",
     "href": "2_Crash_Course.html#standard-error-pitfalls-in-r",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Standard Error Pitfalls in R",
-    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\nNote: Treat Species as subjects and rows within Species as trials.\n\ndata &lt;-\n  iris %&gt;% \n  rename(subject = Species, measure = Sepal.Length) %&gt;% \n  mutate(trial = 1:n(), .by = subject) %&gt;% \n  select(subject, trial, measure) %&gt;% arrange(trial, subject) %&gt;% tibble() #neater output\nprint(data)\n\n# A tibble: 150 × 3\n   subject    trial measure\n   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;\n 1 setosa         1     5.1\n 2 versicolor     1     7  \n 3 virginica      1     6.3\n 4 setosa         2     4.9\n 5 versicolor     2     6.4\n 6 virginica      2     5.8\n 7 setosa         3     4.7\n 8 versicolor     3     6.9\n 9 virginica      3     7.1\n10 setosa         4     4.6\n# ℹ 140 more rows"
+    "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\nNote: Treat Species as subjects (N = 3) and rows within Species as trials.\n\ndata &lt;-\n  iris %&gt;% \n  rename(subject = Species, measure = Sepal.Length) %&gt;% \n  mutate(trial = 1:n(), .by = subject) %&gt;% \n  select(subject, trial, measure) %&gt;% arrange(trial, subject) %&gt;% tibble() #neater output\nprint(data)\n\n# A tibble: 150 × 3\n   subject    trial measure\n   &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt;\n 1 setosa         1     5.1\n 2 versicolor     1     7  \n 3 virginica      1     6.3\n 4 setosa         2     4.9\n 5 versicolor     2     6.4\n 6 virginica      2     5.8\n 7 setosa         3     4.7\n 8 versicolor     3     6.9\n 9 virginica      3     7.1\n10 setosa         4     4.6\n# ℹ 140 more rows"
   },
   {
     "objectID": "2_Crash_Course.html#standard-error-pitfalls-in-r-1",
     "href": "2_Crash_Course.html#standard-error-pitfalls-in-r-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Standard Error Pitfalls in R",
     "text": "Standard Error Pitfalls in R\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure))\n\n# A tibble: 1 × 2\n      m     se\n  &lt;dbl&gt;  &lt;dbl&gt;\n1  5.84 0.0676\n\n\n\n\n\n\ndata %&gt;% \n  summarize(m = mean(measure),\n            se = confintr::se_mean(measure),\n            n = n())\n\n# A tibble: 1 × 3\n      m     se     n\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.0676   150"
   },
   {
     "objectID": "2_Crash_Course.html#standard-error-pitfalls-in-r-2",
     "href": "2_Crash_Course.html#standard-error-pitfalls-in-r-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Standard Error Pitfalls in R 2",
     "text": "Standard Error Pitfalls in R 2\nWhat is the group-level precision of Sepal.Length?\n\ndata %&gt;% \n  summarize(measure.subject = mean(measure), .by = subject) %&gt;% #subject-level averages\n  summarize(m = mean(measure.subject),\n            se = confintr::se_mean(measure.subject),\n            n = n())\n\n# A tibble: 1 × 3\n      m    se     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     3\n\n\n\n⇒ When using trial-level data to calculate group-level precision, summarize twice!\n⇒ Every summarize brings you up exactly one level - don’t try to skip!\ntrial-level → subject-level → group-level\n\n\n\nLinear Mixed Models (LMMs) implicitly take this into account when specifying random intercepts for subjects (1|subject)."
   },
   {
     "objectID": "2_Crash_Course.html#summary-precision-in-r",
     "href": "2_Crash_Course.html#summary-precision-in-r",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Summary: Precision in R",
-    "text": "Summary: Precision in R\n\ndata %&gt;% \n  summarize(.by = subject, #trial- to subject-level\n            measure.subject = mean(measure), #subject-level averages\n            se.subject = confintr::se_mean(measure)) %&gt;%  #subject-level precision\n  summarize(m = mean(measure.subject), #group-level mean (\"grand average\")\n            se = confintr::se_mean(measure.subject), #group-level precision\n            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)\n            n = n())\n\n# A tibble: 1 × 4\n      m    se se.subject     n\n  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     0.0709     3"
+    "text": "Summary: Precision in R\n\ndata %&gt;% \n  # from trial- to subject-level\n  summarize(.by = subject, #trial- to subject-level\n            measure.subject = mean(measure), #subject-level averages\n            se.subject = confintr::se_mean(measure)) %&gt;%  #subject-level precision\n  # from subject- to group-level\n  summarize(m = mean(measure.subject), #group-level mean (\"grand average\")\n            se = confintr::se_mean(measure.subject), #group-level precision\n            se.subject = mean(se.subject), #average subject-level precision (note: pooling should be used)\n            n = n())\n\n# A tibble: 1 × 4\n      m    se se.subject     n\n  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;\n1  5.84 0.459     0.0709     3"
   },
   {
     "objectID": "2_Crash_Course.html#cis-in-r",
     "href": "2_Crash_Course.html#cis-in-r",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "CIs in R",
-    "text": "CIs in R\nEasiest way is to use calls to t.test:\n\niris %&gt;% \n  mutate(subject = 1:n(), .by = Species) %&gt;% \n  pivot_wider(names_from = Species, values_from = Petal.Width) %&gt;% \n  summarize(\n    setosa.ci.size = t.test(setosa)$conf.int %&gt;% diff(), # or confintr::se_mean(setosa)\n    versicolor.ci.size = t.test(versicolor)$conf.int %&gt;% diff(), # or confintr::se_mean(versicolor)\n    diff.ci.size = t.test(setosa, versicolor)$conf.int %&gt;% diff() # or confintr::se_mean_diff(setosa, versicolor)\n  )\n\n# A tibble: 1 × 3\n  setosa.ci.size versicolor.ci.size diff.ci.size\n           &lt;dbl&gt;              &lt;dbl&gt;        &lt;dbl&gt;\n1         0.0599              0.112        0.126"
+    "text": "CIs in R\nEasiest way is to use calls to t.test:\n\niris %&gt;% \n  mutate(subject = 1:n(), .by = Species) %&gt;% \n  pivot_wider(names_from = Species, values_from = Petal.Width) %&gt;% \n  summarize(\n    setosa.ci.size = t.test(setosa)$conf.int %&gt;% diff(), # or confintr::ci_mean(setosa)$interval %&gt;% diff()\n    versicolor.ci.size = t.test(versicolor)$conf.int %&gt;% diff(), # or confintr::ci_mean(versicolor)$interval %&gt;% diff()\n    diff.ci.size = t.test(setosa, versicolor)$conf.int %&gt;% diff() # or confintr::ci_mean_diff(setosa, versicolor)$interval %&gt;% diff()\n  )\n\n# A tibble: 1 × 3\n  setosa.ci.size versicolor.ci.size diff.ci.size\n           &lt;dbl&gt;              &lt;dbl&gt;        &lt;dbl&gt;\n1         0.0599              0.112        0.126"
   },
   {
     "objectID": "2_Crash_Course.html#cis-in-r-within-subjects-design",
     "href": "2_Crash_Course.html#cis-in-r-within-subjects-design",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "CIs in R: Within-Subjects Design",
-    "text": "CIs in R: Within-Subjects Design\nIt works similar with paired t-tests (but the pivoting is slightly different):\n\niris %&gt;% \n  mutate(subject = 1:n(), .by = Species) %&gt;% \n  pivot_wider(names_from = Species, values_from = Petal.Width, id_cols = subject) %&gt;% \n  summarize(\n    setosa.ci.size = t.test(setosa)$conf.int %&gt;% diff(),\n    versicolor.ci.size = t.test(versicolor)$conf.int %&gt;% diff(),\n    diff.ci.size = t.test(setosa, versicolor, paired = TRUE)$conf.int %&gt;% diff() #or confintr::se_mean(setosa - versicolor)\n  )\n\n# A tibble: 1 × 3\n  setosa.ci.size versicolor.ci.size diff.ci.size\n           &lt;dbl&gt;              &lt;dbl&gt;        &lt;dbl&gt;\n1         0.0599              0.112        0.136"
+    "text": "CIs in R: Within-Subjects Design\nIt works similarly with paired t-tests (but the pivoting is slightly different):\n\niris %&gt;% \n  mutate(subject = 1:n(), .by = Species) %&gt;% \n  pivot_wider(names_from = Species, values_from = Petal.Width, id_cols = subject) %&gt;% \n  summarize(\n    setosa.ci.size = t.test(setosa)$conf.int %&gt;% diff(),\n    versicolor.ci.size = t.test(versicolor)$conf.int %&gt;% diff(),\n    diff.ci.size = t.test(setosa, versicolor, paired = TRUE)$conf.int %&gt;% diff() #or confintr::ci_mean(setosa - versicolor)$interval %&gt;% diff()\n  )\n\n# A tibble: 1 × 3\n  setosa.ci.size versicolor.ci.size diff.ci.size\n           &lt;dbl&gt;              &lt;dbl&gt;        &lt;dbl&gt;\n1         0.0599              0.112        0.136"
   },
   {
     "objectID": "2_Crash_Course.html#take-home-message-1",
     "href": "2_Crash_Course.html#take-home-message-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Take Home Message",
     "text": "Take Home Message\n\n\nCIs around means are different for one sample vs. independent samples vs. paired samples\nMixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)\n⇒ Be transparent! Describe how you calculated your CIs!\nAssumption: Normally distributed means\n⇒ Might want to plot raw data (see last part!)"
   },
   {
     "objectID": "2_Crash_Course.html#cohens-d",
     "href": "2_Crash_Course.html#cohens-d",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Cohen’s d",
     "text": "Cohen’s d\n\niris %&gt;% \n  mutate(subject = 1:n(), .by = Species) %&gt;% \n  pivot_wider(names_from = Species, values_from = Petal.Width) %&gt;% \n  summarize(\n    setosa.test = t.test(setosa) %&gt;% apa::t_apa(es_ci = TRUE, print = FALSE),\n    versicolor.test = t.test(versicolor) %&gt;% apa::t_apa(es_ci = TRUE, print = FALSE),\n    diff.test = t.test(setosa, versicolor, var.equal = TRUE) %&gt;% apa::t_apa(es_ci = TRUE, print = FALSE)\n  ) %&gt;% \n  pivot_longer(everything(), names_to = \"test\", values_to = \"output\") # nicer output\n\n[1] \"The observed noncentrality parameter of the noncentral t-distribution has exceeded 37.62 in magnitude (R's limitation for accurate probabilities from the noncentral t-distribution) in the function's iterative search for the appropriate value(s). The results may be fine, but they might be inaccurate; use caution.\"\n\n\n# A tibble: 3 × 2\n  test            output                                            \n  &lt;chr&gt;           &lt;chr&gt;                                             \n1 setosa.test     t(49) = 16.51, p &lt; .001, d = 2.33 [1.79; 2.87]    \n2 versicolor.test t(49) = 47.41, p &lt; .001, d = 6.71 [5.32; 8.03]    \n3 diff.test       t(98) = -34.08, p &lt; .001, d = -6.82 [-7.83; -5.78]"
   },
@@ -2334,63 +2334,63 @@
   {
     "objectID": "2_Crash_Course.html#anovas",
     "href": "2_Crash_Course.html#anovas",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVAs",
-    "text": "ANOVAs\n\naov_words &lt;- \n  afex::aov_ez(\n    id = \"id\", \n    dv = \"rt\", \n    data = fhch2010_summary, \n    between = \"task\", \n    within = \"stimulus\",\n    # we want to report partial eta² (\"pes\"), and include the intercept in the output table ...\n    anova_table = list(es = \"pes\", intercept = TRUE)\n  )\n\naov_words\n\nAnova Table (Type 3 tests)\n\nResponse: rt\n         Effect    df  MSE          F  pes p.value\n1   (Intercept) 1, 43 0.10 904.33 *** .955   &lt;.001\n2          task 1, 43 0.10  15.76 *** .268   &lt;.001\n3      stimulus 1, 43 0.01  77.24 *** .642   &lt;.001\n4 task:stimulus 1, 43 0.01  31.89 *** .426   &lt;.001\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1"
+    "text": "ANOVAs\n\naov_words &lt;- \n  afex::aov_ez(\n    id = \"id\", \n    dv = \"rt\", \n    data = fhch2010_summary, \n    between = \"task\", \n    within = \"stimulus\",\n    # we want to report partial eta² (\"pes\"), and include the intercept in the output table ...\n    anova_table = list(es = \"pes\", intercept = TRUE)\n  )\n\naov_words %&gt;% apa::anova_apa() #optional: slightly different (APA-conform) output\n\n         Effect                                              \n1   (Intercept) F(1, 43) = 904.33, p &lt; .001, petasq = .95 ***\n2          task F(1, 43) =  15.76, p &lt; .001, petasq = .27 ***\n3      stimulus F(1, 43) =  77.24, p &lt; .001, petasq = .64 ***\n4 task:stimulus F(1, 43) =  31.89, p &lt; .001, petasq = .43 ***"
   },
   {
     "objectID": "2_Crash_Course.html#ci-around-partial-eta²",
     "href": "2_Crash_Course.html#ci-around-partial-eta²",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "CI around partial eta²",
-    "text": "CI around partial eta²\nIn principle, apaTables offers a function for CIs around \\(\\eta_p^2\\) …\n\n# e.g., for our task effect\napaTables::get.ci.partial.eta.squared(\n  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95\n)\n\n$LL\n[1] 0.06851017\n\n$UL\n[1] 0.4511011\n\n\n\n… but it would be tedious to copy these values."
+    "text": "CI around partial eta²\nIn principle, apaTables offers a (non-vectorized) function for CIs around \\(\\eta_p^2\\) …\n\n# e.g., for our task effect\napaTables::get.ci.partial.eta.squared(\n  F.value = 15.76, df1 = 1, df2 = 43, conf.level = .95\n)\n\n$LL\n[1] 0.06851017\n\n$UL\n[1] 0.4511011\n\n\n\n… but it would be tedious to copy these values."
   },
   {
     "objectID": "2_Crash_Course.html#ci-around-partial-eta²-1",
     "href": "2_Crash_Course.html#ci-around-partial-eta²-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "CI around partial eta²",
-    "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)\n    \n    result &lt;- \n      apply(anova_table, 1, function(x) {\n        ci &lt;- \n          apaTables::get.ci.partial.eta.squared(\n            F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n          )\n        \n        return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n      }) %&gt;% \n      t() %&gt;% \n      as.data.frame()\n    \n    result$conf.level &lt;- conf.level\n    \n    return(result)\n  }"
+    "text": "CI around partial eta²\nA little clunky function that can be applied to afex tables:\n\npeta.ci &lt;- \n  function(anova_table, conf.level = .9) { # 90% CIs are recommended for partial eta²:  https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F\n    \n    result &lt;- \n      apply(anova_table, 1, function(x) {\n        ci &lt;- \n          apaTables::get.ci.partial.eta.squared(\n            F.value = x[\"F\"], df1 = x[\"num Df\"], df2 = x[\"den Df\"], conf.level = conf.level\n          )\n        \n        return(setNames(c(ci$LL, ci$UL), c(\"LL\", \"UL\")))\n      }) %&gt;% \n      t() %&gt;% \n      as.data.frame()\n    \n    result$conf.level &lt;- conf.level\n    \n    return(result)\n  }"
   },
   {
     "objectID": "2_Crash_Course.html#ci-around-partial-eta²-2",
     "href": "2_Crash_Course.html#ci-around-partial-eta²-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "CI around partial eta²",
-    "text": "CI around partial eta²\nThe result of custom function that applies the apaTables function to our entire ANOVA table:\n\npeta.ci(aov_words$anova_table)\n\n                      LL        UL conf.level\n(Intercept)   0.92985360 0.9656284        0.9\ntask          0.09399555 0.4224818        0.9\nstimulus      0.48335736 0.7294335        0.9\ntask:stimulus 0.23280549 0.5584355        0.9\n\n\nAlso see this blogpost by Daniel Lakens from 2014 about CIs for \\(\\eta_p^2\\)."
+    "text": "CI around partial eta²\nThe result of custom function that applies the apaTables function to our entire ANOVA table:\n\npeta.ci(aov_words$anova_table)\n\n                      LL        UL conf.level\n(Intercept)   0.92985360 0.9656284        0.9\ntask          0.09399555 0.4224818        0.9\nstimulus      0.48335736 0.7294335        0.9\ntask:stimulus 0.23280549 0.5584355        0.9\n\n\nAlso see this blogpost by Daniel Lakens from 2014 about CIs for \\(\\eta_p^2\\).\n\nWe cross-checked the results between apaTables and Daniel Lakens’s blog post: they are identical!"
   },
   {
     "objectID": "2_Crash_Course.html#visualizing-cis-around-means",
     "href": "2_Crash_Course.html#visualizing-cis-around-means",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Visualizing CIs around means",
-    "text": "Visualizing CIs around means\nIn this part, we will visualize CIs around means for:\n\nt-tests (one sample, independent samples, & paired samples),\nANOVAs (a simple 2x2 interaction),\nand correlations.\n\nYou have already learned how to calculate CIs around their effect sizes (Cohen’s d, \\(\\eta_p^2\\), and Pearson’s r)\n\n\nFor all examples, we will use the fhch2010 data set of the afex package that we have encountered before. Make sure that you have the subject-level aggregates ready:\n\nfhch2010_summary &lt;- \n  afex::fhch2010 %&gt;% \n  summarise(rt = mean(rt), .by = c(id, task, stimulus))"
+    "text": "Visualizing CIs around means\nIn this part, we will visualize CIs around means for:\n\nt-tests (one sample, independent samples, & paired samples),\nANOVAs (a simple \\(2 \\times 2\\) interaction),\nand correlations.\n\nYou have already learned how to calculate CIs around their effect sizes (Cohen’s d, \\(\\eta_p^2\\), and Pearson’s r)\n\n\nFor all examples, we will use the fhch2010 data set of the afex package that we have encountered before. Make sure that you have the subject-level aggregates ready:\n\nfhch2010_summary &lt;- \n  afex::fhch2010 %&gt;% \n  summarize(rt = mean(rt), .by = c(id, task, stimulus))"
   },
   {
     "objectID": "2_Crash_Course.html#ggthemes",
     "href": "2_Crash_Course.html#ggthemes",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "GgThemes",
     "text": "GgThemes\nThe default options in ggplot have some problems: Most importantly, text is too small. The easiest solution is to create your own theme that you apply to your plots.\nI am currently using this theme adapted from an old script of Lara Rösler.\n\ntheme_set( # theme_set has to be executed every session; cf. library(tidyverse)\n  myGgTheme &lt;- # you can save your theme in a local variable instead, add it to every plot, and save your environment across sessions\n    theme_bw() + # start with the black-and-white theme\n    theme( \n      #aspect.ratio = 1,\n      plot.title = element_text(hjust = 0.5),\n      panel.background = element_rect(fill = \"white\", color = \"white\"),\n      legend.background = element_rect(fill = \"white\", color = \"grey\"),\n      legend.key = element_rect(fill = \"white\"),\n      strip.background = element_rect(fill = \"white\"),\n      axis.ticks.x = element_line(color = \"black\"),\n      axis.line.x = element_line(color = \"black\"),\n      axis.line.y = element_line(color = \"black\"),\n      axis.text = element_text(color = \"black\"),\n      axis.text.x = element_text(size = 16, color = \"black\"),\n      axis.text.y = element_text(size = 16, color = \"black\"),\n      axis.title = element_text(size = 16, color = \"black\"),\n      legend.text = element_text(size = 14, color = \"black\"),\n      legend.title = element_text(size = 14, color = \"black\"),\n      strip.text = element_text(size = 12, color = \"black\"))\n)"
   },
   {
     "objectID": "2_Crash_Course.html#one-sample-t-test",
     "href": "2_Crash_Course.html#one-sample-t-test",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "One Sample t-test",
     "text": "One Sample t-test\nAre the mean reaction times for naming words faster than 1 sec?\n\n\nfhch2010_summary_wordnaming &lt;- \n  fhch2010_summary %&gt;% \n  filter(task == \"naming\", stimulus == \"word\")\n\nfhch2010_summary_wordnaming %&gt;% \n  pull(rt) %&gt;% \n  t.test(mu = 1, alternative = \"less\") %&gt;% \n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -15.55, p &lt; .001, d = -3.48 [-4.65; -2.29]"
   },
   {
     "objectID": "2_Crash_Course.html#one-sample-t-test-visualization-code",
     "href": "2_Crash_Course.html#one-sample-t-test-visualization-code",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "One Sample t-test: Visualization Code",
-    "text": "One Sample t-test: Visualization Code\n\nostt &lt;-\n  fhch2010_summary_wordnaming %&gt;% \n  summarize(\n    rt.m = mean(rt), #careful! if you do rt = mean(rt), you cannot calculate ci_mean(rt) afterwards\n    rt.ci.length = t.test(rt)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = \"naming words\")) +\n  geom_point() + #plot the mean\n  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2)) + #plot the CI\n  geom_hline(yintercept = 1, linetype = \"dashed\") #plot the population mean to test against\n\n\n“Beautiful” alternative:\n\n\n# A tibble: 2 × 6\n  parameter       interval estimate probs type  info \n  &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n1 population mean    0.687    0.724 0.025 t     \"\"   \n2 population mean    0.761    0.724 0.975 t     \"\""
+    "text": "One Sample t-test: Visualization Code\n\nostt &lt;-\n  fhch2010_summary_wordnaming %&gt;% \n  summarize(\n    rt.m = mean(rt), #careful! if you do rt = mean(rt), you cannot calculate t.test(rt) afterwards\n    rt.ci.length = t.test(rt)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = \"naming words\")) +\n  geom_point() + #plot the mean\n  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2)) + #plot the CI\n  geom_hline(yintercept = 1, linetype = \"dashed\") #plot the population mean to test against\n\n\n“Beautiful” alternative:\n\n\n# A tibble: 2 × 6\n  parameter       interval estimate probs type  info \n  &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n1 population mean    0.687    0.724 0.025 t     \"\"   \n2 population mean    0.761    0.724 0.975 t     \"\""
   },
   {
     "objectID": "2_Crash_Course.html#one-sample-t-test-figure",
     "href": "2_Crash_Course.html#one-sample-t-test-figure",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "One Sample t-test: Figure",
     "text": "One Sample t-test: Figure"
   },
@@ -2404,14 +2404,14 @@
   {
     "objectID": "2_Crash_Course.html#independent-samples-t-test",
     "href": "2_Crash_Course.html#independent-samples-t-test",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Independent Samples t-test",
     "text": "Independent Samples t-test\nAre the mean reaction times for naming words different from lexically identifying words?\n\n\nfhch2010_summary_words &lt;- \n  fhch2010_summary %&gt;% \n  filter(stimulus == \"word\")\n\nwith(fhch2010_summary_words,\n     t.test(rt ~ task) #Welch test\n     #t.test(rt ~ task, var.equal = TRUE) #assume equal variances\n) #%&gt;% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(\n\n\n    Welch Two Sample t-test\n\ndata:  rt by task\nt = -6.351, df = 28.554, p-value = 6.55e-07\nalternative hypothesis: true difference in means between group naming and group lexdec is not equal to 0\n95 percent confidence interval:\n -0.5003253 -0.2564522\nsample estimates:\nmean in group naming mean in group lexdec \n           0.7241744            1.1025631 \n\n\n\nYou can also pivot_wider instead of using the formula notation:\n\n\n\n    Welch Two Sample t-test\n\ndata:  naming and lexdec\nt = -6.351, df = 28.554, p-value = 6.55e-07\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.5003253 -0.2564522\nsample estimates:\nmean of x mean of y \n0.7241744 1.1025631"
   },
   {
     "objectID": "2_Crash_Course.html#independent-samples-t-test-viz-code",
     "href": "2_Crash_Course.html#independent-samples-t-test-viz-code",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Independent Samples t-test: Viz Code",
     "text": "Independent Samples t-test: Viz Code\n\nistt2 &lt;-\n  fhch2010_summary_words %&gt;% \n  pivot_wider(names_from = task, values_from = rt) %&gt;% \n  summarize(\n    rt.m = mean(naming, na.rm = TRUE) - mean(lexdec, na.rm = TRUE), #difference of the means == mean difference\n    rt.ci.length = t.test(naming, lexdec)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = \"difference\")) +\n  geom_point() + #plot the mean difference\n  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2)) + #plot the difference CI\n  geom_hline(yintercept = 0, linetype = \"dashed\") #plot the population mean to test against"
   },
@@ -2446,7 +2446,7 @@
   {
     "objectID": "2_Crash_Course.html#independent-samples-t-test-ci-of-the-difference-figure",
     "href": "2_Crash_Course.html#independent-samples-t-test-ci-of-the-difference-figure",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Independent Samples t-test: CI of the difference: Figure",
     "text": "Independent Samples t-test: CI of the difference: Figure"
   },
@@ -2460,21 +2460,21 @@
   {
     "objectID": "2_Crash_Course.html#paired-samples-t-test",
     "href": "2_Crash_Course.html#paired-samples-t-test",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Paired Samples t-test",
     "text": "Paired Samples t-test\nAre the mean reaction times for naming words different from naming non-words?\n\n\nfhch2010_summary_naming &lt;- \n  fhch2010_summary %&gt;% \n  filter(task == \"naming\")\n\n# with(fhch2010_summary_naming, t.test(rt ~ stimulus, paired = TRUE)) #not allowed anymore :(\n# fhch2010_summary_naming %&gt;% rstatix::t_test(rt ~ stimulus, paired = TRUE, detailed = TRUE) # alternative!\n\nwith(fhch2010_summary_naming %&gt;% \n       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit\n     t.test(word, nonword, paired = TRUE)) %&gt;% \n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]"
   },
   {
     "objectID": "2_Crash_Course.html#paired-samples-t-test-viz-code",
     "href": "2_Crash_Course.html#paired-samples-t-test-viz-code",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Paired Samples t-test: Viz Code?",
     "text": "Paired Samples t-test: Viz Code?\n\n\nfhch2010_summary_naming %&gt;% \n  summarize(\n    .by = stimulus,\n    rt.m = mean(rt), \n    rt.ci.length = t.test(rt)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus)) +\n  geom_point() + \n  geom_errorbar(aes(ymin = rt.m - rt.ci.length/2, ymax = rt.m + rt.ci.length/2))\n\n\n\n\n\n\n\n\n\n\n\n\nThere is a difference between the precision of the means (aggregated across subjects) and the\nprecision of the paired differences (paired within the same subjects and then aggregated across)."
   },
   {
     "objectID": "2_Crash_Course.html#between--vs.-within-subject-error",
     "href": "2_Crash_Course.html#between--vs.-within-subject-error",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Between- vs. Within-Subject Error",
     "text": "Between- vs. Within-Subject Error\nBetween- and within-subject variance can be (partially) independent.\n\nUse Notes Canvas (paint brush icon on bottom left) to draw worst possibility of paired differences in “Raw Data” and resulting increase in within-subjects error variance while between-subjects variance remains fixed.\n\n\n\nPfister & Janczyk (2013), Fig. 1"
   },
@@ -2495,211 +2495,260 @@
   {
     "objectID": "2_Crash_Course.html#paired-samples-t-test-insight",
     "href": "2_Crash_Course.html#paired-samples-t-test-insight",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Paired Samples t-test: Insight",
-    "text": "Paired Samples t-test: Insight\nThe paired samples t-test of two factor levels\n\nwith(fhch2010_summary_naming %&gt;% \n       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit\n     t.test(word, nonword, paired = TRUE)) %&gt;% \n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]\n\n\n… is the one sample t-test of the paired differences (i.e., slopes between the factor levels).\n\nwith(fhch2010_summary_naming %&gt;% \n       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id) %&gt;%  #make pairing by id explicit\n       mutate(diff = word - nonword),\n     t.test(diff)) %&gt;% # one sample t-test of paired differences\n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]"
+    "text": "Paired Samples t-test: Insight\nThe paired samples t-test of two factor levels\n\nwith(fhch2010_summary_naming %&gt;% \n       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit\n     t.test(word, nonword, paired = TRUE)) %&gt;% \n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]\n\n\n… is the one sample t-test of the paired differences (i.e., slopes between the factor levels).\n\nwith(fhch2010_summary_naming %&gt;% \n       pivot_wider(names_from = stimulus, values_from = rt, id_cols = id), #make pairing by id explicit\n     t.test(word - nonword)) %&gt;% # one sample t-test of paired differences\n  apa::t_apa(es_ci = TRUE) # output to APA format\n\nt(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]"
   },
   {
     "objectID": "2_Crash_Course.html#paired-samples-t-test-viz-code-1",
     "href": "2_Crash_Course.html#paired-samples-t-test-viz-code-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Paired Samples t-test: Viz Code",
     "text": "Paired Samples t-test: Viz Code\n\npstt &lt;- \n  fhch2010_summary_naming %&gt;% \n  pivot_wider(names_from = stimulus, values_from = rt, id_cols = id) %&gt;%  #make pairing by id explicit\n  mutate(diff = word - nonword) %&gt;% \n  #almost identical to one sample t-test from here\n  summarize(diff.m = mean(diff),\n            diff.ci.length = t.test(word, nonword, paired = TRUE)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = diff.m, x = \"naming words vs. non-words\")) +\n  geom_point() + #plot the mean\n  geom_errorbar(aes(ymin = diff.m - diff.ci.length/2, ymax = diff.m + diff.ci.length/2)) + #plot the CI\n  geom_hline(yintercept = 0, linetype = \"dashed\") #plot the population mean to test against"
   },
   {
     "objectID": "2_Crash_Course.html#paired-samples-t-test-figure",
     "href": "2_Crash_Course.html#paired-samples-t-test-figure",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Paired Samples t-test: Figure",
     "text": "Paired Samples t-test: Figure"
   },
   {
     "objectID": "2_Crash_Course.html#anova",
     "href": "2_Crash_Course.html#anova",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVA",
     "text": "ANOVA\nIs the reaction time difference between words and non-words different for naming vs. lexical decision?\n\n\n\naov_words &lt;- \n  afex::aov_ez(\n    id = \"id\", \n    dv = \"rt\", \n    data = fhch2010_summary, \n    between = \"task\", \n    within = \"stimulus\",\n    # we want to report partial eta² (\"pes\"), and include the intercept in the output table ...\n    anova_table = list(es = \"pes\", intercept = TRUE))\n\naov_words %&gt;% apa::anova_apa() #optional: slightly different (APA-conform) output\n\n         Effect                                              \n1   (Intercept) F(1, 43) = 904.33, p &lt; .001, petasq = .95 ***\n2          task F(1, 43) =  15.76, p &lt; .001, petasq = .27 ***\n3      stimulus F(1, 43) =  77.24, p &lt; .001, petasq = .64 ***\n4 task:stimulus F(1, 43) =  31.89, p &lt; .001, petasq = .43 ***\n\n\n\n\n\nThe question above is equivalent to: “Is the reaction time difference between naming and lexical decision different for words vs. non-words?”"
   },
   {
     "objectID": "2_Crash_Course.html#anova-interaction-viz-code-1",
     "href": "2_Crash_Course.html#anova-interaction-viz-code-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVA interaction: Viz Code 1",
-    "text": "ANOVA interaction: Viz Code 1\nWithin-effect modulated by between-variable:\nIs the reaction time difference between words and non-words different for naming vs. lexical decision?\n\n\naov1 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = \"stimulus\", values_from = \"rt\", id_cols = c(id, task)) %&gt;% \n  summarize(\n    .by = task, #for each condition combination\n    diff.m = mean(word - nonword), \n    diff.ci.length = t.test(word, nonword, paired = TRUE)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = diff.m, x = task)) +\n  geom_point() + #plot the mean\n  geom_errorbar(aes(ymin = diff.m - diff.ci.length/2, ymax = diff.m + diff.ci.length/2)) + #plot the CI\n  geom_hline(yintercept = 0, linetype = \"dashed\") #plot the population mean to test against"
+    "text": "ANOVA interaction: Viz Code 1\nWithin-effect modulated by between-variable:\nIs the reaction time difference between words and non-words different for naming vs. lexical decision?\n\n\naov1 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %&gt;% \n  summarize(\n    .by = task, #for each condition combination\n    diff.m = mean(word - nonword), \n    diff.ci.length = t.test(word, nonword, paired = TRUE)$conf.int %&gt;% diff()\n  ) %&gt;% \n  \n  ggplot(aes(y = diff.m, x = task)) +\n  geom_point() + #plot the mean\n  geom_errorbar(aes(ymin = diff.m - diff.ci.length/2, ymax = diff.m + diff.ci.length/2)) + #plot the CI\n  geom_hline(yintercept = 0, linetype = \"dashed\") #plot the population mean to test against"
   },
   {
     "objectID": "2_Crash_Course.html#anova-interaction-viz-code-2",
     "href": "2_Crash_Course.html#anova-interaction-viz-code-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVA interaction: Viz Code 2",
     "text": "ANOVA interaction: Viz Code 2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = task, values_from = rt, id_cols = c(id, stimulus)) %&gt;% \n  summarize(\n    .by = stimulus, # task is implicitly kept due to pivot_wider\n    ci.length = t.test(naming, lexdec)$conf.int %&gt;% diff(), # do this first so we can overwrite naming & lexdec\n    naming = mean(naming, na.rm = TRUE), \n    lexdec = mean(lexdec, na.rm = TRUE)\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + # explicitly specify default width = .9\n  theme(legend.position = \"top\")"
   },
   {
     "objectID": "2_Crash_Course.html#anova-interaction-viz-code-2.2",
     "href": "2_Crash_Course.html#anova-interaction-viz-code-2.2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVA interaction: Viz Code 2.2",
-    "text": "ANOVA interaction: Viz Code 2.2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  # alternative: spare the first pivot by using base R indexing\n  summarize(\n    .by = stimulus,\n    ci.length = t.test(rt[task == \"naming\"], rt[task == \"lexdec\"])$conf.int %&gt;% diff(),\n    naming = mean(rt[task == \"naming\"]),\n    lexdec = mean(rt[task == \"lexdec\"])\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")"
+    "text": "ANOVA interaction: Viz Code 2.2\nBetween-effect modulated by within-variable:\nIs the reaction time difference between naming and lexical decision different for words vs. non-words?\n\naov2 &lt;-\n  fhch2010_summary %&gt;% \n  # alternative: spare the first pivot by using base R indexing (only safe for between-subjects variables)\n  summarize(\n    .by = stimulus,\n    ci.length = t.test(rt[task == \"naming\"], rt[task == \"lexdec\"])$conf.int %&gt;% diff(),\n    naming = mean(rt[task == \"naming\"]), # we want to put CIs on RT this time, not on RT difference\n    lexdec = mean(rt[task == \"lexdec\"])\n  ) %&gt;% \n  pivot_longer(cols = c(naming, lexdec), names_to = \"task\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = task, color = stimulus)) +\n  facet_wrap(vars(stimulus), labeller = label_both) +\n  geom_point(position = position_dodge(.9)) + #explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + #explicitly specify default width = .9\n  theme(legend.position = \"top\")"
   },
   {
     "objectID": "2_Crash_Course.html#anova-interaction-figures",
     "href": "2_Crash_Course.html#anova-interaction-figures",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVA interaction: Figures",
     "text": "ANOVA interaction: Figures\n\nIf you are asking: Can I do the plot on the right but ordered by stimulus first and with within-errors to show the within effect modulated by the between factor?\n→ next slide :)"
   },
   {
     "objectID": "2_Crash_Course.html#within-errors-on-marginal-means",
     "href": "2_Crash_Course.html#within-errors-on-marginal-means",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Within-Errors on Marginal Means",
     "text": "Within-Errors on Marginal Means\nThere are methods to draw within-subject errors directly on marginal means instead of on paired differences (e.g., Morey, 2008).\nWhile this is okay for the simplest design including one within-variable with just two factor levels, this already becomes problematic at 3 levels because sphericity may not hold, i.e., the variance may be heterogenous across paired differences (level 1-2 vs. 2-3).\n→ If the CI for 1-2 is small but CI for 2-3 is large. What do you plot on factor level 2?\n\n⇒ The within-subjects standard error is a characteristic of paired differences and should thus not be plotted on factor levels."
   },
   {
     "objectID": "2_Crash_Course.html#correlations",
     "href": "2_Crash_Course.html#correlations",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Correlations",
-    "text": "Correlations\n\niris %&gt;% \n  summarise(\n    cortest = cor.test(Petal.Width, Petal.Length) %&gt;% \n      apa::cor_apa(r_ci = TRUE, print = FALSE),\n    .by = Species\n  )\n\n     Species                          cortest\n1     setosa r(48) = .33 [.06; .56], p = .019\n2 versicolor r(48) = .79 [.65; .87], p &lt; .001\n3  virginica r(48) = .32 [.05; .55], p = .023"
+    "text": "Correlations\n\niris %&gt;% \n  summarize(\n    cortest = cor.test(Petal.Width, Petal.Length) %&gt;% \n      apa::cor_apa(r_ci = TRUE, print = FALSE),\n    .by = Species\n  )\n\n     Species                          cortest\n1     setosa r(48) = .33 [.06; .56], p = .019\n2 versicolor r(48) = .79 [.65; .87], p &lt; .001\n3  virginica r(48) = .32 [.05; .55], p = .023"
   },
   {
     "objectID": "2_Crash_Course.html#correlations-viz-code",
     "href": "2_Crash_Course.html#correlations-viz-code",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Correlations: Viz Code",
     "text": "Correlations: Viz Code\n\ncorrelplot &lt;-\n  fhch2010_summary2 %&gt;% \n  pivot_wider(names_from = stimulus, values_from = starts_with(\"rt.m\")) %&gt;% #also rt.m.low & rt.m.high\n  ggplot(aes(x = rt.m_nonword, y = rt.m_word)) + #non-words vs. words\n  stat_smooth(method = \"lm\", se = TRUE) + #linear regression line with confidence bands\n  geom_point() + #rt means of individual subjects\n  geom_errorbarh(aes(xmin = rt.m.low_nonword, xmax = rt.m.high_nonword)) + #horizontal CIs: non-words\n  geom_errorbar (aes(ymin = rt.m.low_word,    ymax = rt.m.high_word)) +    #vertical   CIs: words\n  geom_label(aes(x = min(rt.m.low_nonword), y = max(rt.m.high_word)), #statistics to show off\n             hjust = \"inward\",\n             label = correl)"
   },
   {
     "objectID": "2_Crash_Course.html#correlations-figure",
     "href": "2_Crash_Course.html#correlations-figure",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Correlations: Figure",
     "text": "Correlations: Figure"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points",
     "href": "2_Crash_Course.html#stacked-points",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points",
     "text": "Stacked Points\n\naov1 +\n  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()\n    data = fhch2010_summary %&gt;% #I should have saved this calculation step...\n      pivot_wider(names_from = \"stimulus\", values_from = \"rt\", id_cols = c(id, task)) %&gt;% \n      mutate(diff.m = word - nonword), #if we call this diff.m, it conforms to aov1\n    #aes(y = diff.m, x = task), #inherited from aov1\n    binaxis = \"y\",\n    stackdir = \"center\",\n    alpha = .5\n  )"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-2",
     "href": "2_Crash_Course.html#stacked-points-2",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 2",
-    "text": "Stacked Points 2\n\naov2 +\n  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov2\n    #aes(y = rt.m, x = task), #inherited from aov2\n    aes(fill = stimulus), #dotplot dots have color = outer border, fill = inner color\n    binaxis = \"y\",\n    stackdir = \"center\",\n    alpha = .5\n  )"
+    "text": "Stacked Points 2\n\naov2.plot &lt;- aov2 +\n  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov2\n    #aes(y = rt.m, x = task), #inherited from aov2\n    aes(fill = stimulus), #dotplot dots have color = outer border, fill = inner color\n    binaxis = \"y\",\n    stackdir = \"center\",\n    alpha = .5\n  )\n\naov2.plot"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-3",
     "href": "2_Crash_Course.html#stacked-points-3",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 3",
-    "text": "Stacked Points 3\nNow that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?\n\nGo back to previous slide and ask where these lines would have to be added.\n\n\n\naov3 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %&gt;% \n  summarize(\n    .by = task, # stimulus is implicitly kept due to pivot_wider\n    ci.length = confintr::ci_mean(word - nonword)$interval %&gt;% diff(), # do this first so we can overwrite word & nonword\n    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %&gt;% diff(), # alternative - same result!\n    word = mean(word, na.rm = TRUE), \n    nonword = mean(nonword, na.rm = TRUE)\n  ) %&gt;% \n  pivot_longer(cols = c(word, nonword), names_to = \"stimulus\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2\n  facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2\n  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + # explicitly specify default width = .9\n  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable\n  myGgTheme +\n  theme(legend.position = \"top\")"
+    "text": "Stacked Points 3\nNow that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?\n\n\nNo! Within-subject variable levels need to be next to each other!\n⇒ Switch the position of both variables in the plot"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-3-1",
     "href": "2_Crash_Course.html#stacked-points-3-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 3",
     "text": "Stacked Points 3\n\naov3 +\n  geom_dotplot( # experts can try ggbeeswarm::geom_beeswarm()\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov3\n    #aes(y = rt.m, x = stimulus), #inherited from aov3\n    aes(fill = task), #dotplot dots have color = outer border, fill = inner color\n    binaxis = \"y\",\n    stackdir = \"center\",\n    alpha = .5\n  ) +\n  geom_line( #add individual slopes\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov3\n    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)\n    alpha = .5) +\n  #plot group-level information again (on top) but black and bigger\n  geom_point(position = position_dodge(.9), color = \"black\", size = 3) + \n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9), \n                color = \"black\", linewidth = 1.125)\n\n\n\nBeautiful! So much information!\nThe slopes for naming are more pronounced and homogenous compared to lexdec.\nBut be careful! Between subjects errorbars! Can only compare across facets (tasks) but not within (words vs. non-words of the same task)\n⇒ This is why some authors suggest to have another plot showing the paired differences only (i.e., aov1 alongside aov3)."
   },
   {
     "objectID": "2_Crash_Course.html#jittered-points",
     "href": "2_Crash_Course.html#jittered-points",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Jittered Points",
     "text": "Jittered Points\n\naov3 +\n  geom_jitter( # geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov3\n    position = position_jitterdodge(dodge.width = .5),\n    alpha = .5\n  )"
   },
   {
     "objectID": "2_Crash_Course.html#jittered-points-with-individual-slopes",
     "href": "2_Crash_Course.html#jittered-points-with-individual-slopes",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Jittered Points with Individual Slopes",
     "text": "Jittered Points with Individual Slopes\nOnly geom_path() is able to align points + lines! geom_line() will not work here. (Ordering can be important: geom_path() connects the observations in the order in which they appear in the data.)\n\naov3 +\n  geom_jitter(\n    data = fhch2010_summary %&gt;% rename(rt.m = rt),\n    position = position_jitter(width = .25, seed = 1337), #same seed needed!\n  ) +\n  geom_path( #add individual slopes\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), \n    aes(group = id),\n    position = position_jitter(width = .25, seed = 1337), #same seed needed!\n    alpha = .5) +\n  #plot group-level information again (on top) but black and bigger\n  geom_point(position = position_dodge(.9), color = \"black\", size = 3) + \n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), \n                color = \"black\", linewidth = 1.125)"
   },
   {
     "objectID": "2_Crash_Course.html#density",
     "href": "2_Crash_Course.html#density",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Density",
     "text": "Density\n\naov3 +\n  geom_violin( \n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov3\n    #aes(y = rt.m, x = stimulus), #inherited from aov3\n    aes(fill = task), #dotplot dots have color = outer border, fill = inner color\n    alpha = .5\n  ) +\n  geom_line( #add individual slopes\n    data = fhch2010_summary %&gt;% rename(rt.m = rt), #conform to naming in aov3\n    aes(group = id), #one line for each subject; sometimes you need: group = interaction(id, task)\n    alpha = .5) +\n  #plot group-level information again (on top) but black and bigger\n  geom_point(position = position_dodge(.9), color = \"black\", size = 3) + \n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), position = position_dodge(.9), \n                color = \"black\", linewidth = 1.125)"
   },
   {
     "objectID": "2_Crash_Course.html#tough-decisions",
     "href": "2_Crash_Course.html#tough-decisions",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Tough Decisions",
     "text": "Tough Decisions\nWhat looks most insightful (or most pleasing) depends heavily on your sample size (and your personal preference).\nUsually, the plots shown here work best with sample size in ascending order:\n\ndot plot for small samples\njittered points for medium samples\nviolin plot for large samples"
   },
   {
     "objectID": "2_Crash_Course.html#everything-everywhere-all-at-once",
     "href": "2_Crash_Course.html#everything-everywhere-all-at-once",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Everything Everywhere All at Once",
     "text": "Everything Everywhere All at Once\nIf you are prone to decision paralysis, try a mixture of jittered points and violin plot:\nthe Raincloud Plot (Allen et al., 2019)\n\nhttps://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif"
   },
   {
     "objectID": "2_Crash_Course.html#correlations-1",
     "href": "2_Crash_Course.html#correlations-1",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Correlations",
     "text": "Correlations\nWhat is the correlation between reactions to words and non-words in the lexical decision task?\n\nWe want to include subject-level CIs, so we need to start with the trial-level data!\n\nfhch2010_summary2 &lt;- \n  afex::fhch2010 %&gt;% #trial-level data!\n  filter(task == \"lexdec\") %&gt;% \n  summarize(.by = c(id, task, stimulus), #retain task column for future reference\n            rt.m = mean(rt),\n            rt.m.low = t.test(rt)$conf.int[[1]], #subject-level CIs!\n            rt.m.high = t.test(rt)$conf.int[[2]]) #subject-level CIs!\n\ncorrel &lt;- \n  with(fhch2010_summary2 %&gt;% \n         pivot_wider(names_from = stimulus, values_from = rt.m, id_cols = id),\n       cor.test(word, nonword)) %&gt;% apa::cor_apa(r_ci = TRUE, print = FALSE)\ncorrel\n\n[1] \"r(23) = .85 [.69; .93], p &lt; .001\""
   },
   {
     "objectID": "2_Crash_Course.html#anovas-preparation",
     "href": "2_Crash_Course.html#anovas-preparation",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "ANOVAs: Preparation",
-    "text": "ANOVAs: Preparation\nThe fhch2010 data set:\n\nData from Freeman, Heathcote, Chalmers, & Hockley (2010), included in afex.\nLexical decision and word naming latencies for 300 words and 300 nonwords.\nFor simplicity, we’re only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword; within subjects).\n\n\n\n  id   task stimulus density frequency length   item    rt      log_rt correct\n1 N1 naming     word    high       low      6 potted 1.091  0.08709471    TRUE\n2 N1 naming     word     low      high      6 engine 0.876 -0.13238919    TRUE\n3 N1 naming     word     low      high      5  ideal 0.710 -0.34249031    TRUE\n4 N1 naming  nonword    high      high      5  uares 1.210  0.19062036    TRUE\n5 N1 naming  nonword     low      high      4   xazz 0.843 -0.17078832    TRUE\n6 N1 naming     word    high      high      4   fill 0.785 -0.24207156    TRUE\n\n\n\n\n# Aggregate to get a word/nonword reaction time per participant\nfhch2010_summary &lt;- \n  fhch2010 %&gt;% \n  summarise(rt = mean(rt), .by = c(id, task, stimulus))"
+    "text": "ANOVAs: Preparation\nThe fhch2010 data set:\n\nData from Freeman, Heathcote, Chalmers, & Hockley (2010), included in afex.\nLexical decision and word naming latencies for 300 words and 300 nonwords.\nFor simplicity, we’re only interested in the task (word naming or lexical decision; between subjects) and the stimulus (word or nonword; within subjects).\n\n\n\n  id   task stimulus density frequency length   item    rt      log_rt correct\n1 N1 naming     word    high       low      6 potted 1.091  0.08709471    TRUE\n2 N1 naming     word     low      high      6 engine 0.876 -0.13238919    TRUE\n3 N1 naming     word     low      high      5  ideal 0.710 -0.34249031    TRUE\n4 N1 naming  nonword    high      high      5  uares 1.210  0.19062036    TRUE\n5 N1 naming  nonword     low      high      4   xazz 0.843 -0.17078832    TRUE\n6 N1 naming     word    high      high      4   fill 0.785 -0.24207156    TRUE\n\n\n\n\n\n\n# Aggregate to get a word/nonword reaction time per participant\nfhch2010_summary &lt;- \n  fhch2010 %&gt;% \n  summarize(rt = mean(rt), .by = c(id, task, stimulus))"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-output",
     "href": "2_Crash_Course.html#stacked-points-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points",
     "text": "Stacked Points"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-2-output",
     "href": "2_Crash_Course.html#stacked-points-2-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 2",
     "text": "Stacked Points 2"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-3-output",
     "href": "2_Crash_Course.html#stacked-points-3-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 3",
     "text": "Stacked Points 3"
   },
   {
     "objectID": "2_Crash_Course.html#stacked-points-3-1-output",
     "href": "2_Crash_Course.html#stacked-points-3-1-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Stacked Points 3",
     "text": "Stacked Points 3"
   },
   {
     "objectID": "2_Crash_Course.html#jittered-points-output",
     "href": "2_Crash_Course.html#jittered-points-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Jittered Points",
     "text": "Jittered Points"
   },
   {
     "objectID": "2_Crash_Course.html#jittered-points-with-individual-slopes-output",
     "href": "2_Crash_Course.html#jittered-points-with-individual-slopes-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Jittered Points with Individual Slopes",
     "text": "Jittered Points with Individual Slopes"
   },
   {
     "objectID": "2_Crash_Course.html#density-output",
     "href": "2_Crash_Course.html#density-output",
-    "title": "Crash Course on Handling Uncertainty",
+    "title": "Handling Uncertainty Crash Course",
     "section": "Density",
     "text": "Density"
+  },
+  {
+    "objectID": "2_Crash_Course.html#subject-level-precision-1",
+    "href": "2_Crash_Course.html#subject-level-precision-1",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Subject-Level Precision",
+    "text": "Subject-Level Precision\nIs there a meaningful correlation?"
+  },
+  {
+    "objectID": "2_Crash_Course.html#take-home-message-precision",
+    "href": "2_Crash_Course.html#take-home-message-precision",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Take Home Message: Precision",
+    "text": "Take Home Message: Precision\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!"
+  },
+  {
+    "objectID": "2_Crash_Course.html#summary-precision",
+    "href": "2_Crash_Course.html#summary-precision",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Summary: Precision",
+    "text": "Summary: Precision\n\nWe are in a replication crisis\nIncreasing the number of subjects is not the only way to get out\nSample size benefits basic research on groups only\n\n⇒ Increase precision on the aggregate level of interest!"
+  },
+  {
+    "objectID": "2_Crash_Course.html#summary-cis-around-means",
+    "href": "2_Crash_Course.html#summary-cis-around-means",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Summary: CIs around means",
+    "text": "Summary: CIs around means\n\n\nCIs around means are different for one sample vs. independent samples vs. paired samples\nMixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)\n⇒ Be transparent! Describe how you calculated your CIs! (between vs. within, SE vs. CI)\nAssumption: Normally distributed means\n⇒ Might want to plot raw data (see last part!)"
+  },
+  {
+    "objectID": "2_Crash_Course.html#stacked-points-3-switched",
+    "href": "2_Crash_Course.html#stacked-points-3-switched",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Stacked Points 3: Switched",
+    "text": "Stacked Points 3: Switched\n\naov3 &lt;-\n  fhch2010_summary %&gt;% \n  pivot_wider(names_from = stimulus, values_from = rt, id_cols = c(id, task)) %&gt;% \n  summarize(\n    .by = task, # stimulus is implicitly kept due to pivot_wider\n    ci.length = confintr::ci_mean(word - nonword)$interval %&gt;% diff(), # do this first so we can overwrite word & nonword\n    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %&gt;% diff(), # alternative - same result!\n    word = mean(word, na.rm = TRUE), \n    nonword = mean(nonword, na.rm = TRUE)\n  ) %&gt;% \n  pivot_longer(cols = c(word, nonword), names_to = \"stimulus\", values_to = \"rt.m\") %&gt;% \n  \n  ggplot(aes(y = rt.m, x = stimulus, color = task)) + # task and stimulus switched compared to aov2\n  facet_wrap(vars(task), labeller = label_both) + # task and stimulus switched compared to aov2\n  scale_color_viridis_d(option = \"H\") + # switch color palette to make different variables more apparent\n  scale_fill_viridis_d(option = \"H\") + # also for fill because this is needed in dot plot\n  geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9\n  geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), \n                position = position_dodge(.9)) + # explicitly specify default width = .9\n  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable\n  myGgTheme +\n  theme(legend.position = \"top\")\n\naov3"
+  },
+  {
+    "objectID": "2_Crash_Course.html#stacked-points-3-switched-output",
+    "href": "2_Crash_Course.html#stacked-points-3-switched-output",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Stacked Points 3: Switched",
+    "text": "Stacked Points 3: Switched"
+  },
+  {
+    "objectID": "2_Crash_Course.html#summary-visualizing-uncertainty",
+    "href": "2_Crash_Course.html#summary-visualizing-uncertainty",
+    "title": "Handling Uncertainty Crash Course",
+    "section": "Summary: Visualizing Uncertainty",
+    "text": "Summary: Visualizing Uncertainty\n\n\nVital difference between i) between- and ii) within-subject variability (slopes / paired differences)\n⇒ Oftentimes, between-subject uncertainty is visualized for within-subject designs 😱\nCIs of differences (e.g., independent or paired samples t-test) belong on difference scores\nCIs of differences can be transferred to individual factor levels but this creates\nproblems esp. if homoscedasticity or sphericity is not met\n⇒ Plots should inform about violations of statistical assumptions, not cover them up! ⇒ If you plot individual factor levels instead of differences, show their one sample CI (or SE) on them\nVisualizing “raw” data (i.e., subject-level aggregates) helps with detecting violations of normality"
   }
 ]

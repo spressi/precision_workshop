@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter">
-  <title>Precision Workshop - Crash Course on Handling Uncertainty</title>
+  <title>Precision Workshop - Handling Uncertainty Crash Course</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Crash Course on Handling Uncertainty</h1>
+  <h1 class="title">Handling Uncertainty Crash Course</h1>
   <p class="subtitle">Extracted from Workshop: “Handling Uncertainty in your Data”</p>
 
 <div class="quarto-title-authors">
@@ -421,27 +421,22 @@ Dr.&nbsp;Mario Reutter
 
 </section>
 <section id="group-level-precision" class="slide level2">
-<h2>Group-level Precision</h2>
+<h2>Group-Level Precision</h2>
 
 <img data-src="images/precision_group_forest.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R" class="uri">https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/forest.html#forest-R</a></p><p>→ Effects in relation to their <em>group-level</em> precision</p>
-</section>
-<section id="group-level-precision-2" class="slide level2">
-<h2>Group-level Precision 2</h2>
-
-<img data-src="images/precision_group_funnel.jpg" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.medicowesome.com/2020/04/funnel-plot.html" class="uri">https://www.medicowesome.com/2020/04/funnel-plot.html</a></p><p>→ Effects in relation to their <em>group-level</em> precision</p>
 </section>
 <section id="subject-level-precision" class="slide level2">
 <h2>Subject-Level Precision</h2>
 <p>Is there a meaningful correlation?</p>
 
 <img data-src="images/precision_subject_cor1.png" class="r-stretch"></section>
-<section id="subject-level-precision-2" class="slide level2">
-<h2>Subject-Level Precision 2</h2>
+<section id="subject-level-precision-1" class="slide level2">
+<h2>Subject-Level Precision</h2>
 <p>Is there a meaningful correlation?</p>
 
 <img data-src="images/precision_subject_cor2.png" class="r-stretch"></section>
-<section id="subject-level-precision-3" class="slide level2">
-<h2>Subject-Level Precision 3</h2>
+<section id="subject-level-precision-2" class="slide level2">
+<h2>Subject-Level Precision</h2>
 <p>Is there a meaningful correlation?</p>
 
 <img data-src="images/precision_subject_cor3.png" class="r-stretch"><aside class="notes">
@@ -496,14 +491,14 @@ systematic differences between individuals but little variability within subject
 <h2>Group- vs.&nbsp;Subject-Level Precision</h2>
 <div class="columns">
 <div class="column">
-<p><strong>Group-level Precision</strong></p>
+<p><strong>Group-Level Precision</strong></p>
 <ul>
 <li><p>Group differences (t-tests, ANOVA)</p></li>
 <li><p>Many subjects (independent observations)</p></li>
 <li><p>Homogenous sample (e.g., psychology students?)</p></li>
 </ul>
 </div><div class="column">
-<p><strong>Subject-level Precision</strong></p>
+<p><strong>Subject-Level Precision</strong></p>
 <ul>
 <li><p>Correlations (e.g., Reliability)</p></li>
 <li><p>Many trials (careful: sequence effects!)</p></li>
@@ -513,8 +508,8 @@ systematic differences between individuals but little variability within subject
 </div>
 </div>
 </section>
-<section id="take-home-message" class="slide level2">
-<h2>Take Home Message</h2>
+<section id="summary-precision" class="slide level2">
+<h2>Summary: Precision</h2>
 <ul>
 <li><p>We are in a replication crisis</p></li>
 <li><p>Increasing the number of subjects is not the only way to get out</p></li>
@@ -557,6 +552,20 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <span id="cb1-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
+<aside class="notes">
+<p>Thanks to <a href="https://juli-nagel.de/">Juli Nagel</a> for suggesting the <code>confintr</code> package!</p>
+<p>Thanks to <a href="https://www.psychologie.uni-wuerzburg.de/bioklin/team/dr-daniel-gromer/">Daniel Gromer</a> for sharing his custom function!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <aside><div>
 <p>Careful with custom functions! I often see people using <code>n()</code> but this does not work correctly with missing values (<code>NA</code> / <code>na.rm = TRUE</code>)</p>
 </div></aside></section>
@@ -584,7 +593,7 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <section id="standard-error-pitfalls-in-r" class="slide level2">
 <h2>Standard Error Pitfalls in <code>R</code></h2>
 <p>What is the group-level precision of <code>Sepal.Length</code>?</p>
-<p>Note: Treat <code>Species</code> as subjects and rows within <code>Species</code> as trials.</p>
+<p>Note: Treat <code>Species</code> as subjects (<code>N = 3</code>) and rows within <code>Species</code> as trials.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data <span class="ot">&lt;-</span></span>
 <span id="cb4-2"><a></a>  iris <span class="sc">%&gt;%</span> </span>
@@ -669,14 +678,16 @@ trial-level → subject-level → group-level</p>
 <section id="summary-precision-in-r" class="slide level2">
 <h2>Summary: Precision in <code>R</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="2-4|5-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
-<span id="cb12-3"><a></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
-<span id="cb12-4"><a></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>
-<span id="cb12-5"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject), <span class="co">#group-level mean ("grand average")</span></span>
-<span id="cb12-6"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject), <span class="co">#group-level precision</span></span>
-<span id="cb12-7"><a></a>            <span class="at">se.subject =</span> <span class="fu">mean</span>(se.subject), <span class="co">#average subject-level precision (note: pooling should be used)</span></span>
-<span id="cb12-8"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="2-5|6-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a></a>  <span class="co"># from trial- to subject-level</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
+<span id="cb12-4"><a></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
+<span id="cb12-5"><a></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>
+<span id="cb12-6"><a></a>  <span class="co"># from subject- to group-level</span></span>
+<span id="cb12-7"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject), <span class="co">#group-level mean ("grand average")</span></span>
+<span id="cb12-8"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject), <span class="co">#group-level precision</span></span>
+<span id="cb12-9"><a></a>            <span class="at">se.subject =</span> <span class="fu">mean</span>(se.subject), <span class="co">#average subject-level precision (note: pooling should be used)</span></span>
+<span id="cb12-10"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
       m    se se.subject     n
@@ -706,9 +717,9 @@ trial-level → subject-level → group-level</p>
 <span id="cb14-2"><a></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
 <span id="cb14-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width) <span class="sc">%&gt;%</span> </span>
 <span id="cb14-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb14-5"><a></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::se_mean(setosa)</span></span>
-<span id="cb14-6"><a></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::se_mean(versicolor)</span></span>
-<span id="cb14-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co"># or confintr::se_mean_diff(setosa, versicolor)</span></span>
+<span id="cb14-5"><a></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(setosa)$interval %&gt;% diff()</span></span>
+<span id="cb14-6"><a></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(versicolor)$interval %&gt;% diff()</span></span>
+<span id="cb14-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co"># or confintr::ci_mean_diff(setosa, versicolor)$interval %&gt;% diff()</span></span>
 <span id="cb14-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -720,7 +731,7 @@ trial-level → subject-level → group-level</p>
 </section>
 <section id="cis-in-r-within-subjects-design" class="slide level2">
 <h2>CIs in <code>R</code>: Within-Subjects Design</h2>
-<p>It works similar with paired t-tests (but the pivoting is slightly different):</p>
+<p>It works similarly with paired t-tests (but the pivoting is slightly different):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
@@ -728,7 +739,7 @@ trial-level → subject-level → group-level</p>
 <span id="cb16-4"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb16-5"><a></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
 <span id="cb16-6"><a></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
-<span id="cb16-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co">#or confintr::se_mean(setosa - versicolor)</span></span>
+<span id="cb16-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co">#or confintr::ci_mean(setosa - versicolor)$interval %&gt;% diff()</span></span>
 <span id="cb16-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -738,13 +749,13 @@ trial-level → subject-level → group-level</p>
 </div>
 </div>
 </section>
-<section id="take-home-message-1" class="slide level2">
-<h2>Take Home Message</h2>
+<section id="summary-cis-around-means" class="slide level2">
+<h2>Summary: CIs around means</h2>
 <div>
 <ul>
 <li class="fragment">CIs around means are different for one sample vs.&nbsp;independent samples vs.&nbsp;paired samples</li>
 <li class="fragment">Mixed designs: Difficult! You will probably need to choose between between-subject or within-subject CIs (depending on your comparisons of interest; see later part!)<br>
-⇒ Be transparent! Describe how you calculated your CIs!</li>
+⇒ Be transparent! Describe how you calculated your CIs! (between vs.&nbsp;within, SE vs.&nbsp;CI)</li>
 <li class="fragment">Assumption: Normally distributed means<br>
 ⇒ Might want to plot raw data (see last part!)</li>
 </ul>
@@ -784,7 +795,7 @@ trial-level → subject-level → group-level</p>
 <h2>Correlations</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb21-2"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb21-3"><a></a>    <span class="at">cortest =</span> <span class="fu">cor.test</span>(Petal.Width, Petal.Length) <span class="sc">%&gt;%</span> </span>
 <span id="cb21-4"><a></a>      apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
 <span id="cb21-5"><a></a>    <span class="at">.by =</span> Species</span>
@@ -817,11 +828,13 @@ trial-level → subject-level → group-level</p>
 </div>
 </div>
 <div class="fragment">
+<p><br>
+</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Aggregate to get a word/nonword reaction time per participant</span></span>
 <span id="cb24-2"><a></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
 <span id="cb24-3"><a></a>  fhch2010 <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a></a>  <span class="fu">summarise</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-4"><a></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -839,24 +852,19 @@ trial-level → subject-level → group-level</p>
 <span id="cb25-9"><a></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb25-10"><a></a>  )</span>
 <span id="cb25-11"><a></a></span>
-<span id="cb25-12"><a></a>aov_words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-12"><a></a>aov_words <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">anova_apa</span>() <span class="co">#optional: slightly different (APA-conform) output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Anova Table (Type 3 tests)
-
-Response: rt
-         Effect    df  MSE          F  pes p.value
-1   (Intercept) 1, 43 0.10 904.33 *** .955   &lt;.001
-2          task 1, 43 0.10  15.76 *** .268   &lt;.001
-3      stimulus 1, 43 0.01  77.24 *** .642   &lt;.001
-4 task:stimulus 1, 43 0.01  31.89 *** .426   &lt;.001
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1</code></pre>
+<pre><code>         Effect                                              
+1   (Intercept) F(1, 43) = 904.33, p &lt; .001, petasq = .95 ***
+2          task F(1, 43) =  15.76, p &lt; .001, petasq = .27 ***
+3      stimulus F(1, 43) =  77.24, p &lt; .001, petasq = .64 ***
+4 task:stimulus F(1, 43) =  31.89, p &lt; .001, petasq = .43 ***</code></pre>
 </div>
 </div>
 </section>
 <section id="ci-around-partial-eta²" class="slide level2">
 <h2>CI around partial eta²</h2>
-<p>In principle, <code>apaTables</code> offers a function for CIs around <span class="math inline">\(\eta_p^2\)</span> …</p>
+<p>In principle, <code>apaTables</code> offers a (non-vectorized) function for CIs around <span class="math inline">\(\eta_p^2\)</span> …</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># e.g., for our task effect</span></span>
 <span id="cb27-2"><a></a>apaTables<span class="sc">::</span><span class="fu">get.ci.partial.eta.squared</span>(</span>
@@ -879,7 +887,7 @@ $UL
 <p>A little clunky function that can be applied to <code>afex</code> tables:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>peta.ci <span class="ot">&lt;-</span> </span>
-<span id="cb29-2"><a></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) { <span class="co"># 90% CIs are recommended for partial eta² (https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F)</span></span>
+<span id="cb29-2"><a></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) { <span class="co"># 90% CIs are recommended for partial eta²:  https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F</span></span>
 <span id="cb29-3"><a></a>    </span>
 <span id="cb29-4"><a></a>    result <span class="ot">&lt;-</span> </span>
 <span id="cb29-5"><a></a>      <span class="fu">apply</span>(anova_table, <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
@@ -913,6 +921,19 @@ task:stimulus 0.23280549 0.5584355        0.9</code></pre>
 </div>
 </div>
 <p>Also see this <a href="https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html">blogpost by Daniel Lakens from 2014</a> about CIs for <span class="math inline">\(\eta_p^2\)</span>.</p>
+<aside class="notes">
+<p>We cross-checked the results between <code>apaTables</code> and Daniel Lakens’s blog post: they are identical!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="visualizing-cis" class="title-slide slide level1 center">
@@ -926,7 +947,7 @@ CIs around effect sizes are for the statistical reporting section.</p>
 <p>In this part, we will visualize CIs around means for:</p>
 <ul>
 <li><p>t-tests (one sample, independent samples, &amp; paired samples),</p></li>
-<li><p>ANOVAs (a simple 2x2 interaction),</p></li>
+<li><p>ANOVAs (a simple <span class="math inline">\(2 \times 2\)</span> interaction),</p></li>
 <li><p>and correlations.</p></li>
 </ul>
 <p>You have already learned how to calculate CIs around their effect sizes (Cohen’s <em>d</em>, <span class="math inline">\(\eta_p^2\)</span>, and Pearson’s <em>r</em>)</p>
@@ -936,7 +957,7 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
 <span id="cb32-2"><a></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a></a>  <span class="fu">summarise</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -990,10 +1011,10 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <section id="one-sample-t-test-visualization-code" class="slide level2">
 <h2>One Sample t-test: Visualization Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-6|4|8|5|10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>ostt <span class="ot">&lt;-</span></span>
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-6|4|4,8|5|5,10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>ostt <span class="ot">&lt;-</span></span>
 <span id="cb36-2"><a></a>  fhch2010_summary_wordnaming <span class="sc">%&gt;%</span> </span>
 <span id="cb36-3"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb36-4"><a></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), <span class="co">#careful! if you do rt = mean(rt), you cannot calculate ci_mean(rt) afterwards</span></span>
+<span id="cb36-4"><a></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), <span class="co">#careful! if you do rt = mean(rt), you cannot calculate t.test(rt) afterwards</span></span>
 <span id="cb36-5"><a></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
 <span id="cb36-6"><a></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb36-7"><a></a>  </span>
@@ -1089,7 +1110,7 @@ mean of x mean of y
 <section id="independent-samples-t-test-viz-code" class="slide level2">
 <h2>Independent Samples t-test: Viz Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="3|5|6-7|9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>istt2 <span class="ot">&lt;-</span></span>
+<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="3|3,5|3,5,6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>istt2 <span class="ot">&lt;-</span></span>
 <span id="cb41-2"><a></a>  fhch2010_summary_words <span class="sc">%&gt;%</span> </span>
 <span id="cb41-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt) <span class="sc">%&gt;%</span> </span>
 <span id="cb41-4"><a></a>  <span class="fu">summarize</span>(</span>
@@ -1193,11 +1214,10 @@ precision of the paired differences (paired <strong>within the same subjects</st
 </div>
 <p>… is the <strong>one sample t-test</strong> of the paired differences (i.e., slopes between the factor levels).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47" data-code-line-numbers="3-4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb47-2"><a></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id) <span class="sc">%&gt;%</span>  <span class="co">#make pairing by id explicit</span></span>
-<span id="cb47-3"><a></a>       <span class="fu">mutate</span>(<span class="at">diff =</span> word <span class="sc">-</span> nonword),</span>
-<span id="cb47-4"><a></a>     <span class="fu">t.test</span>(diff)) <span class="sc">%&gt;%</span> <span class="co"># one sample t-test of paired differences</span></span>
-<span id="cb47-5"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
+<span id="cb47-3"><a></a>     <span class="fu">t.test</span>(word <span class="sc">-</span> nonword)) <span class="sc">%&gt;%</span> <span class="co"># one sample t-test of paired differences</span></span>
+<span id="cb47-4"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>t(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]</code></pre>
 </div>
@@ -1339,7 +1359,7 @@ Is the reaction time difference between <em>words and non-words</em> different f
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52" data-code-line-numbers="3|5-7|10,12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>aov1 <span class="ot">&lt;-</span></span>
 <span id="cb52-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb52-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"stimulus"</span>, <span class="at">values_from =</span> <span class="st">"rt"</span>, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
 <span id="cb52-4"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb52-5"><a></a>    <span class="at">.by =</span> task, <span class="co">#for each condition combination</span></span>
 <span id="cb52-6"><a></a>    <span class="at">diff.m =</span> <span class="fu">mean</span>(word <span class="sc">-</span> nonword), </span>
@@ -1384,11 +1404,11 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54" data-code-line-numbers="3,6-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>aov2 <span class="ot">&lt;-</span></span>
 <span id="cb54-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb54-3"><a></a>  <span class="co"># alternative: spare the first pivot by using base R indexing</span></span>
+<span id="cb54-3"><a></a>  <span class="co"># alternative: spare the first pivot by using base R indexing (only safe for between-subjects variables)</span></span>
 <span id="cb54-4"><a></a>  <span class="fu">summarize</span>(</span>
 <span id="cb54-5"><a></a>    <span class="at">.by =</span> stimulus,</span>
 <span id="cb54-6"><a></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>], rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
-<span id="cb54-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>]),</span>
+<span id="cb54-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>]), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
 <span id="cb54-8"><a></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])</span>
 <span id="cb54-9"><a></a>  ) <span class="sc">%&gt;%</span> </span>
 <span id="cb54-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
@@ -1524,7 +1544,7 @@ But, hey! It's at least one additional level of information! &#128517;
 </div></section><section id="stacked-points-2" class="slide level2">
 <h2>Stacked Points 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>aov2 <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb59" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>aov2.plot <span class="ot">&lt;-</span> aov2 <span class="sc">+</span></span>
 <span id="cb59-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
 <span id="cb59-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov2</span></span>
 <span id="cb59-4"><a></a>    <span class="co">#aes(y = rt.m, x = task), #inherited from aov2</span></span>
@@ -1532,7 +1552,9 @@ But, hey! It's at least one additional level of information! &#128517;
 <span id="cb59-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
 <span id="cb59-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
 <span id="cb59-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb59-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-9"><a></a>  )</span>
+<span id="cb59-10"><a></a></span>
+<span id="cb59-11"><a></a>aov2.plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1547,22 +1569,16 @@ But, hey! It's at least one additional level of information! &#128517;
 </div></section><section id="stacked-points-3" class="slide level2">
 <h2>Stacked Points 3</h2>
 <p>Now that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?</p>
-<aside class="notes">
-<p>Go back to previous slide and ask where these lines would have to be added.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<div class="fragment">
+
+<img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"><div class="fragment">
+<p>No! Within-subject variable levels need to be next to each other!<br>
+⇒ Switch the position of both variables in the plot</p>
+</div>
+</section>
+<section id="stacked-points-3-switched" class="slide level2">
+<h2>Stacked Points 3: Switched</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>aov3 <span class="ot">&lt;-</span></span>
+<div class="sourceCode cell-code" id="cb60" data-code-line-numbers="6,15-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>aov3 <span class="ot">&lt;-</span></span>
 <span id="cb60-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
 <span id="cb60-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
 <span id="cb60-4"><a></a>  <span class="fu">summarize</span>(</span>
@@ -1576,15 +1592,20 @@ But, hey! It's at least one additional level of information! &#128517;
 <span id="cb60-12"><a></a>  </span>
 <span id="cb60-13"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus, <span class="at">color =</span> task)) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
 <span id="cb60-14"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(task), <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
-<span id="cb60-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb60-16"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb60-17"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb60-18"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(.<span class="dv">6</span>, <span class="fl">1.4</span>)) <span class="sc">+</span> <span class="co"># explicitly set axis to make plots comparable</span></span>
-<span id="cb60-19"><a></a>  myGgTheme <span class="sc">+</span></span>
-<span id="cb60-20"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-15"><a></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># switch color palette to make different variables more apparent</span></span>
+<span id="cb60-16"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># also for fill because this is needed in dot plot</span></span>
+<span id="cb60-17"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb60-18"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb60-19"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb60-20"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(.<span class="dv">6</span>, <span class="fl">1.4</span>)) <span class="sc">+</span> <span class="co"># explicitly set axis to make plots comparable</span></span>
+<span id="cb60-21"><a></a>  myGgTheme <span class="sc">+</span></span>
+<span id="cb60-22"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb60-23"><a></a></span>
+<span id="cb60-24"><a></a>aov3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<div class="cell">
+</section>
+<section id="stacked-points-3-switched-output" class="slide level2 output-location-slide"><h2>Stacked Points 3: Switched</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1592,11 +1613,6 @@ But, hey! It's at least one additional level of information! &#128517;
 </figure>
 </div>
 </div>
-</div>
-</div>
-</section>
-<section id="stacked-points-3-output" class="slide level2 output-location-slide"><h2>Stacked Points 3</h2><div class="cell output-location-slide">
-
 </div></section><section id="stacked-points-3-1" class="slide level2">
 <h2>Stacked Points 3</h2>
 <div class="cell">
@@ -1738,7 +1754,21 @@ But, hey! It's at least one additional level of information! &#128517;
 <p>If you are prone to decision paralysis, try a mixture of jittered points and violin plot:<br>
 the <code>Raincloud Plot</code> (<a href="https://doi.org/10.12688%2Fwellcomeopenres.15191.2">Allen et al., 2019</a>)</p>
 
-<img data-src="images/raincloud.gif" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif" class="uri">https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif</a></p></section></section>
+<img data-src="images/raincloud.gif" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif" class="uri">https://wellcomeopenresearch.s3.eu-west-1.amazonaws.com/manuscripts/18219/eead2c52-c14e-42f6-b53d-07fa9f09407f_Figure%20N2.gif</a></p></section>
+<section id="summary-visualizing-uncertainty" class="slide level2">
+<h2>Summary: Visualizing Uncertainty</h2>
+<div>
+<ul>
+<li class="fragment">Vital difference between i) between- and ii) within-subject variability (slopes / paired differences)<br>
+⇒ Oftentimes, between-subject uncertainty is visualized for within-subject designs 😱</li>
+<li class="fragment">CIs of differences (e.g., independent or paired samples t-test) belong on difference scores</li>
+<li class="fragment">CIs of differences can be transferred to individual factor levels but this creates<br>
+problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
+⇒ <strong>Plots should inform about violations of statistical assumptions</strong>, not cover them up! ⇒ If you plot individual factor levels instead of differences, show their one sample CI (or SE) on them</li>
+<li class="fragment">Visualizing “raw” data (i.e., subject-level aggregates) helps with detecting violations of normality</li>
+</ul>
+</div>
+</section></section>
 <section id="thanks-for-your-attention" class="title-slide slide level1 center">
 <h1>Thanks for Your Attention!</h1>
 <p>Learning objectives:</p>
