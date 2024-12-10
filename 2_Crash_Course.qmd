@@ -906,7 +906,7 @@ While this is okay for the simplest design including **one within-variable with 
 
 ## Correlations
 
-What is the correlation between reactions to words and non-words in the lexical decision task?
+What is the correlation between reactions to words and non-words in the naming task?
 
 . . .
 
@@ -917,7 +917,7 @@ We want to include subject-level CIs, so we need to start with the trial-level d
 #| code-line-numbers: "2,6-7"
 fhch2010_summary2 <- 
   afex::fhch2010 %>% #trial-level data!
-  filter(task == "lexdec") %>% 
+  filter(task == "naming") %>% 
   summarize(.by = c(id, task, stimulus), #retain task column for future reference
             rt.m = mean(rt),
             rt.m.low = t.test(rt)$conf.int[[1]], #subject-level CIs!
@@ -945,7 +945,8 @@ correlplot <-
   geom_errorbar (aes(ymin = rt.m.low_word,    ymax = rt.m.high_word)) +    #vertical   CIs: words
   geom_label(aes(x = min(rt.m.low_nonword), y = max(rt.m.high_word)), #statistics to show off
              hjust = "inward",
-             label = correl)
+             label = correl) +
+  coord_equal() #same scaling on both axes (even though break tics are different)
 ```
 
 ## Correlations: Figure
@@ -954,6 +955,19 @@ correlplot <-
 #| echo: false
 correlplot
 ```
+. . .
+
+Error bars for non-words are bigger! \
+&rArr; More non-word trials to increase precision and stabilize correlation estimation?
+
+::: notes
+```{r}
+#| echo: true
+fhch2010_summary2 %>% 
+  summarize(.by = stimulus, 
+            precision = mean(rt.m.high - rt.m.low))
+```
+:::
 
 # Visualizing "Raw Data"
 
@@ -1033,7 +1047,7 @@ aov3 <-
   summarize(
     .by = task, # stimulus is implicitly kept due to pivot_wider
     ci.length = confintr::ci_mean(word - nonword)$interval %>% diff(), # do this first so we can overwrite word & nonword
-    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %>% diff(), # alternative - same result!
+    # ci.length = t.test(word, nonword, paired = TRUE)$conf.int %>% diff(), # alternative - same result!
     word = mean(word, na.rm = TRUE), 
     nonword = mean(nonword, na.rm = TRUE)
   ) %>% 
@@ -1046,7 +1060,6 @@ aov3 <-
   geom_point(position = position_dodge(.9)) + # explicitly specify default width = .9
   geom_errorbar(aes(ymin = rt.m - ci.length/2, ymax = rt.m + ci.length/2), 
                 position = position_dodge(.9)) + # explicitly specify default width = .9
-  scale_y_continuous(limits = c(.6, 1.4)) + # explicitly set axis to make plots comparable
   myGgTheme +
   theme(legend.position = "top")
 

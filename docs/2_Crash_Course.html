@@ -8,7 +8,7 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.3.353">
 
   <meta name="author" content="Dr.&nbsp;Mario Reutter">
   <title>Precision Workshop - Handling Uncertainty Crash Course</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -223,8 +223,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -406,7 +405,7 @@ Dr.&nbsp;Mario Reutter
 </div>
 
 </section>
-<section id="agenda" class="title-slide slide level1 center scrollable">
+<section id="agenda" class="title-slide slide level1 center">
 <h1>Agenda</h1>
 <ol type="1">
 <li><p>Measurement Precision</p></li>
@@ -462,7 +461,7 @@ Confidence band of regression slope = group-level precision of the regression es
 <img data-src="images/precision_trial.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://doi.org/10.3758/s13428-021-01762-8">Holmqvist et al.&nbsp;(2023, retracted)</a></p><p>Only relevant for time series data (i.e., several “measurements” per trial)</p>
 <p>Note: Calculating standard deviation / error is not trivial here because of auto-correlation</p>
 </section>
-<section id="what-is-precision" class="slide level2 scrollable">
+<section id="what-is-precision" class="slide level2">
 <h2>What is Precision?</h2>
 <ol type="1">
 <li><p>Precision is indicated by errorbars / confidence intervals</p></li>
@@ -472,7 +471,7 @@ Confidence band of regression slope = group-level precision of the regression es
 <li><p>Closely linked to statistical power and reliability</p></li>
 </ol>
 </section>
-<section id="how-can-we-enhance-precision" class="slide level2 scrollable">
+<section id="how-can-we-enhance-precision" class="slide level2">
 <h2>How Can We Enhance Precision?</h2>
 <ol type="1">
 <li><p>Shield the measurement from random noise → precise equipment / paradigm<br>
@@ -539,7 +538,7 @@ div.cell-output-stdout {
 standard deviation (<span class="math inline">\(SD\)</span>) of the individual observations and their number (<span class="math inline">\(n\)</span>)</p>
 <p><span class="math display">\[SE = \frac{SD}{\sqrt{n}}\]</span></p>
 </section>
-<section id="the-standard-error-se-in-r" class="slide level2 scrollable">
+<section id="the-standard-error-se-in-r" class="slide level2">
 <h2>The Standard Error (SE) in <code>R</code></h2>
 <p>No base <code>R</code> function available 💩</p>
 <ol type="1">
@@ -547,9 +546,9 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <li><p>Use a custom function</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb1-2"><a></a>  <span class="fu">sd</span>(x, na.rm) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="cf">if</span>(<span class="sc">!</span>na.rm) <span class="fu">length</span>(x) <span class="cf">else</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)))</span>
-<span id="cb1-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">sd</span>(x, na.rm) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="cf">if</span>(<span class="sc">!</span>na.rm) <span class="fu">length</span>(x) <span class="cf">else</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)))</span>
+<span id="cb1-3"><a href="#cb1-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <aside class="notes">
@@ -573,13 +572,13 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <h2>The Standard Error (SE) in <code>R</code> 2</h2>
 <p>Whenever you use <code>mean</code>, also calculate the SE:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>iris <span class="sc">%&gt;%</span> <span class="co">#helpful data set for illustration</span></span>
-<span id="cb2-4"><a></a>  <span class="fu">summarize</span>( <span class="co">#aggregation =&gt; precision</span></span>
-<span id="cb2-5"><a></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">"Sepal"</span>), <span class="co">#everything(), #output too wide</span></span>
-<span id="cb2-6"><a></a>           <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">se =</span> confintr<span class="sc">::</span>se_mean)),</span>
-<span id="cb2-7"><a></a>    <span class="at">.by =</span> Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>iris <span class="sc">%&gt;%</span> <span class="co">#helpful data set for illustration</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">summarize</span>( <span class="co">#aggregation =&gt; precision</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">"Sepal"</span>), <span class="co">#everything(), #output too wide</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>           <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">se =</span> confintr<span class="sc">::</span>se_mean)),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">.by =</span> Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Species Sepal.Length_mean Sepal.Length_se Sepal.Width_mean Sepal.Width_se
 1     setosa             5.006      0.04984957            3.428     0.05360780
@@ -595,12 +594,12 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <p>What is the group-level precision of <code>Sepal.Length</code>?</p>
 <p>Note: Treat <code>Species</code> as subjects (<code>N = 3</code>) and rows within <code>Species</code> as trials.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>data <span class="ot">&lt;-</span></span>
-<span id="cb4-2"><a></a>  iris <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a></a>  <span class="fu">rename</span>(<span class="at">subject =</span> Species, <span class="at">measure =</span> Sepal.Length) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a></a>  <span class="fu">mutate</span>(<span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-5"><a></a>  <span class="fu">select</span>(subject, trial, measure) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(trial, subject) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>() <span class="co">#neater output</span></span>
-<span id="cb4-6"><a></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>data <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  iris <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">rename</span>(<span class="at">subject =</span> Species, <span class="at">measure =</span> Sepal.Length) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">mutate</span>(<span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">select</span>(subject, trial, measure) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(trial, subject) <span class="sc">%&gt;%</span> <span class="fu">tibble</span>() <span class="co">#neater output</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 150 × 3
    subject    trial measure
@@ -623,9 +622,9 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <h2>Standard Error Pitfalls in <code>R</code></h2>
 <p>What is the group-level precision of <code>Sepal.Length</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
-<span id="cb6-3"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
       m     se
@@ -637,10 +636,10 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
-<span id="cb8-3"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure),</span>
-<span id="cb8-4"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure),</span>
+<span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure),</span>
+<span id="cb8-4"><a href="#cb8-4"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       m     se     n
@@ -654,11 +653,11 @@ standard deviation (<span class="math inline">\(SD\)</span>) of the individual o
 <h2>Standard Error Pitfalls in <code>R</code> 2</h2>
 <p>What is the group-level precision of <code>Sepal.Length</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a></a>  <span class="fu">summarize</span>(<span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> <span class="co">#subject-level averages</span></span>
-<span id="cb10-3"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject),</span>
-<span id="cb10-4"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject),</span>
-<span id="cb10-5"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">summarize</span>(<span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="at">.by =</span> subject) <span class="sc">%&gt;%</span> <span class="co">#subject-level averages</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject),</span>
+<span id="cb10-4"><a href="#cb10-4"></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject),</span>
+<span id="cb10-5"><a href="#cb10-5"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       m    se     n
@@ -678,16 +677,16 @@ trial-level → subject-level → group-level</p>
 <section id="summary-precision-in-r" class="slide level2">
 <h2>Summary: Precision in <code>R</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="2-5|6-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a></a>  <span class="co"># from trial- to subject-level</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
-<span id="cb12-4"><a></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
-<span id="cb12-5"><a></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>
-<span id="cb12-6"><a></a>  <span class="co"># from subject- to group-level</span></span>
-<span id="cb12-7"><a></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject), <span class="co">#group-level mean ("grand average")</span></span>
-<span id="cb12-8"><a></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject), <span class="co">#group-level precision</span></span>
-<span id="cb12-9"><a></a>            <span class="at">se.subject =</span> <span class="fu">mean</span>(se.subject), <span class="co">#average subject-level precision (note: pooling should be used)</span></span>
-<span id="cb12-10"><a></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="2-5|6-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="co"># from trial- to subject-level</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> subject, <span class="co">#trial- to subject-level</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>            <span class="at">measure.subject =</span> <span class="fu">mean</span>(measure), <span class="co">#subject-level averages</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>            <span class="at">se.subject =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure)) <span class="sc">%&gt;%</span>  <span class="co">#subject-level precision</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="co"># from subject- to group-level</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(measure.subject), <span class="co">#group-level mean ("grand average")</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>            <span class="at">se =</span> confintr<span class="sc">::</span><span class="fu">se_mean</span>(measure.subject), <span class="co">#group-level precision</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>            <span class="at">se.subject =</span> <span class="fu">mean</span>(se.subject), <span class="co">#average subject-level precision (note: pooling should be used)</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
       m    se se.subject     n
@@ -696,7 +695,7 @@ trial-level → subject-level → group-level</p>
 </div>
 </div>
 </section></section>
-<section id="confidence-intervals-cis" class="title-slide slide level1 center scrollable">
+<section id="confidence-intervals-cis" class="title-slide slide level1 center">
 <h1>Confidence Intervals (CIs)</h1>
 <ol type="1">
 <li><p>CIs around means</p></li>
@@ -713,14 +712,14 @@ trial-level → subject-level → group-level</p>
 <h2>CIs in <code>R</code></h2>
 <p>Easiest way is to use calls to <code>t.test</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="5-7|3,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb14-5"><a></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(setosa)$interval %&gt;% diff()</span></span>
-<span id="cb14-6"><a></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(versicolor)$interval %&gt;% diff()</span></span>
-<span id="cb14-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co"># or confintr::ci_mean_diff(setosa, versicolor)$interval %&gt;% diff()</span></span>
-<span id="cb14-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="5-7|3,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(setosa)$interval %&gt;% diff()</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># or confintr::ci_mean(versicolor)$interval %&gt;% diff()</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co"># or confintr::ci_mean_diff(setosa, versicolor)$interval %&gt;% diff()</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   setosa.ci.size versicolor.ci.size diff.ci.size
@@ -733,14 +732,14 @@ trial-level → subject-level → group-level</p>
 <h2>CIs in <code>R</code>: Within-Subjects Design</h2>
 <p>It works similarly with paired t-tests (but the pivoting is slightly different):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width, <span class="at">id_cols =</span> subject) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb16-5"><a></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
-<span id="cb16-6"><a></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
-<span id="cb16-7"><a></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co">#or confintr::ci_mean(setosa - versicolor)$interval %&gt;% diff()</span></span>
-<span id="cb16-8"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="3,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width, <span class="at">id_cols =</span> subject) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">setosa.ci.size =</span> <span class="fu">t.test</span>(setosa)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">versicolor.ci.size =</span> <span class="fu">t.test</span>(versicolor)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="at">diff.ci.size =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="co">#or confintr::ci_mean(setosa - versicolor)$interval %&gt;% diff()</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   setosa.ci.size versicolor.ci.size diff.ci.size
@@ -769,15 +768,15 @@ trial-level → subject-level → group-level</p>
 <section id="cohens-d" class="slide level2">
 <h2>Cohen’s d</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="5-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb18-5"><a></a>    <span class="at">setosa.test =</span> <span class="fu">t.test</span>(setosa) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb18-6"><a></a>    <span class="at">versicolor.test =</span> <span class="fu">t.test</span>(versicolor) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb18-7"><a></a>    <span class="at">diff.test =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">var.equal =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-8"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-9"><a></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"test"</span>, <span class="at">values_to =</span> <span class="st">"output"</span>) <span class="co"># nicer output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="5-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">.by =</span> Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Species, <span class="at">values_from =</span> Petal.Width) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="at">setosa.test =</span> <span class="fu">t.test</span>(setosa) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="at">versicolor.test =</span> <span class="fu">t.test</span>(versicolor) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="at">diff.test =</span> <span class="fu">t.test</span>(setosa, versicolor, <span class="at">var.equal =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-8"><a href="#cb18-8"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-9"><a href="#cb18-9"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"test"</span>, <span class="at">values_to =</span> <span class="st">"output"</span>) <span class="co"># nicer output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The observed noncentrality parameter of the noncentral t-distribution has exceeded 37.62 in magnitude (R's limitation for accurate probabilities from the noncentral t-distribution) in the function's iterative search for the appropriate value(s). The results may be fine, but they might be inaccurate; use caution."</code></pre>
 </div>
@@ -794,12 +793,12 @@ trial-level → subject-level → group-level</p>
 <section id="correlations" class="slide level2">
 <h2>Correlations</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb21-3"><a></a>    <span class="at">cortest =</span> <span class="fu">cor.test</span>(Petal.Width, Petal.Length) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a></a>      apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb21-5"><a></a>    <span class="at">.by =</span> Species</span>
-<span id="cb21-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-3"><a href="#cb21-3"></a>    <span class="at">cortest =</span> <span class="fu">cor.test</span>(Petal.Width, Petal.Length) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4"></a>      apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">.by =</span> Species</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Species                          cortest
 1     setosa r(48) = .33 [.06; .56], p = .019
@@ -831,28 +830,28 @@ trial-level → subject-level → group-level</p>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Aggregate to get a word/nonword reaction time per participant</span></span>
-<span id="cb24-2"><a></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
-<span id="cb24-3"><a></a>  fhch2010 <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Aggregate to get a word/nonword reaction time per participant</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
+<span id="cb24-3"><a href="#cb24-3"></a>  fhch2010 <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="anovas" class="slide level2">
 <h2>ANOVAs</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>aov_words <span class="ot">&lt;-</span> </span>
-<span id="cb25-2"><a></a>  afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
-<span id="cb25-3"><a></a>    <span class="at">id =</span> <span class="st">"id"</span>, </span>
-<span id="cb25-4"><a></a>    <span class="at">dv =</span> <span class="st">"rt"</span>, </span>
-<span id="cb25-5"><a></a>    <span class="at">data =</span> fhch2010_summary, </span>
-<span id="cb25-6"><a></a>    <span class="at">between =</span> <span class="st">"task"</span>, </span>
-<span id="cb25-7"><a></a>    <span class="at">within =</span> <span class="st">"stimulus"</span>,</span>
-<span id="cb25-8"><a></a>    <span class="co"># we want to report partial eta² ("pes"), and include the intercept in the output table ...</span></span>
-<span id="cb25-9"><a></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-10"><a></a>  )</span>
-<span id="cb25-11"><a></a></span>
-<span id="cb25-12"><a></a>aov_words <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">anova_apa</span>() <span class="co">#optional: slightly different (APA-conform) output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>aov_words <span class="ot">&lt;-</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>  afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="at">id =</span> <span class="st">"id"</span>, </span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="at">dv =</span> <span class="st">"rt"</span>, </span>
+<span id="cb25-5"><a href="#cb25-5"></a>    <span class="at">data =</span> fhch2010_summary, </span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="at">between =</span> <span class="st">"task"</span>, </span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="at">within =</span> <span class="st">"stimulus"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>    <span class="co"># we want to report partial eta² ("pes"), and include the intercept in the output table ...</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-10"><a href="#cb25-10"></a>  )</span>
+<span id="cb25-11"><a href="#cb25-11"></a></span>
+<span id="cb25-12"><a href="#cb25-12"></a>aov_words <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">anova_apa</span>() <span class="co">#optional: slightly different (APA-conform) output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Effect                                              
 1   (Intercept) F(1, 43) = 904.33, p &lt; .001, petasq = .95 ***
@@ -866,10 +865,10 @@ trial-level → subject-level → group-level</p>
 <h2>CI around partial eta²</h2>
 <p>In principle, <code>apaTables</code> offers a (non-vectorized) function for CIs around <span class="math inline">\(\eta_p^2\)</span> …</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># e.g., for our task effect</span></span>
-<span id="cb27-2"><a></a>apaTables<span class="sc">::</span><span class="fu">get.ci.partial.eta.squared</span>(</span>
-<span id="cb27-3"><a></a>  <span class="at">F.value =</span> <span class="fl">15.76</span>, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">43</span>, <span class="at">conf.level =</span> .<span class="dv">95</span></span>
-<span id="cb27-4"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># e.g., for our task effect</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>apaTables<span class="sc">::</span><span class="fu">get.ci.partial.eta.squared</span>(</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="at">F.value =</span> <span class="fl">15.76</span>, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">43</span>, <span class="at">conf.level =</span> .<span class="dv">95</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$LL
 [1] 0.06851017
@@ -886,32 +885,32 @@ $UL
 <h2>CI around partial eta²</h2>
 <p>A little clunky function that can be applied to <code>afex</code> tables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>peta.ci <span class="ot">&lt;-</span> </span>
-<span id="cb29-2"><a></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) { <span class="co"># 90% CIs are recommended for partial eta²:  https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F</span></span>
-<span id="cb29-3"><a></a>    </span>
-<span id="cb29-4"><a></a>    result <span class="ot">&lt;-</span> </span>
-<span id="cb29-5"><a></a>      <span class="fu">apply</span>(anova_table, <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
-<span id="cb29-6"><a></a>        ci <span class="ot">&lt;-</span> </span>
-<span id="cb29-7"><a></a>          apaTables<span class="sc">::</span><span class="fu">get.ci.partial.eta.squared</span>(</span>
-<span id="cb29-8"><a></a>            <span class="at">F.value =</span> x[<span class="st">"F"</span>], <span class="at">df1 =</span> x[<span class="st">"num Df"</span>], <span class="at">df2 =</span> x[<span class="st">"den Df"</span>], <span class="at">conf.level =</span> conf.level</span>
-<span id="cb29-9"><a></a>          )</span>
-<span id="cb29-10"><a></a>        </span>
-<span id="cb29-11"><a></a>        <span class="fu">return</span>(<span class="fu">setNames</span>(<span class="fu">c</span>(ci<span class="sc">$</span>LL, ci<span class="sc">$</span>UL), <span class="fu">c</span>(<span class="st">"LL"</span>, <span class="st">"UL"</span>)))</span>
-<span id="cb29-12"><a></a>      }) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-13"><a></a>      <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb29-14"><a></a>      <span class="fu">as.data.frame</span>()</span>
-<span id="cb29-15"><a></a>    </span>
-<span id="cb29-16"><a></a>    result<span class="sc">$</span>conf.level <span class="ot">&lt;-</span> conf.level</span>
-<span id="cb29-17"><a></a>    </span>
-<span id="cb29-18"><a></a>    <span class="fu">return</span>(result)</span>
-<span id="cb29-19"><a></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>peta.ci <span class="ot">&lt;-</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="cf">function</span>(anova_table, <span class="at">conf.level =</span> .<span class="dv">9</span>) { <span class="co"># 90% CIs are recommended for partial eta²:  https://daniellakens.blogspot.com/2014/06/calculating-confidence-intervals-for.html#:~:text=Why%20should%20you%20report%2090%25%20CI%20for%20eta%2Dsquared%3F</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>    </span>
+<span id="cb29-4"><a href="#cb29-4"></a>    result <span class="ot">&lt;-</span> </span>
+<span id="cb29-5"><a href="#cb29-5"></a>      <span class="fu">apply</span>(anova_table, <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb29-6"><a href="#cb29-6"></a>        ci <span class="ot">&lt;-</span> </span>
+<span id="cb29-7"><a href="#cb29-7"></a>          apaTables<span class="sc">::</span><span class="fu">get.ci.partial.eta.squared</span>(</span>
+<span id="cb29-8"><a href="#cb29-8"></a>            <span class="at">F.value =</span> x[<span class="st">"F"</span>], <span class="at">df1 =</span> x[<span class="st">"num Df"</span>], <span class="at">df2 =</span> x[<span class="st">"den Df"</span>], <span class="at">conf.level =</span> conf.level</span>
+<span id="cb29-9"><a href="#cb29-9"></a>          )</span>
+<span id="cb29-10"><a href="#cb29-10"></a>        </span>
+<span id="cb29-11"><a href="#cb29-11"></a>        <span class="fu">return</span>(<span class="fu">setNames</span>(<span class="fu">c</span>(ci<span class="sc">$</span>LL, ci<span class="sc">$</span>UL), <span class="fu">c</span>(<span class="st">"LL"</span>, <span class="st">"UL"</span>)))</span>
+<span id="cb29-12"><a href="#cb29-12"></a>      }) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-13"><a href="#cb29-13"></a>      <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-14"><a href="#cb29-14"></a>      <span class="fu">as.data.frame</span>()</span>
+<span id="cb29-15"><a href="#cb29-15"></a>    </span>
+<span id="cb29-16"><a href="#cb29-16"></a>    result<span class="sc">$</span>conf.level <span class="ot">&lt;-</span> conf.level</span>
+<span id="cb29-17"><a href="#cb29-17"></a>    </span>
+<span id="cb29-18"><a href="#cb29-18"></a>    <span class="fu">return</span>(result)</span>
+<span id="cb29-19"><a href="#cb29-19"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ci-around-partial-eta²-2" class="slide level2">
 <h2>CI around partial eta²</h2>
 <p>The result of custom function that applies the <code>apaTables</code> function to our entire ANOVA table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">peta.ci</span>(aov_words<span class="sc">$</span>anova_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">peta.ci</span>(aov_words<span class="sc">$</span>anova_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      LL        UL conf.level
 (Intercept)   0.92985360 0.9656284        0.9
@@ -955,9 +954,9 @@ CIs around effect sizes are for the statistical reporting section.</p>
 <p><br>
 For all examples, we will use the <code>fhch2010</code> data set of the <code>afex</code> package that we have encountered before. Make sure that you have the subject-level aggregates ready:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
-<span id="cb32-2"><a></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>fhch2010_summary <span class="ot">&lt;-</span> </span>
+<span id="cb32-2"><a href="#cb32-2"></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">summarize</span>(<span class="at">rt =</span> <span class="fu">mean</span>(rt), <span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -966,27 +965,27 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <p>The default options in <code>ggplot</code> have some problems: Most importantly, text is too small. The easiest solution is to create your own theme that you apply to your plots.</p>
 <p>I am currently using this theme adapted from an old script of <a href="https://lararoesler.nl/">Lara Rösler</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">theme_set</span>( <span class="co"># theme_set has to be executed every session; cf. library(tidyverse)</span></span>
-<span id="cb33-2"><a></a>  myGgTheme <span class="ot">&lt;-</span> <span class="co"># you can save your theme in a local variable instead, add it to every plot, and save your environment across sessions</span></span>
-<span id="cb33-3"><a></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co"># start with the black-and-white theme</span></span>
-<span id="cb33-4"><a></a>    <span class="fu">theme</span>( </span>
-<span id="cb33-5"><a></a>      <span class="co">#aspect.ratio = 1,</span></span>
-<span id="cb33-6"><a></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb33-7"><a></a>      <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"white"</span>),</span>
-<span id="cb33-8"><a></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"grey"</span>),</span>
-<span id="cb33-9"><a></a>      <span class="at">legend.key =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
-<span id="cb33-10"><a></a>      <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
-<span id="cb33-11"><a></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-12"><a></a>      <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-13"><a></a>      <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-14"><a></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-15"><a></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-16"><a></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-17"><a></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-18"><a></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-19"><a></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb33-20"><a></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>))</span>
-<span id="cb33-21"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">theme_set</span>( <span class="co"># theme_set has to be executed every session; cf. library(tidyverse)</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  myGgTheme <span class="ot">&lt;-</span> <span class="co"># you can save your theme in a local variable instead, add it to every plot, and save your environment across sessions</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="co"># start with the black-and-white theme</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="fu">theme</span>( </span>
+<span id="cb33-5"><a href="#cb33-5"></a>      <span class="co">#aspect.ratio = 1,</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb33-7"><a href="#cb33-7"></a>      <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"white"</span>),</span>
+<span id="cb33-8"><a href="#cb33-8"></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"grey"</span>),</span>
+<span id="cb33-9"><a href="#cb33-9"></a>      <span class="at">legend.key =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
+<span id="cb33-10"><a href="#cb33-10"></a>      <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),</span>
+<span id="cb33-11"><a href="#cb33-11"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-12"><a href="#cb33-12"></a>      <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-13"><a href="#cb33-13"></a>      <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-14"><a href="#cb33-14"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-15"><a href="#cb33-15"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-16"><a href="#cb33-16"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-17"><a href="#cb33-17"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-18"><a href="#cb33-18"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-19"><a href="#cb33-19"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb33-20"><a href="#cb33-20"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>))</span>
+<span id="cb33-21"><a href="#cb33-21"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="one-sample-t-test" class="slide level2">
@@ -994,14 +993,14 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <p>Are the mean reaction times <strong>for naming words</strong> faster than 1 sec?</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>fhch2010_summary_wordnaming <span class="ot">&lt;-</span> </span>
-<span id="cb34-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"naming"</span>, stimulus <span class="sc">==</span> <span class="st">"word"</span>)</span>
-<span id="cb34-4"><a></a></span>
-<span id="cb34-5"><a></a>fhch2010_summary_wordnaming <span class="sc">%&gt;%</span> </span>
-<span id="cb34-6"><a></a>  <span class="fu">pull</span>(rt) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-7"><a></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">1</span>, <span class="at">alternative =</span> <span class="st">"less"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-8"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>fhch2010_summary_wordnaming <span class="ot">&lt;-</span> </span>
+<span id="cb34-2"><a href="#cb34-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"naming"</span>, stimulus <span class="sc">==</span> <span class="st">"word"</span>)</span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a>fhch2010_summary_wordnaming <span class="sc">%&gt;%</span> </span>
+<span id="cb34-6"><a href="#cb34-6"></a>  <span class="fu">pull</span>(rt) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-7"><a href="#cb34-7"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">1</span>, <span class="at">alternative =</span> <span class="st">"less"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-8"><a href="#cb34-8"></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>t(19) = -15.55, p &lt; .001, d = -3.48 [-4.65; -2.29]</code></pre>
 </div>
@@ -1011,17 +1010,17 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <section id="one-sample-t-test-visualization-code" class="slide level2">
 <h2>One Sample t-test: Visualization Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-6|4|4,8|5|5,10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>ostt <span class="ot">&lt;-</span></span>
-<span id="cb36-2"><a></a>  fhch2010_summary_wordnaming <span class="sc">%&gt;%</span> </span>
-<span id="cb36-3"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb36-4"><a></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), <span class="co">#careful! if you do rt = mean(rt), you cannot calculate t.test(rt) afterwards</span></span>
-<span id="cb36-5"><a></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
-<span id="cb36-6"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-7"><a></a>  </span>
-<span id="cb36-8"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> <span class="st">"naming words"</span>)) <span class="sc">+</span></span>
-<span id="cb36-9"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
-<span id="cb36-10"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
-<span id="cb36-11"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36" data-code-line-numbers="2-6|4|4,8|5|5,10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>ostt <span class="ot">&lt;-</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  fhch2010_summary_wordnaming <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb36-4"><a href="#cb36-4"></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), <span class="co">#careful! if you do rt = mean(rt), you cannot calculate t.test(rt) afterwards</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
+<span id="cb36-6"><a href="#cb36-6"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-7"><a href="#cb36-7"></a>  </span>
+<span id="cb36-8"><a href="#cb36-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> <span class="st">"naming words"</span>)) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>“Beautiful” alternative:</p>
@@ -1055,14 +1054,14 @@ For all examples, we will use the <code>fhch2010</code> data set of the <code>af
 <p>Are the mean reaction times for <strong>naming words</strong> different from <strong>lexically identifying words</strong>?</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>fhch2010_summary_words <span class="ot">&lt;-</span> </span>
-<span id="cb38-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a></a>  <span class="fu">filter</span>(stimulus <span class="sc">==</span> <span class="st">"word"</span>)</span>
-<span id="cb38-4"><a></a></span>
-<span id="cb38-5"><a></a><span class="fu">with</span>(fhch2010_summary_words,</span>
-<span id="cb38-6"><a></a>     <span class="fu">t.test</span>(rt <span class="sc">~</span> task) <span class="co">#Welch test</span></span>
-<span id="cb38-7"><a></a>     <span class="co">#t.test(rt ~ task, var.equal = TRUE) #assume equal variances</span></span>
-<span id="cb38-8"><a></a>) <span class="co">#%&gt;% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>fhch2010_summary_words <span class="ot">&lt;-</span> </span>
+<span id="cb38-2"><a href="#cb38-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">filter</span>(stimulus <span class="sc">==</span> <span class="st">"word"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4"></a></span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="fu">with</span>(fhch2010_summary_words,</span>
+<span id="cb38-6"><a href="#cb38-6"></a>     <span class="fu">t.test</span>(rt <span class="sc">~</span> task) <span class="co">#Welch test</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>     <span class="co">#t.test(rt ~ task, var.equal = TRUE) #assume equal variances</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a>) <span class="co">#%&gt;% apa::t_apa(es_ci = TRUE) #does not work for Welch test :(</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -1110,18 +1109,18 @@ mean of x mean of y
 <section id="independent-samples-t-test-viz-code" class="slide level2">
 <h2>Independent Samples t-test: Viz Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="3|3,5|3,5,6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>istt2 <span class="ot">&lt;-</span></span>
-<span id="cb41-2"><a></a>  fhch2010_summary_words <span class="sc">%&gt;%</span> </span>
-<span id="cb41-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt) <span class="sc">%&gt;%</span> </span>
-<span id="cb41-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb41-5"><a></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co">#difference of the means == mean difference</span></span>
-<span id="cb41-6"><a></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(naming, lexdec)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
-<span id="cb41-7"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb41-8"><a></a>  </span>
-<span id="cb41-9"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> <span class="st">"difference"</span>)) <span class="sc">+</span></span>
-<span id="cb41-10"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean difference</span></span>
-<span id="cb41-11"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the difference CI</span></span>
-<span id="cb41-12"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41" data-code-line-numbers="3|3,5|3,5,6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>istt2 <span class="ot">&lt;-</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>  fhch2010_summary_words <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co">#difference of the means == mean difference</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(naming, lexdec)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
+<span id="cb41-7"><a href="#cb41-7"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-8"><a href="#cb41-8"></a>  </span>
+<span id="cb41-9"><a href="#cb41-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> <span class="st">"difference"</span>)) <span class="sc">+</span></span>
+<span id="cb41-10"><a href="#cb41-10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean difference</span></span>
+<span id="cb41-11"><a href="#cb41-11"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the difference CI</span></span>
+<span id="cb41-12"><a href="#cb41-12"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="independent-samples-t-test-ci-of-the-difference-figure" class="slide level2">
@@ -1134,17 +1133,17 @@ mean of x mean of y
 <p>Are the mean reaction times for <strong>naming words</strong> different from <strong>naming non-words</strong>?</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>fhch2010_summary_naming <span class="ot">&lt;-</span> </span>
-<span id="cb42-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb42-3"><a></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"naming"</span>)</span>
-<span id="cb42-4"><a></a></span>
-<span id="cb42-5"><a></a><span class="co"># with(fhch2010_summary_naming, t.test(rt ~ stimulus, paired = TRUE)) #not allowed anymore :(</span></span>
-<span id="cb42-6"><a></a><span class="co"># fhch2010_summary_naming %&gt;% rstatix::t_test(rt ~ stimulus, paired = TRUE, detailed = TRUE) # alternative!</span></span>
-<span id="cb42-7"><a></a></span>
-<span id="cb42-8"><a></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb42-9"><a></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
-<span id="cb42-10"><a></a>     <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-11"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>fhch2010_summary_naming <span class="ot">&lt;-</span> </span>
+<span id="cb42-2"><a href="#cb42-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"naming"</span>)</span>
+<span id="cb42-4"><a href="#cb42-4"></a></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="co"># with(fhch2010_summary_naming, t.test(rt ~ stimulus, paired = TRUE)) #not allowed anymore :(</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="co"># fhch2010_summary_naming %&gt;% rstatix::t_test(rt ~ stimulus, paired = TRUE, detailed = TRUE) # alternative!</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb42-9"><a href="#cb42-9"></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>     <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-11"><a href="#cb42-11"></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>t(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]</code></pre>
 </div>
@@ -1155,23 +1154,19 @@ mean of x mean of y
 <h2>Paired Samples t-test: Viz Code?</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb44" data-code-line-numbers="1,3,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb44-3"><a></a>    <span class="at">.by =</span> stimulus,</span>
-<span id="cb44-4"><a></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), </span>
-<span id="cb44-5"><a></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
-<span id="cb44-6"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb44-7"><a></a>  </span>
-<span id="cb44-8"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus)) <span class="sc">+</span></span>
-<span id="cb44-9"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb44-10"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44" data-code-line-numbers="1,3,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb44-3"><a href="#cb44-3"></a>    <span class="at">.by =</span> stimulus,</span>
+<span id="cb44-4"><a href="#cb44-4"></a>    <span class="at">rt.m =</span> <span class="fu">mean</span>(rt), </span>
+<span id="cb44-5"><a href="#cb44-5"></a>    <span class="at">rt.ci.length =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
+<span id="cb44-6"><a href="#cb44-6"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-7"><a href="#cb44-7"></a>  </span>
+<span id="cb44-8"><a href="#cb44-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus)) <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb44-10"><a href="#cb44-10"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> rt.ci.length<span class="sc">/</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
-<div>
-<figure>
 <p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
-</figure>
-</div>
 </div>
 </div>
 </div>
@@ -1204,20 +1199,20 @@ precision of the paired differences (paired <strong>within the same subjects</st
 <h2>Paired Samples t-test: Insight</h2>
 <p>The paired samples t-test of two factor levels</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb45-2"><a></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
-<span id="cb45-3"><a></a>     <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-4"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2"></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>     <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-4"><a href="#cb45-4"></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>t(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]</code></pre>
 </div>
 </div>
 <p>… is the <strong>one sample t-test</strong> of the paired differences (i.e., slopes between the factor levels).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb47-2"><a></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
-<span id="cb47-3"><a></a>     <span class="fu">t.test</span>(word <span class="sc">-</span> nonword)) <span class="sc">%&gt;%</span> <span class="co"># one sample t-test of paired differences</span></span>
-<span id="cb47-4"><a></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">with</span>(fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>       <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id), <span class="co">#make pairing by id explicit</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>     <span class="fu">t.test</span>(word <span class="sc">-</span> nonword)) <span class="sc">%&gt;%</span> <span class="co"># one sample t-test of paired differences</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>  apa<span class="sc">::</span><span class="fu">t_apa</span>(<span class="at">es_ci =</span> <span class="cn">TRUE</span>) <span class="co"># output to APA format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>t(19) = -12.87, p &lt; .001, d = -2.88 [-3.88; -1.86]</code></pre>
 </div>
@@ -1226,19 +1221,19 @@ precision of the paired differences (paired <strong>within the same subjects</st
 <section id="paired-samples-t-test-viz-code-1" class="slide level2">
 <h2>Paired Samples t-test: Viz Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49" data-code-line-numbers="3-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>pstt <span class="ot">&lt;-</span> </span>
-<span id="cb49-2"><a></a>  fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
-<span id="cb49-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id) <span class="sc">%&gt;%</span>  <span class="co">#make pairing by id explicit</span></span>
-<span id="cb49-4"><a></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> word <span class="sc">-</span> nonword) <span class="sc">%&gt;%</span> </span>
-<span id="cb49-5"><a></a>  <span class="co">#almost identical to one sample t-test from here</span></span>
-<span id="cb49-6"><a></a>  <span class="fu">summarize</span>(<span class="at">diff.m =</span> <span class="fu">mean</span>(diff),</span>
-<span id="cb49-7"><a></a>            <span class="at">diff.ci.length =</span> <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
-<span id="cb49-8"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb49-9"><a></a>  </span>
-<span id="cb49-10"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diff.m, <span class="at">x =</span> <span class="st">"naming words vs. non-words"</span>)) <span class="sc">+</span></span>
-<span id="cb49-11"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
-<span id="cb49-12"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> diff.m <span class="sc">-</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> diff.m <span class="sc">+</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
-<span id="cb49-13"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49" data-code-line-numbers="3-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>pstt <span class="ot">&lt;-</span> </span>
+<span id="cb49-2"><a href="#cb49-2"></a>  fhch2010_summary_naming <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> id) <span class="sc">%&gt;%</span>  <span class="co">#make pairing by id explicit</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> word <span class="sc">-</span> nonword) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="co">#almost identical to one sample t-test from here</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>  <span class="fu">summarize</span>(<span class="at">diff.m =</span> <span class="fu">mean</span>(diff),</span>
+<span id="cb49-7"><a href="#cb49-7"></a>            <span class="at">diff.ci.length =</span> <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
+<span id="cb49-8"><a href="#cb49-8"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-9"><a href="#cb49-9"></a>  </span>
+<span id="cb49-10"><a href="#cb49-10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diff.m, <span class="at">x =</span> <span class="st">"naming words vs. non-words"</span>)) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="#cb49-11"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
+<span id="cb49-12"><a href="#cb49-12"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> diff.m <span class="sc">-</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> diff.m <span class="sc">+</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="paired-samples-t-test-figure" class="slide level2">
@@ -1251,17 +1246,17 @@ precision of the paired differences (paired <strong>within the same subjects</st
 
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>aov_words <span class="ot">&lt;-</span> </span>
-<span id="cb50-2"><a></a>  afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
-<span id="cb50-3"><a></a>    <span class="at">id =</span> <span class="st">"id"</span>, </span>
-<span id="cb50-4"><a></a>    <span class="at">dv =</span> <span class="st">"rt"</span>, </span>
-<span id="cb50-5"><a></a>    <span class="at">data =</span> fhch2010_summary, </span>
-<span id="cb50-6"><a></a>    <span class="at">between =</span> <span class="st">"task"</span>, </span>
-<span id="cb50-7"><a></a>    <span class="at">within =</span> <span class="st">"stimulus"</span>,</span>
-<span id="cb50-8"><a></a>    <span class="co"># we want to report partial eta² ("pes"), and include the intercept in the output table ...</span></span>
-<span id="cb50-9"><a></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb50-10"><a></a></span>
-<span id="cb50-11"><a></a>aov_words <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">anova_apa</span>() <span class="co">#optional: slightly different (APA-conform) output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>aov_words <span class="ot">&lt;-</span> </span>
+<span id="cb50-2"><a href="#cb50-2"></a>  afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
+<span id="cb50-3"><a href="#cb50-3"></a>    <span class="at">id =</span> <span class="st">"id"</span>, </span>
+<span id="cb50-4"><a href="#cb50-4"></a>    <span class="at">dv =</span> <span class="st">"rt"</span>, </span>
+<span id="cb50-5"><a href="#cb50-5"></a>    <span class="at">data =</span> fhch2010_summary, </span>
+<span id="cb50-6"><a href="#cb50-6"></a>    <span class="at">between =</span> <span class="st">"task"</span>, </span>
+<span id="cb50-7"><a href="#cb50-7"></a>    <span class="at">within =</span> <span class="st">"stimulus"</span>,</span>
+<span id="cb50-8"><a href="#cb50-8"></a>    <span class="co"># we want to report partial eta² ("pes"), and include the intercept in the output table ...</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a>    <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="st">"pes"</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb50-10"><a href="#cb50-10"></a></span>
+<span id="cb50-11"><a href="#cb50-11"></a>aov_words <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">anova_apa</span>() <span class="co">#optional: slightly different (APA-conform) output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Effect                                              
 1   (Intercept) F(1, 43) = 904.33, p &lt; .001, petasq = .95 ***
@@ -1270,6 +1265,7 @@ precision of the paired differences (paired <strong>within the same subjects</st
 4 task:stimulus F(1, 43) =  31.89, p &lt; .001, petasq = .43 ***</code></pre>
 </div>
 </div>
+
 <!--
 ## ANOVA Insights
 
@@ -1278,7 +1274,6 @@ The main effect of the **between-subjects** factor `task`
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
-
 ```
 Anova Table (Type 3 tests)
 
@@ -1288,8 +1283,6 @@ Response: rt
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
 :::
 :::
 
@@ -1299,12 +1292,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
-
 ```
 [1] 0.0002686411
 ```
-
-
 :::
 :::
 
@@ -1316,7 +1306,6 @@ The main effect of the **within-subjects** factor `stimulus`
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
-
 ```
 Anova Table (Type 3 tests)
 
@@ -1326,8 +1315,6 @@ Response: rt
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
 :::
 :::
 
@@ -1337,12 +1324,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
-
 ```
 [1] 1.25e-07
 ```
-
-
 :::
 :::
 
@@ -1357,19 +1341,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Is the reaction time difference between <em>words and non-words</em> different for <em>naming vs.&nbsp;lexical decision</em>?</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52" data-code-line-numbers="3|5-7|10,12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>aov1 <span class="ot">&lt;-</span></span>
-<span id="cb52-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb52-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb52-5"><a></a>    <span class="at">.by =</span> task, <span class="co">#for each condition combination</span></span>
-<span id="cb52-6"><a></a>    <span class="at">diff.m =</span> <span class="fu">mean</span>(word <span class="sc">-</span> nonword), </span>
-<span id="cb52-7"><a></a>    <span class="at">diff.ci.length =</span> <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
-<span id="cb52-8"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-9"><a></a>  </span>
-<span id="cb52-10"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diff.m, <span class="at">x =</span> task)) <span class="sc">+</span></span>
-<span id="cb52-11"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
-<span id="cb52-12"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> diff.m <span class="sc">-</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> diff.m <span class="sc">+</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
-<span id="cb52-13"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52" data-code-line-numbers="3|5-7|10,12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>aov1 <span class="ot">&lt;-</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a href="#cb52-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-4"><a href="#cb52-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb52-5"><a href="#cb52-5"></a>    <span class="at">.by =</span> task, <span class="co">#for each condition combination</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a>    <span class="at">diff.m =</span> <span class="fu">mean</span>(word <span class="sc">-</span> nonword), </span>
+<span id="cb52-7"><a href="#cb52-7"></a>    <span class="at">diff.ci.length =</span> <span class="fu">t.test</span>(word, nonword, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>()</span>
+<span id="cb52-8"><a href="#cb52-8"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-9"><a href="#cb52-9"></a>  </span>
+<span id="cb52-10"><a href="#cb52-10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diff.m, <span class="at">x =</span> task)) <span class="sc">+</span></span>
+<span id="cb52-11"><a href="#cb52-11"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#plot the mean</span></span>
+<span id="cb52-12"><a href="#cb52-12"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> diff.m <span class="sc">-</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> diff.m <span class="sc">+</span> diff.ci.length<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">+</span> <span class="co">#plot the CI</span></span>
+<span id="cb52-13"><a href="#cb52-13"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="co">#plot the population mean to test against</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1378,23 +1362,23 @@ Is the reaction time difference between <em>words and non-words</em> different f
 <p><em>Between-effect</em> modulated by <em>within-variable</em>:<br>
 Is the reaction time difference between <em>naming and lexical decision</em> different for <em>words vs.&nbsp;non-words</em>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53" data-code-line-numbers="3,5,12,13|3,6-8,10|13-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>aov2 <span class="ot">&lt;-</span></span>
-<span id="cb53-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb53-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, stimulus)) <span class="sc">%&gt;%</span> </span>
-<span id="cb53-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb53-5"><a></a>    <span class="at">.by =</span> stimulus, <span class="co"># task is implicitly kept due to pivot_wider</span></span>
-<span id="cb53-6"><a></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(naming, lexdec)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># do this first so we can overwrite naming &amp; lexdec</span></span>
-<span id="cb53-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
-<span id="cb53-8"><a></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb53-9"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb53-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb53-11"><a></a>  </span>
-<span id="cb53-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
-<span id="cb53-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
-<span id="cb53-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb53-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb53-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb53-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53" data-code-line-numbers="3,5,12,13|3,6-8,10|13-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>aov2 <span class="ot">&lt;-</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> task, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, stimulus)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb53-5"><a href="#cb53-5"></a>    <span class="at">.by =</span> stimulus, <span class="co"># task is implicitly kept due to pivot_wider</span></span>
+<span id="cb53-6"><a href="#cb53-6"></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(naming, lexdec)<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># do this first so we can overwrite naming &amp; lexdec</span></span>
+<span id="cb53-7"><a href="#cb53-7"></a>    <span class="at">naming =</span> <span class="fu">mean</span>(naming, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
+<span id="cb53-8"><a href="#cb53-8"></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(lexdec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb53-9"><a href="#cb53-9"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-10"><a href="#cb53-10"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-11"><a href="#cb53-11"></a>  </span>
+<span id="cb53-12"><a href="#cb53-12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
+<span id="cb53-13"><a href="#cb53-13"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb53-14"><a href="#cb53-14"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb53-15"><a href="#cb53-15"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb53-16"><a href="#cb53-16"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb53-17"><a href="#cb53-17"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="anova-interaction-viz-code-2.2" class="slide level2">
@@ -1402,23 +1386,23 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 <p><em>Between-effect</em> modulated by <em>within-variable</em>:<br>
 Is the reaction time difference between <em>naming and lexical decision</em> different for <em>words vs.&nbsp;non-words</em>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54" data-code-line-numbers="3,6-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>aov2 <span class="ot">&lt;-</span></span>
-<span id="cb54-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb54-3"><a></a>  <span class="co"># alternative: spare the first pivot by using base R indexing (only safe for between-subjects variables)</span></span>
-<span id="cb54-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb54-5"><a></a>    <span class="at">.by =</span> stimulus,</span>
-<span id="cb54-6"><a></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>], rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
-<span id="cb54-7"><a></a>    <span class="at">naming =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>]), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
-<span id="cb54-8"><a></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])</span>
-<span id="cb54-9"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-10"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb54-11"><a></a>  </span>
-<span id="cb54-12"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
-<span id="cb54-13"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
-<span id="cb54-14"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb54-15"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb54-16"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb54-17"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54" data-code-line-numbers="3,6-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>aov2 <span class="ot">&lt;-</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="#cb54-3"></a>  <span class="co"># alternative: spare the first pivot by using base R indexing (only safe for between-subjects variables)</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb54-5"><a href="#cb54-5"></a>    <span class="at">.by =</span> stimulus,</span>
+<span id="cb54-6"><a href="#cb54-6"></a>    <span class="at">ci.length =</span> <span class="fu">t.test</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>], rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])<span class="sc">$</span>conf.int <span class="sc">%&gt;%</span> <span class="fu">diff</span>(),</span>
+<span id="cb54-7"><a href="#cb54-7"></a>    <span class="at">naming =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"naming"</span>]), <span class="co"># we want to put CIs on RT this time, not on RT difference</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>    <span class="at">lexdec =</span> <span class="fu">mean</span>(rt[task <span class="sc">==</span> <span class="st">"lexdec"</span>])</span>
+<span id="cb54-9"><a href="#cb54-9"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-10"><a href="#cb54-10"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(naming, lexdec), <span class="at">names_to =</span> <span class="st">"task"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-11"><a href="#cb54-11"></a>  </span>
+<span id="cb54-12"><a href="#cb54-12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> task, <span class="at">color =</span> stimulus)) <span class="sc">+</span></span>
+<span id="cb54-13"><a href="#cb54-13"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(stimulus), <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb54-14"><a href="#cb54-14"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb54-15"><a href="#cb54-15"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb54-16"><a href="#cb54-16"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb54-17"><a href="#cb54-17"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="anova-interaction-figures" class="slide level2">
@@ -1450,25 +1434,25 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 </section>
 <section id="correlations-1" class="slide level2">
 <h2>Correlations</h2>
-<p>What is the correlation between reactions to words and non-words in the lexical decision task?</p>
+<p>What is the correlation between reactions to words and non-words in the naming task?</p>
 <div class="fragment">
 <p>We want to include subject-level CIs, so we need to start with the trial-level data!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55" data-code-line-numbers="2,6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>fhch2010_summary2 <span class="ot">&lt;-</span> </span>
-<span id="cb55-2"><a></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> <span class="co">#trial-level data!</span></span>
-<span id="cb55-3"><a></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"lexdec"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb55-4"><a></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus), <span class="co">#retain task column for future reference</span></span>
-<span id="cb55-5"><a></a>            <span class="at">rt.m =</span> <span class="fu">mean</span>(rt),</span>
-<span id="cb55-6"><a></a>            <span class="at">rt.m.low =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int[[<span class="dv">1</span>]], <span class="co">#subject-level CIs!</span></span>
-<span id="cb55-7"><a></a>            <span class="at">rt.m.high =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int[[<span class="dv">2</span>]]) <span class="co">#subject-level CIs!</span></span>
-<span id="cb55-8"><a></a></span>
-<span id="cb55-9"><a></a>correl <span class="ot">&lt;-</span> </span>
-<span id="cb55-10"><a></a>  <span class="fu">with</span>(fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
-<span id="cb55-11"><a></a>         <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt.m, <span class="at">id_cols =</span> id),</span>
-<span id="cb55-12"><a></a>       <span class="fu">cor.test</span>(word, nonword)) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb55-13"><a></a>correl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55" data-code-line-numbers="2,6-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>fhch2010_summary2 <span class="ot">&lt;-</span> </span>
+<span id="cb55-2"><a href="#cb55-2"></a>  afex<span class="sc">::</span>fhch2010 <span class="sc">%&gt;%</span> <span class="co">#trial-level data!</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">filter</span>(task <span class="sc">==</span> <span class="st">"naming"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-4"><a href="#cb55-4"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> <span class="fu">c</span>(id, task, stimulus), <span class="co">#retain task column for future reference</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>            <span class="at">rt.m =</span> <span class="fu">mean</span>(rt),</span>
+<span id="cb55-6"><a href="#cb55-6"></a>            <span class="at">rt.m.low =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int[[<span class="dv">1</span>]], <span class="co">#subject-level CIs!</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>            <span class="at">rt.m.high =</span> <span class="fu">t.test</span>(rt)<span class="sc">$</span>conf.int[[<span class="dv">2</span>]]) <span class="co">#subject-level CIs!</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a></span>
+<span id="cb55-9"><a href="#cb55-9"></a>correl <span class="ot">&lt;-</span> </span>
+<span id="cb55-10"><a href="#cb55-10"></a>  <span class="fu">with</span>(fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
+<span id="cb55-11"><a href="#cb55-11"></a>         <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt.m, <span class="at">id_cols =</span> id),</span>
+<span id="cb55-12"><a href="#cb55-12"></a>       <span class="fu">cor.test</span>(word, nonword)) <span class="sc">%&gt;%</span> apa<span class="sc">::</span><span class="fu">cor_apa</span>(<span class="at">r_ci =</span> <span class="cn">TRUE</span>, <span class="at">print =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb55-13"><a href="#cb55-13"></a>correl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "r(23) = .85 [.69; .93], p &lt; .001"</code></pre>
+<pre><code>[1] "r(18) = .89 [.73; .96], p &lt; .001"</code></pre>
 </div>
 </div>
 </div>
@@ -1476,23 +1460,50 @@ Is the reaction time difference between <em>naming and lexical decision</em> dif
 <section id="correlations-viz-code" class="slide level2">
 <h2>Correlations: Viz Code</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57" data-code-line-numbers="3|4,6|7-8|5|9-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>correlplot <span class="ot">&lt;-</span></span>
-<span id="cb57-2"><a></a>  fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
-<span id="cb57-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> <span class="fu">starts_with</span>(<span class="st">"rt.m"</span>)) <span class="sc">%&gt;%</span> <span class="co">#also rt.m.low &amp; rt.m.high</span></span>
-<span id="cb57-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt.m_nonword, <span class="at">y =</span> rt.m_word)) <span class="sc">+</span> <span class="co">#non-words vs. words</span></span>
-<span id="cb57-5"><a></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#linear regression line with confidence bands</span></span>
-<span id="cb57-6"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#rt means of individual subjects</span></span>
-<span id="cb57-7"><a></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rt.m.low_nonword, <span class="at">xmax =</span> rt.m.high_nonword)) <span class="sc">+</span> <span class="co">#horizontal CIs: non-words</span></span>
-<span id="cb57-8"><a></a>  <span class="fu">geom_errorbar</span> (<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low_word,    <span class="at">ymax =</span> rt.m.high_word)) <span class="sc">+</span>    <span class="co">#vertical   CIs: words</span></span>
-<span id="cb57-9"><a></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">min</span>(rt.m.low_nonword), <span class="at">y =</span> <span class="fu">max</span>(rt.m.high_word)), <span class="co">#statistics to show off</span></span>
-<span id="cb57-10"><a></a>             <span class="at">hjust =</span> <span class="st">"inward"</span>,</span>
-<span id="cb57-11"><a></a>             <span class="at">label =</span> correl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57" data-code-line-numbers="3|4,6|7-8|5|9-11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>correlplot <span class="ot">&lt;-</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
+<span id="cb57-3"><a href="#cb57-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> <span class="fu">starts_with</span>(<span class="st">"rt.m"</span>)) <span class="sc">%&gt;%</span> <span class="co">#also rt.m.low &amp; rt.m.high</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt.m_nonword, <span class="at">y =</span> rt.m_word)) <span class="sc">+</span> <span class="co">#non-words vs. words</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#linear regression line with confidence bands</span></span>
+<span id="cb57-6"><a href="#cb57-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#rt means of individual subjects</span></span>
+<span id="cb57-7"><a href="#cb57-7"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> rt.m.low_nonword, <span class="at">xmax =</span> rt.m.high_nonword)) <span class="sc">+</span> <span class="co">#horizontal CIs: non-words</span></span>
+<span id="cb57-8"><a href="#cb57-8"></a>  <span class="fu">geom_errorbar</span> (<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m.low_word,    <span class="at">ymax =</span> rt.m.high_word)) <span class="sc">+</span>    <span class="co">#vertical   CIs: words</span></span>
+<span id="cb57-9"><a href="#cb57-9"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">min</span>(rt.m.low_nonword), <span class="at">y =</span> <span class="fu">max</span>(rt.m.high_word)), <span class="co">#statistics to show off</span></span>
+<span id="cb57-10"><a href="#cb57-10"></a>             <span class="at">hjust =</span> <span class="st">"inward"</span>,</span>
+<span id="cb57-11"><a href="#cb57-11"></a>             <span class="at">label =</span> correl) <span class="sc">+</span></span>
+<span id="cb57-12"><a href="#cb57-12"></a>  <span class="fu">coord_equal</span>() <span class="co">#same scaling on both axes (even though break tics are different)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="correlations-figure" class="slide level2">
 <h2>Correlations: Figure</h2>
 
-<img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"><div class="fragment">
+<p>Error bars for non-words are bigger!<br>
+⇒ More non-word trials to increase precision and stabilize correlation estimation?</p>
+<aside class="notes">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>fhch2010_summary2 <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">summarize</span>(<span class="at">.by =</span> stimulus, </span>
+<span id="cb58-3"><a href="#cb58-3"></a>            <span class="at">precision =</span> <span class="fu">mean</span>(rt.m.high <span class="sc">-</span> rt.m.low))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  stimulus  precision
+1     word 0.05735898
+2  nonword 0.10053780</code></pre>
+</div>
+</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
 <section>
 <section id="visualizing-raw-data" class="title-slide slide level1 center">
 <h1>Visualizing “Raw Data”</h1>
@@ -1520,57 +1531,49 @@ But, hey! It's at least one additional level of information! &#128517;
 <section id="stacked-points" class="slide level2">
 <h2>Stacked Points</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58" data-code-line-numbers="2|3-5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a>aov1 <span class="sc">+</span></span>
-<span id="cb58-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb58-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="co">#I should have saved this calculation step...</span></span>
-<span id="cb58-4"><a></a>      <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"stimulus"</span>, <span class="at">values_from =</span> <span class="st">"rt"</span>, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
-<span id="cb58-5"><a></a>      <span class="fu">mutate</span>(<span class="at">diff.m =</span> word <span class="sc">-</span> nonword), <span class="co">#if we call this diff.m, it conforms to aov1</span></span>
-<span id="cb58-6"><a></a>    <span class="co">#aes(y = diff.m, x = task), #inherited from aov1</span></span>
-<span id="cb58-7"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb58-8"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb58-9"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb58-10"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60" data-code-line-numbers="2|3-5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>aov1 <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="co">#I should have saved this calculation step...</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>      <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"stimulus"</span>, <span class="at">values_from =</span> <span class="st">"rt"</span>, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-5"><a href="#cb60-5"></a>      <span class="fu">mutate</span>(<span class="at">diff.m =</span> word <span class="sc">-</span> nonword), <span class="co">#if we call this diff.m, it conforms to aov1</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a>    <span class="co">#aes(y = diff.m, x = task), #inherited from aov1</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb60-8"><a href="#cb60-8"></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb60-9"><a href="#cb60-9"></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="stacked-points-output" class="slide level2 output-location-slide"><h2>Stacked Points</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-47-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
 </div>
 </div></section><section id="stacked-points-2" class="slide level2">
 <h2>Stacked Points 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>aov2.plot <span class="ot">&lt;-</span> aov2 <span class="sc">+</span></span>
-<span id="cb59-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb59-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov2</span></span>
-<span id="cb59-4"><a></a>    <span class="co">#aes(y = rt.m, x = task), #inherited from aov2</span></span>
-<span id="cb59-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> stimulus), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb59-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb59-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb59-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb59-9"><a></a>  )</span>
-<span id="cb59-10"><a></a></span>
-<span id="cb59-11"><a></a>aov2.plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61" data-code-line-numbers="3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>aov2.plot <span class="ot">&lt;-</span> aov2 <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov2</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a>    <span class="co">#aes(y = rt.m, x = task), #inherited from aov2</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> stimulus), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb61-7"><a href="#cb61-7"></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb61-8"><a href="#cb61-8"></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a>  )</span>
+<span id="cb61-10"><a href="#cb61-10"></a></span>
+<span id="cb61-11"><a href="#cb61-11"></a>aov2.plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="stacked-points-2-output" class="slide level2 output-location-slide"><h2>Stacked Points 2</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-49-1.png" width="960"></p>
 </div>
 </div></section><section id="stacked-points-3" class="slide level2">
 <h2>Stacked Points 3</h2>
 <p>Now that we have added individual points, can we also add individual slopes to show the variability in within-subject changes between words and nonwords?</p>
 
-<img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"><div class="fragment">
+<img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"><div class="fragment">
 <p>No! Within-subject variable levels need to be next to each other!<br>
 ⇒ Switch the position of both variables in the plot</p>
 </div>
@@ -1578,62 +1581,57 @@ But, hey! It's at least one additional level of information! &#128517;
 <section id="stacked-points-3-switched" class="slide level2">
 <h2>Stacked Points 3: Switched</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60" data-code-line-numbers="6,15-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>aov3 <span class="ot">&lt;-</span></span>
-<span id="cb60-2"><a></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb60-3"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
-<span id="cb60-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb60-5"><a></a>    <span class="at">.by =</span> task, <span class="co"># stimulus is implicitly kept due to pivot_wider</span></span>
-<span id="cb60-6"><a></a>    <span class="at">ci.length =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(word <span class="sc">-</span> nonword)<span class="sc">$</span>interval <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># do this first so we can overwrite word &amp; nonword</span></span>
-<span id="cb60-7"><a></a>    <span class="co"># ci.length = t.test(word, nonword, paired = TRUE)$conf.int[1:2] %&gt;% diff(), # alternative - same result!</span></span>
-<span id="cb60-8"><a></a>    <span class="at">word =</span> <span class="fu">mean</span>(word, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb60-9"><a></a>    <span class="at">nonword =</span> <span class="fu">mean</span>(nonword, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb60-10"><a></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb60-11"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(word, nonword), <span class="at">names_to =</span> <span class="st">"stimulus"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb60-12"><a></a>  </span>
-<span id="cb60-13"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus, <span class="at">color =</span> task)) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
-<span id="cb60-14"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(task), <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
-<span id="cb60-15"><a></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># switch color palette to make different variables more apparent</span></span>
-<span id="cb60-16"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># also for fill because this is needed in dot plot</span></span>
-<span id="cb60-17"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb60-18"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb60-19"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
-<span id="cb60-20"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(.<span class="dv">6</span>, <span class="fl">1.4</span>)) <span class="sc">+</span> <span class="co"># explicitly set axis to make plots comparable</span></span>
-<span id="cb60-21"><a></a>  myGgTheme <span class="sc">+</span></span>
-<span id="cb60-22"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb60-23"><a></a></span>
-<span id="cb60-24"><a></a>aov3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62" data-code-line-numbers="6,15-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>aov3 <span class="ot">&lt;-</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  fhch2010_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="#cb62-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stimulus, <span class="at">values_from =</span> rt, <span class="at">id_cols =</span> <span class="fu">c</span>(id, task)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-4"><a href="#cb62-4"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb62-5"><a href="#cb62-5"></a>    <span class="at">.by =</span> task, <span class="co"># stimulus is implicitly kept due to pivot_wider</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a>    <span class="at">ci.length =</span> confintr<span class="sc">::</span><span class="fu">ci_mean</span>(word <span class="sc">-</span> nonword)<span class="sc">$</span>interval <span class="sc">%&gt;%</span> <span class="fu">diff</span>(), <span class="co"># do this first so we can overwrite word &amp; nonword</span></span>
+<span id="cb62-7"><a href="#cb62-7"></a>    <span class="co"># ci.length = t.test(word, nonword, paired = TRUE)$conf.int %&gt;% diff(), # alternative - same result!</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a>    <span class="at">word =</span> <span class="fu">mean</span>(word, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb62-9"><a href="#cb62-9"></a>    <span class="at">nonword =</span> <span class="fu">mean</span>(nonword, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-10"><a href="#cb62-10"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-11"><a href="#cb62-11"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(word, nonword), <span class="at">names_to =</span> <span class="st">"stimulus"</span>, <span class="at">values_to =</span> <span class="st">"rt.m"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-12"><a href="#cb62-12"></a>  </span>
+<span id="cb62-13"><a href="#cb62-13"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> rt.m, <span class="at">x =</span> stimulus, <span class="at">color =</span> task)) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
+<span id="cb62-14"><a href="#cb62-14"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(task), <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># task and stimulus switched compared to aov2</span></span>
+<span id="cb62-15"><a href="#cb62-15"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># switch color palette to make different variables more apparent</span></span>
+<span id="cb62-16"><a href="#cb62-16"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"H"</span>) <span class="sc">+</span> <span class="co"># also for fill because this is needed in dot plot</span></span>
+<span id="cb62-17"><a href="#cb62-17"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb62-18"><a href="#cb62-18"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb62-19"><a href="#cb62-19"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span> <span class="co"># explicitly specify default width = .9</span></span>
+<span id="cb62-20"><a href="#cb62-20"></a>  myGgTheme <span class="sc">+</span></span>
+<span id="cb62-21"><a href="#cb62-21"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb62-22"><a href="#cb62-22"></a></span>
+<span id="cb62-23"><a href="#cb62-23"></a>aov3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="stacked-points-3-switched-output" class="slide level2 output-location-slide"><h2>Stacked Points 3: Switched</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
 </div>
 </div></section><section id="stacked-points-3-1" class="slide level2">
 <h2>Stacked Points 3</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61" data-code-line-numbers="1,4-5|10-13|14-18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb61-2"><a></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
-<span id="cb61-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb61-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
-<span id="cb61-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb61-6"><a></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
-<span id="cb61-7"><a></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
-<span id="cb61-8"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb61-9"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb61-10"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb61-11"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb61-12"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
-<span id="cb61-13"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb61-14"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb61-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb61-16"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
-<span id="cb61-17"><a></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb61-18"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63" data-code-line-numbers="1,4-5|10-13|14-18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>aov3 <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">geom_dotplot</span>( <span class="co"># experts can try ggbeeswarm::geom_beeswarm()</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb63-6"><a href="#cb63-6"></a>    <span class="at">binaxis =</span> <span class="st">"y"</span>,</span>
+<span id="cb63-7"><a href="#cb63-7"></a>    <span class="at">stackdir =</span> <span class="st">"center"</span>,</span>
+<span id="cb63-8"><a href="#cb63-8"></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb63-9"><a href="#cb63-9"></a>  ) <span class="sc">+</span></span>
+<span id="cb63-10"><a href="#cb63-10"></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb63-11"><a href="#cb63-11"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb63-12"><a href="#cb63-12"></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
+<span id="cb63-13"><a href="#cb63-13"></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb63-14"><a href="#cb63-14"></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb63-15"><a href="#cb63-15"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb63-16"><a href="#cb63-16"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb63-17"><a href="#cb63-17"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb63-18"><a href="#cb63-18"></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <aside class="notes">
@@ -1655,91 +1653,75 @@ But, hey! It's at least one additional level of information! &#128517;
 </section>
 <section id="stacked-points-3-1-output" class="slide level2 output-location-slide"><h2>Stacked Points 3</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
 </div>
 </div></section><section id="jittered-points" class="slide level2">
 <h2>Jittered Points</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62" data-code-line-numbers="2-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb62-2"><a></a>  <span class="fu">geom_jitter</span>( <span class="co"># geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result</span></span>
-<span id="cb62-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb62-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span> .<span class="dv">5</span>),</span>
-<span id="cb62-5"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb62-6"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64" data-code-line-numbers="2-6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>aov3 <span class="sc">+</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a>  <span class="fu">geom_jitter</span>( <span class="co"># geom_jitter doesn't dodge the groups; geom_point with position_jitterdodge would lead to same result</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span> .<span class="dv">5</span>),</span>
+<span id="cb64-5"><a href="#cb64-5"></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb64-6"><a href="#cb64-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="jittered-points-output" class="slide level2 output-location-slide"><h2>Jittered Points</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
 </div>
 </div></section><section id="jittered-points-with-individual-slopes" class="slide level2">
 <h2>Jittered Points with Individual Slopes</h2>
 <p>Only <code>geom_path()</code> is able to align points + lines! <code>geom_line()</code> will not work here. (Ordering can be important: <code>geom_path()</code> connects the observations in the order in which they appear in the data.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63" data-code-line-numbers="2-5|6-10|4,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb63-2"><a></a>  <span class="fu">geom_jitter</span>(</span>
-<span id="cb63-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt),</span>
-<span id="cb63-4"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
-<span id="cb63-5"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb63-6"><a></a>  <span class="fu">geom_path</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb63-7"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), </span>
-<span id="cb63-8"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id),</span>
-<span id="cb63-9"><a></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
-<span id="cb63-10"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb63-11"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb63-12"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb63-13"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb63-14"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65" data-code-line-numbers="2-5|6-10|4,9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>aov3 <span class="sc">+</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="fu">geom_jitter</span>(</span>
+<span id="cb65-3"><a href="#cb65-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt),</span>
+<span id="cb65-4"><a href="#cb65-4"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb65-5"><a href="#cb65-5"></a>  ) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="#cb65-6"></a>  <span class="fu">geom_path</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb65-7"><a href="#cb65-7"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), </span>
+<span id="cb65-8"><a href="#cb65-8"></a>    <span class="fu">aes</span>(<span class="at">group =</span> id),</span>
+<span id="cb65-9"><a href="#cb65-9"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">25</span>, <span class="at">seed =</span> <span class="dv">1337</span>), <span class="co">#same seed needed!</span></span>
+<span id="cb65-10"><a href="#cb65-10"></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb65-11"><a href="#cb65-11"></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb65-12"><a href="#cb65-12"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb65-13"><a href="#cb65-13"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb65-14"><a href="#cb65-14"></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="jittered-points-with-individual-slopes-output" class="slide level2 output-location-slide"><h2>Jittered Points with Individual Slopes</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
-</figure>
-</div>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
 </div>
 </div></section><section id="density" class="slide level2">
 <h2>Density</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a>aov3 <span class="sc">+</span></span>
-<span id="cb64-2"><a></a>  <span class="fu">geom_violin</span>( </span>
-<span id="cb64-3"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb64-4"><a></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
-<span id="cb64-5"><a></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
-<span id="cb64-6"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
-<span id="cb64-7"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb64-8"><a></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
-<span id="cb64-9"><a></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
-<span id="cb64-10"><a></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
-<span id="cb64-11"><a></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb64-12"><a></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
-<span id="cb64-13"><a></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb64-14"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
-<span id="cb64-15"><a></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>aov3 <span class="sc">+</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>  <span class="fu">geom_violin</span>( </span>
+<span id="cb66-3"><a href="#cb66-3"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a>    <span class="co">#aes(y = rt.m, x = stimulus), #inherited from aov3</span></span>
+<span id="cb66-5"><a href="#cb66-5"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> task), <span class="co">#dotplot dots have color = outer border, fill = inner color</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a>    <span class="at">alpha =</span> .<span class="dv">5</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb66-8"><a href="#cb66-8"></a>  <span class="fu">geom_line</span>( <span class="co">#add individual slopes</span></span>
+<span id="cb66-9"><a href="#cb66-9"></a>    <span class="at">data =</span> fhch2010_summary <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">rt.m =</span> rt), <span class="co">#conform to naming in aov3</span></span>
+<span id="cb66-10"><a href="#cb66-10"></a>    <span class="fu">aes</span>(<span class="at">group =</span> id), <span class="co">#one line for each subject; sometimes you need: group = interaction(id, task)</span></span>
+<span id="cb66-11"><a href="#cb66-11"></a>    <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a>  <span class="co">#plot group-level information again (on top) but black and bigger</span></span>
+<span id="cb66-13"><a href="#cb66-13"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb66-14"><a href="#cb66-14"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rt.m <span class="sc">-</span> ci.length<span class="sc">/</span><span class="dv">2</span>, <span class="at">ymax =</span> rt.m <span class="sc">+</span> ci.length<span class="sc">/</span><span class="dv">2</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), </span>
+<span id="cb66-15"><a href="#cb66-15"></a>                <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="density-output" class="slide level2 output-location-slide"><h2>Density</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
-</figure>
+<p><img data-src="2_Crash_Course_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
 </div>
-</div>
-</div></section><section id="tough-decisions" class="slide level2 scrollable">
+</div></section><section id="tough-decisions" class="slide level2">
 <h2>Tough Decisions</h2>
 <p>What looks most insightful (or most pleasing) depends heavily on your sample size (and your personal preference).</p>
 <p>Usually, the plots shown here work best with sample size in ascending order:</p>
@@ -1782,10 +1764,8 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
 <li>Know how to plot subject-level averages with group-level aggregates and CIs</li>
 </ul>
 
-<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
 </div>
 </section>
     </div>
@@ -1815,6 +1795,7 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -2001,80 +1982,42 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
       });
     </script>
     
-
     <script>
-
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
       // slide changes (different for each slide format).
-
       (function () {
-
         // dispatch for htmlwidgets
-
         function fireSlideEnter() {
-
           const event = window.document.createEvent("Event");
-
           event.initEvent("slideenter", true, true);
-
           window.document.dispatchEvent(event);
-
         }
-
-    
 
         function fireSlideChanged(previousSlide, currentSlide) {
-
           fireSlideEnter();
 
-    
-
           // dispatch for shiny
-
           if (window.jQuery) {
-
             if (previousSlide) {
-
               window.jQuery(previousSlide).trigger("hidden");
-
             }
-
             if (currentSlide) {
-
               window.jQuery(currentSlide).trigger("shown");
-
             }
-
           }
-
         }
-
-    
 
         // hookup for slidy
-
         if (window.w3c_slidy) {
-
           window.w3c_slidy.add_observer(function (slide_num) {
-
             // slide_num starts at position 1
-
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
           });
-
         }
 
-    
-
       })();
-
     </script>
-
-    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -2152,27 +2095,10 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
         // clear code selection
         e.clearSelection();
       });
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
-            }
-          }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -2182,17 +2108,8 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -2206,11 +2123,7 @@ problems esp.&nbsp;if homoscedasticity or sphericity is not met<br>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+          return note.innerHTML;
         });
       }
       const findCites = (el) => {
